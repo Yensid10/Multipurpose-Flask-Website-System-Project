@@ -1,4 +1,4 @@
-# CS2800
+# Team Project
 
 This repository has been created to store your Team Project.
 
