@@ -1,0 +1,14 @@
+<table>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Allergies</th>
+    </tr>
+    {% for item in menu_items %}
+      <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.price }}</td>
+        <td>{{ item.allergies }}</td>
+      </tr>
+    {% endfor %}
+  </table>
