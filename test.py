@@ -31,5 +31,8 @@ def menu(array = [["beans", 12, "Bean Allergy", 123, "this is the quantity, the 
 #     # # Render the template with the menu items
     return render_template('dynamicMenu.html', menu_items=array)
 
-if name == 'main':
-    app.run(debug=True)
+# if name == 'main':
+#     app.run(debug=True)
+
+# export FLASK_APP=test.py 
+# python -m flask run
