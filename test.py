@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route("/")
 # @app.route("/menu/<array>")
-def menu(array = [["beans", 12, "Bean Allergy"], ["cheese", 11, "cheese Allergy"], ["soup", 10, "soup Allergy"]]):
+def menu(array = [["beans", 12, "Bean Allergy", 123, "this is the quantity, the item is nice"], ["cheese", 11, "cheese Allergy"], ["soup", 10, "soup Allergy"]]):
 # # def menu(query):
 #     # # Connect to the database
 #     # conn = mysql.connector.connect(user='username',
@@ -31,5 +31,5 @@ def menu(array = [["beans", 12, "Bean Allergy"], ["cheese", 11, "cheese Allergy"
 #     # # Render the template with the menu items
     return render_template('dynamicMenu.html', menu_items=array)
 
-# if name == 'main':
-#     app.run(debug=True)
+if name == 'main':
+    app.run(debug=True)
