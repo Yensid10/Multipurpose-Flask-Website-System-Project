@@ -1,9 +1,7 @@
 from flask import Flask, render_template
-
 # import mysql.connector
 
 app = Flask(__name__)
-
 
 # @app.route("/")
 # def home():
@@ -14,7 +12,7 @@ app = Flask(__name__)
 # @app.route("/menu/<array>")
 # Format will be Name, price, Description, Calories and Allergic/Religious/Dietary requirements.
 def menu(array=[["Beans", 12, "Some Cool Beans", 123, "Bean Allergy?"],
-                ["Cheese", 11, "Some Cool Cheese", 1234, "Cheese Allergy?"],
+                ["Cheese", 11, "Some Cool Cheese", 1234, "Chesse Allergy?"],
                 ["Soup", 10, "Some Cool Soup", 321, "Soup Allergy?"]]):
     # # def menu(query):
     #     # # Connect to the database
@@ -40,4 +38,4 @@ def menu(array=[["Beans", 12, "Some Cool Beans", 123, "Bean Allergy?"],
 # if name == 'main':
 #     app.run(debug=True)
 
-# export FLASK_APP=test.py python -m flask run
+# flask --app test.py --debug run
