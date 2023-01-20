@@ -38,4 +38,4 @@ def menu(array=[["Beans", 12, "Some Cool Beans", 123, "Bean Allergy?"],
 # if name == 'main':
 #     app.run(debug=True)
 
-# flask --app test.py --debug run
+# FLASK_APP=test.py flask --debug run
