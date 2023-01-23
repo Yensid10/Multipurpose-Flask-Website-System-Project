@@ -36,9 +36,15 @@ class Queue:
                 size = current_size
             time.sleep(10)
 
+    def ReadQueue(self):
+        self.Temp = self.queue[0]
+        print("("+self.Temp.TableNo + ", " + self.Temp.Request + ")")
+        self.queue.pop(0)
+
 
 queue = Queue()
-# queue.add_object('14', "Please bring some water")
+queue.add_object('14', "Please bring some water")
+queue.ReadQueue()
 # queue.add_object('15', "Please bring some bread")
 # print(queue.queue[1].Request)
 # queue.AlterRequest('15', "Please bring some water")
