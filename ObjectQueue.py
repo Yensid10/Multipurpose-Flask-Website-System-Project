@@ -1,4 +1,5 @@
 from threading import Thread
+import threading
 import time
 
 
@@ -11,6 +12,8 @@ class Object:
 class Queue:
     def __init__(self):
         self.queue = []
+        t = threading.Thread(target=self.Check_queue)
+        t.start()
 
     def add_object(self, TableNo, Request):
         new_object = Object(TableNo, Request)
@@ -35,12 +38,10 @@ class Queue:
 
 
 queue = Queue()
-queue.add_object('14', "Please bring some water")
-queue.add_object('15', "Please bring some bread")
-print(queue.queue[1].Request)
-queue.AlterRequest('15', "Please bring some water")
-print(queue.queue[1].Request)
-
-
-p = Thread(target=queue.Check_queue)
-p.start()
+# queue.add_object('14', "Please bring some water")
+# queue.add_object('15', "Please bring some bread")
+# print(queue.queue[1].Request)
+# queue.AlterRequest('15', "Please bring some water")
+# print(queue.queue[1].Request)
+# p = threading.Thread(target=queue.Check_queue)
+# p.start()
