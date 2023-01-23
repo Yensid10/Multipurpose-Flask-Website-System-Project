@@ -1,20 +1,24 @@
+from ObjectQueue import Queue
 import threading
 from flask import Flask, render_template, request
 from flask import redirect
-from ObjectQueue import Queue
 app = Flask(__name__)
 
 
 @app.route('/')
 def home():
-    t = threading.Thread(target=Queue().Check_queue)
-    t.start()
     return render_template('index.html')
 
 
-@app.route('/background_process_test')
+@app.route('/background_process_test', methods=['GET', 'POST'])
 def background_process_test():
-    Queue().add_object('14', "Table Needs Assistance")
+    if request.method == "POST":
+        table_number = request.form.get("TableNum")
+        Request = request.form.get("Request")
+        print(table_number)
+        print(Request)
+    if table_number and Request:
+        Queue().add_object(table_number, Request)
     return redirect('/')
 
 
