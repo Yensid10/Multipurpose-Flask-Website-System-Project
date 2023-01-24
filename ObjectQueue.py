@@ -8,6 +8,12 @@ class Object:
         self.TableNo = TableNo
         self.Request = Request
 
+    def getTableNo(self):
+        return self.TableNo
+
+    def getRequest(self):
+        return self.Request
+
 
 class Queue:
     def __init__(self):
@@ -34,7 +40,7 @@ class Queue:
             if (current_size > size):
                 print("Changed")
                 size = current_size
-            time.sleep(10)
+            time.sleep(1)
 
     def ReadQueue(self):
         self.Temp = self.queue[0]
