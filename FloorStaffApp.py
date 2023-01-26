@@ -1,6 +1,7 @@
 from ObjectQueue import Queue
 from flask import Flask, render_template, request
 from flask import redirect
+
 app = Flask(__name__)
 
 
@@ -19,7 +20,7 @@ def home():
     queue.add_object("Table", "#3")
     queue.add_object("Table", "#17")
     queue.add_object("Door", "<---")
-# Colour coordinate these depending on the type of request
+    # Colour coordinate these depending on the type of request
     return render_template('Floor-Staff.html', queue=queue.getQueue())
 
 

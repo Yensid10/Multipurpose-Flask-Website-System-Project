@@ -75,21 +75,21 @@
 </head>
 
 <body>
-    <h1
+<h1
         style="font-size: 60px; position: absolute; top: -5%; left: 2.5%; font-weight: bold; text-decoration: underline;">
-        Floor Staff</h1>
-    <h2 style="font-size: 40px; position: absolute; top: 11%; left: 6.5%; font-weight: bold;">
-        QUEUE</h2>
-    <div class="scroll-menu">
-        <div class="menu-item"> {{ queue[0].getNote() + " " + queue[0].getTableNo() }}
-            <button class="button">Accept</button>
-        </div>
-        {% for index in range((queue|length) - 1): %}
+    Floor Staff</h1>
+<h2 style="font-size: 40px; position: absolute; top: 11%; left: 6.5%; font-weight: bold;">
+    QUEUE</h2>
+<div class="scroll-menu">
+    <div class="menu-item"> {{ queue[0].getNote() + " " + queue[0].getTableNo() }}
+        <button class="button">Accept</button>
+    </div>
+    {% for index in range((queue|length) - 1): %}
         <div class="menu-item"> {{ queue[index + 1].getNote() + " " + queue[index + 1].getTableNo() }}
             <!--<button class="button">Accept</button> -->
         </div>
-        {% endfor %}
-    </div>
+    {% endfor %}
+</div>
 
 </body>
 

@@ -57,7 +57,6 @@ class Queue:
     def getQueue(self):
         return self.queue
 
-
 # queue = Queue()
 # queue.add_object('14', "Please bring some water")
 # queue.ReadQueue()
