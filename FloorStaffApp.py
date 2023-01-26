@@ -1,5 +1,4 @@
 from ObjectQueue import Queue
-import threading
 from flask import Flask, render_template, request
 from flask import redirect
 app = Flask(__name__)

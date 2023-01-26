@@ -3,16 +3,24 @@ import threading
 import time
 
 
-class Object:
-    def __init__(self, TableNo, Request):
+class Order:
+    # def __init__(self, TableNo, Note):
+    #     self.TableNo = TableNo
+    #     self.Note = Note
+
+    def __init__(self, TableNo, Note):
         self.TableNo = TableNo
-        self.Request = Request
+        self.Note = Note
+        # self.Price = Price
 
     def getTableNo(self):
         return self.TableNo
 
-    def getRequest(self):
-        return self.Request
+    def getNote(self):
+        return self.Note
+
+    # def getPrice(self):
+    #     return self.Price
 
 
 class Queue:
@@ -21,8 +29,8 @@ class Queue:
         t = threading.Thread(target=self.Check_queue)
         t.start()
 
-    def add_object(self, TableNo, Request):
-        new_object = Object(TableNo, Request)
+    def add_object(self, TableNo, Note):
+        new_object = Order(TableNo, Note)
         self.queue.append(new_object)
 
     def AlterRequest(self, TableNum, New_Request):
@@ -43,9 +51,9 @@ class Queue:
             time.sleep(1)
 
     def ReadQueue(self):
-        self.Temp = self.queue[0]
-        print("("+self.Temp.TableNo + ", " + self.Temp.Request + ")")
-        self.queue.pop(0)
+        for order in self.queue:
+            print(order.getTableNo() + " | " +
+                  order.getNote())
 
 
 queue = Queue()
