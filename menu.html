@@ -32,6 +32,21 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
+	<!-- Popup that appears automatically when the page is loaded-->
+	<div id="allergen-popup" style="display: none">
+		<div class="overlay"></div>
+		<div class="popup">
+		  <h3>Please select any allergens you have:</h3>
+		  <input type="submit" value="Submit">
+		  <input type="button" value="Close" onclick="document.getElementById('allergen-popup').style.display='none'">
+		</div>
+	  </div>
+	  <script>
+		window.onload = function() {
+		  document.getElementById("allergen-popup").style.display = "block";
+		}
+	  </script>
+	  
 
   	<!--The standard navbar for the website -->
   	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
