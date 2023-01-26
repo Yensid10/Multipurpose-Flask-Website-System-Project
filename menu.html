@@ -36,7 +36,33 @@
 	<div id="allergen-popup" style="display: none">
 		<div class="overlay"></div>
 		<div class="popup">
-		  <h3>Please select any allergens you have:</h3>
+		  <h3>Please Select any Dietary Restrictions:</h3>
+		  <h4>Allergens:</h4>
+		  <form>
+			<input type="checkbox" id="milk" name="allergen" value="milk">
+			<label for="milk">Milk</label><br>
+			<input type="checkbox" id="eggs" name="allergen" value="eggs">
+			<label for="eggs">Eggs</label><br>
+			<input type="checkbox" id="peanuts" name="allergen" value="peanuts">
+			<label for="peanuts">Peanuts</label><br>
+			<input type="checkbox" id="tree_nuts" name="allergen" value="tree_nuts">
+			<label for="tree_nuts">Tree nuts</label><br>
+			<input type="checkbox" id="wheat" name="allergen" value="wheat">
+			<label for="wheat">Wheat</label><br>
+			<input type="checkbox" id="soy" name="allergen" value="soy">
+			<label for="soy">Soy</label><br>
+			<input type="checkbox" id="fish" name="allergen" value="fish">
+			<label for="fish">Fish</label><br>
+			<input type="checkbox" id="shellfish" name="allergen" value="shellfish">
+			<label for="shellfish">Shellfish</label><br>
+		  </form>
+		  <h4>Religious Restrictions:</h4>
+		  <form>
+			<input type="checkbox" id="Kosher" name="allergen" value="Kosher">
+			<label for="Kosher">Kosher</label><br>
+			<input type="checkbox" id="Halal" name="allergen" value="Halal">
+			<label for="Halal">Halal</label><br>
+		  </form>
 		  <input type="submit" value="Submit">
 		  <input type="button" value="Close" onclick="document.getElementById('allergen-popup').style.display='none'">
 		</div>
