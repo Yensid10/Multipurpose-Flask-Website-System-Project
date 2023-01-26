@@ -3,7 +3,7 @@ import threading
 import time
 
 
-class Order:
+class Task:
     # def __init__(self, TableNo, Note):
     #     self.TableNo = TableNo
     #     self.Note = Note
@@ -26,43 +26,48 @@ class Order:
 class Queue:
     def __init__(self):
         self.queue = []
-        t = threading.Thread(target=self.Check_queue)
+        t = threading.Thread(target=self.checkQueue)
         t.start()
 
-    def add_object(self, Note, TableNo):
-        new_object = Order(Note, TableNo)
+    def addObject(self, Note, TableNo):
+        new_object = Task(Note, TableNo)
         self.queue.append(new_object)
 
-    def AlterRequest(self, TableNum, New_Request):
-        Position = -1
-        for i, obj in enumerate(self.queue):
-            if obj.TableNo == TableNum:
-                Position = i
-        if (Position >= 0):
-            self.queue[Position].Request = New_Request
-
-    def Check_queue(self):
-        size = len(self.queue)
-        while True:
-            current_size = len(self.queue)
-            if (current_size > size):
-                print("Changed")
-                size = current_size
-            time.sleep(1)
-
-    def ReadQueue(self):
-        for order in self.queue:
-            print(order.getNote() + " " + order.getTableNo())
-
-    def getQueue(self):
-        return self.queue
+    def popFrontObject(self):
+        # if (len(self.queue) == 0):
+        #     return None
+        # task = self.queue[0]
+        self.queue.pop(0)
 
     def getOrder(self, index):
         return self.queue[index]
 
-    def getQueueLength(self):
+    def getLength(self):
         return len(self.queue)
-    # Use the above functions in my HTML code instead
+
+    def checkQueue(self):
+        size = len(self.queue)
+        while True:
+            current_size = len(self.queue)
+            if (current_size > size or current_size < size):
+                print("Changed")
+                size = current_size
+            time.sleep(1)
+
+    # def alterRequest(self, TableNum, New_Request):
+    #     Position = -1
+    #     for i, obj in enumerate(self.queue):
+    #         if obj.TableNo == TableNum:
+    #             Position = i
+    #     if (Position >= 0):
+    #         self.queue[Position].Request = New_Request
+
+    # def printQueue(self):
+    #     for order in self.queue:
+    #         print(order.getNote() + " " + order.getTableNo())
+
+    # def getQueue(self):
+    #     return self.queue
 
 # queue = Queue()
 # queue.add_object('14', "Please bring some water")
