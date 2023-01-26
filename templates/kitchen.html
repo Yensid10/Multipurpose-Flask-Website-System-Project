@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Kitchen Staff</title>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
+    <script src="{{ url_for('static', filename='script.js') }}" type="text/javascript"></script>
+</head>
+<body>
+<h1>Order Queue</h1>
+<table id="order-queue-table">
+    <thead>
+    <tr>
+        <th>Order ID</th>
+        <th>Customer Name</th>
+        <th>Items</th>
+        <th>Accept</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for order in order_queue %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.customer_name }}</td>
+            <td>{{ order.items }}</td>
+            <td>
+                <button onclick="acceptOrder(order.id)">Accept</button>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<h1>Accepted Orders</h1>
+<table id="accepted-orders-table">
+    <thead>
+    <tr>
+        <th>Order ID</th>
+        <th>Customer Name</th>
+        <th>Items</th>
+        <th>Recipe</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for order in accepted_orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.customer_name }}</td>
+            <td>{{ order.items }}</td>
+            <td>
+                <a class="recipe-link" href="{{ order.recipe_url }}">View Recipe</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
