@@ -6,6 +6,7 @@ class queries:
     def main(self):
         self.FetchMainAllergiesCalories("Guacamole and chips")
         self.FetchMenu("Guacamole and chips")
+        self.FetchDescrition("Guacamole and chips")
 
     def DatabaseConnection(self):
         conn = None
@@ -18,7 +19,8 @@ class queries:
 
     def FetchMainAllergiesCalories(self, Input):
         conn = self.DatabaseConnection()
-        a = (conn.execute("SELECT Calories FROM MENU,Allergies WHERE MENU.Name = '" + Input + "' LIMIT 1"))
+        a = (conn.execute(
+            "SELECT Calories FROM MENU,Allergies WHERE MENU.Name = '" + Input + "' LIMIT 1"))
         b = (conn.execute("SELECT Name, "
                           + "(CASE WHEN gluten = TRUE THEN 'gluten ' ELSE '' END) || "
                           + "(CASE WHEN peanuts = TRUE THEN 'peanuts ' ELSE '' END) || "
@@ -42,6 +44,15 @@ class queries:
         for result in results:
             print(result)
         conn.commit()
+
+    def FetchDescrition(self, Input):
+        conn = self.DatabaseConnection()
+        a = (conn.execute("SELECT Name, Description "
+                          + "FROM Menu "
+                          + "WHERE Name = '" + Input + "';"))
+        results = a.fetchall()
+        for result in results:
+            print(result)
 
     def FetchMenu(self, Input):
         conn = self.DatabaseConnection()
