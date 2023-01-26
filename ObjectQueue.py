@@ -57,6 +57,13 @@ class Queue:
     def getQueue(self):
         return self.queue
 
+    def getOrder(self, index):
+        return self.queue[index]
+
+    def getQueueLength(self):
+        return len(self.queue)
+    # Use the above functions in my HTML code instead
+
 # queue = Queue()
 # queue.add_object('14', "Please bring some water")
 # queue.ReadQueue()
