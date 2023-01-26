@@ -51,7 +51,7 @@ class Queue:
             current_size = len(self.queue)
             if (current_size > size or current_size < size):
                 print("Changed")
-                size = current_size
+                return "Changed"
             time.sleep(1)
 
     # def alterRequest(self, TableNum, New_Request):

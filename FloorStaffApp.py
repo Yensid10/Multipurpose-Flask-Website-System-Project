@@ -1,8 +1,18 @@
+import time
 from ObjectQueue import Queue
 from flask import Flask, render_template, request
 from flask import redirect
+from threading import Thread
 
 app = Flask(__name__)
+
+
+def checkQueue():
+    while True:
+        if queue.checkQueue() == "Changed":
+            return redirect('/')
+        time.sleep(1)
+
 
 queue = Queue()
 queue.addObject("Food", "#12")
@@ -22,8 +32,8 @@ queue.addObject("Door", "<---")
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    # if queue.checkQueue() == "Changed":
-    #     return redirect('/')
+    thread = Thread(target=checkQueue)
+    thread.start()
     if request.method == 'POST':
         if request.form.get('popQueue') == 'Accept':
             queue.popFrontObject()
