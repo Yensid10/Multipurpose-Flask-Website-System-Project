@@ -4,8 +4,10 @@
     <title>Kitchen Staff</title>
     <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
     <script src="{{ url_for('static', filename='script.js') }}" type="text/javascript"></script>
+    <link href="{{ url_for('static', filename='icon.png') }}" rel="icon" type="image/png">
 </head>
 <body>
+<img src="{{ url_for('static', filename='icon.png') }}" alt="Page Icon" style="width:32px; height:32px;">
 <h1>Order Queue</h1>
 <table id="order-queue-table">
     <thead>
