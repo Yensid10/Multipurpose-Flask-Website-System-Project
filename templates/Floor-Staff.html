@@ -11,7 +11,7 @@
 
         /* body {
             height: 100%;
-            overflow: auto;
+            
         } */
 
         /* Convert percentages into pixels to make more accurate!!! */
@@ -22,6 +22,7 @@
             font-family: Arial, Helvetica, sans-serif;
             width: 1024px;
             height: 768px;
+            overflow: auto;
         }
 
         .scroll-menu {
@@ -155,7 +156,12 @@
 </head>
 
 <body>
-
+    <form style="text-align: right;" action="{{url_for('background_process_test')}}" method="post">
+        <label for="Request">Table No:</label>
+        <input type="text" id="TableNum" name="TableNum" placeholder="TableNum">
+        <input type="text" id="Note" name="Note" placeholder="Note">
+        <button type="submit">Submit Note</button>
+    </form>
     <h1
         style="font-size: 60px; position: absolute; top: -5%; left: 2.5%; font-weight: bold; text-decoration: underline;">
         Floor Staff</h1>
@@ -167,6 +173,7 @@
         <div class="menu-item"> {{ queue.getOrder(0).getNote() + " " + queue.getOrder(0).getTableNo() }}
             <!-- <button class="button">Accept</button> -->
             <form method="post">
+                <!-- Set the above to work as a flask function that is called :) -->
                 <input type="submit" class="button" value="Accept" name="popQueue" />
             </form>
 
@@ -288,7 +295,7 @@
 
     <div class="review">
         <div
-            style="width: 220px; height: 50px; border: 3px solid rgb(0, 0, 0); position: absolute; top: -3px; left: -3px;">
+            style="width: 220px; height: 50px; border: 3px solid rgb(0, 0, 0); position: absolute; top: -3px; left: -3px;overflow-x: hidden;">
             <h3 style="font-size: 35px; position: absolute; top: -60%; left: 17%; font-weight: bold;">
                 REVIEW</h3>
         </div>

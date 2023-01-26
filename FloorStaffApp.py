@@ -41,16 +41,22 @@ def home():
     return render_template('Floor-Staff.html', queue=queue)
 
 
-# @app.route('/background_process_test', methods=['GET', 'POST'])
-# def background_process_test():
+@app.route('/test')
+def test():
+    return render_template('test.html')
 
-#     #     table_number = request.form.get("TableNum")
-#     #     Request = request.form.get("Request")
-#     #     print(table_number)
-#     #     print(Request)
-#     # if table_number and Request:
-#     #     Queue().add_object(table_number, Request)
-#     return redirect('/')
+
+@ app.route('/background_process_test', methods=['GET', 'POST'])
+def background_process_test():
+
+    if request.method == "POST":
+        table_number = request.form.get("TableNum")
+        note = request.form.get("Note")
+        print(table_number)
+        print(note)
+    if table_number and note:
+        queue.addObject(note, table_number)
+    return redirect('/')
 
 
 if __name__ == '__main__':
