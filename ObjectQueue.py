@@ -8,7 +8,7 @@ class Order:
     #     self.TableNo = TableNo
     #     self.Note = Note
 
-    def __init__(self, TableNo, Note):
+    def __init__(self, Note, TableNo):
         self.TableNo = TableNo
         self.Note = Note
         # self.Price = Price
@@ -29,8 +29,8 @@ class Queue:
         t = threading.Thread(target=self.Check_queue)
         t.start()
 
-    def add_object(self, TableNo, Note):
-        new_object = Order(TableNo, Note)
+    def add_object(self, Note, TableNo):
+        new_object = Order(Note, TableNo)
         self.queue.append(new_object)
 
     def AlterRequest(self, TableNum, New_Request):
@@ -52,13 +52,15 @@ class Queue:
 
     def ReadQueue(self):
         for order in self.queue:
-            print(order.getTableNo() + " | " +
-                  order.getNote())
+            print(order.getNote() + " " + order.getTableNo())
+
+    def getQueue(self):
+        return self.queue
 
 
-queue = Queue()
-queue.add_object('14', "Please bring some water")
-queue.ReadQueue()
+# queue = Queue()
+# queue.add_object('14', "Please bring some water")
+# queue.ReadQueue()
 # queue.add_object('15', "Please bring some bread")
 # print(queue.queue[1].Request)
 # queue.AlterRequest('15', "Please bring some water")
