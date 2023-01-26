@@ -13,6 +13,7 @@
         <th>Order ID</th>
         <th>Customer Name</th>
         <th>Items</th>
+        <th>Status</th>
         <th>Accept</th>
     </tr>
     </thead>
@@ -21,13 +22,15 @@
         <tr>
             <td>{{ order.id }}</td>
             <td>{{ order.customer_name }}</td>
-            <td>{{ order.items }}</td>
+            <td>{{ order["items"] }}</td>
+            <td>{{ order.status }}</td>
             <td>
-                <button onclick="acceptOrder(order.id)">Accept</button>
+                <button onclick="acceptOrder({{ order.id }})">Accept</button>
             </td>
         </tr>
     {% endfor %}
     </tbody>
+
 </table>
 
 <h1>Accepted Orders</h1>
@@ -45,13 +48,12 @@
         <tr>
             <td>{{ order.id }}</td>
             <td>{{ order.customer_name }}</td>
-            <td>{{ order.items }}</td>
-            <td>
-                <a class="recipe-link" href="{{ order.recipe_url }}">View Recipe</a>
-            </td>
+            <td>{{ order["items"] }}</td>
+            <td><a href="{{ order.recipe_url }}" target="_blank">{{ order.recipe_url }}</a></td>
         </tr>
     {% endfor %}
     </tbody>
+
 </table>
 </body>
 </html>
