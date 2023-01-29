@@ -7114,3 +7114,12 @@ button.bg-dark:focus {
     text-align: right !important; }
   .text-xl-center {
     text-align: center !important; } }
+    
+.text-lowercase {
+  text-transform: lowercase !important; }
+
+.text-uppercase {
+  text-transform: uppercase !important; }
+
+.text-capitalize {
+  text-transform: capitalize !important; }
