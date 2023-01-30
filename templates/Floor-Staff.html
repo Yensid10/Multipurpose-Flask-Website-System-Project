@@ -156,6 +156,39 @@
 </head>
 
 <body>
+    <script>
+        count = 0;
+        function updateQueue() {
+            count++;
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/updateQueue", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Parse the response from the server
+                    var data = JSON.parse(xhr.responseText);
+
+                    // Update the queue information on the page
+                    document.querySelector("h2").innerHTML = "QUEUE: " + data.queueLength;
+
+                    // Clear the existing queue items
+                    var menu = document.querySelector(".scroll-menu");
+                    menu.innerHTML = "";
+
+                    // Add the new queue items to the page
+                    for (var i = 0; i < data.queueItems.length; i++) {
+                        var item = document.createElement("div");
+                        item.classList.add("menu-item");
+                        item.innerHTML = "<form method='post'><input type='submit' class='button' value='Accept' name='popQueue' /></form>"
+                            + data.queueItems[i].note + " " + count + " " + data.queueItems[i].tableNo;
+                        menu.appendChild(item);
+
+                    }
+                }
+            };
+            xhr.send();
+        }
+        setInterval(updateQueue, 1000);
+    </script>
     <form style="text-align: right;" action="{{url_for('background_process_test')}}" method="post">
         <label for="Request">Table No:</label>
         <input type="text" id="TableNum" name="TableNum" placeholder="TableNum">
@@ -171,7 +204,8 @@
 
         {% if queue.getLength() != 0: %}
         <div class="menu-item"> {{ queue.getOrder(0).getNote() + " " + queue.getOrder(0).getTableNo() }}
-            <!-- <button class="button">Accept</button> -->
+            <!-- <button class="button" onclick="updateQueue()">Update</button> -->
+
             <form method="post">
                 <!-- Set the above to work as a flask function that is called :) -->
                 <input type="submit" class="button" value="Accept" name="popQueue" />

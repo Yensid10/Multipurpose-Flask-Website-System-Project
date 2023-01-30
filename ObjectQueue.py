@@ -66,8 +66,8 @@ class Queue:
     #     for order in self.queue:
     #         print(order.getNote() + " " + order.getTableNo())
 
-    # def getQueue(self):
-    #     return self.queue
+    def getQueue(self):
+        return self.queue
 
 # queue = Queue()
 # queue.add_object('14', "Please bring some water")

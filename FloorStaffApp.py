@@ -1,6 +1,6 @@
 import time
 from ObjectQueue import Queue
-from flask import Flask, render_template, request
+from flask import Flask, jsonify, render_template, request
 from flask import redirect
 from threading import Thread
 
@@ -57,6 +57,21 @@ def background_process_test():
     if table_number and note:
         queue.addObject(note, table_number)
     return redirect('/')
+
+
+@app.route("/updateQueue")
+def updateQueue():
+    queueItems = []
+    for i in range(queue.getLength()):
+        order = queue.getOrder(i)
+        queueItems.append({
+            "note": order.getNote(),
+            "tableNo": order.getTableNo()
+        })
+    return jsonify({
+        "queueLength": queue.getLength(),
+        "queueItems": queueItems
+    })
 
 
 if __name__ == '__main__':
