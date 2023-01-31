@@ -2,7 +2,7 @@ from ObjectQueue import Queue
 import threading
 from flask import Flask, render_template, request
 from flask import redirect
-app = Flask(__name__)
+app = Flask('__name__')
 
 
 @app.route('/')
@@ -20,6 +20,11 @@ def background_process_test():
     if table_number and Request:
         Queue().add_object(table_number, Request)
     return redirect('/')
+
+
+@app.route('/Ring')
+def show():
+    return render_template('Ring.html')
 
 
 if __name__ == '__main__':
