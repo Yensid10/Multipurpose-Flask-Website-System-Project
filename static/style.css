@@ -29,6 +29,11 @@ th {
     cursor: pointer;
 }
 
+.accept-button:disabled {
+        background-color: grey;
+        cursor: not-allowed;
+    }
+
 .recipe-link {
     color: blue;
     text-decoration: none;

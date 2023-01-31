@@ -11,51 +11,33 @@
 <h1>Order Queue</h1>
 <table id="order-queue-table">
     <thead>
-    <tr>
-        <th>Order ID</th>
-        <th>Customer Name</th>
-        <th>Items</th>
-        <th>Status</th>
-        <th>Accept</th>
-    </tr>
+        <tr>
+            <th>Order ID</th>
+            <th>Table #</th>
+            <th>Items</th>
+            <th>Status</th>
+            <th>Recipe URL</th>
+            <th>Accept</th>
+        </tr>
     </thead>
     <tbody>
-    {% for order in order_queue %}
+        {% for order in orders %}
         <tr>
-            <td>{{ order.id }}</td>
-            <td>{{ order.customer_name }}</td>
-            <td>{{ order["items"] }}</td>
-            <td>{{ order.status }}</td>
+            <td>{{ order[0] }}</td>
+            <td>{{ order[1] }}</td>
+            <td>{{ order[2] }}</td>
+            <td>{{ order[3] }}</td>
+            <td>{{ order[4] }}</td>
             <td>
-                <button onclick="acceptOrder({{ order.id }})">Accept</button>
+                <button class="accept-button" {% if order[3] == "<pending>" %} disabled {% endif %}>Accept</button>
             </td>
         </tr>
-    {% endfor %}
+        {% endfor %}
     </tbody>
-
 </table>
 
-<h1>Accepted Orders</h1>
-<table id="accepted-orders-table">
-    <thead>
-    <tr>
-        <th>Order ID</th>
-        <th>Customer Name</th>
-        <th>Items</th>
-        <th>Recipe</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for order in accepted_orders %}
-        <tr>
-            <td>{{ order.id }}</td>
-            <td>{{ order.customer_name }}</td>
-            <td>{{ order["items"] }}</td>
-            <td><a href="{{ order.recipe_url }}" target="_blank">{{ order.recipe_url }}</a></td>
-        </tr>
-    {% endfor %}
-    </tbody>
 
-</table>
+
+
 </body>
 </html>
