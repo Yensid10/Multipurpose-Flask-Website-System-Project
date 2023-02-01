@@ -18,7 +18,7 @@ queue.addObject("Food", "#12")
 queue.addObject("Table", "#3")
 queue.addObject("Table", "#17")
 queue.addObject("Door", "<---")
-# Colour coordinate these depending on the type of request
+# Colour coordinate these depending on the type of request?
 
 
 @app.route('/')
