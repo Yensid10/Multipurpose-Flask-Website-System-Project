@@ -156,10 +156,27 @@
 </head>
 
 <body>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+
     <script>
-        count = 0;
+        function performTest() {
+            $.ajax({
+                type: "POST",
+                url: "/test",
+            })
+            updateQueue();
+        }
+
+        function performTest2() {
+            data = { "note": "Table", "tableNo": "#" + math.floor(random.random() * 100) }
+            $.ajax({
+                type: "POST",
+                url: "/test2",
+                data: data,
+            })
+        }
+
         function updateQueue() {
-            count++;
             var xhr = new XMLHttpRequest();
             xhr.open("GET", "/updateQueue", true);
             xhr.onreadystatechange = function () {
@@ -174,12 +191,15 @@
                     var menu = document.querySelector(".scroll-menu");
                     menu.innerHTML = "";
 
+                    // Adding a queue item with random number as table number, and note being "Table"
+                    // data.queueItems.push({ tableNo: Math.floor(Math.random() * 100), note: "Table" });
+
                     // Add the new queue items to the page
                     for (var i = 0; i < data.queueItems.length; i++) {
                         var item = document.createElement("div");
                         item.classList.add("menu-item");
-                        item.innerHTML = "<form method='post'><input type='submit' class='button' value='Accept' name='popQueue' /></form>"
-                            + data.queueItems[i].note + " " + count + " " + data.queueItems[i].tableNo;
+                        item.innerHTML = '<button type="button" class="button" onclick="performTest()">Accept</button>'
+                            + data.queueItems[i].note + " " + data.queueItems[i].tableNo;
                         menu.appendChild(item);
 
                     }
@@ -189,12 +209,15 @@
         }
         setInterval(updateQueue, 1000);
     </script>
-    <form style="text-align: right;" action="{{url_for('background_process_test')}}" method="post">
+    <!-- <form style="text-align: right;" action="{{url_for('background_process_test')}}" method="post">
         <label for="Request">Table No:</label>
         <input type="text" id="TableNum" name="TableNum" placeholder="TableNum">
         <input type="text" id="Note" name="Note" placeholder="Note">
         <button type="submit">Submit Note</button>
-    </form>
+    </form> -->
+    <button style="position: absolute; top: 0%; left: 85%;" type="button" onclick="performTest2()">Add Random
+        Table</button>
+
     <h1
         style="font-size: 60px; position: absolute; top: -5%; left: 2.5%; font-weight: bold; text-decoration: underline;">
         Floor Staff</h1>
@@ -205,11 +228,12 @@
         {% if queue.getLength() != 0: %}
         <div class="menu-item"> {{ queue.getOrder(0).getNote() + " " + queue.getOrder(0).getTableNo() }}
             <!-- <button class="button" onclick="updateQueue()">Update</button> -->
+            <button type="button" class="button" onclick="performTest()">Accept</button>
 
-            <form method="post">
-                <!-- Set the above to work as a flask function that is called :) -->
+            <!-- <form method="post">
+                Set the above to work as a flask function that is called :)
                 <input type="submit" class="button" value="Accept" name="popQueue" />
-            </form>
+            </form> -->
 
         </div>
         {% for index in range(1, queue.getLength()): %}
