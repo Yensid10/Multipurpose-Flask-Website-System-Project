@@ -9,11 +9,6 @@
             height: 100%;
         }
 
-        /* body {
-            height: 100%;
-            
-        } */
-
         /* Convert percentages into pixels to make more accurate!!! */
         body {
             background-color: rgb(255, 255, 255);
@@ -72,7 +67,7 @@
             top: 2%;
         }
 
-        /* .button:after {
+        .button:after {
             content: "";
             background: #f1f1f1;
             display: block;
@@ -91,8 +86,7 @@
             margin: 0;
             opacity: 1;
             transition: 0s
-        } */
-
+        }
 
         /* Musfik Stuff */
         .menu {
@@ -159,12 +153,26 @@
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 
     <script>
-        function performTest() {
+        function acceptQueuePing() {
             $.ajax({
                 type: "POST",
-                url: "/test",
+                url: "/acceptQueuePing",
             })
             updateQueue();
+        }
+        function addPingToQueue() {
+            $.ajax({
+                type: "POST",
+                url: "/addPingToQueue",
+                data: JSON.stringify({ "tableNo": "#" + (Math.floor(Math.random() * 100)).toString() }),
+                contentType: "application/json",
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
         }
         function updateQueue() {
             var xhr = new XMLHttpRequest();
@@ -173,71 +181,48 @@
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     // Parse the response from the server
                     var data = JSON.parse(xhr.responseText);
-
-                    // Update the queue information on the page
+                    // Update the queue count on the page
                     document.querySelector("h2").innerHTML = "QUEUE: " + data.queueLength;
-
-                    // Clear the existing queue items
+                    // Clear the existing queue
                     var menu = document.querySelector(".scroll-menu");
                     menu.innerHTML = "";
 
-                    // Adding a queue item with random number as table number, and note being "Table"
-                    // data.queueItems.push({ tableNo: Math.floor(Math.random() * 100), note: "Table" });
+                    // Adding the first new queue objects to the page with button
+                    var item = document.createElement("div");
+                    item.classList.add("menu-item");
+                    item.innerHTML = '<button type="button" class="button" onclick="acceptQueuePing()">Accept</button>' + data.queueItems[0].note + " " + data.queueItems[0].tableNo;
+                    menu.appendChild(item);
 
-                    // Add the new queue items to the page
-                    for (var i = 0; i < data.queueItems.length; i++) {
-                        var item = document.createElement("div");
+                    // Adding the rest of the new queue objects to the page
+                    for (var i = 1; i < data.queueItems.length; i++) {
+                        item = document.createElement("div");
                         item.classList.add("menu-item");
-                        item.innerHTML = '<button type="button" class="button" onclick="performTest()">Accept</button>'
-                            + data.queueItems[i].note + " " + data.queueItems[i].tableNo;
+                        item.innerHTML = data.queueItems[i].note + " " + data.queueItems[i].tableNo;
                         menu.appendChild(item);
-
                     }
                 }
             };
             xhr.send();
         }
+        updateQueue();
         setInterval(updateQueue, 1000);
     </script>
-    <!-- <form style="text-align: right;" action="{{url_for('background_process_test')}}" method="post">
-        <label for="Request">Table No:</label>
-        <input type="text" id="TableNum" name="TableNum" placeholder="TableNum">
-        <input type="text" id="Note" name="Note" placeholder="Note">
-        <button type="submit">Submit Note</button>
-    </form> -->
-    <!-- <button style="position: absolute; top: 0%; left: 85%;" type="button" onclick="performTest2()">Add Random
-        Table</button> -->
-    <button style="position: absolute; top: 0%; left: 85%;" type="button" id="add-random-table"
-        onclick="performTest2()">Add Random Table</button>
 
+    <button style="position: absolute; top: 5%; left: 85%;" type="button" class="button" onclick="addPingToQueue()">Add
+    </button>
 
     <h1
         style="font-size: 60px; position: absolute; top: -5%; left: 2.5%; font-weight: bold; text-decoration: underline;">
         Floor Staff</h1>
     <h2 style="font-size: 35px; position: absolute; top: 12.5%; left: 4.5%; font-weight: bold;">
         QUEUE: {{ queue.getLength() }}</h2>
-    <div class="scroll-menu">
 
-        {% if queue.getLength() != 0: %}
-        <div class="menu-item"> {{ queue.getOrder(0).getNote() + " " + queue.getOrder(0).getTableNo() }}
-            <!-- <button class="button" onclick="updateQueue()">Update</button> -->
-            <button type="button" class="button" onclick="performTest()">Accept</button>
-
-            <!-- <form method="post">
-                Set the above to work as a flask function that is called :)
-                <input type="submit" class="button" value="Accept" name="popQueue" />
-            </form> -->
-
-        </div>
-        {% for index in range(1, queue.getLength()): %}
-        <div class="menu-item"> {{ queue.getOrder(index).getNote() + " " + queue.getOrder(index).getTableNo() }}
-        </div>
-        {% endfor %}
-        {% endif %}
-    </div>
+    <div class="scroll-menu"></div>
 
     <h2 style="font-size: 35px; position: absolute; top: 12.5%; left: 28%; font-weight: bold;">
         ORDER FOR TABLE # <!-- add a drop down list here --></h2>
+
+    <!-- Musfik's Stuff -->
     <div class="menu">
         <h4>Appetizers</h4>
         <div class="item">
