@@ -30,7 +30,7 @@ queue.addObject("Door", "<---")
 # Colour coordinate these depending on the type of request
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def home():
     # thread = Thread(target=checkQueue)
     # thread.start()
@@ -41,23 +41,32 @@ def home():
     return render_template('Floor-Staff.html', queue=queue)
 
 
+@app.route('/page')
+def page():
+    # thread = Thread(target=checkQueue)
+    # thread.start()
+    # if request.method == 'POST':
+    #     if request.form.get('popQueue') == 'Accept':
+    #         queue.popFrontObject()
+    #         return redirect('/')
+    return render_template('page.html')
+
+
 @app.route('/test', methods=['POST'])
 def test():
     if request.method == 'POST':
         queue.popFrontObject()
+        # print("popped")
         return ('', 204)
 
 
-@app.route('/test2', methods=['POST'])
-def test2():
+@app.route('/addToQueueTest', methods=['POST'])
+def addToQueueTest():
+    print("help")
     if request.method == 'POST':
-        # data = request.get_json()
-        # note = data.get('note')
-        # tableNo = data.get('tableNo')
-        queue.addObject({request.form.get('note')}, {
-                        request.form.get('tableNo')})
-        print({request.form.get('note')}, {
-            request.form.get('tableNo')})
+        data = request.get_json()
+        tableNo = data.get('tableNo')
+        queue.addObject("Table ", tableNo)
         return ('', 204)
 
 
