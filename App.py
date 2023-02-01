@@ -1,5 +1,6 @@
 import time
 from ObjectQueue import Queue
+from flask import redirect
 from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
@@ -22,8 +23,12 @@ queue.addObject("Door", "<---")
 
 @app.route('/')
 def home():
-    return render_template('Floor-Staff.html', queue=queue)
+    return render_template('menu.html')
 
+
+# @app.route('/')
+# def home():
+#     return render_template('Floor-Staff.html', queue=queue)
 
 @app.route('/acceptQueuePing', methods=['POST'])
 def acceptQueuePing():
@@ -54,6 +59,28 @@ def updateQueue():
         "queueLength": queue.getLength(),
         "queueItems": jsonQueue
     })
+
+
+@app.route('/background_process_test', methods=['GET', 'POST'])
+def background_process_test():
+    if request.method == "POST":
+        table_number = request.form.get("TableNum")
+        Request = request.form.get("Request")
+        print(table_number)
+        print(Request)
+    if table_number and Request:
+        Queue().add_object(table_number, Request)
+    return redirect('/')
+
+
+@app.route('/Ring')
+def showRing():
+    return render_template('Ring.html')
+
+
+@app.route('/Floor-Staff')
+def showFS():
+    return render_template('Floor-Staff.html', queue=queue)
 
 
 if __name__ == '__main__':
