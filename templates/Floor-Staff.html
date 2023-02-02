@@ -229,100 +229,112 @@
             <span class="item__title">Guacamole and chips -</span> £7.50
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="item1">
+                <p id="output1"></p>
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button" id="btn1">+</button>
         </div>
         <div class="item">
             <span class="item__title">Queso fundido -</span> £9.00
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="item2">
+                <p id="output2"></p>
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button" id="btn2">+</button>
         </div>
         <div class="item">
             <span class="item__title">Tostadas de tinga -</span> £8.50
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="item3">
+                <p id="output3"></p>
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button" id="btn3">+</button>
         </div>
         <h4>Entrees</h4>
         <div class="item">
             <span class="item__title">Mole negro -</span> £15.00
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="item4">
+                <p id="output4"></p>
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button"id="btn4">+</button>
         </div>
         <div class="item">
             <span class="item__title">Tacos al pastor -</span> £12.00
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="item5">
+                <p id="output5"></p>
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button"id="btn5">+</button>
         </div>
         <div class="item">
             <span class="item__title">Enchiladas verdes -</span> £13.50
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="item6">
+                <p id="output6"></p>
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button"id="btn6">+</button>
         </div>
         <h4>Sides</h4>
         <div class="item">
             <span class="item__title">Arroz verde -</span> £4.50
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="item7">
+                <p id="output7"></p>
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button"id="btn7">+</button>
         </div>
         <div class="item">
             <span class="item__title">Frijoles negros -</span> £4.00
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="item8">
+                <p id="output8"></p>
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button" id="btn8">+</button>
         </div>
         <div class="item">
             <span class="item__title">Elote -</span> £5.50
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="item9">
+                <p id="output9"></p>
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button" id="btn9">+</button>
         </div>
         <h4>Desserts</h4>
         <div class="item">
             <span class="item__title">Flan -</span> £6.00
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="item10">
+                <p id="output10"></p>
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button" id="btn10">+</button>
         </div>
         <div class="item">
             <span class="item__title">Tres leches -</span> £7.00
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="item11">
+                <p id="output11"></p>
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button" id="btn11">+</button>
         </div>
         <div class="item">
             <span class="item__title">Sorbete de tamarindo -</span> £5.50
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="item12">
+                <p id="output12"></p>
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button" id="btn12">+</button>
         </div>
         <p style="margin-top: 20px; font-style: italic; font-size: 0.8em;">Allergen Information: Our menu items may
             contain peanuts, tree nuts, dairy, soy, avocado, pork, chicken, and
@@ -336,6 +348,85 @@
                 REVIEW</h3>
         </div>
     </div>
+    <script>
+        //Declares all the variables for each corresponding menu item
+        const item1 = document.getElementById('item1');
+        const btn1 = document.getElementById('btn1');
+        const out1 = document.getElementById('output1');
+
+        const item2 = document.getElementById('item2');
+        const btn2 = document.getElementById('btn2');
+        const out2 = document.getElementById('output2');
+
+        const item3 = document.getElementById('item3');
+        const btn3 = document.getElementById('btn3');
+        const out3 = document.getElementById('output3');
+
+        const item4 = document.getElementById('item4');
+        const btn4 = document.getElementById('btn4');
+        const out4 = document.getElementById('output4');
+
+        const item5 = document.getElementById('item5');
+        const btn5 = document.getElementById('btn5');
+        const out5 = document.getElementById('output5');
+
+        const item6 = document.getElementById('item6');
+        const btn6 = document.getElementById('btn6');
+        const out6 = document.getElementById('output6');
+
+        const item7 = document.getElementById('item7');
+        const btn7 = document.getElementById('btn7');
+        const out7 = document.getElementById('output7');
+
+        const item8 = document.getElementById('item8');
+        const btn8 = document.getElementById('btn8');
+        const out8 = document.getElementById('output8');
+
+        const item9 = document.getElementById('item9');
+        const btn9 = document.getElementById('btn9');
+        const out9 = document.getElementById('output9');
+
+        const item10 = document.getElementById('item10');
+        const btn10 = document.getElementById('btn10');
+        const out10 = document.getElementById('output10');
+
+        const item11 = document.getElementById('item11');
+        const btn11 = document.getElementById('btn11');
+        const out11 = document.getElementById('output11');
+
+        const item12 = document.getElementById('item12');
+        const btn12 = document.getElementById('btn12');
+        const out12 = document.getElementById('output12');
+        
+        //Following function updates the input value for each corresponding paragraph also known as output
+        function notes() {
+            out1.innerHTML = item1.value;
+            out2.innerHTML = item2.value;
+            out3.innerHTML = item3.value;
+            out4.innerHTML = item4.value;
+            out5.innerHTML = item5.value;
+            out6.innerHTML = item6.value;
+            out7.innerHTML = item7.value;
+            out8.innerHTML = item8.value;
+            out9.innerHTML = item9.value;
+            out10.innerHTML = item10.value;
+            out11.innerHTML = item11.value;
+            out12.innerHTML = item12.value;
+        }
+        //As the button is clicked the notes function will be called and update the output for each menu item
+        btn1.addEventListener('click',notes);
+        btn2.addEventListener('click',notes);
+        btn3.addEventListener('click',notes);
+        btn4.addEventListener('click',notes);
+        btn5.addEventListener('click',notes);
+        btn6.addEventListener('click',notes);
+        btn7.addEventListener('click',notes);
+        btn8.addEventListener('click',notes);
+        btn9.addEventListener('click',notes);
+        btn10.addEventListener('click',notes);
+        btn11.addEventListener('click',notes);
+        btn12.addEventListener('click',notes);
+    </script>    
 </body>
 
 </html>
