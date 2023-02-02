@@ -10,6 +10,7 @@
 </head>
 <body>
 <img src="{{ url_for('static', filename='icon.png') }}" alt="Page Icon" style="width:32px; height:32px;">
+
 <h1>Order Queue</h1>
 <table id="order-queue-table">
     <thead>
@@ -38,6 +39,31 @@
     {% endfor %}
     </tbody>
 </table>
+
+<h1>Accepted Orders</h1>
+<table id="accepted-orders-table">
+    <thead>
+    <tr>
+        <th>Order ID</th>
+        <th>Table #</th>
+        <th>Items</th>
+        <th>Status</th>
+        <th>Recipe URL</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for order in accepted_orders %}
+        <tr>
+            <td>{{ order[0] }}</td>
+            <td>{{ order[1] }}</td>
+            <td>{{ order[2] }}</td>
+            <td>{{ order[3] }}</td>
+            <td>{{ order[4] }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
 
 </body>
 </html>

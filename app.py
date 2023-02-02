@@ -11,8 +11,10 @@ def kitchen():
     c = conn.cursor()
     c.execute("SELECT * FROM order_queue")
     orders = c.fetchall()
+    c.execute("SELECT * FROM accepted_orders")
+    accepted_orders = c.fetchall()
     conn.close()
-    return render_template("kitchen.html", orders=orders)
+    return render_template("kitchen.html", orders=orders, accepted_orders=accepted_orders)
 
 
 @app.route('/accept_order/<int:order_id>')
