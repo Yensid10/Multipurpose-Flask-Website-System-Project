@@ -7533,3 +7533,53 @@ h1, h2, h3, h4, h5,
         color: #fff;
         height: 750px;
         text-align: right; }
+        @media (min-width: 992px) {
+          .owl-carousel.home-slider .slider-item .slider-text .order-md-last {
+            text-align: left !important; } }
+        @media (max-width: 767.98px) {
+          .owl-carousel.home-slider .slider-item .slider-text {
+            text-align: center; } }
+        .owl-carousel.home-slider .slider-item .slider-text .subheading {
+          font-family: "Nothing You Could Do", cursive;
+          font-size: 30px;
+          color: #fac564; }
+        .owl-carousel.home-slider .slider-item .slider-text h1 {
+          text-transform: uppercase;
+          font-size: 40px;
+          color: #fff;
+          line-height: 1.5;
+          font-weight: normal;
+          letter-spacing: 1px; }
+          .owl-carousel.home-slider .slider-item .slider-text h1 strong {
+            color: #fff;
+            font-family: "Josefin Sans", Arial, sans-serif;
+            font-size: 50px; }
+          @media (max-width: 991.98px) {
+            .owl-carousel.home-slider .slider-item .slider-text h1 {
+              font-size: 30px; } }
+        .owl-carousel.home-slider .slider-item .slider-text p {
+          font-size: 18px;
+          line-height: 1.5;
+          font-weight: 300;
+          color: white; }
+          .owl-carousel.home-slider .slider-item .slider-text p.sub-p {
+            font-weight: 400; }
+          .owl-carousel.home-slider .slider-item .slider-text p strong {
+            font-weight: 700; }
+            .owl-carousel.home-slider .slider-item .slider-text p strong a {
+              color: #fff; }
+        .owl-carousel.home-slider .slider-item .slider-text .unstyled-list {
+          width: 50%;
+          padding: 0; }
+          .owl-carousel.home-slider .slider-item .slider-text .unstyled-list li {
+            list-style: none; }
+        .owl-carousel.home-slider .slider-item .slider-text .breadcrumbs {
+          text-transform: uppercase;
+          font-size: 13px;
+          letter-spacing: 1px; }
+          .owl-carousel.home-slider .slider-item .slider-text .breadcrumbs span {
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1); }
+            .owl-carousel.home-slider .slider-item .slider-text .breadcrumbs span a {
+              color: #fff; }
+      .owl-carousel.home-slider .slider-item.bread-item {
+        height: 500px !important; }
