@@ -2,68 +2,69 @@
 <html lang="en">
 <head>
     <title>Kitchen Staff</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="{{ url_for('static', filename='script.js') }}" type="text/javascript"></script>
     <link href="{{ url_for('static', filename='icon.png') }}" rel="icon" type="image/png">
-
-
 </head>
 <body>
-<img src="{{ url_for('static', filename='icon.png') }}" alt="Page Icon" style="width:32px; height:32px;">
+    <img src="{{ url_for('static', filename='icon.png') }}" alt="Page Icon" class="img-fluid">
 
-<h1>Order Queue</h1>
-<table id="order-queue-table">
-    <thead>
-    <tr>
-        <th>Order ID</th>
-        <th>Table #</th>
-        <th>Items</th>
-        <th>Status</th>
-        <th>Recipe URL</th>
-        <th>Accept</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for order in orders %}
-        <tr>
-            <td>{{ order[0] }}</td>
-            <td>{{ order[1] }}</td>
-            <td>{{ order[2] }}</td>
-            <td>{{ order[3] }}</td>
-            <td>{{ order[4] }}</td>
-            <td>
-                <button class="accept-button" {% if order[3] == "<pending>" %} disabled {% endif %} id="accept-order-{{ order[0] }}">Accept</button>
+    <div class="container mt-5">
+        <h1 class="text-center mb-5">Order Queue</h1>
+        <table class="table table-bordered table-striped" id="order-queue-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Table #</th>
+                    <th>Items</th>
+                    <th>Status</th>
+                    <th>Recipe URL</th>
+                    <th>Accept</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order[0] }}</td>
+                        <td>{{ order[1] }}</td>
+                        <td>{{ order[2] }}</td>
+                        <td>{{ order[3] }}</td>
+                        <td>{{ order[4] }}</td>
+                        <td>
+                            <button class="btn btn-primary accept-button" {% if order[3] == "<pending>" %} disabled {% endif %} id="accept-order-{{ order[0] }}">Accept</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
-
-<h1>Accepted Orders</h1>
-<table id="accepted-orders-table">
-    <thead>
-    <tr>
-        <th>Order ID</th>
-        <th>Table #</th>
-        <th>Items</th>
-        <th>Status</th>
-        <th>Recipe URL</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for order in accepted_orders %}
-        <tr>
-            <td>{{ order[0] }}</td>
-            <td>{{ order[1] }}</td>
-            <td>{{ order[2] }}</td>
-            <td>{{ order[3] }}</td>
-            <td>{{ order[4] }}</td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
-
-
+        <h1 class="text-center mt-5 mb-5">Accepted Orders</h1>
+        <table class="table table-bordered table-striped" id="accepted-orders-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Table #</th>
+                    <th>Items</th>
+                    <th>Status</th>
+                    <th>Recipe URL</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in accepted_orders %}
+                <tr>
+                    <td>{{ order[0] }}</td>
+                    <td>{{ order[1] }}</td>
+                    <td>{{ order[2] }}</td>
+                    <td>{{ order[3] }}</td>
+                    <td>{{ order[4] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

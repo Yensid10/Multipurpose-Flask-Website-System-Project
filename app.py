@@ -32,6 +32,11 @@ def accept_order(order_id):
     cursor.execute("DELETE FROM order_queue WHERE id=?", (order_id,))
     conn.commit()
 
+    conn = sqlite3.connect('orders.db')
+    c = conn.cursor()
+    c.execute("UPDATE accepted_orders SET status = '<preparing>' WHERE id=?", (order_id,))
+    conn.commit()
+
     return redirect(url_for('kitchen'))
 
 
