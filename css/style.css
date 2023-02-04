@@ -7718,3 +7718,70 @@ h1, h2, h3, h4, h5,
   .ftco-intro .wrap .info {
     background: #000;
     padding: 30px; }
+    @media (min-width: 1200px) {
+      .ftco-intro .wrap .info {
+        width: calc(100% - 35%);
+        padding: 2% 5% 2% 12%; } }
+    @media (max-width: 767.98px) {
+      .ftco-intro .wrap .info {
+        width: 100%; } }
+    .ftco-intro .wrap .info p {
+      margin-bottom: 0; }
+  .ftco-intro .wrap .social {
+    width: 35%;
+    background: #fac564; }
+    @media (max-width: 767.98px) {
+      .ftco-intro .wrap .social {
+        width: 100%; } }
+    .ftco-intro .wrap .social .social-icon {
+      margin: 0;
+      padding: 0; }
+      .ftco-intro .wrap .social .social-icon li {
+        list-style: none;
+        display: inline-block;
+        line-height: 0;
+        padding: 0 10px; }
+        .ftco-intro .wrap .social .social-icon li a {
+          display: block;
+          margin: 0;
+          padding: 0; }
+          .ftco-intro .wrap .social .social-icon li a span {
+            color: #fff;
+            font-size: 20px; }
+  .ftco-intro .wrap h3 {
+    font-size: 16px; }
+  .ftco-intro .wrap .text {
+    width: calc(100% - 40px); }
+  .ftco-intro .wrap .icon {
+    width: 40px; }
+    .ftco-intro .wrap .icon span {
+      color: #fac564;
+      font-size: 20px; }
+
+.ftco-about .one-half {
+  width: 100%;
+  padding: 30px 15px; }
+  @media (min-width: 768px) {
+    .ftco-about .one-half {
+      padding: 5%;
+      width: 50%; } }
+  .ftco-about .one-half.img {
+    display: block; }
+    @media (max-width: 767.98px) {
+      .ftco-about .one-half.img {
+        height: 300px; } }
+
+.ftco-services {
+  background: url(../images/food.png) repeat;
+  color: #5c3d03; }
+  .ftco-services .overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: '';
+    background: #fac564;
+    opacity: 0; }
+  .ftco-services .heading-section h2 {
+    color: black; }
