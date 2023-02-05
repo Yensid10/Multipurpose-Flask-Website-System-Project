@@ -1,4 +1,6 @@
+/* Define the root styles */
 :root {
+  /* Define the root styles */
   --blue: #007bff;
   --indigo: #6610f2;
   --purple: #6f42c1;
@@ -25,15 +27,19 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
+
+  /* Define font family variables */
   --font-family-sans-serif: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
+/* Box sizing styles */
 *,
 *::before,
 *::after {
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
+/* Set font family and line height for the document */
 html {
   font-family: sans-serif;
   line-height: 1.15;
@@ -42,12 +48,15 @@ html {
   -ms-overflow-style: scrollbar;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
+/* Viewport styles */
 @-ms-viewport {
   width: device-width; }
 
+/* Set display styles for semantic elements */
 article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block; }
 
+/* Body styles */
 body {
   margin: 0;
   font-family: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -61,63 +70,113 @@ body {
 [tabindex="-1"]:focus {
   outline: 0 !important; }
 
+/* Define styles for the horizontal rule element */
 hr {
+  /* Aligns the content box within the element */
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
+  /* Sets the height of the element to 0 */
   height: 0;
-  overflow: visible; }
+  /* Makes the content within the element visible */
+  overflow: visible; 
+}
 
+/* Define styles for h1-h6 elements */
 h1, h2, h3, h4, h5, h6 {
+  /* Remove the top margin */
   margin-top: 0;
-  margin-bottom: 0.5rem; }
+  /* Add bottom margin of 0.5rem */
+  margin-bottom: 0.5rem; 
+}
 
+/* Define styles for the paragraph element */
 p {
+  /* Remove the top margin */
   margin-top: 0;
-  margin-bottom: 1rem; }
+  /* Add bottom margin of 1rem */
+  margin-bottom: 1rem; 
+}
 
+/* Define styles for the abbr element */
 abbr[title],
 abbr[data-original-title] {
+  /* Add an underline */
   text-decoration: underline;
+  /* Add a dotted underline for webkit browsers */
   -webkit-text-decoration: underline dotted;
+  /* Add a dotted underline */
   text-decoration: underline dotted;
+  /* Changes cursor to a "help" cursor */
   cursor: help;
-  border-bottom: 0; }
+  /* Removes bottom border */
+  border-bottom: 0; 
+}
 
+/* Define styles for the address element */
 address {
+  /* Add bottom margin of 1rem */
   margin-bottom: 1rem;
+  /* Normal font style */
   font-style: normal;
-  line-height: inherit; }
+  /* Inherit line height */
+  line-height: inherit; 
+}
 
+/* Define styles for the ordered list, unordered list, and definition list elements */
 ol,
 ul,
 dl {
+  /* Remove top margin */
   margin-top: 0;
-  margin-bottom: 1rem; }
+  /* Add bottom margin of 1rem */
+  margin-bottom: 1rem; 
+}
 
+/* Define styles for nested ordered and unordered lists */
 ol ol,
 ul ul,
 ol ul,
 ul ol {
-  margin-bottom: 0; }
+  /* Remove bottom margin */
+  margin-bottom: 0; 
+}
 
+/* Define styles for the definition term element */
 dt {
-  font-weight: 700; }
+  /* Bold font weight */
+  font-weight: 700; 
+}
 
+/* Define styles for the definition description element */
 dd {
+  /* Add bottom margin of 0.5rem */
   margin-bottom: .5rem;
-  margin-left: 0; }
+  /* Remove left margin */
+  margin-left: 0; 
+}
 
+/* Define styles for the blockquote element */
 blockquote {
-  margin: 0 0 1rem; }
+  /* Add top and bottom margin of 1rem */
+  margin: 0 0 1rem; 
+}
 
+/* Define styles for the defined term element */
 dfn {
-  font-style: italic; }
+  /* Italic font style */
+  font-style: italic; 
+}
 
+/* Define styles for the bold and strong elements */
 b,
 strong {
-  font-weight: bolder; }
+  /* Bolder font weight */
+  font-weight: bolder; 
+}
 
+/* Define styles for the small element */
 small {
+  /* 80% font size*/
   font-size: 80%; }
 
 sub,
@@ -7785,3 +7844,157 @@ h1, h2, h3, h4, h5,
     opacity: 0; }
   .ftco-services .heading-section h2 {
     color: black; }
+
+    .services .icon {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 0; }
+      .services .icon:after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        content: '';
+        bordeR: 1px solid #bf7e06;
+        z-index: -1;
+        -moz-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        -webkit-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        transition: all 0.3s ease; }
+      .services .icon span {
+        font-size: 60px;
+        color: #5c3d03;
+        z-index: 1; }
+    
+    .services h3 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: black;
+      text-transform: uppercase; }
+    
+    .services .media-body {
+      color: #5c3d03; }
+    
+    .services:hover .icon span {
+      color: #fff; }
+    
+    .services:hover .icon:after {
+      border: none;
+      -webkit-transform: rotate(135deg);
+      -ms-transform: rotate(135deg);
+      transform: rotate(135deg);
+      background: #f8b500; }
+    
+    .services-wrap {
+      width: 100%;
+      display: block; }
+      @media (max-width: 991.98px) {
+        .services-wrap {
+          margin-bottom: 30px; } }
+      .services-wrap .img, .services-wrap .text {
+        width: 50%; }
+      .services-wrap .img {
+        display: block; }
+      .services-wrap .text {
+        background: rgba(0, 0, 0, 0.2);
+        position: relative; }
+        .services-wrap .text h3 {
+          font-size: 20px; }
+        .services-wrap .text .price {
+          font-size: 16px;
+          margin-bottom: 0; }
+          .services-wrap .text .price span {
+            color: #fac564; }
+    
+    .ftco-gallery {
+      padding-top: 7em; }
+    
+    .gallery {
+      display: block;
+      height: 300px;
+      position: relative; }
+      .gallery .icon {
+        width: 50px;
+        height: 50px;
+        margin: 0 auto;
+        z-index: 0;
+        opacity: 0;
+        position: relative;
+        -moz-transition: all 0.6s ease;
+        -o-transition: all 0.6s ease;
+        -webkit-transition: all 0.6s ease;
+        -ms-transition: all 0.6s ease;
+        transition: all 0.6s ease; }
+        .gallery .icon:after {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          width: 50px;
+          height: 50px;
+          content: '';
+          background: #fac564;
+          z-index: -1;
+          -moz-transition: all 0.6s ease;
+          -o-transition: all 0.6s ease;
+          -webkit-transition: all 0.6s ease;
+          -ms-transition: all 0.6s ease;
+          transition: all 0.6s ease; }
+        .gallery .icon span {
+          color: #fff; }
+      .gallery:hover .icon, .gallery:focus .icon {
+        opacity: 1; }
+        .gallery:hover .icon:after, .gallery:focus .icon:after {
+          -webkit-transform: rotate(135deg);
+          -ms-transform: rotate(135deg);
+          transform: rotate(135deg); }
+    
+    .pricing-entry {
+      width: 100%;
+      display: block;
+      margin-bottom: 30px; }
+      .pricing-entry .img {
+        width: 60px;
+        height: 60px;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        border-radius: 50%; }
+      .pricing-entry .desc {
+        width: calc(100% - 60px); }
+        .pricing-entry .desc p {
+          margin-bottom: 0; }
+      .pricing-entry .text {
+        width: 100%;
+        display: block;
+        position: relative;
+        z-index: 0; }
+        .pricing-entry .text:after {
+          position: absolute;
+          bottom: 35%;
+          left: 0;
+          right: 0;
+          content: '';
+          width: 100%;
+          height: 1px;
+          border-bottom: 1px dashed #bf7e06;
+          z-index: -1; }
+        .pricing-entry .text h3 {
+          width: calc(100% - 80px);
+          font-size: 18px; }
+          .pricing-entry .text h3 span {
+            background: #121618;
+            background: url(../images/bg_4.jpg) no-repeat fixed;
+            padding-right: 20px; }
+        .pricing-entry .text .price {
+          width: 80px;
+          color: #fac564;
+          text-align: right;
+          background: #121618;
+          background: url(../images/bg_4.jpg) no-repeat fixed;
+          font-size: 16px; }
