@@ -51,6 +51,7 @@
                     <th>Items</th>
                     <th>Status</th>
                     <th>Recipe URL</th>
+                    <th>Complete</th>
                 </tr>
             </thead>
             <tbody>
@@ -61,10 +62,17 @@
                     <td>{{ order[2] }}</td>
                     <td>{{ order[3] }}</td>
                     <td>{{ order[4] }}</td>
+                    <td>
+                        <button class="complete-button" id="complete-order-{{ order[0] }}">Complete</button>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
+<div class="center">
+    <button class="order-history-button">Order History</a>
+</button>
+</div>
 </body>
 </html>

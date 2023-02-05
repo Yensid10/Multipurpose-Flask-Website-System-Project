@@ -34,6 +34,23 @@ th {
     cursor: not-allowed;
 }
 
+.complete-button {
+    background-color: green;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.complete-button:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}
+
 .recipe-link {
     color: blue;
     text-decoration: none;
@@ -52,3 +69,9 @@ body {
     background-color: #98C1D9;
 }
 
+.center {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100%;
+}
