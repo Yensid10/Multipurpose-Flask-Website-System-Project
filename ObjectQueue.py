@@ -18,7 +18,7 @@ class Queue:
         self.queue.append(Task(Note, TableNo))
 
     def popFrontObject(self):
-        self.queue.pop(0)
+        return self.queue.pop(0)
 
     def getObject(self, index):
         return self.queue[index]

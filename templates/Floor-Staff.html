@@ -69,7 +69,7 @@
         }
 
         /* may delete */
-        .button:after {
+        /* .button:after {
             content: "";
             background: #f1f1f1;
             display: block;
@@ -88,7 +88,7 @@
             margin: 0;
             opacity: 1;
             transition: 0s
-        }
+        } */
 
         /* Musfik Stuff */
         .menu {
@@ -159,6 +159,9 @@
             $.ajax({
                 type: "POST",
                 url: "/acceptQueuePing",
+                success: function (data) {
+                    $("#info-container").html(data.acceptedPing);
+                }
             })
             updateQueue();
         }
@@ -202,7 +205,13 @@
         }
         updateQueue();
         setInterval(updateQueue, 1000);
+
     </script>
+    <div style="position: absolute; top: 3%; left: 45%;">
+        <div> Your Current Job is: </div>
+        <div id="info-container" class="menu-item"></div>
+    </div>
+
 
     <button style="position: absolute; top: 5%; left: 85%;" type="button" class="button" onclick="addPingToQueue()">Add
     </button>

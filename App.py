@@ -32,8 +32,11 @@ def home():
 @app.route('/acceptQueuePing', methods=['POST'])
 def acceptQueuePing():
     if request.method == 'POST':
-        queue.popFrontObject()
-        return ('', 204)
+        ping = queue.popFrontObject()
+        data = {
+            "acceptedPing": ping.getNote() + " " + ping.getTableNo(),
+        }
+        return jsonify(data)
 
 
 @app.route('/addPingToQueue', methods=['POST'])
