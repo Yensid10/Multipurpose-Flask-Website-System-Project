@@ -25,3 +25,34 @@ class Queue:
 
     def getLength(self):
         return len(self.queue)
+
+class Notes:
+    def __init__(self, Order, OrderNotes):
+        self.Order = Order
+        self.OrderNotes = OrderNotes
+
+    def getOrder(self):
+        return self.Order
+
+    def getOrderNotes(self):
+        return self.OrderNotes
+
+class Orders:
+    def __init__(self):
+        self.queue = []
+
+    def addOrder(self, Order, OrderNotes):
+        self.queue.append(Notes(Order, OrderNotes))
+
+    def popFrontOrder(self):
+        return self.queue.pop(0)
+
+    def getOrders(self, index):
+        return self.queue[index]
+
+    def getLength(self):
+        return len(self.queue)
+    
+    def print(self):
+        for e in self.queue:
+            print(e)
