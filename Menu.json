@@ -1,0 +1,122 @@
+[
+    {
+        "name": "Guacamole and chips",
+        "price": "7.5",
+        "appetisers": "1",
+        "entree": "0",
+        "side": "0",
+        "dessert": "0",
+        "calories": "600",
+        "description": "A refreshing appetizer with an avacado based dip originating from Mexico"
+    },
+    {
+        "name": "Mole negro",
+        "price": "15.0",
+        "appetisers": "0",
+        "entree": "1",
+        "side": "0",
+        "dessert": "0",
+        "calories": "900",
+        "description": "A sause made from smoked black chilies, prunes and chocolate"
+    },
+    {
+        "name": "Arroz verde",
+        "price": "4.5",
+        "appetisers": "0",
+        "entree": "0",
+        "side": "1",
+        "dessert": "0",
+        "calories": "490",
+        "description": "Short-grain paella rice with clams and small prawns, garlic and parsley"
+    },
+    {
+        "name": "Flan",
+        "price": "6.0",
+        "appetisers": "0",
+        "entree": "0",
+        "side": "0",
+        "dessert": "1",
+        "calories": "1200",
+        "description": "A sweet pudding containing eggs milk and sugar covered in caramel"
+    },
+    {
+        "name": "Queso fundido",
+        "price": "9.0",
+        "appetisers": "1",
+        "entree": "0",
+        "side": "0",
+        "dessert": "0",
+        "calories": "906",
+        "description": "Melted cheese and chorizo with spicy ground pork sausage"
+    },
+    {
+        "name": "Tostadas de tinga",
+        "price": "8.5",
+        "appetisers": "1",
+        "entree": "0",
+        "side": "0",
+        "dessert": "0",
+        "calories": "345",
+        "description": "A fried corn tortillas topped with meat and beans, lettuce tomatoes, cheese and sour cream"
+    },
+    {
+        "name": "Tacos al pastor",
+        "price": "12.0",
+        "appetisers": "0",
+        "entree": "1",
+        "side": "0",
+        "dessert": "0",
+        "calories": "150",
+        "description": "Thinly sliced marinated pork with onions pinaple and cilantro"
+    },
+    {
+        "name": "Enchiladas verdes",
+        "price": "13.5",
+        "appetisers": "0",
+        "entree": "1",
+        "side": "0",
+        "dessert": "0",
+        "calories": "330",
+        "description": "A homemade green enchilada sauce made of roasted tomatillos, onions, and serrano chilis blended with garlic, lime juice, cilantro, chicken stock, and sour cream wrapped in a tortilla with chicken and cheese"
+    },
+    {
+        "name": "Frijoles negros",
+        "price": "4.0",
+        "appetisers": "0",
+        "entree": "0",
+        "side": "1",
+        "dessert": "0",
+        "calories": "70",
+        "description": "Black beans"
+    },
+    {
+        "name": "Elote",
+        "price": "5.5",
+        "appetisers": "0",
+        "entree": "0",
+        "side": "1",
+        "dessert": "0",
+        "calories": "168",
+        "description": "Corn on the cob charred on the grill, then slathered in a spicy and creamy chili, garlic, and Cotija cheese spiked sauce"
+    },
+    {
+        "name": "Tres leches",
+        "price": "7.0",
+        "appetisers": "0",
+        "entree": "0",
+        "side": "0",
+        "dessert": "1",
+        "calories": "295",
+        "description": "Sponge cake soaked in evaporated milk, condensed milk and whole milk. with creame, icing, vanilla extract and eggs"
+    },
+    {
+        "name": "Sorbete de tamarindo",
+        "price": "5.5",
+        "appetisers": "0",
+        "entree": "0",
+        "side": "0",
+        "dessert": "1",
+        "calories": "3",
+        "description": "Tamarind sorbet"
+    }
+]
