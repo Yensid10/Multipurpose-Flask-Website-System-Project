@@ -19,10 +19,11 @@ queue.addObject("Table", "#17")
 queue.addObject("Door", "<---")
 # Colour coordinate these depending on the type of request?
 
-#Testing Orders queue implementation
+# Testing Orders queue implementation
 order = Orders()
 order.addOrder("Guacamole and chips", "this is a test")
 print(order)
+
 
 @app.route('/')
 def home():
