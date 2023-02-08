@@ -49,7 +49,7 @@ body{
     
 }
 .popup{
-    background-color: limegreen;
+    background-color: lightblue;
     width: 420px;
     padding: 30px 40px;
     position: absolute;
@@ -129,23 +129,23 @@ a{
                 <h3>Please Select any Dietary Restrictions:</h3>
                 <h4>Allergens:</h4>
                 <form>
-                    <input type="checkbox" id="milk" name="allergen" value="milk">
-                    <label for="milk">Milk</label><br>
-                    <input type="checkbox" id="eggs" name="allergen" value="eggs">
-                    <label for="eggs">Eggs</label><br>
-                    <input type="checkbox" id="peanuts" name="allergen" value="peanuts">
-                    <label for="peanuts">Peanuts</label><br>
-                    <input type="checkbox" id="tree_nuts" name="allergen" value="tree_nuts">
-                    <label for="tree_nuts">Tree nuts</label><br>
-                    <input type="checkbox" id="wheat" name="allergen" value="wheat">
-                    <label for="wheat">Wheat</label><br>
-                    <input type="checkbox" id="soy" name="allergen" value="soy">
-                    <label for="soy">Soy</label><br>
-                    <input type="checkbox" id="fish" name="allergen" value="fish">
-                    <label for="fish">Fish</label><br>
-                    <input type="checkbox" id="shellfish" name="allergen" value="shellfish">
-                    <label for="shellfish">Shellfish</label><br>
-                  </form>
+                    <input type="checkbox" id="allergen1" name="allergen" value="Milk">
+                    <label for="allergen1">Milk</label><br>
+                    <input type="checkbox" id="allergen2" name="allergen" value="Eggs">
+                    <label for="allergen2">Eggs</label><br>
+                    <input type="checkbox" id="allergen3" name="allergen" value="Peanuts">
+                    <label for="allergen3">Peanuts</label><br>
+                    <input type="checkbox" id="allergen4" name="allergen" value="Tree Nuts">
+                    <label for="allergen4">Tree Nuts</label><br>
+                    <input type="checkbox" id="allergen5" name="allergen" value="Wheat">
+                    <label for="allergen5">Wheat</label><br>
+                    <input type="checkbox" id="allergen6" name="allergen" value="Soy">
+                    <label for="allergen6">Soy</label><br>
+                    <input type="checkbox" id="allergen7" name="allergen" value="Fish">
+                    <label for="allergen7">Fish</label><br>
+                    <input type="checkbox" id="allergen8" name="allergen" value="Shellfish">
+                    <label for="allergen8">Shellfish</label><br>
+                    </form>
                   <h4>Religious Restrictions:</h4>
 		  <form>
 			<input type="checkbox" id="Kosher" name="allergen" value="Kosher">
@@ -153,11 +153,28 @@ a{
 			<input type="checkbox" id="Halal" name="allergen" value="Halal">
 			<label for="Halal">Halal</label><br>
 		  </form>
-		  <input type="submit" value="Submit">
-		  <input type="button" value="Close" onclick="document.getElementById('allergen-popup').style.display='none'">
+		  <input type="button" value="Submit">
+		  <!--<input type="button" value="Close" onclick="document.getElementById('allergen-popup').style.display='none'">-->
         
     </div>
     <!--Script-->
+
+    <script>
+        const form = document.querySelector("form");
+        form.addEventListener("submit", function(event) {
+          event.preventDefault();
+          const allergens = document.querySelectorAll("input[name='allergen']:checked");
+          const list = document.querySelector("#displayAllergens");
+          list.innerHTML = "";
+          for (let i = 0; i < allergens.length; i++) {
+            const li = document.createElement("li");
+            li.innerHTML = allergens[i].value;
+            list.appendChild(li);
+          }
+        });
+      </script>
+    
+
     <script type="text/javascript">
 window.addEventListener("load", function(){
     setTimeout(
