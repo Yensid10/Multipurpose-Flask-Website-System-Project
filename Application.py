@@ -5,15 +5,6 @@ from flask import Flask, render_template, redirect, url_for, jsonify
 app = Flask(__name__)
 
 
-def get_row_count(table_name):
-    con = sqlite3.connect('orders.db')
-    cur = con.cursor()
-    cur.execute(f"SELECT COUNT(*) FROM {table_name}")
-    count = cur.fetchone()[0]
-    con.close()
-    return count
-
-
 @app.route('/kitchen')
 def kitchen():
     conn = sqlite3.connect("orders.db")
