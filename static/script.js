@@ -27,3 +27,46 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+var oqprevData;
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    function getOrderQueueData() {
+    $.getJSON("/order_queue_data", function (oqdata) {
+        if (oqprevData == null) {
+            oqprevData = oqdata;
+        }
+
+        else if (JSON.stringify(oqdata) !== JSON.stringify(oqprevData)) {
+            console.log("Order queue data changed, reloading page...");
+            oqprevData = oqdata;
+            location.reload();
+        }
+    });
+}
+setInterval(getOrderQueueData, 5000);
+});
+
+
+
+var aoprevData;
+
+document.addEventListener("DOMContentLoaded", function () {
+    function getAcceptedOrdersData() {
+    $.getJSON("/accepted_orders_data", function (aodata) {
+        if (aoprevData == null) {
+            aoprevData = aodata;
+        }
+
+        else if (JSON.stringify(aodata) !== JSON.stringify(aoprevData)) {
+            console.log("Accepted orders data changed, reloading page...");
+            aoprevData = aodata;
+            location.reload();
+        }
+    });
+}
+setInterval(getAcceptedOrdersData, 5000);
+});
+
+

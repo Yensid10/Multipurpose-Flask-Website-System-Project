@@ -11,68 +11,70 @@
     <link href="{{ url_for('static', filename='icon.png') }}" rel="icon" type="image/png">
 </head>
 <body>
-    <img src="{{ url_for('static', filename='icon.png') }}" alt="Page Icon" class="img-fluid">
+<img src="{{ url_for('static', filename='icon.png') }}" alt="Page Icon" class="img-fluid">
 
-    <div class="container mt-5">
-        <h1 class="text-center mb-5">Order Queue</h1>
-        <table class="table table-bordered table-striped" id="order-queue-table">
-            <thead>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Table #</th>
-                    <th>Items</th>
-                    <th>Status</th>
-                    <th>Recipe URL</th>
-                    <th>Accept</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for order in orders %}
-                    <tr>
-                        <td>{{ order[0] }}</td>
-                        <td>{{ order[1] }}</td>
-                        <td>{{ order[2] }}</td>
-                        <td>{{ order[3] }}</td>
-                        <td>{{ order[4] }}</td>
-                        <td>
-                            <button class="btn btn-primary accept-button" {% if order[3] == "<pending>" %} disabled {% endif %} id="accept-order-{{ order[0] }}">Accept</button>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+<div class="container mt-5">
+    <h1 class="text-center mb-5">Order Queue</h1>
+    <table class="table table-bordered table-striped" id="order-queue-table">
+        <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Table #</th>
+            <th>Items</th>
+            <th>Status</th>
+            <th>Recipe URL</th>
+            <th>Accept</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+            <tr>
+                <td>{{ order[0] }}</td>
+                <td>{{ order[1] }}</td>
+                <td>{{ order[2] }}</td>
+                <td>{{ order[3] }}</td>
+                <td>{{ order[4] }}</td>
+                <td>
+                    <button class="btn btn-primary accept-button" {% if order[3] == "<pending>" %} disabled {% endif %}
+                            id="accept-order-{{ order[0] }}">Accept
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-        <h1 class="text-center mt-5 mb-5">Accepted Orders</h1>
-        <table class="table table-bordered table-striped" id="accepted-orders-table">
-            <thead>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Table #</th>
-                    <th>Items</th>
-                    <th>Status</th>
-                    <th>Recipe URL</th>
-                    <th>Complete</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for order in accepted_orders %}
-                <tr>
-                    <td>{{ order[0] }}</td>
-                    <td>{{ order[1] }}</td>
-                    <td>{{ order[2] }}</td>
-                    <td>{{ order[3] }}</td>
-                    <td>{{ order[4] }}</td>
-                    <td>
-                        <button class="complete-button" id="complete-order-{{ order[0] }}">Complete</button>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    <h1 class="text-center mt-5 mb-5">Accepted Orders</h1>
+    <table class="table table-bordered table-striped" id="accepted-orders-table">
+        <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Table #</th>
+            <th>Items</th>
+            <th>Status</th>
+            <th>Recipe URL</th>
+            <th>Complete</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in accepted_orders %}
+            <tr>
+                <td>{{ order[0] }}</td>
+                <td>{{ order[1] }}</td>
+                <td>{{ order[2] }}</td>
+                <td>{{ order[3] }}</td>
+                <td>{{ order[4] }}</td>
+                <td>
+                    <button class="complete-button" id="complete-order-{{ order[0] }}">Complete</button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 <div class="center">
     <button class="order-history-button">Order History</a>
-</button>
+    </button>
 </div>
 </body>
 </html>
