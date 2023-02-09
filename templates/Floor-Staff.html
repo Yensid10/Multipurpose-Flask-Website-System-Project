@@ -192,7 +192,24 @@
                 data: JSON.stringify({ "tableNo": "#" + (Math.floor(Math.random() * 100)).toString() }),
                 contentType: "application/json",
             });
+
+
         }
+
+        function addPingToOrder() {
+            $.ajax({
+                type: "POST",
+                url: "/addPingToOrder",
+                data: JSON.stringify({ "orderItem": orderItem, "orderNotes": notes }),
+                contentType: "application/json",
+            });
+        }
+        $(".order-button").click(function () {
+            var orderItem = $(this).data(".order-item");
+            var notes = $(".order-note").val();
+            addPingToOrder(orderItem, notes);
+        });
+
         function updateQueue() {
             var xhr = new XMLHttpRequest();
             xhr.open("GET", "/updateQueue", true);
@@ -288,103 +305,103 @@
     <div class="menu">
         <h4>Appetizers</h4>
         <div class="item">
-            <span class="item__title">Guacamole and chips -</span> £7.50
+            <span class="item__title" id="order-item">Guacamole and chips -</span> £7.50
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button" id="order-button">+</button>
         </div>
         <div class="item">
-            <span class="item__title">Queso fundido -</span> £9.00
+            <span class="item__title" id="order-item">Queso fundido -</span> £9.00
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button" id="order-button">+</button>
         </div>
         <div class="item">
-            <span class="item__title">Tostadas de tinga -</span> £8.50
+            <span class="item__title" id="order-item">Tostadas de tinga -</span> £8.50
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button" id="order-button">+</button>
         </div>
         <h4>Entrees</h4>
         <div class="item">
-            <span class="item__title">Mole negro -</span> £15.00
+            <span class="item__title" id="order-item">Mole negro -</span> £15.00
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button" id="order-button">+</button>
         </div>
         <div class="item">
-            <span class="item__title">Tacos al pastor -</span> £12.00
+            <span class="item__title" id="order-item">Tacos al pastor -</span> £12.00
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button" id="order-button">+</button>
         </div>
         <div class="item">
-            <span class="item__title">Enchiladas verdes -</span> £13.50
+            <span class="item__title" id="order-item">Enchiladas verdes -</span> £13.50
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button" id="order-button">+</button>
         </div>
         <h4>Sides</h4>
         <div class="item">
-            <span class="item__title">Arroz verde -</span> £4.50
+            <span class="item__title" id="order-item">Arroz verde -</span> £4.50
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button" id="order-button">+</button>
         </div>
         <div class="item">
-            <span class="item__title">Frijoles negros -</span> £4.00
+            <span class="item__title" id="order-item">Frijoles negros -</span> £4.00
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button" id="order-button">+</button>
         </div>
         <div class="item">
-            <span class="item__title">Elote -</span> £5.50
+            <span class="item__title" id="order-item">Elote -</span> £5.50
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button" id="order-button">+</button>
         </div>
         <h4>Desserts</h4>
         <div class="item">
-            <span class="item__title">Flan -</span> £6.00
+            <span class="item__title" id="order-item">Flan -</span> £6.00
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button" id="order-button">+</button>
         </div>
         <div class="item">
-            <span class="item__title">Tres leches -</span> £7.00
+            <span class="item__title" id="order-item">Tres leches -</span> £7.00
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button" id="order-button">+</button>
         </div>
         <div class="item">
-            <span class="item__title">Sorbete de tamarindo -</span> £5.50
+            <span class="item__title" id="order-item">Sorbete de tamarindo -</span> £5.50
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text">
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button">+</button>
+            <button class="add-button" id="order-button">+</button>
         </div>
         <p style="margin-top: 20px; font-style: italic; font-size: 0.8em;">Allergen Information: Our menu items may
             contain peanuts, tree nuts, dairy, soy, avocado, pork, chicken, and

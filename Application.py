@@ -23,9 +23,7 @@ queue.addObject("Door", "<---")
 # Colour coordinate these depending on the type of request?
 
 # Testing Orders queue implementation
-order = Orders()
-order.addOrder("Guacamole and chips", "this is a test")
-print(order)
+orders = Orders()
 
 
 @app.route('/')
@@ -53,6 +51,16 @@ def addPingToQueue():
         data = request.get_json()
         tableNo = data.get('tableNo')
         queue.addObject("Table ", tableNo)
+        return ('', 204)
+
+
+@app.route('/addPingToOrder', methods=['POST'])
+def addPingToOrder():
+    if request.method == 'POST':
+        data = request.get_json()
+        orderItem = data.get('orderItem')
+        orderNotes = data.get('orderNotes')
+        orders.addOrder(orderItem, orderNotes)
         return ('', 204)
 
 
