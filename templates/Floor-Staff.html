@@ -97,7 +97,7 @@
             border: 2px solid black;
             position: absolute;
             top: 22%;
-            left: 28%;
+            left: 27%;
             overflow-y: auto;
             width: 260px;
             height: 543px;
@@ -142,10 +142,30 @@
         .review {
             position: absolute;
             top: 22%;
-            left: 53.8%;
+            left: 52.5%;
             overflow-y: auto;
             width: 220px;
             height: 543px;
+            border: 3px solid rgb(0, 0, 0);
+        }
+
+        .bills {
+            position: absolute;
+            top: 22%;
+            left: 76.5%;
+            overflow-y: auto;
+            width: 220px;
+            height: 240px;
+            border: 3px solid rgb(0, 0, 0);
+        }
+
+        .help {
+            position: absolute;
+            top: 61.5%;
+            left: 76.5%;
+            overflow-y: auto;
+            width: 220px;
+            height: 240px;
             border: 3px solid rgb(0, 0, 0);
         }
     </style>
@@ -207,17 +227,18 @@
         setInterval(updateQueue, 1000);
 
     </script>
-    <div style="position: absolute; top: 3%; left: 45%;">
-        <div> Your Current Job is: </div>
+    <div style="position: absolute; top: 0.5%; left: 47%;">
+        <div style="position: absolute; left: 17%;"> Your Current Job is: </div><br>
         <div id="info-container" class="menu-item"></div>
+    </div>
     </div>
 
 
     <button style="position: absolute; top: 5%; left: 85%;" type="button" class="button" onclick="addPingToQueue()">Add
     </button>
 
-    <h1
-        style="font-size: 60px; position: absolute; top: -5%; left: 2.5%; font-weight: bold; text-decoration: underline;">
+    <h1 style="font-size: 60px; position: absolute; top: -5%; left: 2.5%; font-weight: bold; 
+        text-decoration: underline;">
         Floor Staff</h1>
     <h2 style="font-size: 35px; position: absolute; top: 12.5%; left: 4.5%; font-weight: bold;">
         QUEUE: {{ queue.getLength() }}</h2>
@@ -225,7 +246,43 @@
     <div class="scroll-menu"></div>
 
     <h2 style="font-size: 35px; position: absolute; top: 12.5%; left: 28%; font-weight: bold;">
-        ORDER FOR TABLE # <!-- add a drop down list here --></h2>
+        ORDER FOR TABLE #
+        <select style="font-size: 30px;">
+            {% for x in range(1, 31) %}
+            <option value="{{ x }}">{{ x }}</option>
+            {% endfor %}
+        </select>
+    </h2>
+
+    <div class="review">
+        <div style="width: 220px; height: 50px; border: 3px solid rgb(0, 0, 0); 
+            position: absolute; top: -3px; left: -3px;overflow-x: hidden;">
+            <h3 style="font-size: 35px; position: absolute; top: -60%; left: 17%; font-weight: bold;">
+                REVIEW</h3>
+        </div>
+    </div>
+
+    <h2 style="font-size: 35px; position: absolute; top: 12.5%; left: 82.5%; font-weight: bold;">
+        BILLS</h2>
+    <div class="bills">
+        <h3 style="font-size: 35px; position: absolute; top: 10%; left: 17%; font-weight: bold; text-align: center;">
+            FOR <br> TABLE #<br>
+            <select style="font-size: 30px;">
+                {% for x in range(1, 31) %}
+                <option value="{{ x }}">{{ x }}</option>
+                {% endfor %}
+            </select>
+        </h3>
+    </div>
+
+    <h2 style="font-size: 35px; position: absolute; top: 51.5%; left: 82.5%; font-weight: bold;">
+        HELP</h2>
+    <div class="help">
+        <h3 style="font-size: 35px; position: absolute; top: 00%; font-weight: bold; text-align: center;">
+            [CLICK HERE TO <br> GO TO FAQ PAGE]</h3>
+    </div>
+
+
 
     <!-- Musfik's Stuff -->
     <div class="menu">
@@ -332,14 +389,6 @@
         <p style="margin-top: 20px; font-style: italic; font-size: 0.8em;">Allergen Information: Our menu items may
             contain peanuts, tree nuts, dairy, soy, avocado, pork, chicken, and
             eggs. Please inform your server of any allergies you may have.</p>
-    </div>
-
-    <div class="review">
-        <div
-            style="width: 220px; height: 50px; border: 3px solid rgb(0, 0, 0); position: absolute; top: -3px; left: -3px;overflow-x: hidden;">
-            <h3 style="font-size: 35px; position: absolute; top: -60%; left: 17%; font-weight: bold;">
-                REVIEW</h3>
-        </div>
     </div>
 </body>
 
