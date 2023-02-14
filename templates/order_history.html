@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Order History</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}" type="text/javascript"></script>
+    <link href="{{ url_for('static', filename='icon.png') }}" rel="icon" type="image/png">
+</head>
+<body>
+<h1 class="text-center mt-5 mb-5">Order History</h1>
+<table class="table table-bordered table-striped" id="order-history-table">
+    <thead>
+    <tr>
+        <th>Order ID</th>
+        <th>Table #</th>
+        <th>Items</th>
+        <th>Status</th>
+        <th>Recipe URL</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for order in order_history %}
+        <tr>
+            <td>{{ order[0] }}</td>
+            <td>{{ order[1] }}</td>
+            <td>{{ order[2] }}</td>
+            <td>{{ order[3] }}</td>
+            <td>{{ order[4] }}</td>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div class="text-center mt-5 mb-5">
+    <a href="javascript:history.back()" class="btn btn-primary">Return to Previous Page</a>
+</div>
+</body>
+</html>

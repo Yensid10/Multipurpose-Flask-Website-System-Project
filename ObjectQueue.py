@@ -1,24 +1,24 @@
-class Task:
-    def __init__(self, Note, TableNo):
-        self.TableNo = TableNo
-        self.Note = Note
+class Notes:
+    def __init__(self, Note1, Note2):
+        self.Note1 = Note1
+        self.Note2 = Note2
 
-    def getTableNo(self):
-        return self.TableNo
+    def getNote1(self):
+        return self.Note1
 
-    def getNote(self):
-        return self.Note
+    def getNote2(self):
+        return self.Note2
 
 
 class Queue:
     def __init__(self):
         self.queue = []
 
-    def addObject(self, Note, TableNo):
-        self.queue.append(Task(Note, TableNo))
+    def addObject(self, Note1, Note2):
+        self.queue.append(Notes(Note1, Note2))
 
     def popFrontObject(self):
-        self.queue.pop(0)
+        return self.queue.pop(0)
 
     def getObject(self, index):
         return self.queue[index]

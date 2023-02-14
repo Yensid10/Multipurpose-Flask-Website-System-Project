@@ -9,12 +9,12 @@
             height: 100%;
         }
 
-        /* Convert percentages into pixels to make more accurate!!! */
         body {
             background-color: rgb(255, 255, 255);
             margin: 0;
             padding: 0;
             font-family: Arial, Helvetica, sans-serif;
+            position: absolute;
             width: 1024px;
             height: 768px;
             overflow: auto;
@@ -22,8 +22,8 @@
 
         .scroll-menu {
             position: absolute;
-            top: 22%;
-            left: 2.5%;
+            top: 169px;
+            left: 26px;
             overflow-y: auto;
             width: 225px;
             height: 543px;
@@ -63,11 +63,12 @@
             overflow: hidden;
             cursor: pointer;
             border-radius: 15px;
-            left: 50%;
-            top: 2%;
+            left: 112.5px;
+            top: 11px;
         }
 
-        .button:after {
+        /* may delete */
+        /* .button:after {
             content: "";
             background: #f1f1f1;
             display: block;
@@ -86,7 +87,7 @@
             margin: 0;
             opacity: 1;
             transition: 0s
-        }
+        } */
 
         /* Musfik Stuff */
         .menu {
@@ -95,7 +96,7 @@
             border: 2px solid black;
             position: absolute;
             top: 22%;
-            left: 28%;
+            left: 27%;
             overflow-y: auto;
             width: 260px;
             height: 543px;
@@ -140,10 +141,30 @@
         .review {
             position: absolute;
             top: 22%;
-            left: 53.8%;
+            left: 52.5%;
             overflow-y: auto;
             width: 220px;
             height: 543px;
+            border: 3px solid rgb(0, 0, 0);
+        }
+
+        .bills {
+            position: absolute;
+            top: 22%;
+            left: 76.5%;
+            overflow-y: auto;
+            width: 220px;
+            height: 240px;
+            border: 3px solid rgb(0, 0, 0);
+        }
+
+        .help {
+            position: absolute;
+            top: 61.5%;
+            left: 76.5%;
+            overflow-y: auto;
+            width: 220px;
+            height: 240px;
             border: 3px solid rgb(0, 0, 0);
         }
     </style>
@@ -157,23 +178,24 @@
             $.ajax({
                 type: "POST",
                 url: "/acceptQueuePing",
+                success: function (data) {
+                    $("#info-container").html(data.acceptedPing);
+                }
             })
             updateQueue();
         }
+
         function addPingToQueue() {
             $.ajax({
                 type: "POST",
                 url: "/addPingToQueue",
                 data: JSON.stringify({ "tableNo": "#" + (Math.floor(Math.random() * 100)).toString() }),
                 contentType: "application/json",
-                success: function (response) {
-                    console.log(response);
-                },
-                error: function (xhr, status, error) {
-                    console.error(error);
-                }
             });
+
+
         }
+
         function updateQueue() {
             var xhr = new XMLHttpRequest();
             xhr.open("GET", "/updateQueue", true);
@@ -190,7 +212,8 @@
                     // Adding the first new queue objects to the page with button
                     var item = document.createElement("div");
                     item.classList.add("menu-item");
-                    item.innerHTML = '<button type="button" class="button" onclick="acceptQueuePing()">Accept</button>' + data.queueItems[0].note + " " + data.queueItems[0].tableNo;
+                    item.innerHTML = '<button type="button" class="button" onclick="acceptQueuePing()">Accept</button>'
+                        + data.queueItems[0].note + " " + data.queueItems[0].tableNo;
                     menu.appendChild(item);
 
                     // Adding the rest of the new queue objects to the page
@@ -204,15 +227,72 @@
             };
             xhr.send();
         }
+
+        function addItemToOrder() {
+            var orderItem = document.getElementById("order-item").getAttribute("order-name");
+            var notes = document.getElementById("order-note").value;
+            $.ajax({
+                type: "POST",
+                url: "/addItemToOrder",
+                data: JSON.stringify({ "orderItem": orderItem, "orderNotes": notes }),
+                contentType: "application/json",
+            });
+            updateOrder();
+        }
+
+        //change this so it only updates on one persons specific html page
+        function updateOrder() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/updateOrder", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Parse the response from the server
+                    var data = JSON.parse(xhr.responseText);
+                    // Clear the existing queue
+                    var review = document.querySelector(".review");
+                    review.innerHTML = "";
+
+                    // Adding the first new queue objects to the page with button
+                    // var item = document.createElement("div");
+                    // item.classList.add("menu-item");
+                    // item.innerHTML = '<button type="button" class="button" onclick="acceptQueuePing()">Accept</button>'
+                    //     + data.queueItems[0].note + " " + data.queueItems[0].tableNo;
+                    // menu.appendChild(item);
+
+                    // Adding the rest of the new queue objects to the page
+                    review.innerHTML = '<div style="width: 220px; height: 50px; border: 3px solid rgb(0, 0, 0); position: absolute;'
+                        + ' top: -3px; left: -3px;overflow-x: hidden;"> <h3 style="font-size: 35px; position: absolute; top: -60%; left: 17%; '
+                        + 'font-weight: bold;"> REVIEW</h3> </div><br><br><br>'
+                    for (var i = 1; i < data.queueItems.length; i++) {
+                        // item = document.createElement("div");
+                        // item.classList.add("menu-item");
+                        review.innerHTML += "<br>" + data.queueItems[i].name + " " + data.queueItems[i].note;
+                        // menu.appendChild(item);
+                    }
+                }
+            };
+            xhr.send();
+        }
+
         updateQueue();
         setInterval(updateQueue, 1000);
     </script>
 
+
+    <div style="position: absolute; top: 0.5%; left: 47%;">
+        <div style="position: absolute; left: 17%;"> Your Current Job is: </div><br>
+        <div id="info-container" class="menu-item" style="font-weight: bold; font-size: 41px; color: #ffffff; 
+        border: 1px solid rgb(255, 0, 0); text-shadow: -2.5px 0 black, 0 2.5px black, 2.5px 0 black, 0 -2.5px black;">
+        </div>
+    </div>
+    </div>
+
+
     <button style="position: absolute; top: 5%; left: 85%;" type="button" class="button" onclick="addPingToQueue()">Add
     </button>
 
-    <h1
-        style="font-size: 60px; position: absolute; top: -5%; left: 2.5%; font-weight: bold; text-decoration: underline;">
+    <h1 style="font-size: 60px; position: absolute; top: -5%; left: 2.5%; font-weight: bold; 
+        text-decoration: underline;">
         Floor Staff</h1>
     <h2 style="font-size: 35px; position: absolute; top: 12.5%; left: 4.5%; font-weight: bold;">
         QUEUE: {{ queue.getLength() }}</h2>
@@ -220,213 +300,152 @@
     <div class="scroll-menu"></div>
 
     <h2 style="font-size: 35px; position: absolute; top: 12.5%; left: 28%; font-weight: bold;">
-        ORDER FOR TABLE # <!-- add a drop down list here --></h2>
+        ORDER FOR TABLE #
+        <select style="font-size: 30px;">
+            {% for x in range(1, 31) %}
+            <option value="{{ x }}">{{ x }}</option>
+            {% endfor %}
+        </select>
+    </h2>
 
-    <!-- Musfik's Stuff -->
+    <div class="review">
+        <div style="width: 220px; height: 50px; border: 3px solid rgb(0, 0, 0); 
+            position: absolute; top: -3px; left: -3px;overflow-x: hidden;">
+            <h3 style="font-size: 35px; position: absolute; top: -60%; left: 17%; font-weight: bold;">
+                REVIEW</h3>
+        </div>
+    </div>
+
+    <h2 style="font-size: 35px; position: absolute; top: 12.5%; left: 82.5%; font-weight: bold;">
+        BILLS</h2>
+    <div class="bills">
+        <h3 style="font-size: 35px; position: absolute; top: 10%; left: 17%; font-weight: bold; text-align: center;">
+            FOR <br> TABLE #<br>
+            <select style="font-size: 30px;">
+                {% for x in range(1, 31) %}
+                <option value="{{ x }}">{{ x }}</option>
+                {% endfor %}
+            </select>
+        </h3>
+    </div>
+
+    <h2 style="font-size: 35px; position: absolute; top: 51.5%; left: 82.5%; font-weight: bold;">
+        HELP</h2>
+    <div class="help">
+        <h3 style="font-size: 35px; position: absolute; top: 00%; font-weight: bold; text-align: center;">
+            [CLICK HERE TO <br> GO TO FAQ PAGE]</h3>
+    </div>
+
+
+
+    <!-- Musfik's Stuff | Needs to be able to display specific notes etc-->
     <div class="menu">
         <h4>Appetizers</h4>
         <div class="item">
-            <span class="item__title">Guacamole and chips -</span> £7.50
+            <span class="item__title" id="order-item" order-name="Guacamole and chips">Guacamole and chips -</span>
+            £7.50
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text" id="item1">
-                <p id="output1"></p>
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button" id="btn1">+</button>
+            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
         </div>
         <div class="item">
-            <span class="item__title">Queso fundido -</span> £9.00
+            <span class="item__title" id="order-item" order-name="Queso fundido">Queso fundido -</span> £9.00
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text" id="item2">
-                <p id="output2"></p>
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button" id="btn2">+</button>
+            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
         </div>
         <div class="item">
-            <span class="item__title">Tostadas de tinga -</span> £8.50
+            <span class="item__title" id="order-item" order-name="Tostadas de tinga">Tostadas de tinga -</span> £8.50
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text" id="item3">
-                <p id="output3"></p>
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button" id="btn3">+</button>
+            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
         </div>
         <h4>Entrees</h4>
         <div class="item">
-            <span class="item__title">Mole negro -</span> £15.00
+            <span class="item__title" id="order-item" order-name="Mole negro">Mole negro -</span> £15.00
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text" id="item4">
-                <p id="output4"></p>
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button"id="btn4">+</button>
+            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
         </div>
         <div class="item">
-            <span class="item__title">Tacos al pastor -</span> £12.00
+            <span class="item__title" id="order-item" order-name="Tacos al pastor">Tacos al pastor -</span> £12.00
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text" id="item5">
-                <p id="output5"></p>
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button"id="btn5">+</button>
+            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
         </div>
         <div class="item">
-            <span class="item__title">Enchiladas verdes -</span> £13.50
+            <span class="item__title" id="order-item" order-name="Enchiladas verdes">Enchiladas verdes -</span> £13.50
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text" id="item6">
-                <p id="output6"></p>
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button"id="btn6">+</button>
+            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
         </div>
         <h4>Sides</h4>
         <div class="item">
-            <span class="item__title">Arroz verde -</span> £4.50
+            <span class="item__title" id="order-item" order-name="Arroz verde">Arroz verde -</span> £4.50
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text" id="item7">
-                <p id="output7"></p>
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button"id="btn7">+</button>
+            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
         </div>
         <div class="item">
-            <span class="item__title">Frijoles negros -</span> £4.00
+            <span class="item__title" id="order-item" order-name="Frijoles negros">Frijoles negros -</span> £4.00
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text" id="item8">
-                <p id="output8"></p>
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button" id="btn8">+</button>
+            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
         </div>
         <div class="item">
-            <span class="item__title">Elote -</span> £5.50
+            <span class="item__title" id="order-item" order-name="Elote">Elote -</span> £5.50
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text" id="item9">
-                <p id="output9"></p>
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button" id="btn9">+</button>
+            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
         </div>
         <h4>Desserts</h4>
         <div class="item">
-            <span class="item__title">Flan -</span> £6.00
+            <span class="item__title" id="order-item" order-name="Flan">Flan -</span> £6.00
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text" id="item10">
-                <p id="output10"></p>
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button" id="btn10">+</button>
+            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
         </div>
         <div class="item">
-            <span class="item__title">Tres leches -</span> £7.00
+            <span class="item__title" id="order-item" order-name="Tres leches">Tres leches -</span> £7.00
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text" id="item11">
-                <p id="output11"></p>
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button" id="btn11">+</button>
+            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
         </div>
         <div class="item">
-            <span class="item__title">Sorbete de tamarindo -</span> £5.50
+            <span class="item__title" id="order-item" order-name="Sorbete de tamarindo">Sorbete de tamarindo -</span>
+            £5.50
             <div class="notes">
                 <label>Notes:</label>
-                <input type="text" id="item12">
-                <p id="output12"></p>
+                <input type="text" id="order-note">
             </div>
-            <button class="add-button" id="btn12">+</button>
+            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
         </div>
         <p style="margin-top: 20px; font-style: italic; font-size: 0.8em;">Allergen Information: Our menu items may
             contain peanuts, tree nuts, dairy, soy, avocado, pork, chicken, and
             eggs. Please inform your server of any allergies you may have.</p>
     </div>
-
-    <div class="review">
-        <div
-            style="width: 220px; height: 50px; border: 3px solid rgb(0, 0, 0); position: absolute; top: -3px; left: -3px;overflow-x: hidden;">
-            <h3 style="font-size: 35px; position: absolute; top: -60%; left: 17%; font-weight: bold;">
-                REVIEW</h3>
-        </div>
-    </div>
-    <script>
-        //Declares all the variables for each corresponding menu item
-        const item1 = document.getElementById('item1');
-        const btn1 = document.getElementById('btn1');
-        const out1 = document.getElementById('output1');
-
-        const item2 = document.getElementById('item2');
-        const btn2 = document.getElementById('btn2');
-        const out2 = document.getElementById('output2');
-
-        const item3 = document.getElementById('item3');
-        const btn3 = document.getElementById('btn3');
-        const out3 = document.getElementById('output3');
-
-        const item4 = document.getElementById('item4');
-        const btn4 = document.getElementById('btn4');
-        const out4 = document.getElementById('output4');
-
-        const item5 = document.getElementById('item5');
-        const btn5 = document.getElementById('btn5');
-        const out5 = document.getElementById('output5');
-
-        const item6 = document.getElementById('item6');
-        const btn6 = document.getElementById('btn6');
-        const out6 = document.getElementById('output6');
-
-        const item7 = document.getElementById('item7');
-        const btn7 = document.getElementById('btn7');
-        const out7 = document.getElementById('output7');
-
-        const item8 = document.getElementById('item8');
-        const btn8 = document.getElementById('btn8');
-        const out8 = document.getElementById('output8');
-
-        const item9 = document.getElementById('item9');
-        const btn9 = document.getElementById('btn9');
-        const out9 = document.getElementById('output9');
-
-        const item10 = document.getElementById('item10');
-        const btn10 = document.getElementById('btn10');
-        const out10 = document.getElementById('output10');
-
-        const item11 = document.getElementById('item11');
-        const btn11 = document.getElementById('btn11');
-        const out11 = document.getElementById('output11');
-
-        const item12 = document.getElementById('item12');
-        const btn12 = document.getElementById('btn12');
-        const out12 = document.getElementById('output12');
-        
-        //Following function updates the input value for each corresponding paragraph also known as output
-        function notes() {
-            out1.innerHTML = item1.value;
-            out2.innerHTML = item2.value;
-            out3.innerHTML = item3.value;
-            out4.innerHTML = item4.value;
-            out5.innerHTML = item5.value;
-            out6.innerHTML = item6.value;
-            out7.innerHTML = item7.value;
-            out8.innerHTML = item8.value;
-            out9.innerHTML = item9.value;
-            out10.innerHTML = item10.value;
-            out11.innerHTML = item11.value;
-            out12.innerHTML = item12.value;
-        }
-        //As the button is clicked the notes function will be called and update the output for each menu item
-        btn1.addEventListener('click',notes);
-        btn2.addEventListener('click',notes);
-        btn3.addEventListener('click',notes);
-        btn4.addEventListener('click',notes);
-        btn5.addEventListener('click',notes);
-        btn6.addEventListener('click',notes);
-        btn7.addEventListener('click',notes);
-        btn8.addEventListener('click',notes);
-        btn9.addEventListener('click',notes);
-        btn10.addEventListener('click',notes);
-        btn11.addEventListener('click',notes);
-        btn12.addEventListener('click',notes);
-    </script>    
 </body>
 
 </html>
