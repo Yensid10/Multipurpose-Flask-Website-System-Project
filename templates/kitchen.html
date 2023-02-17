@@ -15,30 +15,32 @@
 
 <div class="container mt-5">
     <h1 class="text-center mb-5">Order Queue</h1>
-    <table class="table table-bordered table-striped" id="order-queue-table">
-        <thead>
-        <tr>
-            <th>Table #</th>
-            <th>Items</th>
-            <th>Status</th>
-            <th>Accept</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for order in orders %}
+    <div class="container">
+        <table class="table table-bordered table-striped" id="order-queue-table">
+            <thead>
             <tr>
-                <td>{{ order["table_number"] }}</td>
-                <td>{{ order["items"] }}</td>
-                <td>{{ order["status"] }}</td>
-                <td>
-                    <button class="btn btn-primary accept-button" {% if order["status"] == "<pending>" %} disabled {% endif %}
-                            id="accept-order-{{ order["_id"] }}">Accept
-                    </button>
-                </td>
+                <th>Table #</th>
+                <th>Items</th>
+                <th>Status</th>
+                <th>Accept</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order["table_number"] }}</td>
+                    <td>{{ order["items"] }}</td>
+                    <td>{{ order["status"] }}</td>
+                    <td>
+                        <button class="btn btn-primary accept-button" {% if order["status"] == "<pending>" %} disabled {% endif %}
+                                id="accept-order-{{ order["_id"] }}">Accept
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 </body>
 </html>

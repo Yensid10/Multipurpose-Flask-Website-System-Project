@@ -2,8 +2,10 @@ table {
     width: 50%;
     border-collapse: collapse;
     background: linear-gradient(to bottom, red, yellow, green);
-    margin-left: auto;
-    margin-right: auto;
+    float: left;
+    margin-right: 20px;
+    overflow-y: scroll;
+    max-height: 500px;
 }
 
 th, td {
@@ -76,4 +78,9 @@ body {
     justify-content: center;
     align-items: center;
     height: 100%;
+}
+
+.container {
+    width: 50%;
+    float: left;
 }
