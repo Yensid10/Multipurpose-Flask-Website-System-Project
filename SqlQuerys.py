@@ -7,13 +7,12 @@ db = client.Menu
 
 
 def FetchMenu():
-    menuItem = []
+    names = []
+    prices = []
     for item in db.Menu.find({}):
-        menuItem.append(item)
-    return menuItem
+        names.append(item["name"])
+        prices.append(item["price"])
+    return names, prices
 
 
-for item in FetchMenu():
-    print(item["name"])
-    print(item["price"])
-    print(item["description"])
+names, prices = FetchMenu()
