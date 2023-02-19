@@ -1,0 +1,24 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $tableNumber = $_POST['table-number'];
+    $allergens = $_POST['allergen'];
+
+    // Connect to MongoDB
+    $mongo = new MongoDB\Client("mongodb://localhost:27017");
+    $db = $mongo->selectDatabase('mydatabase');
+    $collection = $db->selectCollection('mycollection');
+
+    // Insert the data into MongoDB
+    $result = $collection->insertOne([
+        'table_number' => $tableNumber,
+        'allergens' => $allergens
+    ]);
+
+    // Check if the data was inserted successfully
+    if ($result->getInsertedCount() == 1) {
+        echo 'Data inserted successfully.';
+    } else {
+        echo 'Error inserting data.';
+    }
+}
+?>
