@@ -67,6 +67,10 @@
             top: 11px;
         }
 
+        /* select:focus {
+            size: 1;
+        } */
+
         /* Musfik Stuff */
         .menu {
             font-family: Arial, Helvetica, sans-serif;
@@ -307,21 +311,13 @@
         ORDER FOR TABLE #
     </h2>
 
-    <select
+    <select size="1"
         style="font-size: 20px; padding: 5px; margin: 5px; background-color: white; border-radius: 5px; position: absolute; top: 16%; left: 64%; z-index: 999; overflow: auto;"
-        onfocus='this.size=6;' onblur='this.size=6;' onfocusout='this.size=null;' onchange='this.size=6; this.blur();'>
+        onfocus="this.size=8;" onblur="this.size=1;" onchange="this.size=1; this.blur();">
         {% for x in range(1, 31) %}
-        <option value=" {{ x }}">{{ x }}</option>
+        <option value="{{ x }}">{{ x }}</option>
         {% endfor %}
     </select>
-
-    <!-- <div class="select-wrapper" style="max-height: 40px; overflow-y: scroll;">
-        <select style="font-size: 20px; padding: 10px; margin: 10px; background-color: white; border-radius: 5px;">
-            {% for x in range(1, 31) %}
-            <option style="height: 20px;" value="{{ x }}">{{ x }}</option>
-            {% endfor %}
-        </select>
-    </div> -->
 
     <div class="review">
         <div style="width: 220px; height: 50px; border: 3px solid rgb(0, 0, 0); 
@@ -336,13 +332,16 @@
     <div class="bills">
         <h3 style="font-size: 35px; position: absolute; top: 10%; left: 17%; font-weight: bold; text-align: center;">
             FOR <br> TABLE #<br>
-            <select style="font-size: 20px; padding: 5px; margin: 5px; background-color: white; border-radius: 5px;">
-                {% for x in range(1, 31) %}
-                <option value="{{ x }}">{{ x }}</option>
-                {% endfor %}
-            </select>
         </h3>
     </div>
+
+    <select size="1"
+        style="font-size: 20px; padding: 5px; margin: 5px; background-color: white; border-radius: 5px; position: absolute; top: 41%; left: 84.5%; overflow: auto; z-index: 999;"
+        onfocus="this.size=8;" onblur="this.size=1;" onchange="this.size=1; this.blur();">
+        {% for x in range(1, 31) %}
+        <option value="{{ x }}">{{ x }}</option>
+        {% endfor %}
+    </select>
 
     <h2 style="font-size: 35px; position: absolute; top: 51.5%; left: 82.5%; font-weight: bold;">
         HELP</h2>
