@@ -1,103 +1,97 @@
 body {
-    overflow: hidden;
+  overflow: hidden;
 }
 
-.kitchen-table-container {
-    height: calc(100vh - 50px);
-    overflow-y: auto;
-    margin-top: 50px;
-    text-align: left;
+.kitchen-table-container,
+.accepted-table-container {
+  height: calc(100vh - 50px);
+  max-height: calc(100vh - 50px);
+  overflow-y: scroll;
+  margin-top: 50px;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    background: linear-gradient(to bottom, red, yellow, green);
+  width: 100%;
+  border-collapse: collapse;
+  background: linear-gradient(to bottom, yellow, yellow);
 }
 
-th, td {
-    border: 1px solid black;
-    padding: 8px;
-    text-align: center;
+th,
+td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
 }
 
 th {
-    font-weight: bold;
-    text-transform: uppercase;
-    background-color: #ddd;
-    padding: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #ddd;
+  padding: 10px;
 }
 
 .accept-button {
-    background-color: green;
-    color: white;
-    padding: 8px 16px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
+  background-color: green;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
 }
 
 .accept-button:disabled {
-    background-color: grey;
-    cursor: not-allowed;
+  background-color: grey;
+  cursor: not-allowed;
 }
 
 .complete-button {
-    background-color: green;
-    color: white;
-    padding: 8px 16px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
+  background-color: green;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
 }
 
 .complete-button:disabled {
-    background-color: grey;
-    cursor: not-allowed;
+  background-color: grey;
+  cursor: not-allowed;
 }
 
 .recipe-link {
-    color: blue;
-    text-decoration: none;
+  color: blue;
+  text-decoration: none;
 }
 
 .recipe-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 img {
-    width: 32px;
-    height: 32px;
+  width: 32px;
+  height: 32px;
 }
 
 body {
-    background-color: #98C1D9;
-}
-
-.accepted-table-container {
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 50px);
-    overflow-y: auto;
-    margin-top: 50px;
-    text-align: center;
+  background-color: #98C1D9;
 }
 
 .accepted-table-container table {
-    width: 80%;
+  width: 100%;
 }
 
 .accepted-table-container h1 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
-.accepted-table-container th, .accepted-table-container td {
+.accepted-table-container th,
+.accepted-table-container td {
   border: 1px solid black;
   padding: 8px;
   text-align: center;
@@ -105,3 +99,37 @@ body {
 
 .accepted-table-container th {
   font-weight: bold;
+  text-transform: uppercase;
+  background-color: #ddd;
+  padding: 10px;
+}
+
+table.accepted-table {
+  margin: 50px auto;
+}
+
+.kitchen-table-container table {
+  width: 100%;
+}
+
+.kitchen-table-container h1 {
+  margin-bottom: 20px;
+}
+
+.kitchen-table-container th,
+.kitchen-table-container td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+}
+
+.kitchen-table-container th {
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #ddd;
+  padding: 10px;
+}
+
+table.kitchen-table {
+  margin: 50px auto;
+}

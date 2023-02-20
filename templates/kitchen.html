@@ -16,12 +16,11 @@
         <div class="col-md-6">
             <div class="kitchen-table-container">
                 <h1 class="text-center mb-5">Order Queue</h1>
-                <table class="table table-bordered table-striped" id="order-queue-table">
+                <table class="table table-bordered" id="order-queue-table">
                     <thead>
                     <tr>
                         <th>Table #</th>
                         <th>Items</th>
-                        <th>Status</th>
                         <th>Accept</th>
                     </tr>
                     </thead>
@@ -30,9 +29,8 @@
                         <tr>
                             <td>{{ order["table_number"] }}</td>
                             <td>{{ order["items"] }}</td>
-                            <td>{{ order["status"] }}</td>
                             <td>
-                                <button class="btn btn-primary accept-button" >Accept
+                                <button class="btn btn-primary accept-button">Accept
                                 </button>
                             </td>
                         </tr>
@@ -44,19 +42,22 @@
         <div class="col-md-6">
             <div class="accepted-table-container">
                 <h1 class="text-center mb-5">Accepted Orders</h1>
-<table class="accepted-table">
-    <thead>
-        <tr>
-            <th>Table Number</th>
-            <th>Items</th>
-            <th>Status</th>
-            <th>Complete</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Here you can dynamically add rows for each accepted order using JavaScript/jQuery -->
-    </tbody>
-</table>
+                <table class="accepted-table">
+                    <thead>
+                    <tr>
+                        <th>Table #</th>
+                        <th>Items</th>
+                        <th>Complete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>Test items</td>
+                    </tr>
+                    </tbody>
+                </table>
 
             </div>
         </div>
