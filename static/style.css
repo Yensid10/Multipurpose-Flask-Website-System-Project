@@ -2,18 +2,10 @@ body {
   overflow: hidden;
 }
 
-.kitchen-table-container,
-.accepted-table-container {
-  height: calc(100vh - 50px);
-  max-height: calc(100vh - 50px);
-  overflow-y: scroll;
-  margin-top: 50px;
-}
-
 table {
   width: 100%;
   border-collapse: collapse;
-  background: linear-gradient(to bottom, yellow, yellow);
+  background: #F9F9F9;
 }
 
 th,
@@ -30,7 +22,7 @@ th {
   padding: 10px;
 }
 
-.accept-button {
+.button {
   background-color: green;
   color: white;
   padding: 8px 16px;
@@ -42,24 +34,7 @@ th {
   cursor: pointer;
 }
 
-.accept-button:disabled {
-  background-color: grey;
-  cursor: not-allowed;
-}
-
-.complete-button {
-  background-color: green;
-  color: white;
-  padding: 8px 16px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-
-.complete-button:disabled {
+.button:disabled {
   background-color: grey;
   cursor: not-allowed;
 }
@@ -82,54 +57,35 @@ body {
   background-color: #98C1D9;
 }
 
-.accepted-table-container table {
+.table-container {
+  height: calc(100vh - 50px);
+  max-height: calc(100vh - 50px);
+  overflow-y: scroll;
+  margin-top: 50px;
+}
+
+.table-container table {
   width: 100%;
 }
 
-.accepted-table-container h1 {
+.table-container h1 {
   margin-bottom: 20px;
 }
 
-.accepted-table-container th,
-.accepted-table-container td {
+.table-container th,
+.table-container td {
   border: 1px solid black;
   padding: 8px;
   text-align: center;
 }
 
-.accepted-table-container th {
+.table-container th {
   font-weight: bold;
   text-transform: uppercase;
   background-color: #ddd;
   padding: 10px;
 }
 
-table.accepted-table {
-  margin: 50px auto;
-}
-
-.kitchen-table-container table {
-  width: 100%;
-}
-
-.kitchen-table-container h1 {
-  margin-bottom: 20px;
-}
-
-.kitchen-table-container th,
-.kitchen-table-container td {
-  border: 1px solid black;
-  padding: 8px;
-  text-align: center;
-}
-
-.kitchen-table-container th {
-  font-weight: bold;
-  text-transform: uppercase;
-  background-color: #ddd;
-  padding: 10px;
-}
-
-table.kitchen-table {
+.table-container table {
   margin: 50px auto;
 }
