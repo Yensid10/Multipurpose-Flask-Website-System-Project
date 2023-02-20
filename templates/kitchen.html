@@ -12,17 +12,18 @@
 </head>
 <body>
 <div class="container-fluid">
-            <div class="col-md-6">
-    <div class="kitchen-table-container">
-        <h1 class="text-center mb-5">Order Queue</h1>
-        <table class="table table-bordered table-striped" id="order-queue-table">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="kitchen-table-container">
+                <h1 class="text-center mb-5">Order Queue</h1>
+                <table class="table table-bordered table-striped" id="order-queue-table">
                     <thead>
-                        <tr>
-                            <th>Table #</th>
-                            <th>Items</th>
-                            <th>Status</th>
-                            <th>Accept</th>
-                        </tr>
+                    <tr>
+                        <th>Table #</th>
+                        <th>Items</th>
+                        <th>Status</th>
+                        <th>Accept</th>
+                    </tr>
                     </thead>
                     <tbody>
                     {% for order in orders %}
@@ -31,8 +32,7 @@
                             <td>{{ order["items"] }}</td>
                             <td>{{ order["status"] }}</td>
                             <td>
-                                <button class="btn btn-primary accept-button" {% if order["status"] == "<pending>" %} disabled {% endif %}
-                                        id="accept-order-{{ order["_id"] }}">Accept
+                                <button class="btn btn-primary accept-button" >Accept
                                 </button>
                             </td>
                         </tr>
@@ -40,7 +40,27 @@
                     </tbody>
                 </table>
             </div>
-</div>
+        </div>
+        <div class="col-md-6">
+            <div class="accepted-table-container">
+                <h1 class="text-center mb-5">Accepted Orders</h1>
+<table class="accepted-table">
+    <thead>
+        <tr>
+            <th>Table Number</th>
+            <th>Items</th>
+            <th>Status</th>
+            <th>Complete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Here you can dynamically add rows for each accepted order using JavaScript/jQuery -->
+    </tbody>
+</table>
+
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

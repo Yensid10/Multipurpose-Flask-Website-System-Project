@@ -80,3 +80,28 @@ body {
     background-color: #98C1D9;
 }
 
+.accepted-table-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 50px);
+    overflow-y: auto;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.accepted-table-container table {
+    width: 80%;
+}
+
+.accepted-table-container h1 {
+    margin-bottom: 20px;
+}
+
+.accepted-table-container th, .accepted-table-container td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+}
+
+.accepted-table-container th {
+  font-weight: bold;
