@@ -1,11 +1,18 @@
+body {
+    overflow: hidden;
+}
+
+.kitchen-table-container {
+    height: calc(100vh - 50px);
+    overflow-y: auto;
+    margin-top: 50px;
+    text-align: left;
+}
+
 table {
-    width: 50%;
+    width: 100%;
     border-collapse: collapse;
     background: linear-gradient(to bottom, red, yellow, green);
-    float: left;
-    margin-right: 20px;
-    overflow-y: scroll;
-    max-height: 500px;
 }
 
 th, td {
@@ -73,14 +80,3 @@ body {
     background-color: #98C1D9;
 }
 
-.center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-.container {
-    width: 50%;
-    float: left;
-}

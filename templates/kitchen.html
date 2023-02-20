@@ -11,36 +11,36 @@
     <link href="{{ url_for('static', filename='icon.png') }}" rel="icon" type="image/png">
 </head>
 <body>
-<img src="{{ url_for('static', filename='icon.png') }}" alt="Page Icon" class="img-fluid">
-
-<div class="container mt-5">
-    <h1 class="text-center mb-5">Order Queue</h1>
-    <div class="container">
+<div class="container-fluid">
+            <div class="col-md-6">
+    <div class="kitchen-table-container">
+        <h1 class="text-center mb-5">Order Queue</h1>
         <table class="table table-bordered table-striped" id="order-queue-table">
-            <thead>
-            <tr>
-                <th>Table #</th>
-                <th>Items</th>
-                <th>Status</th>
-                <th>Accept</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for order in orders %}
-                <tr>
-                    <td>{{ order["table_number"] }}</td>
-                    <td>{{ order["items"] }}</td>
-                    <td>{{ order["status"] }}</td>
-                    <td>
-                        <button class="btn btn-primary accept-button" {% if order["status"] == "<pending>" %} disabled {% endif %}
-                                id="accept-order-{{ order["_id"] }}">Accept
-                        </button>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+                    <thead>
+                        <tr>
+                            <th>Table #</th>
+                            <th>Items</th>
+                            <th>Status</th>
+                            <th>Accept</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <td>{{ order["table_number"] }}</td>
+                            <td>{{ order["items"] }}</td>
+                            <td>{{ order["status"] }}</td>
+                            <td>
+                                <button class="btn btn-primary accept-button" {% if order["status"] == "<pending>" %} disabled {% endif %}
+                                        id="accept-order-{{ order["_id"] }}">Accept
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+</div>
 </div>
 </body>
 </html>
