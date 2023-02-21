@@ -3,7 +3,7 @@ import sqlite3
 from flask import Flask, jsonify, render_template, request
 from flask import redirect
 from ObjectQueue import Queue
-
+import SqlQuerys
 
 app = Flask(__name__)
 
@@ -31,11 +31,18 @@ def home():
     return render_template('menu.html')
 
 
-# @app.route('/')
-# def home():
-#     return render_template('Floor-Staff.html', queue=queue)
+@app.route('/HideDairy')
+def index():
+    x = request.args.get('x')
+    if (x == "dairy"):
+        value = (SqlQuerys.FetchDairy())
+        print(value)
+        response = (value)
+        return response[0]
+    return jsonify({'success': True})
 
-@app.route('/acceptQueuePing', methods=['POST'])
+
+@ app.route('/acceptQueuePing', methods=['POST'])
 def acceptQueuePing():
     if request.method == 'POST':
         ping = queue.popFrontObject()
@@ -45,7 +52,7 @@ def acceptQueuePing():
         return jsonify(data)
 
 
-@app.route('/addPingToQueue', methods=['POST'])
+@ app.route('/addPingToQueue', methods=['POST'])
 def addPingToQueue():
     if request.method == 'POST':
         data = request.get_json()
@@ -54,7 +61,7 @@ def addPingToQueue():
         return ('', 204)
 
 
-@app.route('/addItemToOrder', methods=['POST'])
+@ app.route('/addItemToOrder', methods=['POST'])
 def addPingToOrder():
     if request.method == 'POST':
         data = request.get_json()
@@ -64,7 +71,7 @@ def addPingToOrder():
         return ('', 204)
 
 
-@app.route("/updateQueue")
+@ app.route("/updateQueue")
 def updateQueue():
     jsonQueue = []
     for i in range(queue.getLength()):
@@ -79,7 +86,7 @@ def updateQueue():
     })
 
 
-@app.route("/updateOrder")
+@ app.route("/updateOrder")
 def updateOrder():
     jsonQueue = []
     for i in range(orders.getLength()):
@@ -105,17 +112,17 @@ def updateOrder():
 #     return redirect('/')
 
 
-@app.route('/Ring')
+@ app.route('/Ring')
 def showRing():
     return render_template('Ring.html')
 
 
-@app.route('/Floor-Staff')
+@ app.route('/Floor-Staff')
 def showFS():
     return render_template('Floor-Staff.html', queue=queue)
 
 
-@app.route('/kitchen')
+@ app.route('/kitchen')
 def kitchen():
     conn = sqlite3.connect("orders.db")
     c = conn.cursor()
@@ -127,7 +134,7 @@ def kitchen():
     return render_template("kitchen.html", orders=orders, accepted_orders=accepted_orders)
 
 
-@app.route('/order_history')
+@ app.route('/order_history')
 def order_history():
     conn = sqlite3.connect("orders.db")
     c = conn.cursor()
@@ -137,7 +144,7 @@ def order_history():
     return render_template('order_history.html', order_history=order_history)
 
 
-@app.route('/accept_order/<int:order_id>')
+@ app.route('/accept_order/<int:order_id>')
 def accept_order(order_id):
     conn = sqlite3.connect('orders.db')
     cursor = conn.cursor()
@@ -161,7 +168,7 @@ def accept_order(order_id):
     return redirect(url_for('kitchen'))
 
 
-@app.route('/complete_order/<int:order_id>')
+@ app.route('/complete_order/<int:order_id>')
 def complete_order(order_id):
     conn = sqlite3.connect('orders.db')
     cursor = conn.cursor()

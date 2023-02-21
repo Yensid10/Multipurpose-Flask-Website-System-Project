@@ -97,7 +97,7 @@ def FetchDairy():
     Item = []
     for item in FetchAllergies():
         if (item["milk"] == True):
-            print(item["name"])
+            # print(item["name"])
             Item.append(item["name"])
     return Item
 
