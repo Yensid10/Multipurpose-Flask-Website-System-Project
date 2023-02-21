@@ -73,40 +73,49 @@
 
         /* Musfik Stuff */
         .menu {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 1.0rem;
             border: 2px solid black;
             position: absolute;
             top: 22%;
             left: 27%;
-            overflow-y: auto;
+            overflow-y: scroll;
             width: 260px;
             height: 543px;
             border: 3px solid rgb(0, 0, 0);
         }
 
         .item {
-            margin-bottom: 15px;
-        }
-
-        .item__title {
-            font-weight: bold;
-        }
-
-        .notes {
+            padding: 10px;
+            border: 1px solid black;
+            margin-bottom: 10px;
             display: flex;
+            justify-content: space-between;
             align-items: center;
         }
 
+        .item_title {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .item_price {
+            font-size: 14px;
+        }
+
+        .notes {
+            margin-left: 10px;
+            width: 100px;
+            height: 20px;
+            border: 1px solid black;
+            padding: 5px;
+        }
+
         .add-button {
-            margin-top: -21.5px;
-            margin-inline: 230px;
-            border-radius: 45%;
-            transition: ease-out 0.3s;
-            font-size: 1rem;
-            background-color: rgb(5, 247, 251);
-            border: 2px solid rgb(0, 0, 0);
-            position: relative;
+            padding: 5px 10px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
         .add-button:hover {
@@ -354,108 +363,20 @@
 
     <!-- Musfik's Stuff | Needs to be able to display specific notes etc-->
     <div class="menu">
-        <h4>Appetizers</h4>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Guacamole and chips">Guacamole and chips -</span>
-            £7.50
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
+        {% for i in range(names|length) %}
+        <div class ="item">
+            <div class="item-details">
+                <div class="item_title">{{ names[i] }}</div>
+                <div class="item_price">{{ prices[i] }}</div>
             </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
-        </div>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Queso fundido">Queso fundido -</span> £9.00
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
+            <div class="item-notes-container">
+                <input type="text" class="notes" placeholder="Add order notes">
+                <button class="add-button">+</button>
             </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
         </div>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Tostadas de tinga">Tostadas de tinga -</span> £8.50
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
-            </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
-        </div>
-        <h4>Entrees</h4>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Mole negro">Mole negro -</span> £15.00
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
-            </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
-        </div>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Tacos al pastor">Tacos al pastor -</span> £12.00
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
-            </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
-        </div>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Enchiladas verdes">Enchiladas verdes -</span> £13.50
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
-            </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
-        </div>
-        <h4>Sides</h4>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Arroz verde">Arroz verde -</span> £4.50
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
-            </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
-        </div>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Frijoles negros">Frijoles negros -</span> £4.00
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
-            </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
-        </div>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Elote">Elote -</span> £5.50
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
-            </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
-        </div>
-        <h4>Desserts</h4>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Flan">Flan -</span> £6.00
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
-            </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
-        </div>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Tres leches">Tres leches -</span> £7.00
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
-            </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
-        </div>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Sorbete de tamarindo">Sorbete de tamarindo -</span>
-            £5.50
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
-            </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
-        </div>
+        {% endfor %}
+    </div>
+    <div>
         <p style="margin-top: 20px; font-style: italic; font-size: 0.8em;">Allergen Information: Our menu items may
             contain peanuts, tree nuts, dairy, soy, avocado, pork, chicken, and
             eggs. Please inform your server of any allergies you may have.</p>

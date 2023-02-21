@@ -3,7 +3,7 @@ import sqlite3
 from flask import Flask, jsonify, render_template, request
 from flask import redirect
 from ObjectQueue import Queue
-
+from SqlQuerys import FetchMenu
 
 app = Flask(__name__)
 
@@ -113,7 +113,9 @@ def showRing():
 @app.route('/Floor-Staff')
 def showFS():
     return render_template('Floor-Staff.html', queue=queue)
-
+def floorstaff_menu():
+    names, prices =FetchMenu()
+    return render_template('Floor-Staff.html', names=names, prices=prices)
 
 @app.route('/kitchen')
 def kitchen():
