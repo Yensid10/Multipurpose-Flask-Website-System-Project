@@ -134,6 +134,7 @@
             top: 22%;
             left: 52.5%;
             overflow-y: auto;
+            overflow-x: hidden;
             width: 220px;
             height: 543px;
             border: 3px solid rgb(0, 0, 0);
@@ -237,9 +238,8 @@
 
         // Musfik Stuff Part 2 WOOOOOOOOOOOO
 
-        function addItemToOrder() {
-            var orderItem = document.getElementById("order-item").getAttribute("order-name");
-            var notes = document.getElementById("order-note").value;
+        function addItemToOrder(orderItem) {
+            var notes = document.getElementById(orderItem).value;
             console.log(orderItem + " " + notes);
             $.ajax({
                 type: "POST",
@@ -258,7 +258,11 @@
                 type: "POST",
                 url: "/updateOrder",
                 success: function (data) {
-                    $("#order-item").html(data.queueItems[0].name + " " + data.queueItems[0].note);
+                    var orderHtml = "";
+                    for (var i = 0; i < data.queueItems.length; i++) {
+                        orderHtml += "<strong>" + data.queueItems[i].name + "</strong><br>" + data.queueItems[i].note + "<br><br>";
+                    }
+                    $("#order-item").html(orderHtml);
                 },
             });
         }
@@ -346,7 +350,7 @@
             <h3 style="font-size: 35px; position: absolute; top: -60%; left: 17%; font-weight: bold;">
                 REVIEW</h3>
         </div>
-        <div id="order-item" style="position: absolute; top: 50%; left: 50%;">TEST
+        <div id="order-item" style="position: absolute; top: 12%; left: 5%;">
         </div>
     </div>
 
@@ -384,8 +388,8 @@
                 <div class="item_price">{{ prices[i] }}</div>
             </div>
             <div class="item-notes-container">
-                <input type="text" class="order-note" placeholder="Add order notes">
-                <button class="add-button" onclick="updateOrder()">+</button>
+                <input type="text" class="order-note" id="{{ names[i] }}" placeholder="Add order notes">
+                <button class="add-button" onclick="addItemToOrder('{{ names[i] }}')">+</button>
             </div>
         </div>
         {% endfor %}

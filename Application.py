@@ -24,7 +24,6 @@ queue.addObject("Door", "<---")
 
 # Testing Orders queue implementation
 orders = Queue()
-orders.addObject("Food", "Damn make this taste goooood!")
 
 
 @app.route('/')
