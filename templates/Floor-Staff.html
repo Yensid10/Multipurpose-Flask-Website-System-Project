@@ -67,17 +67,13 @@
             top: 11px;
         }
 
-        /* select:focus {
-            size: 1;
-        } */
-
-        /* Musfik Stuff */
         .menu {
             border: 2px solid black;
             position: absolute;
             top: 22%;
             left: 27%;
             overflow-y: scroll;
+            overflow-x: hidden;
             width: 260px;
             height: 543px;
             border: 3px solid rgb(0, 0, 0);
@@ -123,10 +119,19 @@
             cursor: pointer;
         }
 
-        h4 {
-            background-color: rgb(6, 206, 241);
-            padding: 10px;
-            border: 2px solid black;
+        h1 {
+            font-size: 60px;
+            position: absolute;
+            top: -5%;
+            left: 2.5%;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        h2 {
+            font-size: 35px;
+            position: absolute;
+            font-weight: bold;
         }
 
         .review {
@@ -138,6 +143,18 @@
             width: 220px;
             height: 543px;
             border: 3px solid rgb(0, 0, 0);
+        }
+
+        .review-header {
+            width: 220px;
+            height: 50px;
+            border: 3px solid rgb(0, 0, 0);
+            position: absolute;
+            top: 22%;
+            left: 52.5%;
+            overflow-x: hidden;
+            z-index: 998;
+            background-color: #FFFFFF;
         }
 
         .bills {
@@ -159,6 +176,17 @@
             height: 240px;
             border: 3px solid rgb(0, 0, 0);
         }
+
+        .select-style {
+            font-size: 20px;
+            padding: 5px;
+            margin: 5px;
+            background-color: white;
+            border-radius: 5px;
+            position: absolute;
+            z-index: 999;
+            overflow: auto;
+        }
     </style>
 </head>
 
@@ -166,6 +194,7 @@
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 
     <script>
+        // QUEUE FUNCTIONS \\
         function acceptQueuePing() {
             if (($("#info-container").html().includes("Complete!")) || ($("#info-container").html().includes("htmlCheck"))) {
                 $.ajax({
@@ -236,8 +265,7 @@
             xhr.send();
         }
 
-        // Musfik Stuff Part 2 WOOOOOOOOOOOO
-
+        // ORDER FUNCTIONS \\
         function addItemToOrder(orderItem) {
             var notes = document.getElementById(orderItem).value;
             console.log(orderItem + " " + notes);
@@ -250,10 +278,7 @@
             updateOrder();
         }
 
-
-
         function updateOrder() {
-            console.log("updateOrde");
             $.ajax({
                 type: "POST",
                 url: "/updateOrder",
@@ -267,45 +292,21 @@
             });
         }
 
-        //change this so it only updates on one persons specific html page
-        // function updateOrder() {
-        //     var xhr = new XMLHttpRequest();
-        //     xhr.open("GET", "/updateOrder", true);
-        //     xhr.onreadystatechange = function () {
-        //         if (xhr.readyState === 4 && xhr.status === 200) {
-        //             // Parse the response from the server
-        //             var data = JSON.parse(xhr.responseText);
-        //             // Clear the existing queue
-        //             var review = document.querySelector(".review");
-        //             review.innerHTML = "";
-
-        //             // Adding the first new queue objects to the page with button
-        //             // var item = document.createElement("div");
-        //             // item.classList.add("menu-item");
-        //             // item.innerHTML = '<button type="button" class="button" onclick="acceptQueuePing()">Accept</button>'
-        //             //     + data.queueItems[0].note + " " + data.queueItems[0].tableNo;
-        //             // menu.appendChild(item);
-
-        //             // Adding the rest of the new queue objects to the page
-        //             review.innerHTML = '<div style="width: 220px; height: 50px; border: 3px solid rgb(0, 0, 0); position: absolute;'
-        //                 + ' top: -3px; left: -3px;overflow-x: hidden;"> <h3 style="font-size: 35px; position: absolute; top: -60%; left: 17%; '
-        //                 + 'font-weight: bold;"> REVIEW</h3> </div><br><br><br>'
-        //             for (var i = 1; i < data.queueItems.length; i++) {
-        //                 // item = document.createElement("div");
-        //                 // item.classList.add("menu-item");
-        //                 review.innerHTML += "<br>" + data.queueItems[i].name + " " + data.queueItems[i].note;
-        //                 // menu.appendChild(item);
-        //             }
-        //         }
-        //     };
-        //     xhr.send();
-        // }
-
         updateQueue();
         setInterval(updateQueue, 1000); 
     </script>
 
+    <!-- //TEST BUTTON\\ -->
+    <button style="position: absolute; top: 0%; left: 90.2%;" type="button" class="button"
+        onclick="addPingToQueue()">Add
+    </button>
 
+
+    <!-- //TITLE\\  -->
+    <h1> Floor Staff</h1>
+
+
+    <!-- //CURRENT JOB SECTION\\ -->
     <div style="position: absolute; top: 0.5%; left: 45%;">
         <div style="position: absolute; left: 17%;"> Your Current Job is: </div><br>
         <div id="info-container" class="menu-item"
@@ -319,67 +320,20 @@
     </button>
 
 
-    <button style="position: absolute; top: 0%; left: 90.2%;" type="button" class="button"
-        onclick="addPingToQueue()">Add
-    </button>
-
-    <h1 style="font-size: 60px; position: absolute; top: -5%; left: 2.5%; font-weight: bold; 
-        text-decoration: underline;">
-        Floor Staff</h1>
-    <h2 style="font-size: 35px; position: absolute; top: 12.5%; left: 4.5%; font-weight: bold;">
-        QUEUE: {{ queue.getLength() }}</h2>
-
+    <!-- //QUEUE SECTION\ -->
+    <h2 style="top: 12.5%; left: 4.5%;">QUEUE: {{ queue.getLength() }}</h2>
     <div class="scroll-menu"></div>
 
-    <h2 style="font-size: 35px; position: absolute; top: 12.5%; left: 28%; font-weight: bold;">
-        ORDER FOR TABLE #
-    </h2>
 
-    <!-- CONVERT THESE SELECT ELEMENTS INTO MOSTLY A STYLE, SAME WITH OTHER HEADINGS ETC, MAKE MORE EFFICIENT IN GENERAL... -->
-    <select size="1"
-        style="font-size: 20px; padding: 5px; margin: 5px; background-color: white; border-radius: 5px; position: absolute; top: 16%; left: 64%; z-index: 999; overflow: auto;"
-        onfocus="this.size=8;" onblur="this.size=1;" onchange="this.size=1; this.blur();">
+    <!-- //MENU SECTION\\ -->
+    <h2 style="top: 12.5%; left: 28%;">ORDER FOR TABLE #</h2>
+    <select size="1" class="select-style" style="top: 16%; left: 64%; " onfocus="this.size=8;" onblur="this.size=1;"
+        onchange="this.size=1; this.blur();">
         {% for x in range(1, 31) %}
         <option value="{{ x }}">{{ x }}</option>
         {% endfor %}
     </select>
 
-    <div class="review">
-        <div style="width: 220px; height: 50px; border: 3px solid rgb(0, 0, 0); 
-            position: absolute; top: -3px; left: -3px;overflow-x: hidden;">
-            <h3 style="font-size: 35px; position: absolute; top: -60%; left: 17%; font-weight: bold;">
-                REVIEW</h3>
-        </div>
-        <div id="order-item" style="position: absolute; top: 12%; left: 5%;">
-        </div>
-    </div>
-
-    <h2 style="font-size: 35px; position: absolute; top: 12.5%; left: 82.5%; font-weight: bold;">
-        BILLS</h2>
-    <div class="bills">
-        <h3 style="font-size: 35px; position: absolute; top: 10%; left: 17%; font-weight: bold; text-align: center;">
-            FOR <br> TABLE #<br>
-        </h3>
-    </div>
-
-    <select size="1"
-        style="font-size: 20px; padding: 5px; margin: 5px; background-color: white; border-radius: 5px; position: absolute; top: 41%; left: 84.5%; overflow: auto; z-index: 999;"
-        onfocus="this.size=8;" onblur="this.size=1;" onchange="this.size=1; this.blur();">
-        {% for x in range(1, 31) %}
-        <option value="{{ x }}">{{ x }}</option>
-        {% endfor %}
-    </select>
-
-    <h2 style="font-size: 35px; position: absolute; top: 51.5%; left: 82.5%; font-weight: bold;">
-        HELP</h2>
-    <div class="help">
-        <h3 style="font-size: 40px; position: absolute; top: 11%; left: 25%; font-weight: bold; text-align: center;">
-            FAQ <br> PAGE </h3>
-    </div>
-
-
-
-    <!-- Musfik's Stuff | Needs to be able to display specific notes etc-->
     <div class="menu">
         {% for i in range(names|length) %}
         <div class="item">
@@ -394,11 +348,42 @@
         </div>
         {% endfor %}
         <div>
-            <p style="margin-top: 20px; font-style: italic; font-size: 0.8em;">Allergen Information: Our menu items
-                may
-                contain peanuts, tree nuts, dairy, soy, avocado, pork, chicken, and
-                eggs. Please inform your server of any allergies you may have.</p>
+            <p style="margin-top: 20px; font-style: italic; font-size: 0.8em;">
+                Allergen Information: Our menu items may contain peanuts, tree nuts, dairy, soy, avocado,
+                pork, chicken, and eggs. Please inform your server of any allergies you may have.</p>
         </div>
+    </div>
+
+
+    <!-- //REVIEW SECTION\\ -->
+    <div class="review-header">
+        <h2 style="top: -48%; left: 17%;">REVIEW</h2>
+    </div>
+    <div class="review">
+        <div id="order-item" style="position: absolute; top: 12%; left: 5%;"></div>
+    </div>
+    <button style="position: absolute; top: 94%; left: 59%;" type="button" class="button">Send</button>
+
+
+    <!-- //BILLS SECTION\\ -->
+    <h2 style="top: 12.5%; left: 82.5%;"> BILLS</h2>
+    <div class="bills">
+        <h2 style="top: 00%; left: 17%; text-align: center;"> FOR <br> TABLE #<br> </h2>
+        <button style="position: absolute; top: 70%; left: 28%;" type="button" class="button">Get</button>
+    </div>
+    <select size="1" class="select-style" style="top: 37%; left: 84.5%;" onfocus="this.size=8;" onblur="this.size=1;"
+        onchange="this.size=1; this.blur();">
+        {% for x in range(1, 31) %}
+        <option value="{{ x }}">{{ x }}</option>
+        {% endfor %}
+    </select>
+
+
+    <!-- //HELP SECTION\\ -->
+    <h2 style="top: 51.5%; left: 82.5%;"> HELP</h2>
+    <div class="help">
+        <!-- Change into a hyperlink -->
+        <h2 style="font-size: 40px; top: 11%; left: 25%; text-align: center;"> FAQ <br> PAGE </h2>
     </div>
 </body>
 
