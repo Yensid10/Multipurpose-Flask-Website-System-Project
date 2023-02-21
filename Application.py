@@ -24,6 +24,7 @@ queue.addObject("Door", "<---")
 
 # Testing Orders queue implementation
 orders = Queue()
+orders.addObject("Food", "Damn make this taste goooood!")
 
 
 @app.route('/')
@@ -79,7 +80,7 @@ def updateQueue():
     })
 
 
-@app.route("/updateOrder")
+@app.route("/updateOrder", methods=['POST'])
 def updateOrder():
     jsonQueue = []
     for i in range(orders.getLength()):
@@ -113,8 +114,7 @@ def showRing():
 @app.route('/Floor-Staff')
 def showFS():
     names, prices = FetchMenu()
-    return render_template('Floor-Staff.html', queue=queue,names=names, prices=prices)
-
+    return render_template('Floor-Staff.html', queue=queue, names=names, prices=prices)
 
 
 @app.route('/kitchen')

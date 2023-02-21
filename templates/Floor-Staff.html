@@ -203,9 +203,6 @@
             }
         }
 
-
-
-
         function updateQueue() {
             var xhr = new XMLHttpRequest();
             xhr.open("GET", "/updateQueue", true);
@@ -243,6 +240,7 @@
         function addItemToOrder() {
             var orderItem = document.getElementById("order-item").getAttribute("order-name");
             var notes = document.getElementById("order-note").value;
+            console.log(orderItem + " " + notes);
             $.ajax({
                 type: "POST",
                 url: "/addItemToOrder",
@@ -252,39 +250,52 @@
             updateOrder();
         }
 
-        //change this so it only updates on one persons specific html page
+
+
         function updateOrder() {
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "/updateOrder", true);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    // Parse the response from the server
-                    var data = JSON.parse(xhr.responseText);
-                    // Clear the existing queue
-                    var review = document.querySelector(".review");
-                    review.innerHTML = "";
-
-                    // Adding the first new queue objects to the page with button
-                    // var item = document.createElement("div");
-                    // item.classList.add("menu-item");
-                    // item.innerHTML = '<button type="button" class="button" onclick="acceptQueuePing()">Accept</button>'
-                    //     + data.queueItems[0].note + " " + data.queueItems[0].tableNo;
-                    // menu.appendChild(item);
-
-                    // Adding the rest of the new queue objects to the page
-                    review.innerHTML = '<div style="width: 220px; height: 50px; border: 3px solid rgb(0, 0, 0); position: absolute;'
-                        + ' top: -3px; left: -3px;overflow-x: hidden;"> <h3 style="font-size: 35px; position: absolute; top: -60%; left: 17%; '
-                        + 'font-weight: bold;"> REVIEW</h3> </div><br><br><br>'
-                    for (var i = 1; i < data.queueItems.length; i++) {
-                        // item = document.createElement("div");
-                        // item.classList.add("menu-item");
-                        review.innerHTML += "<br>" + data.queueItems[i].name + " " + data.queueItems[i].note;
-                        // menu.appendChild(item);
-                    }
-                }
-            };
-            xhr.send();
+            console.log("updateOrde");
+            $.ajax({
+                type: "POST",
+                url: "/updateOrder",
+                success: function (data) {
+                    $("#order-item").html(data.queueItems[0].name + " " + data.queueItems[0].note);
+                },
+            });
         }
+
+        //change this so it only updates on one persons specific html page
+        // function updateOrder() {
+        //     var xhr = new XMLHttpRequest();
+        //     xhr.open("GET", "/updateOrder", true);
+        //     xhr.onreadystatechange = function () {
+        //         if (xhr.readyState === 4 && xhr.status === 200) {
+        //             // Parse the response from the server
+        //             var data = JSON.parse(xhr.responseText);
+        //             // Clear the existing queue
+        //             var review = document.querySelector(".review");
+        //             review.innerHTML = "";
+
+        //             // Adding the first new queue objects to the page with button
+        //             // var item = document.createElement("div");
+        //             // item.classList.add("menu-item");
+        //             // item.innerHTML = '<button type="button" class="button" onclick="acceptQueuePing()">Accept</button>'
+        //             //     + data.queueItems[0].note + " " + data.queueItems[0].tableNo;
+        //             // menu.appendChild(item);
+
+        //             // Adding the rest of the new queue objects to the page
+        //             review.innerHTML = '<div style="width: 220px; height: 50px; border: 3px solid rgb(0, 0, 0); position: absolute;'
+        //                 + ' top: -3px; left: -3px;overflow-x: hidden;"> <h3 style="font-size: 35px; position: absolute; top: -60%; left: 17%; '
+        //                 + 'font-weight: bold;"> REVIEW</h3> </div><br><br><br>'
+        //             for (var i = 1; i < data.queueItems.length; i++) {
+        //                 // item = document.createElement("div");
+        //                 // item.classList.add("menu-item");
+        //                 review.innerHTML += "<br>" + data.queueItems[i].name + " " + data.queueItems[i].note;
+        //                 // menu.appendChild(item);
+        //             }
+        //         }
+        //     };
+        //     xhr.send();
+        // }
 
         updateQueue();
         setInterval(updateQueue, 1000); 
@@ -320,6 +331,7 @@
         ORDER FOR TABLE #
     </h2>
 
+    <!-- CONVERT THESE SELECT ELEMENTS INTO MOSTLY A STYLE, SAME WITH OTHER HEADINGS ETC, MAKE MORE EFFICIENT IN GENERAL... -->
     <select size="1"
         style="font-size: 20px; padding: 5px; margin: 5px; background-color: white; border-radius: 5px; position: absolute; top: 16%; left: 64%; z-index: 999; overflow: auto;"
         onfocus="this.size=8;" onblur="this.size=1;" onchange="this.size=1; this.blur();">
@@ -333,6 +345,8 @@
             position: absolute; top: -3px; left: -3px;overflow-x: hidden;">
             <h3 style="font-size: 35px; position: absolute; top: -60%; left: 17%; font-weight: bold;">
                 REVIEW</h3>
+        </div>
+        <div id="order-item" style="position: absolute; top: 50%; left: 50%;">TEST
         </div>
     </div>
 
@@ -364,19 +378,20 @@
     <!-- Musfik's Stuff | Needs to be able to display specific notes etc-->
     <div class="menu">
         {% for i in range(names|length) %}
-        <div class ="item">
+        <div class="item">
             <div class="item-details">
                 <div class="item_title">{{ names[i] }}</div>
                 <div class="item_price">{{ prices[i] }}</div>
             </div>
             <div class="item-notes-container">
-                <input type="text" class="notes" placeholder="Add order notes">
-                <button class="add-button">+</button>
+                <input type="text" class="order-note" placeholder="Add order notes">
+                <button class="add-button" onclick="updateOrder()">+</button>
             </div>
         </div>
         {% endfor %}
         <div>
-            <p style="margin-top: 20px; font-style: italic; font-size: 0.8em;">Allergen Information: Our menu items may
+            <p style="margin-top: 20px; font-style: italic; font-size: 0.8em;">Allergen Information: Our menu items
+                may
                 contain peanuts, tree nuts, dairy, soy, avocado, pork, chicken, and
                 eggs. Please inform your server of any allergies you may have.</p>
         </div>
