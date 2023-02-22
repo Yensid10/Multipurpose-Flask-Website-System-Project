@@ -183,19 +183,22 @@
 					type: 'GET',
 					url: '/HideDairy',
 					data: { 'x': x },
+					dataType: 'json'
 				}).done(function (response) {
-					message = response;
-					console.log('this is my message:', message);
-					var x1 = document.getElementById(message);
-					console.log('x is now changed to:', message);
-					if (x1.length == "0") {
-						location.reload(); // Temp solution until i find out how to reset css style sheets display
-					}
-					console.log('x:', x);
-					if (x1.style.display === "none") {
-						x1.style.display = "block";
-					} else {
-						x1.style.display = "none";
+					console.log('this is my response:', response);
+					var data = response.data;
+					for (var i = 0; i < data.length; i++) {
+						var x1 = document.getElementById(data[i]);
+						console.log('x is now changed to:', data[i]);
+						if (x1.length == "0") {
+							location.reload(); // Temp solution until i find out how to reset css style sheets display
+						}
+						console.log('x:', x);
+						if (x1.style.display === "none") {
+							x1.style.display = "block";
+						} else {
+							x1.style.display = "none";
+						}
 					}
 				});
 			}

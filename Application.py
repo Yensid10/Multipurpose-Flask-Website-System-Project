@@ -34,12 +34,10 @@ def home():
 @app.route('/HideDairy')
 def index():
     x = request.args.get('x')
-    if (x == "dairy"):
-        value = (SqlQuerys.FetchDairy())
-        print(value)
-        response = (value)
-        return response[0]
-    return jsonify({'success': True})
+    if x == 'dairy':
+        value = SqlQuerys.FetchDairy()
+        return jsonify({'data': value})
+    return jsonify({'success': False})
 
 
 @ app.route('/acceptQueuePing', methods=['POST'])
