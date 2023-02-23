@@ -110,6 +110,11 @@ def showRing():
     return render_template('Ring.html')
 
 
+@app.route('/loginPage')
+def loginPage():
+    return render_template('loginpage.html')
+
+
 @app.route('/Floor-Staff')
 def showFS():
     return render_template('Floor-Staff.html', queue=queue)
