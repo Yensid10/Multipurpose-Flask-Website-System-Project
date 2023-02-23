@@ -190,6 +190,20 @@
             z-index: 999;
             overflow: auto;
         }
+
+        @keyframes flash {
+            from {
+                background-color: rgb(255, 0, 0);
+            }
+
+            to {
+                background-color: white;
+            }
+        }
+
+        .flash {
+            animation: flash 2s linear;
+        }
     </style>
 </head>
 
@@ -197,7 +211,7 @@
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 
     <script>
-        // GLOBAL CLASSES \\
+        // CLIENT CLASSES \\
         class orderNotes {
             constructor(Note1, Note2) {
                 this.Note1 = Note1;
@@ -308,36 +322,67 @@
         }
 
 
-        // ORDER FUNCTIONS \\
+        // ORDER FUNCTIONS \\        
+        function flashElement(element) {
+            //Animation Function
+            if (element.classList.contains("flash")) {
+                element.classList.remove("flash");
+                void element.offsetWidth;
+                element.classList.add("flash");
+            } else {
+                element.classList.add("flash");
+            }
+        }
+
         function updateOrder() {
             var orderHtml = "";
             for (var i = 0; i < order.getLength(); i++) {
                 orderHtml += "<strong>" + order.getObject(i).getNote1() + "</strong><br>" + order.getObject(i).getNote2() + "<br><br>";
             }
             $("#order-item").html(orderHtml);
-
         }
 
         function addItemToOrder(orderItem) {
+            document.getElementById("review").classList.remove("flash");
             order.addObject(orderItem, document.getElementById(orderItem).value);
             document.getElementById(orderItem).value = "";
             updateOrder();
         }
 
         function sendToKitchen() {
-            var element = document.getElementById("orderSelect");
-            if (!element.options[element.selectedIndex].value.includes("htmlCheck")) {
+            var selectElement = document.getElementById("orderSelect");
+            if (selectElement.options[selectElement.selectedIndex].value.includes("htmlCheck")) {
+                flashElement(selectElement)
+            }
+            if (order.getLength() == 0) {
+                flashElement(document.getElementById("review"));
+            }
+            if (!selectElement.options[selectElement.selectedIndex].value.includes("htmlCheck") && order.getLength() != 0) {
                 $.ajax({
                     type: "POST",
                     url: "/sendToKitchen",
-                    data: JSON.stringify({ "order": order, "tableNo": element.options[element.selectedIndex].value }),
+                    data: JSON.stringify({ "order": order, "tableNo": selectElement.options[selectElement.selectedIndex].value }),
                     contentType: "application/json",
                 });
                 order = new orderQueue();
                 updateOrder();
-                element.selectedIndex = 0;
+                selectElement.selectedIndex = 0;
+            }
+        }
+
+
+        // BILLS FUNCTIONS \\
+        function getBill() {
+            var selectElement = document.getElementById("billSelect");
+            if (!selectElement.options[selectElement.selectedIndex].value.includes("htmlCheck")) {
+                // $.ajax({
+                //     type: "POST",
+                //     url: "/getBill",
+                //     data: JSON.stringify({ "tableNo": selectElement.options[selectElement.selectedIndex].value }),
+                //     contentType: "application/json",
+                // });
             } else {
-                alert("Please select a table number");
+                flashElement(selectElement);
             }
         }
 
@@ -379,8 +424,8 @@
 
     <!-- //MENU SECTION\\ -->
     <h2 style="top: 12.5%; left: 28%;">ORDER FOR TABLE #</h2>
-    <select size="1" class="select-style" style="top: 16%; left: 64%; " onfocus="this.size=8;" onblur="this.size=1;"
-        onchange="this.size=1; this.blur();" id="orderSelect">
+    <select size="1" class="select-style" style="top: 16%; left: 64%;" onblur="this.size=1;"
+        onfocus="this.size=8; this.classList.remove('flash');" onchange="this.size=1; this.blur();" id="orderSelect">
         <option value="htmlCheck"> - </option>
         {% for x in range(1, 31) %}
         <option value="{{ x }}">{{ x }}</option>
@@ -412,7 +457,7 @@
     <div class="review-header">
         <h2 style="top: -48%; left: 17%;">REVIEW</h2>
     </div>
-    <div class="review">
+    <div class="review" id="review">
         <div id="order-item" style="position: absolute; top: 12%; left: 5%;"></div>
     </div>
     <button style="position: absolute; top: 94%; left: 59%;" onclick="sendToKitchen()" class="button">Send</button>
@@ -422,10 +467,12 @@
     <h2 style="top: 12.5%; left: 82.5%;"> BILLS</h2>
     <div class="bills">
         <h2 style="top: 00%; left: 17%; text-align: center;"> FOR <br> TABLE #<br> </h2>
-        <button style="position: absolute; top: 70%; left: 28%;" type="button" class="button">Get</button>
+        <button style="position: absolute; top: 70%; left: 28%;" type="button" class="button"
+            onclick="getBill()">Get</button>
     </div>
-    <select size="1" class="select-style" style="top: 37%; left: 84.5%;" onfocus="this.size=8;" onblur="this.size=1;"
-        onchange="this.size=1; this.blur();">
+    <select size="1" class="select-style" style="top: 37%; left: 84.5%;" onblur="this.size=1;"
+        onfocus="this.size=8; this.classList.remove('flash');" onchange="this.size=1; this.blur();" id="billSelect">
+        <option value="htmlCheck"> - </option>
         {% for x in range(1, 31) %}
         <option value="{{ x }}">{{ x }}</option>
         {% endfor %}
