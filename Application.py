@@ -2,30 +2,30 @@ import datetime
 import random
 from flask import Flask, render_template, jsonify, request
 from pymongo import MongoClient
-
 from ObjectQueue import Queue
 from SqlQuerys import FetchMenu
 
 app = Flask(__name__)
 
-client = MongoClient('mongodb+srv://Theamzingu:Socr%40tis123@teamproject14.nnzfaib.mongodb.net/test')
+client = MongoClient(
+    'mongodb+srv://Theamzingu:Socr%40tis123@teamproject14.nnzfaib.mongodb.net/test')
 db = client["Kitchen"]
 order_collection = db["order_queue"]
 accepted_collection = db["accepted_orders"]
 
 queue = Queue()
-queue.addObject("Food", "#12")
-queue.addObject("Table", "#3")
-queue.addObject("Table", "#17")
-queue.addObject("Door", "<---")
-queue.addObject("Food", "#12")
-queue.addObject("Table", "#3")
-queue.addObject("Table", "#17")
-queue.addObject("Door", "<---")
-queue.addObject("Food", "#12")
-queue.addObject("Table", "#3")
-queue.addObject("Table", "#17")
-queue.addObject("Door", "<---")
+# queue.addObject("Food", "#12")
+# queue.addObject("Table", "#3")
+# queue.addObject("Table", "#17")
+# queue.addObject("Door", "<---")
+# queue.addObject("Food", "#12")
+# queue.addObject("Table", "#3")
+# queue.addObject("Table", "#17")
+# queue.addObject("Door", "<---")
+# queue.addObject("Food", "#12")
+# queue.addObject("Table", "#3")
+# queue.addObject("Table", "#17")
+# queue.addObject("Door", "<---")
 
 # Testing Orders queue implementation
 orders = Queue()
@@ -81,14 +81,13 @@ def sendToKitchen():
 
         queue = order.get('queue', [])
 
-
         for item in queue:
             order_items = item.get('Note1')
             note = item.get('Note2')
 
             # Insert the order into the order queue in MongoDB
             order_collection.insert_one({
-                '_id': time.strftime("%Y%m%d%H%M%S" + str(random.randint(0,999))),
+                '_id': time.strftime("%Y%m%d%H%M%S" + str(random.randint(0, 999))),
                 'table_number': tableNo,
                 'items': order_items,
                 'note': note,
@@ -99,11 +98,14 @@ def sendToKitchen():
         return ('', 204)
 
 
-
-
 @app.route('/Ring')
 def showRing():
     return render_template('Ring.html')
+
+
+@app.route('/faqPage')
+def faqPage():
+    return render_template('faq.html')
 
 
 @app.route('/loginPage')
@@ -115,7 +117,6 @@ def loginPage():
 def showFS():
     names, prices = FetchMenu()
     return render_template('Floor-Staff.html', queue=queue, names=names, prices=prices)
-
 
 
 @app.route('/kitchen')

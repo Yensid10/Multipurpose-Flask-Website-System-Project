@@ -40,7 +40,7 @@
 			$.ajax({
 				type: "POST",
 				url: "/addPingToQueue",
-				data: JSON.stringify({ "tableNo": "#" + (Math.floor(Math.random() * 100)).toString() }),
+				data: JSON.stringify({ "pingType": "Table", "tableNo": "#" + (Math.floor(Math.random() * 100)).toString() }),
 				contentType: "application/json",
 			});
 		}

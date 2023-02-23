@@ -204,6 +204,11 @@
         .flash {
             animation: flash 2s linear;
         }
+
+        .fade-out-text {
+            opacity: 1;
+            transition: opacity 5s linear;
+        }
     </style>
 </head>
 
@@ -278,14 +283,8 @@
         function completeCurrentJob() {
             if ((!$("#info-container").html().includes("htmlCheck"))
                 && (!$("#info-container").html().includes("Complete!"))) {
-                $("#info-container").html("<span id='fade-out-text'>Complete!</span>");
-                $("#fade-out-text").css({
-                    "opacity": "1",
-                    "transition": "opacity 5s linear"
-                });
-                setTimeout(function () {
-                    $("#fade-out-text").css("opacity", "0");
-                }, 50);
+                $("#info-container").html("<span id='fade-out-text' class='fade-out-text'>Complete!</span>");
+                setTimeout(function () { $("#fade-out-text").css("opacity", "0"); }, 50);
             }
         }
 
@@ -366,6 +365,9 @@
                 });
                 order = new orderQueue();
                 updateOrder();
+                $("#order-item").html("<span id='fade-out-text' style='text-align: center; font-size: 25px; font-weight: bold;"
+                    + "color: red; text-decoration: underline;' class='fade-out-text'>Sent to Kitchen!</span>");
+                setTimeout(function () { $("#fade-out-text").css("opacity", "0"); }, 50);
                 selectElement.selectedIndex = 0;
             }
         }
@@ -395,9 +397,9 @@
 
 
     <!-- //TEST BUTTON\\ -->
-    <button style="position: absolute; top: 0%; left: 90.2%;" type="button" class="button"
+    <!-- <button style="position: absolute; top: 0%; left: 90.2%;" type="button" class="button"
         onclick="addPingToQueue()">Add
-    </button>
+    </button> -->
 
 
     <!-- //TITLE\\  -->
@@ -482,8 +484,11 @@
     <!-- //HELP SECTION\\ -->
     <h2 style="top: 51.5%; left: 82.5%;"> HELP</h2>
     <div class="help">
-        <!-- Change into a hyperlink -->
-        <h2 style="font-size: 40px; top: 11%; left: 25%; text-align: center;"> FAQ <br> PAGE </h2>
+        <a href="/faqPage">
+            <h2 style="font-size: 40px; top: 15%; left: 25%; text-align: center; text-decoration: underline;"> FAQ <br>
+                PAGE </h2>
+        </a>
+
     </div>
 </body>
 
