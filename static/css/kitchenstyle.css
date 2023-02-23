@@ -1,0 +1,41 @@
+body {
+  background-color: #98C1D9;
+}
+
+.page-container {
+  height: 100%;
+  overflow: hidden;
+}
+
+.table-container {
+  height: calc(100vh - 50px);
+  max-height: calc(100vh - 50px);
+  overflow-y: scroll;
+  margin-top: 50px;
+}
+
+.table-container table {
+  width: 100%;
+}
+
+.table-container h1 {
+  margin-bottom: 20px;
+}
+
+.table-container th,
+.table-container td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+}
+
+.table-container th {
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #ddd;
+  padding: 10px;
+}
+
+.table-container table {
+  margin: 50px auto;
+}
