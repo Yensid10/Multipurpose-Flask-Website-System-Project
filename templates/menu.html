@@ -42,13 +42,6 @@
 				url: "/addPingToQueue",
 				data: JSON.stringify({ "tableNo": "#" + (Math.floor(Math.random() * 100)).toString() }),
 				contentType: "application/json",
-				success: function (response) {
-					console.log(response);
-					PopUp();
-				},
-				error: function (xhr, status, error) {
-					console.error(error);
-				}
 			});
 		}
 	</script>
@@ -65,7 +58,7 @@
 					<li class="nav-item"><a href="{{ url_for('home') }}" class="nav-link">Home</a></li>
 					<li class="nav-item active"><a href="{{ url_for('home') }}" class="nav-link">Menu</a></li>
 					<li class="nav-item"><a href="#" onclick="addPingToQueue();" class="nav-link">Ring Us</a></li>
-					<li class="nav-item"><a href="{{ url_for('showFS') }}" class="nav-link">Staff login</a></li>
+					<li class="nav-item"><a href="{{ url_for('loginPage') }}" class="nav-link">Staff login</a></li>
 
 				</ul>
 			</div>
