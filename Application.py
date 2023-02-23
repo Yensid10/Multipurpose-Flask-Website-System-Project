@@ -4,6 +4,8 @@ from flask import Flask, jsonify, render_template, request
 from flask import redirect
 from ObjectQueue import Queue
 import SqlQuerys
+from flask import Response
+import requests
 
 app = Flask(__name__)
 
@@ -38,6 +40,19 @@ def index():
         value = SqlQuerys.FetchDairy()
         return jsonify({'data': value})
     return jsonify({'success': False})
+
+
+@app.route('/submit-form', methods=['POST'])
+def submit_form():
+    table_number = request.form.get('table-number')
+    allergens = request.form.getlist('allergen')
+    # do something with table_number and allergens
+    if 'Milk' in allergens:
+        response = requests.get('http://localhost:5000/HideDairy?x=dairy')
+        data = response.json()['data']
+    print(table_number)
+    print(allergens)
+    return ("Form Submmited")
 
 
 @ app.route('/acceptQueuePing', methods=['POST'])
