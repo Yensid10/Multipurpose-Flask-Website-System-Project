@@ -1,8 +1,5 @@
 import datetime
-from flask import Flask, render_template, redirect, url_for
-import sqlite3
-from flask import Flask, jsonify, render_template, request
-from flask import redirect
+from flask import Flask, render_template, redirect, url_for, jsonify, request
 from ObjectQueue import Queue
 from SqlQuerys import FetchMenu
 
