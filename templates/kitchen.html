@@ -14,51 +14,50 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6">
-            <div class="kitchen-table-container">
+            <div class="kitchen-table-container table-container">
                 <h1 class="text-center mb-5">Order Queue</h1>
                 <table class="table kitchen-table" id="order-queue-table">
                     <thead>
-                    <tr>
-                        <th>Table</th>
-                        <th>Items</th>
-                        <th>Accept</th>
-                    </tr>
+                        <tr>
+                            <th>Table</th>
+                            <th>Items</th>
+                            <th>Note</th>
+                            <th>Accept</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    {% for order in orders %}
-                        <tr>
-                            <td>{{ order["table_number"] }}</td>
-                            <td>{{ order["items"] }}</td>
-                            <td>
-                                <button class="btn btn-primary accept-button">Accept
-                                </button>
-                            </td>
-                        </tr>
-                    {% endfor %}
+                        {% for order in orders %}
+                            <tr>
+                                <td>{{ order["table_number"] }}</td>
+                                <td>
+                                    {% for item in order["items"] %}
+                                        {{ item }}<br>
+                                    {% endfor %}
+                                </td>
+                                <td>{{ order["note"] }}</td>
+                                <td>
+                                    <button class="btn btn-primary accept-button" data-order-id="{{ order["_id"] }}">Accept</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
         <div class="col-md-6">
-            <div class="accepted-table-container">
+            <div class="accepted-table-container table-container">
                 <h1 class="text-center mb-5">Accepted Orders</h1>
                 <table class="table accepted-table">
                     <thead>
-                    <tr>
-                        <th>Table</th>
-                        <th>Items</th>
-                        <th>Complete</th>
-                    </tr>
+                        <tr>
+                            <th>Table</th>
+                            <th>Items</th>
+                            <th>Complete</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>Test items</td>
-                    </tr>
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>
