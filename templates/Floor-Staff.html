@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vertical Scroll Menu</title>
+    <style>
+        html {
+            overflow: hidden;
+            height: 100%;
+        }
+
+        body {
+            background-color: rgb(255, 255, 255);
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            position: absolute;
+            width: 1024px;
+            height: 768px;
+            overflow: auto;
+        }
+
+        .scroll-menu {
+            position: absolute;
+            top: 169px;
+            left: 26px;
+            overflow-y: auto;
+            width: 225px;
+            height: 543px;
+            border: 3px solid rgb(0, 0, 0);
+        }
+
+        .menu-item {
+            width: 207px;
+            height: 55px;
+            line-height: 55px;
+            background-color: rgb(221, 221, 221);
+            text-align: left;
+            font-size: 22px;
+            border: 1px solid rgb(0, 0, 0);
+            margin: 3px;
+            border-radius: 15px;
+            padding-left: 10px;
+        }
+
+        .menu-item:hover {
+            background-color: rgb(255, 255, 255);
+            cursor: pointer;
+        }
+
+        .button {
+            position: absolute;
+            background-color: #4b1abd;
+            border: black;
+            font-size: 28px;
+            color: #FFFFFF;
+            padding: 2px;
+            width: 100px;
+            height: 40px;
+            text-align: center;
+            transition-duration: 0.4s;
+            text-decoration: none;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: 15px;
+            left: 112.5px;
+            top: 11px;
+        }
+
+        .menu {
+            border: 2px solid black;
+            position: absolute;
+            top: 22%;
+            left: 27%;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            width: 260px;
+            height: 543px;
+            border: 3px solid rgb(0, 0, 0);
+        }
+
+        .item {
+            padding: 10px;
+            border: 1px solid black;
+            margin-bottom: 10px;
+            display: inline-block;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item_title {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .item_price {
+            font-weight: italic;
+            font-size: 14px;
+        }
+
+        .notes {
+            margin-left: 10px;
+            width: 100px;
+            height: 20px;
+            border: 1px solid black;
+            padding: 5px;
+        }
+
+        .add-button {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 5px 10px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .add-button:hover {
+            color: rgb(0, 235, 51);
+            cursor: pointer;
+        }
+
+        h1 {
+            font-size: 60px;
+            position: absolute;
+            top: -5%;
+            left: 2.5%;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        h2 {
+            font-size: 35px;
+            position: absolute;
+            font-weight: bold;
+        }
+
+        .review {
+            position: absolute;
+            top: 22%;
+            left: 52.5%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            width: 220px;
+            height: 543px;
+            border: 3px solid rgb(0, 0, 0);
+        }
+
+        .review-header {
+            width: 220px;
+            height: 50px;
+            border: 3px solid rgb(0, 0, 0);
+            position: absolute;
+            top: 22%;
+            left: 52.5%;
+            overflow-x: hidden;
+            z-index: 998;
+            background-color: #FFFFFF;
+        }
+
+        .bills {
+            position: absolute;
+            top: 22%;
+            left: 76.5%;
+            overflow-y: auto;
+            width: 220px;
+            height: 240px;
+            border: 3px solid rgb(0, 0, 0);
+        }
+
+        .help {
+            position: absolute;
+            top: 61.5%;
+            left: 76.5%;
+            overflow-y: auto;
+            width: 220px;
+            height: 240px;
+            border: 3px solid rgb(0, 0, 0);
+        }
+
+        .select-style {
+            font-size: 20px;
+            padding: 5px;
+            margin: 5px;
+            background-color: white;
+            border-radius: 5px;
+            position: absolute;
+            z-index: 999;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+
+    <script>
+        // GLOBAL CLASSES \\
+        class orderNotes {
+            constructor(Note1, Note2) {
+                this.Note1 = Note1;
+                this.Note2 = Note2;
+            }
+
+            getNote1() {
+                return this.Note1;
+            }
+
+            getNote2() {
+                return this.Note2;
+            }
+        }
+
+        class orderQueue {
+            constructor() {
+                this.queue = [];
+            }
+
+            addObject(Note1, Note2) {
+                this.queue.push(new orderNotes(Note1, Note2));
+            }
+
+            removeObject(index) {
+                this.queue.splice(index, 1);
+            }
+
+            getObject(index) {
+                return this.queue[index];
+            }
+
+            getLength() {
+                return this.queue.length;
+            }
+        }
+
+
+        // TEST BUTTON FUNCTION \\
+        function addPingToQueue() {
+            $.ajax({
+                type: "POST",
+                url: "/addPingToQueue",
+                data: JSON.stringify({ "pingType": "Table", "tableNo": "#" + (Math.floor(Math.random() * 100)).toString() }),
+                contentType: "application/json",
+            });
+        }
+
+
+        // QUEUE FUNCTIONS \\
+        function acceptQueuePing() {
+            if (($("#info-container").html().includes("Complete!")) || ($("#info-container").html().includes("htmlCheck"))) {
+                $.ajax({
+                    type: "POST",
+                    url: "/acceptQueuePing",
+                    success: function (data) {
+                        $("#info-container").html(data.acceptedPing);
+                    }
+                })
+                updateQueue();
+            }
+        }
+
+        function completeCurrentJob() {
+            if ((!$("#info-container").html().includes("htmlCheck"))
+                && (!$("#info-container").html().includes("Complete!"))) {
+                $("#info-container").html("<span id='fade-out-text'>Complete!</span>");
+                $("#fade-out-text").css({
+                    "opacity": "1",
+                    "transition": "opacity 5s linear"
+                });
+                setTimeout(function () {
+                    $("#fade-out-text").css("opacity", "0");
+                }, 50);
+            }
+        }
+
+        function updateQueue() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/updateQueue", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Parse the response from the server
+                    var data = JSON.parse(xhr.responseText);
+                    // Update the queue count on the page
+                    document.querySelector("h2").innerHTML = "QUEUE: " + data.queueLength;
+                    // Clear the existing queue
+                    var menu = document.querySelector(".scroll-menu");
+                    menu.innerHTML = "";
+
+                    // Adding the first new queue objects to the page with button
+                    var item = document.createElement("div");
+                    item.classList.add("menu-item");
+                    item.innerHTML = '<button type="button" class="button" onclick="acceptQueuePing()">Accept</button>'
+                        + data.queueItems[0].note + " " + data.queueItems[0].tableNo;
+                    menu.appendChild(item);
+
+                    // Adding the rest of the new queue objects to the page
+                    for (var i = 1; i < data.queueItems.length; i++) {
+                        item = document.createElement("div");
+                        item.classList.add("menu-item");
+                        item.innerHTML = data.queueItems[i].note + " " + data.queueItems[i].tableNo;
+                        menu.appendChild(item);
+                    }
+                }
+            };
+            xhr.send();
+        }
+
+
+        // ORDER FUNCTIONS \\
+        function updateOrder() {
+            var orderHtml = "";
+            for (var i = 0; i < order.getLength(); i++) {
+                orderHtml += "<strong>" + order.getObject(i).getNote1() + "</strong><br>" + order.getObject(i).getNote2() + "<br><br>";
+            }
+            $("#order-item").html(orderHtml);
+
+        }
+
+        function addItemToOrder(orderItem) {
+            order.addObject(orderItem, document.getElementById(orderItem).value);
+            document.getElementById(orderItem).value = "";
+            updateOrder();
+        }
+
+        function sendToKitchen() {
+            var element = document.getElementById("orderSelect");
+            if (!element.options[element.selectedIndex].value.includes("htmlCheck")) {
+                $.ajax({
+                    type: "POST",
+                    url: "/sendToKitchen",
+                    data: JSON.stringify({ "order": order, "tableNo": element.options[element.selectedIndex].value }),
+                    contentType: "application/json",
+                });
+                order = new orderQueue();
+                updateOrder();
+                element.selectedIndex = 0;
+            } else {
+                alert("Please select a table number");
+            }
+        }
+
+
+        // MAIN JAVASCRIPT CODE \\
+        order = new orderQueue();
+        updateQueue();
+        setInterval(updateQueue, 1000); 
+    </script>
+
+
+    <!-- //TEST BUTTON\\ -->
+    <button style="position: absolute; top: 0%; left: 90.2%;" type="button" class="button"
+        onclick="addPingToQueue()">Add
+    </button>
+
+
+    <!-- //TITLE\\  -->
+    <h1>Floor Staff</h1>
+
+    <!-- //CURRENT JOB SECTION\\ -->
+    <div style="position: absolute; top: 0.5%; left: 45%;">
+        <div style="position: absolute; left: 17%;"> Your Current Job is: </div><br>
+        <div id="info-container" class="menu-item"
+            style="font-weight: bold; font-size: 41px; color: #ffffff; 
+            border: 1px solid rgb(255, 0, 0); text-shadow: -2.5px 0 black, 0 2.5px black, 2.5px 0 black, 0 -2.5px black;">
+            <span style="opacity:0;"> htmlCheck </span>
+        </div>
+    </div>
+    <button style="position: absolute; top: 4.2%; left: 67.5%;" type="button" class="button"
+        onclick="completeCurrentJob()">Done!
+    </button>
+
+
+    <!-- //QUEUE SECTION\ -->
+    <h2 style="top: 12.5%; left: 4.5%;">QUEUE: {{ queue.getLength() }}</h2>
+    <div class="scroll-menu"></div>
+
+
+    <!-- //MENU SECTION\\ -->
+    <h2 style="top: 12.5%; left: 28%;">ORDER FOR TABLE #</h2>
+    <select size="1" class="select-style" style="top: 16%; left: 64%; " onfocus="this.size=8;" onblur="this.size=1;"
+        onchange="this.size=1; this.blur();" id="orderSelect">
+        <option value="htmlCheck"> - </option>
+        {% for x in range(1, 31) %}
+        <option value="{{ x }}">{{ x }}</option>
+        {% endfor %}
+    </select>
+
+    <div class="menu">
+        {% for i in range(names|length) %}
+        <div class="item">
+            <div class="item-details">
+                <div class="item_title">{{ names[i] }}</div>
+                <div class="item_price">£{{ prices[i] }}</div>
+            </div>
+            <div class="item-notes-container">
+                <input type="text" class="order-note" id="{{ names[i] }}" placeholder="Add order notes">
+                <button class="add-button" onclick="addItemToOrder('{{ names[i] }}')">+</button>
+            </div>
+        </div>
+        {% endfor %}
+        <div>
+            <p style="margin-top: 20px; font-style: italic; font-size: 0.8em;">
+                Allergen Information: Our menu items may contain peanuts, tree nuts, dairy, soy, avocado,
+                pork, chicken, and eggs. Please inform your server of any allergies you may have.</p>
+        </div>
+    </div>
+
+
+    <!-- //REVIEW SECTION\\ -->
+    <div class="review-header">
+        <h2 style="top: -48%; left: 17%;">REVIEW</h2>
+    </div>
+    <div class="review">
+        <div id="order-item" style="position: absolute; top: 12%; left: 5%;"></div>
+    </div>
+    <button style="position: absolute; top: 94%; left: 59%;" onclick="sendToKitchen()" class="button">Send</button>
+
+
+    <!-- //BILLS SECTION\\ -->
+    <h2 style="top: 12.5%; left: 82.5%;"> BILLS</h2>
+    <div class="bills">
+        <h2 style="top: 00%; left: 17%; text-align: center;"> FOR <br> TABLE #<br> </h2>
+        <button style="position: absolute; top: 70%; left: 28%;" type="button" class="button">Get</button>
+    </div>
+    <select size="1" class="select-style" style="top: 37%; left: 84.5%;" onfocus="this.size=8;" onblur="this.size=1;"
+        onchange="this.size=1; this.blur();">
+        {% for x in range(1, 31) %}
+        <option value="{{ x }}">{{ x }}</option>
+        {% endfor %}
+    </select>
+
+
+    <!-- //HELP SECTION\\ -->
+    <h2 style="top: 51.5%; left: 82.5%;"> HELP</h2>
+    <div class="help">
+        <!-- Change into a hyperlink -->
+        <h2 style="font-size: 40px; top: 11%; left: 25%; text-align: center;"> FAQ <br> PAGE </h2>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,134 @@
+[
+    {
+        "_id": "63e39a9ffc2a06d796698fa5",
+        "name": "Guacamole and chips",
+        "price": "7.5",
+        "appetisers": true,
+        "entree": false,
+        "side": false,
+        "dessert": false,
+        "calories": "600",
+        "description": "A refreshing appetizer with an avacado based dip originating from Mexico"
+    },
+    {
+        "_id": "63e39a9ffc2a06d796698fa6",
+        "name": "Mole negro",
+        "price": "15.0",
+        "appetisers": false,
+        "entree": true,
+        "side": false,
+        "dessert": false,
+        "calories": "900",
+        "description": "A sause made from smoked black chilies, prunes and chocolate"
+    },
+    {
+        "_id": "63e39a9ffc2a06d796698fa7",
+        "name": "Arroz verde",
+        "price": "4.5",
+        "appetisers": false,
+        "entree": false,
+        "side": true,
+        "dessert": false,
+        "calories": "490",
+        "description": "Short-grain paella rice with clams and small prawns, garlic and parsley"
+    },
+    {
+        "_id": "63e39a9ffc2a06d796698fa8",
+        "name": "Flan",
+        "price": "6.0",
+        "appetisers": false,
+        "entree": false,
+        "side": false,
+        "dessert": true,
+        "calories": "1200",
+        "description": "A sweet pudding containing eggs milk and sugar covered in caramel"
+    },
+    {
+        "_id": "63e39a9ffc2a06d796698fa9",
+        "name": "Queso fundido",
+        "price": "9.0",
+        "appetisers": true,
+        "entree": false,
+        "side": false,
+        "dessert": false,
+        "calories": "906",
+        "description": "Melted cheese and chorizo with spicy ground pork sausage"
+    },
+    {
+        "_id": "63e39a9ffc2a06d796698faa",
+        "name": "Tostadas de tinga",
+        "price": "8.5",
+        "appetisers": true,
+        "entree": false,
+        "side": false,
+        "dessert": false,
+        "calories": "345",
+        "description": "A fried corn tortillas topped with meat and beans, lettuce tomatoes, cheese and sour cream"
+    },
+    {
+        "_id": "63e39a9ffc2a06d796698fab",
+        "name": "Tacos al pastor",
+        "price": "12.0",
+        "appetisers": false,
+        "entree": true,
+        "side": false,
+        "dessert": false,
+        "calories": "150",
+        "description": "Thinly sliced marinated pork with onions pinaple and cilantro"
+    },
+    {
+        "_id": "63e39a9ffc2a06d796698fac",
+        "name": "Enchiladas verdes",
+        "price": "13.5",
+        "appetisers": false,
+        "entree": true,
+        "side": false,
+        "dessert": false,
+        "calories": "330",
+        "description": "A homemade green enchilada sauce made of roasted tomatillos, onions, and serrano chilis blended with garlic, lime juice, cilantro, chicken stock, and sour cream wrapped in a tortilla with chicken and cheese"
+    },
+    {
+        "_id": "63e39a9ffc2a06d796698fad",
+        "name": "Frijoles negros",
+        "price": "4.0",
+        "appetisers": false,
+        "entree": false,
+        "side": true,
+        "dessert": false,
+        "calories": "70",
+        "description": "Black beans"
+    },
+    {
+        "_id": "63e39a9ffc2a06d796698fae",
+        "name": "Elote",
+        "price": "5.5",
+        "appetisers": false,
+        "entree": false,
+        "side": true,
+        "dessert": false,
+        "calories": "168",
+        "description": "Corn on the cob charred on the grill, then slathered in a spicy and creamy chili, garlic, and Cotija cheese spiked sauce"
+    },
+    {
+        "_id": "63e39a9ffc2a06d796698faf",
+        "name": "Tres leches",
+        "price": "7.0",
+        "appetisers": false,
+        "entree": false,
+        "side": false,
+        "dessert": true,
+        "calories": "295",
+        "description": "Sponge cake soaked in evaporated milk, condensed milk and whole milk. with creame, icing, vanilla extract and eggs"
+    },
+    {
+        "_id": "63e39a9ffc2a06d796698fb0",
+        "name": "Sorbete de tamarindo",
+        "price": "5.5",
+        "appetisers": false,
+        "entree": false,
+        "side": false,
+        "dessert": true,
+        "calories": "3",
+        "description": "Tamarind sorbet"
+    }
+]
