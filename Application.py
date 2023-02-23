@@ -1,6 +1,7 @@
 import datetime
-import random
-from flask import Flask, render_template, jsonify, request
+
+from bson import ObjectId
+from flask import Flask, render_template, jsonify, request, json
 from pymongo import MongoClient
 
 from ObjectQueue import Queue
@@ -81,14 +82,13 @@ def sendToKitchen():
 
         queue = order.get('queue', [])
 
-
         for item in queue:
             order_items = item.get('Note1')
             note = item.get('Note2')
 
             # Insert the order into the order queue in MongoDB
             order_collection.insert_one({
-                '_id': time.strftime("%Y%m%d%H%M%S" + str(random.randint(0,999))),
+                '_id': ObjectId(),
                 'table_number': tableNo,
                 'items': order_items,
                 'note': note,
@@ -97,8 +97,6 @@ def sendToKitchen():
             })
 
         return ('', 204)
-
-
 
 
 @app.route('/Ring')
@@ -112,12 +110,37 @@ def showFS():
     return render_template('Floor-Staff.html', queue=queue, names=names, prices=prices)
 
 
-
 @app.route('/kitchen')
 def kitchen():
-    orders = list(order_collection.find({}, {'_id': False}))
+    orders = list(order_collection.find())
+    for order in orders:
+        order['_id'] = str(order['_id'])
+
+    accepted_orders = list(accepted_collection.find())
+    for order in accepted_orders:
+        order['_id'] = str(order['_id'])
+
     print(orders)
-    return render_template('kitchen.html', orders=orders)
+    return render_template('kitchen.html', orders=orders, accepted_orders=accepted_orders)
+
+
+@app.route('/accept_order', methods=['POST'])
+def accept_order():
+    # Get the order data from the POST request
+    order_data = json.loads(request.form['order_data'])
+
+    order_data['time'] = int(request.form['time'])
+
+    print(order_data)
+
+    # Insert the order data into the accepted_orders collection
+    accepted_collection.insert_one(order_data)
+
+    # Remove the order data from the order_queue collection
+    order_collection.delete_one({'_id': ObjectId(order_data['old_id'])})
+
+    # Return a success response
+    return jsonify({'success': True})
 
 
 if __name__ == '__main__':
