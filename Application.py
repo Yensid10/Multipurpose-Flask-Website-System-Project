@@ -79,9 +79,6 @@ def sendToKitchen():
         tableNo = data.get('tableNo')
         time = datetime.datetime.now()
 
-        print(data)
-        print(order)
-
         queue = order.get('queue', [])
 
 
@@ -119,6 +116,7 @@ def showFS():
 @app.route('/kitchen')
 def kitchen():
     orders = list(order_collection.find({}, {'_id': False}))
+    print(orders)
     return render_template('kitchen.html', orders=orders)
 
 

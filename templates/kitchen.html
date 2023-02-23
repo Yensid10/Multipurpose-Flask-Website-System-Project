@@ -14,34 +14,30 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6">
-            <div class="kitchen-table-container table-container">
-                <h1 class="text-center mb-5">Order Queue</h1>
-                <table class="table kitchen-table" id="order-queue-table">
-                    <thead>
-                        <tr>
-                            <th>Table</th>
-                            <th>Items</th>
-                            <th>Note</th>
-                            <th>Accept</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for order in orders %}
-                            <tr>
-                                <td>{{ order["table_number"] }}</td>
-                                <td>
-                                    {% for item in order["items"] %}
-                                        {{ item }}<br>
-                                    {% endfor %}
-                                </td>
-                                <td>{{ order["note"] }}</td>
-                                <td>
-                                    <button class="btn btn-primary accept-button" data-order-id="{{ order["_id"] }}">Accept</button>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+            <table class="table kitchen-table table-container" id="order-queue-table">
+  <thead>
+    <tr>
+      <th>Table</th>
+      <th>Items</th>
+      <th>Note</th>
+      <th>Accept</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for order in orders %}
+    <tr>
+      <td>{{ order["table_number"] }}</td>
+      <td>
+        {{ order["items"] }}
+      </td>
+      <td>{{ order["note"] }}</td>
+      <td>
+        <button class="btn btn-primary accept-button" data-order-id="{{ order["_id"] }}">Accept</button>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
             </div>
         </div>
         <div class="col-md-6">
