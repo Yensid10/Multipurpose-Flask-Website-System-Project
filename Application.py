@@ -20,7 +20,6 @@ queue.addObject("Food", "#12")
 queue.addObject("Table", "#3")
 queue.addObject("Table", "#17")
 queue.addObject("Door", "<---")
-# Colour coordinate these depending on the type of request?
 
 # Testing Orders queue implementation
 orders = Queue()
@@ -30,10 +29,6 @@ orders = Queue()
 def home():
     return render_template('menu.html')
 
-
-# @app.route('/')
-# def home():
-#     return render_template('Floor-Staff.html', queue=queue)
 
 @app.route('/acceptQueuePing', methods=['POST'])
 def acceptQueuePing():
@@ -49,19 +44,20 @@ def acceptQueuePing():
 def addPingToQueue():
     if request.method == 'POST':
         data = request.get_json()
+        pingType = data.get('pingType')
         tableNo = data.get('tableNo')
-        queue.addObject("Table ", tableNo)
+        queue.addObject(pingType, tableNo)
         return ('', 204)
 
 
-@app.route('/addItemToOrder', methods=['POST'])
-def addPingToOrder():
-    if request.method == 'POST':
-        data = request.get_json()
-        orderItem = data.get('orderItem')
-        orderNotes = data.get('orderNotes')
-        orders.addObject(orderItem, orderNotes)
-        return ('', 204)
+# @app.route('/addItemToOrder', methods=['POST'])
+# def addPingToOrder():
+#     if request.method == 'POST':
+#         data = request.get_json()
+#         orderItem = data.get('orderItem')
+#         orderNotes = data.get('orderNotes')
+#         orders.addObject(orderItem, orderNotes)
+#         return ('', 204)
 
 
 @app.route("/updateQueue")
@@ -79,30 +75,18 @@ def updateQueue():
     })
 
 
-@app.route("/updateOrder", methods=['POST'])
-def updateOrder():
-    jsonQueue = []
-    for i in range(orders.getLength()):
-        order = orders.getObject(i)
-        jsonQueue.append({
-            "name": order.getNote1(),
-            "note": order.getNote2()
-        })
-    return jsonify({
-        "queueItems": jsonQueue
-    })
-
-
-# @app.route('/background_process_test', methods=['GET', 'POST'])
-# def background_process_test():
-#     if request.method == "POST":
-#         table_number = request.form.get("TableNum")
-#         Request = request.form.get("Request")
-#         print(table_number)
-#         print(Request)
-#     if table_number and Request:
-#         Queue().add_object(table_number, Request)
-#     return redirect('/')
+# @app.route("/updateOrder", methods=['POST'])
+# def updateOrder():
+#     jsonQueue = []
+#     for i in range(orders.getLength()):
+#         order = orders.getObject(i)
+#         jsonQueue.append({
+#             "name": order.getNote1(),
+#             "note": order.getNote2()
+#         })
+#     return jsonify({
+#         "queueItems": jsonQueue
+#     })
 
 
 @app.route('/Ring')

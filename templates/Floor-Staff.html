@@ -197,6 +197,44 @@
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 
     <script>
+        class orderNotes {
+            constructor(Note1, Note2) {
+                this.Note1 = Note1;
+                this.Note2 = Note2;
+            }
+
+            getNote1() {
+                return this.Note1;
+            }
+
+            getNote2() {
+                return this.Note2;
+            }
+        }
+
+        class orderQueue {
+            constructor() {
+                this.queue = [];
+            }
+
+            addObject(Note1, Note2) {
+                this.queue.push(new orderNotes(Note1, Note2));
+            }
+
+            removeObject(index) {
+                this.queue.splice(index, 1);
+            }
+
+            getObject(index) {
+                return this.queue[index];
+            }
+
+            getLength() {
+                return this.queue.length;
+            }
+        }
+
+
         // QUEUE FUNCTIONS \\
         function acceptQueuePing() {
             if (($("#info-container").html().includes("Complete!")) || ($("#info-container").html().includes("htmlCheck"))) {
@@ -215,11 +253,9 @@
             $.ajax({
                 type: "POST",
                 url: "/addPingToQueue",
-                data: JSON.stringify({ "tableNo": "#" + (Math.floor(Math.random() * 100)).toString() }),
+                data: JSON.stringify({ "pingType": "Table", "tableNo": "#" + (Math.floor(Math.random() * 100)).toString() }),
                 contentType: "application/json",
             });
-
-
         }
 
         function completeCurrentJob() {
@@ -268,36 +304,30 @@
             xhr.send();
         }
 
+
         // ORDER FUNCTIONS \\
         function addItemToOrder(orderItem) {
-            var notes = document.getElementById(orderItem).value;
-            console.log(orderItem + " " + notes);
-            $.ajax({
-                type: "POST",
-                url: "/addItemToOrder",
-                data: JSON.stringify({ "orderItem": orderItem, "orderNotes": notes }),
-                contentType: "application/json",
-            });
+            order.addObject(orderItem, document.getElementById(orderItem).value);
+            document.getElementById(orderItem).value = "";
             updateOrder();
         }
 
         function updateOrder() {
-            $.ajax({
-                type: "POST",
-                url: "/updateOrder",
-                success: function (data) {
-                    var orderHtml = "";
-                    for (var i = 0; i < data.queueItems.length; i++) {
-                        orderHtml += "<strong>" + data.queueItems[i].name + "</strong><br>" + data.queueItems[i].note + "<br><br>";
-                    }
-                    $("#order-item").html(orderHtml);
-                },
-            });
+            var orderHtml = "";
+            for (var i = 0; i < order.getLength(); i++) {
+                orderHtml += "<strong>" + order.getObject(i).getNote1() + "</strong><br>" + order.getObject(i).getNote2() + "<br><br>";
+            }
+            $("#order-item").html(orderHtml);
+
         }
 
+
+        // MAIN JAVASCRIPT CODE \\
+        order = new orderQueue();
         updateQueue();
         setInterval(updateQueue, 1000); 
     </script>
+
 
     <!-- //TEST BUTTON\\ -->
     <button style="position: absolute; top: 0%; left: 90.2%;" type="button" class="button"
@@ -306,8 +336,7 @@
 
 
     <!-- //TITLE\\  -->
-    <h1> Floor Staff</h1>
-
+    <h1>Floor Staff</h1>
 
     <!-- //CURRENT JOB SECTION\\ -->
     <div style="position: absolute; top: 0.5%; left: 45%;">
