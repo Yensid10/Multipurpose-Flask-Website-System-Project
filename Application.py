@@ -1,9 +1,10 @@
+import datetime
 from flask import Flask, render_template, redirect, url_for
 import sqlite3
 from flask import Flask, jsonify, render_template, request
 from flask import redirect
 from ObjectQueue import Queue
-
+from SqlQuerys import FetchMenu
 
 app = Flask(__name__)
 
@@ -20,7 +21,6 @@ queue.addObject("Food", "#12")
 queue.addObject("Table", "#3")
 queue.addObject("Table", "#17")
 queue.addObject("Door", "<---")
-# Colour coordinate these depending on the type of request?
 
 # Testing Orders queue implementation
 orders = Queue()
@@ -30,10 +30,6 @@ orders = Queue()
 def home():
     return render_template('menu.html')
 
-
-# @app.route('/')
-# def home():
-#     return render_template('Floor-Staff.html', queue=queue)
 
 @app.route('/acceptQueuePing', methods=['POST'])
 def acceptQueuePing():
@@ -49,18 +45,9 @@ def acceptQueuePing():
 def addPingToQueue():
     if request.method == 'POST':
         data = request.get_json()
+        pingType = data.get('pingType')
         tableNo = data.get('tableNo')
-        queue.addObject("Table ", tableNo)
-        return ('', 204)
-
-
-@app.route('/addItemToOrder', methods=['POST'])
-def addPingToOrder():
-    if request.method == 'POST':
-        data = request.get_json()
-        orderItem = data.get('orderItem')
-        orderNotes = data.get('orderNotes')
-        orders.addObject(orderItem, orderNotes)
+        queue.addObject(pingType, tableNo)
         return ('', 204)
 
 
@@ -79,30 +66,16 @@ def updateQueue():
     })
 
 
-@app.route("/updateOrder")
-def updateOrder():
-    jsonQueue = []
-    for i in range(orders.getLength()):
-        order = orders.getObject(i)
-        jsonQueue.append({
-            "name": order.getNote1(),
-            "note": order.getNote2()
-        })
-    return jsonify({
-        "queueItems": jsonQueue
-    })
+@app.route('/sendToKitchen', methods=['POST'])
+def sendToKitchen():
+    if request.method == 'POST':
+        data = request.get_json()
+        order = data.get('order')
+        tableNo = data.get('tableNo')
+        time = datetime.datetime.now()
 
-
-# @app.route('/background_process_test', methods=['GET', 'POST'])
-# def background_process_test():
-#     if request.method == "POST":
-#         table_number = request.form.get("TableNum")
-#         Request = request.form.get("Request")
-#         print(table_number)
-#         print(Request)
-#     if table_number and Request:
-#         Queue().add_object(table_number, Request)
-#     return redirect('/')
+        # This is for Maan to deal with :))))
+        return ('', 204)
 
 
 @app.route('/Ring')
@@ -117,7 +90,8 @@ def loginPage():
 
 @app.route('/Floor-Staff')
 def showFS():
-    return render_template('Floor-Staff.html', queue=queue)
+    names, prices = FetchMenu()
+    return render_template('Floor-Staff.html', queue=queue, names=names, prices=prices)
 
 
 @app.route('/kitchen')

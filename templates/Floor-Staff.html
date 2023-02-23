@@ -67,64 +67,54 @@
             top: 11px;
         }
 
-        /* may delete */
-        /* .button:after {
-            content: "";
-            background: #f1f1f1;
-            display: block;
-            border-radius: 15px;
-            position: absolute;
-            padding-top: 300%;
-            padding-left: 350%;
-            margin-left: -20px !important;
-            margin-top: -120%;
-            opacity: 0;
-            transition: all 0.8s
-        }
-
-        .button:active:after {
-            padding: 0;
-            margin: 0;
-            opacity: 1;
-            transition: 0s
-        } */
-
-        /* Musfik Stuff */
         .menu {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 1.0rem;
             border: 2px solid black;
             position: absolute;
             top: 22%;
             left: 27%;
-            overflow-y: auto;
+            overflow-y: scroll;
+            overflow-x: hidden;
             width: 260px;
             height: 543px;
             border: 3px solid rgb(0, 0, 0);
         }
 
         .item {
-            margin-bottom: 15px;
-        }
-
-        .item__title {
-            font-weight: bold;
-        }
-
-        .notes {
-            display: flex;
+            padding: 10px;
+            border: 1px solid black;
+            margin-bottom: 10px;
+            display: inline-block;
+            justify-content: space-between;
             align-items: center;
         }
 
+        .item_title {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .item_price {
+            font-weight: italic;
+            font-size: 14px;
+        }
+
+        .notes {
+            margin-left: 10px;
+            width: 100px;
+            height: 20px;
+            border: 1px solid black;
+            padding: 5px;
+        }
+
         .add-button {
-            margin-top: -21.5px;
-            margin-inline: 230px;
-            border-radius: 45%;
-            transition: ease-out 0.3s;
-            font-size: 1rem;
-            background-color: rgb(5, 247, 251);
-            border: 2px solid rgb(0, 0, 0);
-            position: relative;
+            display: inline-block;
+            margin-left: 10px;
+            padding: 5px 10px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
         .add-button:hover {
@@ -132,10 +122,19 @@
             cursor: pointer;
         }
 
-        h4 {
-            background-color: rgb(6, 206, 241);
-            padding: 10px;
-            border: 2px solid black;
+        h1 {
+            font-size: 60px;
+            position: absolute;
+            top: -5%;
+            left: 2.5%;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        h2 {
+            font-size: 35px;
+            position: absolute;
+            font-weight: bold;
         }
 
         .review {
@@ -143,9 +142,22 @@
             top: 22%;
             left: 52.5%;
             overflow-y: auto;
+            overflow-x: hidden;
             width: 220px;
             height: 543px;
             border: 3px solid rgb(0, 0, 0);
+        }
+
+        .review-header {
+            width: 220px;
+            height: 50px;
+            border: 3px solid rgb(0, 0, 0);
+            position: absolute;
+            top: 22%;
+            left: 52.5%;
+            overflow-x: hidden;
+            z-index: 998;
+            background-color: #FFFFFF;
         }
 
         .bills {
@@ -167,6 +179,31 @@
             height: 240px;
             border: 3px solid rgb(0, 0, 0);
         }
+
+        .select-style {
+            font-size: 20px;
+            padding: 5px;
+            margin: 5px;
+            background-color: white;
+            border-radius: 5px;
+            position: absolute;
+            z-index: 999;
+            overflow: auto;
+        }
+
+        @keyframes flash {
+            from {
+                background-color: rgb(255, 0, 0);
+            }
+
+            to {
+                background-color: white;
+            }
+        }
+
+        .flash {
+            animation: flash 2s linear;
+        }
     </style>
 </head>
 
@@ -174,26 +211,82 @@
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 
     <script>
-        function acceptQueuePing() {
-            $.ajax({
-                type: "POST",
-                url: "/acceptQueuePing",
-                success: function (data) {
-                    $("#info-container").html(data.acceptedPing);
-                }
-            })
-            updateQueue();
+        // CLIENT CLASSES \\
+        class orderNotes {
+            constructor(Note1, Note2) {
+                this.Note1 = Note1;
+                this.Note2 = Note2;
+            }
+
+            getNote1() {
+                return this.Note1;
+            }
+
+            getNote2() {
+                return this.Note2;
+            }
         }
 
+        class orderQueue {
+            constructor() {
+                this.queue = [];
+            }
+
+            addObject(Note1, Note2) {
+                this.queue.push(new orderNotes(Note1, Note2));
+            }
+
+            removeObject(index) {
+                this.queue.splice(index, 1);
+            }
+
+            getObject(index) {
+                return this.queue[index];
+            }
+
+            getLength() {
+                return this.queue.length;
+            }
+        }
+
+
+        // TEST BUTTON FUNCTION \\
         function addPingToQueue() {
             $.ajax({
                 type: "POST",
                 url: "/addPingToQueue",
-                data: JSON.stringify({ "tableNo": "#" + (Math.floor(Math.random() * 100)).toString() }),
+                data: JSON.stringify({ "pingType": "Table", "tableNo": "#" + (Math.floor(Math.random() * 100)).toString() }),
                 contentType: "application/json",
             });
+        }
 
 
+        // QUEUE FUNCTIONS \\
+        function acceptQueuePing() {
+            if (($("#info-container").html().includes("Complete!")) || ($("#info-container").html().includes("htmlCheck"))) {
+                $.ajax({
+                    type: "POST",
+                    url: "/acceptQueuePing",
+                    success: function (data) {
+                        $("#info-container").html(data.acceptedPing);
+                    }
+                })
+                updateQueue();
+            }
+        }
+
+        function completeCurrentJob() {
+            if ((!$("#info-container").html().includes("htmlCheck"))
+                && (!$("#info-container").html().includes("Complete!"))) {
+                $("#info-container").html("<span id='fade-out-text'>Complete!</span>");
+                $("#fade-out-text").css({
+                    "opacity": "1",
+                    "transition": "opacity 5s linear"
+                });
+                setTimeout(function () {
+                    $("#fade-out-text").css("opacity", "0");
+                }, 50);
+            }
         }
 
         function updateQueue() {
@@ -228,223 +321,169 @@
             xhr.send();
         }
 
-        function addItemToOrder() {
-            var orderItem = document.getElementById("order-item").getAttribute("order-name");
-            var notes = document.getElementById("order-note").value;
-            $.ajax({
-                type: "POST",
-                url: "/addItemToOrder",
-                data: JSON.stringify({ "orderItem": orderItem, "orderNotes": notes }),
-                contentType: "application/json",
-            });
+
+        // ORDER FUNCTIONS \\        
+        function flashElement(element) {
+            //Animation Function
+            if (element.classList.contains("flash")) {
+                element.classList.remove("flash");
+                void element.offsetWidth;
+                element.classList.add("flash");
+            } else {
+                element.classList.add("flash");
+            }
+        }
+
+        function updateOrder() {
+            var orderHtml = "";
+            for (var i = 0; i < order.getLength(); i++) {
+                orderHtml += "<strong>" + order.getObject(i).getNote1() + "</strong><br>" + order.getObject(i).getNote2() + "<br><br>";
+            }
+            $("#order-item").html(orderHtml);
+        }
+
+        function addItemToOrder(orderItem) {
+            document.getElementById("review").classList.remove("flash");
+            order.addObject(orderItem, document.getElementById(orderItem).value);
+            document.getElementById(orderItem).value = "";
             updateOrder();
         }
 
-        //change this so it only updates on one persons specific html page
-        function updateOrder() {
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "/updateOrder", true);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    // Parse the response from the server
-                    var data = JSON.parse(xhr.responseText);
-                    // Clear the existing queue
-                    var review = document.querySelector(".review");
-                    review.innerHTML = "";
-
-                    // Adding the first new queue objects to the page with button
-                    // var item = document.createElement("div");
-                    // item.classList.add("menu-item");
-                    // item.innerHTML = '<button type="button" class="button" onclick="acceptQueuePing()">Accept</button>'
-                    //     + data.queueItems[0].note + " " + data.queueItems[0].tableNo;
-                    // menu.appendChild(item);
-
-                    // Adding the rest of the new queue objects to the page
-                    review.innerHTML = '<div style="width: 220px; height: 50px; border: 3px solid rgb(0, 0, 0); position: absolute;'
-                        + ' top: -3px; left: -3px;overflow-x: hidden;"> <h3 style="font-size: 35px; position: absolute; top: -60%; left: 17%; '
-                        + 'font-weight: bold;"> REVIEW</h3> </div><br><br><br>'
-                    for (var i = 1; i < data.queueItems.length; i++) {
-                        // item = document.createElement("div");
-                        // item.classList.add("menu-item");
-                        review.innerHTML += "<br>" + data.queueItems[i].name + " " + data.queueItems[i].note;
-                        // menu.appendChild(item);
-                    }
-                }
-            };
-            xhr.send();
+        function sendToKitchen() {
+            var selectElement = document.getElementById("orderSelect");
+            if (selectElement.options[selectElement.selectedIndex].value.includes("htmlCheck")) {
+                flashElement(selectElement)
+            }
+            if (order.getLength() == 0) {
+                flashElement(document.getElementById("review"));
+            }
+            if (!selectElement.options[selectElement.selectedIndex].value.includes("htmlCheck") && order.getLength() != 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "/sendToKitchen",
+                    data: JSON.stringify({ "order": order, "tableNo": selectElement.options[selectElement.selectedIndex].value }),
+                    contentType: "application/json",
+                });
+                order = new orderQueue();
+                updateOrder();
+                selectElement.selectedIndex = 0;
+            }
         }
 
+
+        // BILLS FUNCTIONS \\
+        function getBill() {
+            var selectElement = document.getElementById("billSelect");
+            if (!selectElement.options[selectElement.selectedIndex].value.includes("htmlCheck")) {
+                // $.ajax({
+                //     type: "POST",
+                //     url: "/getBill",
+                //     data: JSON.stringify({ "tableNo": selectElement.options[selectElement.selectedIndex].value }),
+                //     contentType: "application/json",
+                // });
+            } else {
+                flashElement(selectElement);
+            }
+        }
+
+
+        // MAIN JAVASCRIPT CODE \\
+        order = new orderQueue();
         updateQueue();
-        setInterval(updateQueue, 1000);
+        setInterval(updateQueue, 1000); 
     </script>
 
 
-    <div style="position: absolute; top: 0.5%; left: 47%;">
-        <div style="position: absolute; left: 17%;"> Your Current Job is: </div><br>
-        <div id="info-container" class="menu-item" style="font-weight: bold; font-size: 41px; color: #ffffff; 
-        border: 1px solid rgb(255, 0, 0); text-shadow: -2.5px 0 black, 0 2.5px black, 2.5px 0 black, 0 -2.5px black;">
-        </div>
-    </div>
-    </div>
-
-
-    <button style="position: absolute; top: 5%; left: 85%;" type="button" class="button" onclick="addPingToQueue()">Add
+    <!-- //TEST BUTTON\\ -->
+    <button style="position: absolute; top: 0%; left: 90.2%;" type="button" class="button"
+        onclick="addPingToQueue()">Add
     </button>
 
-    <h1 style="font-size: 60px; position: absolute; top: -5%; left: 2.5%; font-weight: bold; 
-        text-decoration: underline;">
-        Floor Staff</h1>
-    <h2 style="font-size: 35px; position: absolute; top: 12.5%; left: 4.5%; font-weight: bold;">
-        QUEUE: {{ queue.getLength() }}</h2>
 
+    <!-- //TITLE\\  -->
+    <h1>Floor Staff</h1>
+
+    <!-- //CURRENT JOB SECTION\\ -->
+    <div style="position: absolute; top: 0.5%; left: 45%;">
+        <div style="position: absolute; left: 17%;"> Your Current Job is: </div><br>
+        <div id="info-container" class="menu-item"
+            style="font-weight: bold; font-size: 41px; color: #ffffff; 
+            border: 1px solid rgb(255, 0, 0); text-shadow: -2.5px 0 black, 0 2.5px black, 2.5px 0 black, 0 -2.5px black;">
+            <span style="opacity:0;"> htmlCheck </span>
+        </div>
+    </div>
+    <button style="position: absolute; top: 4.2%; left: 67.5%;" type="button" class="button"
+        onclick="completeCurrentJob()">Done!
+    </button>
+
+
+    <!-- //QUEUE SECTION\ -->
+    <h2 style="top: 12.5%; left: 4.5%;">QUEUE: {{ queue.getLength() }}</h2>
     <div class="scroll-menu"></div>
 
-    <h2 style="font-size: 35px; position: absolute; top: 12.5%; left: 28%; font-weight: bold;">
-        ORDER FOR TABLE #
-        <select style="font-size: 30px;">
-            {% for x in range(1, 31) %}
-            <option value="{{ x }}">{{ x }}</option>
-            {% endfor %}
-        </select>
-    </h2>
 
-    <div class="review">
-        <div style="width: 220px; height: 50px; border: 3px solid rgb(0, 0, 0); 
-            position: absolute; top: -3px; left: -3px;overflow-x: hidden;">
-            <h3 style="font-size: 35px; position: absolute; top: -60%; left: 17%; font-weight: bold;">
-                REVIEW</h3>
-        </div>
-    </div>
+    <!-- //MENU SECTION\\ -->
+    <h2 style="top: 12.5%; left: 28%;">ORDER FOR TABLE #</h2>
+    <select size="1" class="select-style" style="top: 16%; left: 64%;" onblur="this.size=1;"
+        onfocus="this.size=8; this.classList.remove('flash');" onchange="this.size=1; this.blur();" id="orderSelect">
+        <option value="htmlCheck"> - </option>
+        {% for x in range(1, 31) %}
+        <option value="{{ x }}">{{ x }}</option>
+        {% endfor %}
+    </select>
 
-    <h2 style="font-size: 35px; position: absolute; top: 12.5%; left: 82.5%; font-weight: bold;">
-        BILLS</h2>
-    <div class="bills">
-        <h3 style="font-size: 35px; position: absolute; top: 10%; left: 17%; font-weight: bold; text-align: center;">
-            FOR <br> TABLE #<br>
-            <select style="font-size: 30px;">
-                {% for x in range(1, 31) %}
-                <option value="{{ x }}">{{ x }}</option>
-                {% endfor %}
-            </select>
-        </h3>
-    </div>
-
-    <h2 style="font-size: 35px; position: absolute; top: 51.5%; left: 82.5%; font-weight: bold;">
-        HELP</h2>
-    <div class="help">
-        <h3 style="font-size: 35px; position: absolute; top: 00%; font-weight: bold; text-align: center;">
-            [CLICK HERE TO <br> GO TO FAQ PAGE]</h3>
-    </div>
-
-
-
-    <!-- Musfik's Stuff | Needs to be able to display specific notes etc-->
     <div class="menu">
-        <h4>Appetizers</h4>
+        {% for i in range(names|length) %}
         <div class="item">
-            <span class="item__title" id="order-item" order-name="Guacamole and chips">Guacamole and chips -</span>
-            £7.50
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
+            <div class="item-details">
+                <div class="item_title">{{ names[i] }}</div>
+                <div class="item_price">£{{ prices[i] }}</div>
             </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
-        </div>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Queso fundido">Queso fundido -</span> £9.00
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
+            <div class="item-notes-container">
+                <input type="text" class="order-note" id="{{ names[i] }}" placeholder="Add order notes">
+                <button class="add-button" onclick="addItemToOrder('{{ names[i] }}')">+</button>
             </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
         </div>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Tostadas de tinga">Tostadas de tinga -</span> £8.50
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
-            </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
+        {% endfor %}
+        <div>
+            <p style="margin-top: 20px; font-style: italic; font-size: 0.8em;">
+                Allergen Information: Our menu items may contain peanuts, tree nuts, dairy, soy, avocado,
+                pork, chicken, and eggs. Please inform your server of any allergies you may have.</p>
         </div>
-        <h4>Entrees</h4>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Mole negro">Mole negro -</span> £15.00
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
-            </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
-        </div>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Tacos al pastor">Tacos al pastor -</span> £12.00
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
-            </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
-        </div>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Enchiladas verdes">Enchiladas verdes -</span> £13.50
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
-            </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
-        </div>
-        <h4>Sides</h4>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Arroz verde">Arroz verde -</span> £4.50
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
-            </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
-        </div>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Frijoles negros">Frijoles negros -</span> £4.00
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
-            </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
-        </div>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Elote">Elote -</span> £5.50
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
-            </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
-        </div>
-        <h4>Desserts</h4>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Flan">Flan -</span> £6.00
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
-            </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
-        </div>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Tres leches">Tres leches -</span> £7.00
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
-            </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
-        </div>
-        <div class="item">
-            <span class="item__title" id="order-item" order-name="Sorbete de tamarindo">Sorbete de tamarindo -</span>
-            £5.50
-            <div class="notes">
-                <label>Notes:</label>
-                <input type="text" id="order-note">
-            </div>
-            <button class="add-button" id="order-button" onclick="addItemToOrder()">+</button>
-        </div>
-        <p style="margin-top: 20px; font-style: italic; font-size: 0.8em;">Allergen Information: Our menu items may
-            contain peanuts, tree nuts, dairy, soy, avocado, pork, chicken, and
-            eggs. Please inform your server of any allergies you may have.</p>
+    </div>
+
+
+    <!-- //REVIEW SECTION\\ -->
+    <div class="review-header">
+        <h2 style="top: -48%; left: 17%;">REVIEW</h2>
+    </div>
+    <div class="review" id="review">
+        <div id="order-item" style="position: absolute; top: 12%; left: 5%;"></div>
+    </div>
+    <button style="position: absolute; top: 94%; left: 59%;" onclick="sendToKitchen()" class="button">Send</button>
+
+
+    <!-- //BILLS SECTION\\ -->
+    <h2 style="top: 12.5%; left: 82.5%;"> BILLS</h2>
+    <div class="bills">
+        <h2 style="top: 00%; left: 17%; text-align: center;"> FOR <br> TABLE #<br> </h2>
+        <button style="position: absolute; top: 70%; left: 28%;" type="button" class="button"
+            onclick="getBill()">Get</button>
+    </div>
+    <select size="1" class="select-style" style="top: 37%; left: 84.5%;" onblur="this.size=1;"
+        onfocus="this.size=8; this.classList.remove('flash');" onchange="this.size=1; this.blur();" id="billSelect">
+        <option value="htmlCheck"> - </option>
+        {% for x in range(1, 31) %}
+        <option value="{{ x }}">{{ x }}</option>
+        {% endfor %}
+    </select>
+
+
+    <!-- //HELP SECTION\\ -->
+    <h2 style="top: 51.5%; left: 82.5%;"> HELP</h2>
+    <div class="help">
+        <!-- Change into a hyperlink -->
+        <h2 style="font-size: 40px; top: 11%; left: 25%; text-align: center;"> FAQ <br> PAGE </h2>
     </div>
 </body>
 
