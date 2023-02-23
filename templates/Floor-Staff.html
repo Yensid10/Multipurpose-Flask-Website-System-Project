@@ -83,7 +83,7 @@
             padding: 10px;
             border: 1px solid black;
             margin-bottom: 10px;
-            display: flex;
+            display: inline-block;
             justify-content: space-between;
             align-items: center;
         }
@@ -94,6 +94,7 @@
         }
 
         .item_price {
+            font-weight: italic;
             font-size: 14px;
         }
 
@@ -106,6 +107,8 @@
         }
 
         .add-button {
+            display: inline-block;
+            margin-left: 10px;
             padding: 5px 10px;
             background-color: green;
             color: white;
@@ -339,7 +342,7 @@
         <div class="item">
             <div class="item-details">
                 <div class="item_title">{{ names[i] }}</div>
-                <div class="item_price">{{ prices[i] }}</div>
+                <div class="item_price">£{{ prices[i] }}</div>
             </div>
             <div class="item-notes-container">
                 <input type="text" class="order-note" id="{{ names[i] }}" placeholder="Add order notes">
