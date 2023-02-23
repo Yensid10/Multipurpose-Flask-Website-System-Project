@@ -197,6 +197,7 @@
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 
     <script>
+        // GLOBAL CLASSES \\
         class orderNotes {
             constructor(Note1, Note2) {
                 this.Note1 = Note1;
@@ -235,6 +236,17 @@
         }
 
 
+        // TEST BUTTON FUNCTION \\
+        function addPingToQueue() {
+            $.ajax({
+                type: "POST",
+                url: "/addPingToQueue",
+                data: JSON.stringify({ "pingType": "Table", "tableNo": "#" + (Math.floor(Math.random() * 100)).toString() }),
+                contentType: "application/json",
+            });
+        }
+
+
         // QUEUE FUNCTIONS \\
         function acceptQueuePing() {
             if (($("#info-container").html().includes("Complete!")) || ($("#info-container").html().includes("htmlCheck"))) {
@@ -247,15 +259,6 @@
                 })
                 updateQueue();
             }
-        }
-
-        function addPingToQueue() {
-            $.ajax({
-                type: "POST",
-                url: "/addPingToQueue",
-                data: JSON.stringify({ "pingType": "Table", "tableNo": "#" + (Math.floor(Math.random() * 100)).toString() }),
-                contentType: "application/json",
-            });
         }
 
         function completeCurrentJob() {
@@ -306,12 +309,6 @@
 
 
         // ORDER FUNCTIONS \\
-        function addItemToOrder(orderItem) {
-            order.addObject(orderItem, document.getElementById(orderItem).value);
-            document.getElementById(orderItem).value = "";
-            updateOrder();
-        }
-
         function updateOrder() {
             var orderHtml = "";
             for (var i = 0; i < order.getLength(); i++) {
@@ -319,6 +316,29 @@
             }
             $("#order-item").html(orderHtml);
 
+        }
+
+        function addItemToOrder(orderItem) {
+            order.addObject(orderItem, document.getElementById(orderItem).value);
+            document.getElementById(orderItem).value = "";
+            updateOrder();
+        }
+
+        function sendToKitchen() {
+            var element = document.getElementById("orderSelect");
+            if (!element.options[element.selectedIndex].value.includes("htmlCheck")) {
+                $.ajax({
+                    type: "POST",
+                    url: "/sendToKitchen",
+                    data: JSON.stringify({ "order": order, "tableNo": element.options[element.selectedIndex].value }),
+                    contentType: "application/json",
+                });
+                order = new orderQueue();
+                updateOrder();
+                element.selectedIndex = 0;
+            } else {
+                alert("Please select a table number");
+            }
         }
 
 
@@ -360,7 +380,8 @@
     <!-- //MENU SECTION\\ -->
     <h2 style="top: 12.5%; left: 28%;">ORDER FOR TABLE #</h2>
     <select size="1" class="select-style" style="top: 16%; left: 64%; " onfocus="this.size=8;" onblur="this.size=1;"
-        onchange="this.size=1; this.blur();">
+        onchange="this.size=1; this.blur();" id="orderSelect">
+        <option value="htmlCheck"> - </option>
         {% for x in range(1, 31) %}
         <option value="{{ x }}">{{ x }}</option>
         {% endfor %}
@@ -394,7 +415,7 @@
     <div class="review">
         <div id="order-item" style="position: absolute; top: 12%; left: 5%;"></div>
     </div>
-    <button style="position: absolute; top: 94%; left: 59%;" type="button" class="button">Send</button>
+    <button style="position: absolute; top: 94%; left: 59%;" onclick="sendToKitchen()" class="button">Send</button>
 
 
     <!-- //BILLS SECTION\\ -->

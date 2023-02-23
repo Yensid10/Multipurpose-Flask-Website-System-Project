@@ -1,3 +1,4 @@
+import datetime
 from flask import Flask, render_template, redirect, url_for
 import sqlite3
 from flask import Flask, jsonify, render_template, request
@@ -50,16 +51,6 @@ def addPingToQueue():
         return ('', 204)
 
 
-# @app.route('/addItemToOrder', methods=['POST'])
-# def addPingToOrder():
-#     if request.method == 'POST':
-#         data = request.get_json()
-#         orderItem = data.get('orderItem')
-#         orderNotes = data.get('orderNotes')
-#         orders.addObject(orderItem, orderNotes)
-#         return ('', 204)
-
-
 @app.route("/updateQueue")
 def updateQueue():
     jsonQueue = []
@@ -75,18 +66,16 @@ def updateQueue():
     })
 
 
-# @app.route("/updateOrder", methods=['POST'])
-# def updateOrder():
-#     jsonQueue = []
-#     for i in range(orders.getLength()):
-#         order = orders.getObject(i)
-#         jsonQueue.append({
-#             "name": order.getNote1(),
-#             "note": order.getNote2()
-#         })
-#     return jsonify({
-#         "queueItems": jsonQueue
-#     })
+@app.route('/sendToKitchen', methods=['POST'])
+def sendToKitchen():
+    if request.method == 'POST':
+        data = request.get_json()
+        order = data.get('order')
+        tableNo = data.get('tableNo')
+        time = datetime.datetime.now()
+
+        # This is for Maan to deal with :))))
+        return ('', 204)
 
 
 @app.route('/Ring')
