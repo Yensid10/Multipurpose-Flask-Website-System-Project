@@ -284,7 +284,7 @@
 			</head>
 
 			<body>
-				<form action="popup_window_menu.php" method="post">
+				<form action="/submit-form" method="POST">
 					<div class="popup">
 						<button id="close">&times;</button>
 						<label for="table-number-select">Table Number:</label>
@@ -323,30 +323,20 @@
 							<label for="allergen3">Peanuts</label><br>
 							<input type="checkbox" id="allergen4" name="allergen" value="Tree Nuts">
 							<label for="allergen4">Tree Nuts</label><br>
-							<input type="checkbox" id="allergen5" name="allergen" value="Wheat">
-							<label for="allergen5">Wheat</label><br>
-							<input type="checkbox" id="allergen6" name="allergen" value="Soy">
-							<label for="allergen6">Soy</label><br>
-							<input type="checkbox" id="allergen7" name="allergen" value="Fish">
-							<label for="allergen7">Fish</label><br>
-							<input type="checkbox" id="allergen8" name="allergen" value="Shellfish">
-							<label for="allergen8">Shellfish</label><br>
-						</form>
-						<h4>Religious Restrictions:</h4>
-						<form>
+							<h4>Religious Restrictions:</h4>
 							<input type="checkbox" id="Kosher" name="allergen" value="Kosher">
 							<label for="Kosher">Kosher</label><br>
 							<input type="checkbox" id="Halal" name="allergen" value="Halal">
 							<label for="Halal">Halal</label><br>
 						</form>
-						<input type="button" value="Submit">
+						<input type="submit" value="Submit">
 						<!--<input type="button" value="Close" onclick="document.getElementById('allergen-popup').style.display='none'">-->
 				</form>
 
 		</div>
 		<!--Script-->
 
-		<script>
+		<!-- <script>
 			const form = document.querySelector("form");
 			form.addEventListener("submit", function (event) {
 				event.preventDefault();
@@ -358,8 +348,9 @@
 					li.innerHTML = allergens[i].value;
 					list.appendChild(li);
 				}
+				console.log(list.innerHTML)
 			});
-		</script>
+		</script>-->
 
 
 		<script type="text/javascript">
@@ -380,7 +371,6 @@
 </body>
 
 <button onclick="Hide('dairy')">Click me</button>
-<!-- <button onclick="Hide({{ url_for('index', x='dairy') }})">Hide dairy</button> -->
 
 <!-- <button onclick="Hide('{{ dairy }}')">Click me</button> -->
 <div class="row">
