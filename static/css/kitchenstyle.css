@@ -1,41 +1,70 @@
 body {
-  background-color: #98C1D9;
+    background-color: #98C1D9;
+    overflow: hidden;
 }
 
+
 .page-container {
-  height: 100%;
-  overflow: hidden;
+    height: 100%;
+    overflow: hidden;
 }
 
 .table-container {
-  height: calc(100vh - 50px);
-  max-height: calc(100vh - 50px);
-  overflow-y: scroll;
-  margin-top: 50px;
+    height: 100%;
+    max-height: 100%;
+    margin-top: 50px;
 }
+
 
 .table-container table {
-  width: 100%;
-}
-
-.table-container h1 {
-  margin-bottom: 20px;
+    width: 100%;
 }
 
 .table-container th,
 .table-container td {
-  border: 1px solid black;
-  padding: 8px;
-  text-align: center;
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
 }
 
 .table-container th {
-  font-weight: bold;
-  text-transform: uppercase;
-  background-color: #ddd;
-  padding: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #ddd;
+    padding: 10px;
 }
 
 .table-container table {
-  margin: 50px auto;
+    margin: 50px auto;
+}
+
+.table-container h1 {
+    margin-bottom: 20px;
+    margin-top: 50px;
+}
+
+
+.table-container table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table-container td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: 1px solid black;
+    padding: 12px;
+    text-align: center;
+}
+
+.table-container tbody {
+    height: calc(100vh - 150px);
+    display: block;
+    overflow-y: scroll;
+}
+
+.table-container thead, .table-container tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
 }
