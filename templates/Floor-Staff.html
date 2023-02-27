@@ -218,9 +218,10 @@
     <script>
         // CLIENT CLASSES \\
         class orderNotes {
-            constructor(Note1, Note2) {
+            constructor(Note1, Note2, price) {
                 this.Note1 = Note1;
                 this.Note2 = Note2;
+                this.price = price;
             }
 
             getNote1() {
@@ -230,6 +231,10 @@
             getNote2() {
                 return this.Note2;
             }
+
+            getPrice() {
+                return this.price;
+            }
         }
 
         class orderQueue {
@@ -237,8 +242,8 @@
                 this.queue = [];
             }
 
-            addObject(Note1, Note2) {
-                this.queue.push(new orderNotes(Note1, Note2));
+            addObject(Note1, Note2, price) {
+                this.queue.push(new orderNotes(Note1, Note2, price));
             }
 
             removeObject(index) {
@@ -335,15 +340,17 @@
 
         function updateOrder() {
             var orderHtml = "";
+            priceTotal = 0;
             for (var i = 0; i < order.getLength(); i++) {
                 orderHtml += "<strong>" + order.getObject(i).getNote1() + "</strong><br>" + order.getObject(i).getNote2() + "<br><br>";
+                priceTotal += parseFloat(order.getObject(i).getPrice());
             }
-            $("#order-item").html(orderHtml);
+            $("#order-item").html(orderHtml + "<strong style='text-decoration: underline; '>Total: £" + priceTotal + "</strong><br><br>");
         }
 
-        function addItemToOrder(orderItem) {
+        function addItemToOrder(orderItem, price) {
             document.getElementById("review").classList.remove("flash");
-            order.addObject(orderItem, document.getElementById(orderItem).value);
+            order.addObject(orderItem, document.getElementById(orderItem).value, price);
             document.getElementById(orderItem).value = "";
             updateOrder();
         }
@@ -443,7 +450,7 @@
             </div>
             <div class="item-notes-container">
                 <input type="text" class="order-note" id="{{ names[i] }}" placeholder="Add order notes">
-                <button class="add-button" onclick="addItemToOrder('{{ names[i] }}')">+</button>
+                <button class="add-button" onclick="addItemToOrder('{{ names[i] }}', '{{ prices[i] }}')">+</button>
             </div>
         </div>
         {% endfor %}
