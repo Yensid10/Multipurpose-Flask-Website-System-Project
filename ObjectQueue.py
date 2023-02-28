@@ -25,3 +25,15 @@ class Queue:
 
     def getLength(self):
         return len(self.queue)
+
+    def getSpecificOrder(self, tableNo):
+        for i in range(self.getLength()):
+            if self.getObject(i).getNote1() == tableNo:
+                return self.getObject(i).getNote2()
+        return False
+
+    def popSpecificOrder(self, tableNo):
+        for i in range(self.getLength()):
+            if self.getObject(i).getNote1() == tableNo:
+                return self.queue.pop(i)
+        return False

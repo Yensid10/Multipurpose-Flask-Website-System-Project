@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Vertical Scroll Menu</title>
+    <title>Floor Staff Page</title>
     <style>
         html {
             overflow: hidden;
@@ -342,6 +342,7 @@
             var orderHtml = "";
             priceTotal = 0;
             for (var i = 0; i < order.getLength(); i++) {
+                // have it so if note2 is too big it wraps onto more lines
                 orderHtml += "<strong>" + order.getObject(i).getNote1() + "</strong><br>" + order.getObject(i).getNote2() + "<br><br>";
                 priceTotal += parseFloat(order.getObject(i).getPrice());
             }
@@ -381,19 +382,37 @@
 
 
         // BILLS FUNCTIONS \\
-        function getBill() {
-            var selectElement = document.getElementById("billSelect");
-            if (!selectElement.options[selectElement.selectedIndex].value.includes("htmlCheck")) {
-                // $.ajax({
-                //     type: "POST",
-                //     url: "/getBill",
-                //     data: JSON.stringify({ "tableNo": selectElement.options[selectElement.selectedIndex].value }),
-                //     contentType: "application/json",
-                // });
-            } else {
-                flashElement(selectElement);
-            }
-        }
+        // function getBill() {
+        //     var selectElement = document.getElementById("billSelect");
+        //     console.log(selectElement.options[selectElement.selectedIndex].value);
+        //     if (!selectElement.options[selectElement.selectedIndex].value.includes("htmlCheck")) {
+        //         // $.ajax({
+        //         //     type: "POST",
+        //         //     url: "/getBill",
+        //         //     data: JSON.stringify({ "tableNo": selectElement.options[selectElement.selectedIndex].value }),
+        //         //     contentType: "application/json",
+        //         //     success: function (response) {
+        //         //         window.location.href = response.redirect; // redirect to new page
+        //         //     }                      
+        //         // });
+        //         var xhr = new XMLHttpRequest();
+        //         xhr.open("POST", "/getBill");
+        //         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        //         xhr.onreadystatechange = function () {
+        //             if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        //                 // Update page with response
+        //                 const response = JSON.parse(this.responseText);
+        //                 document.getElementById("table-number").textContent = `FOR TABLE #${tableNumber}`;
+        //                 // Render template with response data
+        //                 // Example: render a template called "bill.html" with the response data
+        //                 document.body.innerHTML = response;
+        //             }
+        //         };
+        //         xhr.send(JSON.stringify({ "tableNo": selectElement.options[selectElement.selectedIndex].value }));
+        //     } else {
+        //         flashElement(selectElement);
+        //     }
+        // }
 
 
         // MAIN JAVASCRIPT CODE \\
@@ -474,18 +493,23 @@
 
     <!-- //BILLS SECTION\\ -->
     <h2 style="top: 12.5%; left: 82.5%;"> BILLS</h2>
+
     <div class="bills">
         <h2 style="top: 00%; left: 17%; text-align: center;"> FOR <br> TABLE #<br> </h2>
-        <button style="position: absolute; top: 70%; left: 28%;" type="button" class="button"
-            onclick="getBill()">Get</button>
     </div>
-    <select size="1" class="select-style" style="top: 37%; left: 84.5%;" onblur="this.size=1;"
-        onfocus="this.size=8; this.classList.remove('flash');" onchange="this.size=1; this.blur();" id="billSelect">
-        <option value="htmlCheck"> - </option>
-        {% for x in range(1, 31) %}
-        <option value="{{ x }}">{{ x }}</option>
-        {% endfor %}
-    </select>
+
+    <form action="/getBill" method="post">
+        <select name="tableNo" size="1" class="select-style" style="top: 37.5%; left: 84%;" onblur="this.size=1;"
+            onfocus="this.size=8; this.classList.remove('flash');" onchange="this.size=1; this.blur();" id="billSelect">
+            <option value="htmlCheck"> - </option>
+            {% for x in range(1, 31) %}
+            <option value="{{ x }}">{{ x }}</option>
+            {% endfor %}
+        </select>
+        <button style="position: absolute; top: 45%; left: 82.5%;" type="submit" class="button">Get</button>
+    </form>
+
+
 
 
     <!-- //HELP SECTION\\ -->

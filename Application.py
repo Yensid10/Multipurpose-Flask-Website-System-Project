@@ -1,5 +1,4 @@
 import datetime
-
 from bson import ObjectId
 from flask import Flask, render_template, jsonify, request, json
 from pymongo import MongoClient
@@ -76,9 +75,15 @@ def updateQueue():
 def sendToKitchen():
     if request.method == 'POST':
         data = request.get_json()
+        time = datetime.datetime.now()
         order = data.get('order')
         tableNo = data.get('tableNo')
-        time = datetime.datetime.now()
+        if orders.getSpecificOrder(tableNo) == False:
+            orders.addObject(tableNo, order)
+        else:
+            order['queue'] += orders.popSpecificOrder(
+                tableNo).getNote2()['queue']
+            orders.addObject(tableNo, order)
 
         queue = order.get('queue', [])
 
@@ -95,32 +100,40 @@ def sendToKitchen():
                 'status': 'Taken',
                 'time': time
             })
-
         return ('', 204)
 
 
-@app.route('/Ring')
+@ app.route('/getBill', methods=['POST'])
+def getBill():
+    if request.method == 'POST':
+        tableNo = request.form['tableNo']
+        if orders.getSpecificOrder(tableNo) == False:
+            return render_template('bills.html', data="No order found")
+        return render_template('bills.html', data=orders.getSpecificOrder(tableNo))
+
+
+@ app.route('/Ring')
 def showRing():
     return render_template('Ring.html')
 
 
-@app.route('/faqPage')
+@ app.route('/faqPage')
 def faqPage():
     return render_template('faq.html')
 
 
-@app.route('/loginPage')
+@ app.route('/loginPage')
 def loginPage():
     return render_template('loginpage.html')
 
 
-@app.route('/Floor-Staff')
+@ app.route('/Floor-Staff')
 def showFS():
     names, prices = FetchMenu()
     return render_template('Floor-Staff.html', queue=queue, names=names, prices=prices)
 
 
-@app.route('/kitchen')
+@ app.route('/kitchen')
 def kitchen():
     orders = list(order_collection.find())
     for order in orders:
@@ -134,7 +147,7 @@ def kitchen():
     return render_template('kitchen.html', orders=orders, accepted_orders=accepted_orders)
 
 
-@app.route('/accept_order', methods=['POST'])
+@ app.route('/accept_order', methods=['POST'])
 def accept_order():
     # Get the order data from the POST request
     order_data = json.loads(request.form['order_data'])
