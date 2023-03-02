@@ -5,7 +5,6 @@ from flask import redirect
 from ObjectQueue import Queue
 import SqlQuerys
 from flask import Response
-import requests
 
 app = Flask(__name__)
 
@@ -33,7 +32,7 @@ def home():
     return render_template('menu.html')
 
 
-@app.route('/HideDairy')
+@app.route('/hideDairy', methods=['POST'])
 def index():
     x = request.args.get('x')
     if x == 'dairy':
