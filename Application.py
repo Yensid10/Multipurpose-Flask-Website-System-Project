@@ -153,6 +153,13 @@ def complete_order():
     # Return a success response
     return jsonify({'success': True})
 
+@app.route('/get_tables_state')
+def get_tables_state():
+    # Get the current state of the tables from MongoDB and return as a JSON object
+    order_queue = list(order_collection.find())
+    accepted_orders = list(accepted_collection.find())
+    return jsonify({'order_queue': order_queue, 'accepted_orders': accepted_orders})
+
 
 
 
