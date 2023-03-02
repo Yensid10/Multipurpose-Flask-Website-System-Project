@@ -49,7 +49,28 @@
         });
     });
 </script>
+<script>var previousState = null;
 
+function checkForUpdates() {
+    $.ajax({
+        url: '/get_tables_state',
+        success: function (data) {
+            var currentState = JSON.stringify(data);
+            if (currentState !== previousState) {
+                // There is a change in the tables, so reload them
+                $('#order-queue-table').load(document.URL + ' #order-queue-table');
+                $('#accepted-orders-table').load(document.URL + ' #accepted-orders-table');
+                previousState = currentState;
+            }
+        }
+    });
+}
+
+$(document).ready(function() {
+    // Check for updates every 2 seconds
+    setInterval(checkForUpdates, 2000);
+});
+</script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
