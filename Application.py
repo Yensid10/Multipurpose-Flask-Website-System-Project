@@ -81,9 +81,9 @@ def sendToKitchen():
         if orders.getSpecificOrder(tableNo) == False:
             orders.addObject(tableNo, order)
         else:
-            orders.popSpecificOrder(tableNo).getNote2()[
-                'queue'] += order['queue']
-            orders.addObject(tableNo, order)
+            tempOrder = orders.popSpecificOrder(tableNo).getNote2()[
+                'queue'] + order['queue']
+            orders.addObject(tableNo, tempOrder)
 
         queue = order.get('queue', [])
 
