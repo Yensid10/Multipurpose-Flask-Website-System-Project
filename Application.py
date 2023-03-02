@@ -146,14 +146,13 @@ def accept_order():
 def complete_order():
     # Get the order ID from the POST request
     order_id = request.form['order_id']
-    print(f"Order ID: {order_id}")
 
     # Remove the order from the accepted_orders collection
-    result = accepted_collection.delete_one({'_id': ObjectId(order_id)})
-    print(f"Delete result: {result.deleted_count}")
+    accepted_collection.delete_one({'_id': ObjectId(order_id)})
 
     # Return a success response
     return jsonify({'success': True})
+
 
 
 

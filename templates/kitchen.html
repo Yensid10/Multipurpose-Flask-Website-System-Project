@@ -33,29 +33,23 @@
     });
     </script>
     <script>
-        function addPingToQueue(tableNumber, orderId) {
-    $.ajax({
-        type: "POST",
-        url: "/addPingToQueue",
-        data: JSON.stringify({"pingType": "Food", "tableNo": "#" + tableNumber}),
-        contentType: "application/json",
-        success: function () {
-            // If the order was completed, remove it from the accepted orders table
-            $.ajax({
-                url: '/complete_order',
-                type: 'POST',
-                data: {'order_id': orderId},
-                success: function (data) {
-                    // If the order was completed, remove it from the accepted orders table
-                    $(this).closest('tr').remove();
-                }
-            });
-        }
+    $(document).on('click', '.complete-button', function () {
+        // Get the order ID
+        const orderID = $(this).data('order-id');
+
+        // Send the order ID to the server to be completed
+        $.ajax({
+            url: '/complete_order',
+            type: 'POST',
+            data: {'order_id': orderID},
+            success: function (data) {
+                // If the order was completed, remove it from the accepted orders table
+                $(this).closest('tr').remove();
+            }
+        });
     });
-}
+</script>
 
-
-    </script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
