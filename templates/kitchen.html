@@ -33,14 +33,28 @@
     });
     </script>
     <script>
-        function addPingToQueue(tableNumber) {
+        function addPingToQueue(tableNumber, orderId) {
+    $.ajax({
+        type: "POST",
+        url: "/addPingToQueue",
+        data: JSON.stringify({"pingType": "Food", "tableNo": "#" + tableNumber}),
+        contentType: "application/json",
+        success: function () {
+            // If the order was completed, remove it from the accepted orders table
             $.ajax({
-                type: "POST",
-                url: "/addPingToQueue",
-                data: JSON.stringify({"pingType": "Food", "tableNo": "#" + tableNumber}),
-                contentType: "application/json",
+                url: '/complete_order',
+                type: 'POST',
+                data: {'order_id': orderId},
+                success: function (data) {
+                    // If the order was completed, remove it from the accepted orders table
+                    $(this).closest('tr').remove();
+                }
             });
         }
+    });
+}
+
+
     </script>
 
 
