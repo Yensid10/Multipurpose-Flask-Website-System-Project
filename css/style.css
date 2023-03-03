@@ -216,14 +216,13 @@ button {
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
-  border-radius: 50%;
-}
+  border-radius: 50%; }
 
-#mybutton {
+.button {
   position: fixed;
   bottom: 700px;
-  right: 10px;
-}
+  right: 10px; }
+
 button:focus {
   outline: 1px dotted;
   outline: 5px auto -webkit-focus-ring-color; }
