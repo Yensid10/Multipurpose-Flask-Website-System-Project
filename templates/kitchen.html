@@ -33,44 +33,31 @@
     });
     </script>
     <script>
-    $(document).on('click', '.complete-button', function () {
-        // Get the order ID
-        const orderID = $(this).data('order-id');
+        $(document).on('click', '.complete-button', function () {
+            // Get the order ID
+            const orderID = $(this).data('order-id');
 
-        // Send the order ID to the server to be completed
-        $.ajax({
-            url: '/complete_order',
-            type: 'POST',
-            data: {'order_id': orderID},
-            success: function (data) {
-                // If the order was completed, remove it from the accepted orders table
-                $(this).closest('tr').remove();
-            }
+            // Send the order ID to the server to be completed
+            $.ajax({
+                url: '/complete_order',
+                type: 'POST',
+                data: {'order_id': orderID},
+                success: function (data) {
+                    // If the order was completed, remove it from the accepted orders table
+                    $(this).closest('tr').remove();
+                }
+            });
         });
-    });
-</script>
-<script>var previousState = null;
+    </script>
 
-function checkForUpdates() {
-    $.ajax({
-        url: '/get_tables_state',
-        success: function (data) {
-            var currentState = JSON.stringify(data);
-            if (currentState !== previousState) {
-                // There is a change in the tables, so reload them
-                $('#order-queue-table').load(document.URL + ' #order-queue-table');
-                $('#accepted-orders-table').load(document.URL + ' #accepted-orders-table');
-                previousState = currentState;
-            }
-        }
-    });
-}
-
-$(document).ready(function() {
-    // Check for updates every 2 seconds
-    setInterval(checkForUpdates, 2000);
-});
+    <script>
+    // Refresh the tables every second
+    setInterval(function() {
+        $('#order-queue-table').load(location.href + ' #order-queue-table');
+        $('#accepted-orders-table').load(location.href + ' #accepted-orders-table');
+    }, 1000);
 </script>
+
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -109,7 +96,7 @@ $(document).ready(function() {
             </table>
         </div>
         <div class="col-md-6">
-            <div class="accepted-table-container table-container">
+            <div class="accepted-table-container table-container" id="accepted-orders-table">
                 <h1 class="text-center mb-5">Accepted Orders</h1>
                 <table class="table accepted-table">
                     <thead>

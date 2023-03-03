@@ -1,7 +1,7 @@
 import datetime
 
 from bson import ObjectId
-from flask import Flask, render_template, jsonify, request, json
+from flask import Flask, render_template, jsonify, request, json, session
 from pymongo import MongoClient
 
 from ObjectQueue import Queue
@@ -120,7 +120,6 @@ def kitchen():
     for order in accepted_orders:
         order['_id'] = str(order['_id'])
 
-    print(orders)
     return render_template('kitchen.html', orders=orders, accepted_orders=accepted_orders)
 
 
@@ -152,14 +151,6 @@ def complete_order():
 
     # Return a success response
     return jsonify({'success': True})
-
-@app.route('/get_tables_state')
-def get_tables_state():
-    # Get the current state of the tables from MongoDB and return as a JSON object
-    order_queue = list(order_collection.find())
-    accepted_orders = list(accepted_collection.find())
-    return jsonify({'order_queue': order_queue, 'accepted_orders': accepted_orders})
-
 
 
 
