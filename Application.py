@@ -34,24 +34,78 @@ def home():
 
 @app.route('/hideDairy', methods=['POST'])
 def index():
-    x = request.args.get('x')
-    if x == 'dairy':
-        value = SqlQuerys.FetchDairy()
-        return jsonify({'data': value})
+    if request.method == 'POST':
+        data = request.get_json()
+        tableNumber = data['tableNumber']
+        allergens = data['allergens']
+        print(tableNumber, allergens)
+        for i in range(len(allergens)):
+            if 'Milk' in allergens:
+                print("True")
+                data = SqlQuerys.FetchDairy()
+                return jsonify({'data': data})
+
+            if 'Gluten' in allergens:
+                print("True")
+                data = SqlQuerys.FetchGluten()
+                return jsonify({'data': data})
+
+            if 'Peanuts' in allergens:
+                print("True")
+                data = SqlQuerys.FetchPeanuts()
+                return jsonify({'data': data})
+
+            if 'Treenuts' in allergens:
+                print("True")
+                data = SqlQuerys.FetchTreenuts()
+                return jsonify({'data': data})
+
+            if 'Celery' in allergens:
+                print("True")
+                data = SqlQuerys.FetchCelery()
+                return jsonify({'data': data})
+
+            if 'Mustard' in allergens:
+                print("True")
+                data = SqlQuerys.FetchMustard()
+                return jsonify({'data': data})
+
+            if 'Eggs' in allergens:
+                print("True")
+                data = SqlQuerys.FetchEggs()
+                return jsonify({'data': data})
+
+            if 'Sesame' in allergens:
+                print("True")
+                data = SqlQuerys.FetchSesame()
+                return jsonify({'data': data})
+
+            if 'Fish' in allergens:
+                print("True")
+                data = SqlQuerys.FetchFish()
+                return jsonify({'data': data})
+
+            if 'Crustaceans' in allergens:
+                print("True")
+                data = SqlQuerys.FetchCrustaceans()
+                return jsonify({'data': data})
+
+            if 'Molluscs' in allergens:
+                print("True")
+                data = SqlQuerys.FetchMolluscs()
+                return jsonify({'data': data})
+
+            if 'Sulphates' in allergens:
+                print("True")
+                data = SqlQuerys.FetchSulphites()
+                return jsonify({'data': data})
+
+            if 'Lupin' in allergens:
+                print("True")
+                data = SqlQuerys.FetchLupin()
+                return jsonify({'data': data})
+            #             # if x == 'dairy':
     return jsonify({'success': False})
-
-
-@app.route('/submit-form', methods=['POST'])
-def submit_form():
-    table_number = request.form.get('table-number')
-    allergens = request.form.getlist('allergen')
-    # do something with table_number and allergens
-    if 'Milk' in allergens:
-        response = requests.get('http://localhost:5000/HideDairy?x=dairy')
-        data = response.json()['data']
-    print(table_number)
-    print(allergens)
-    return ("Form Submmited")
 
 
 @ app.route('/acceptQueuePing', methods=['POST'])

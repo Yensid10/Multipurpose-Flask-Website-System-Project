@@ -173,35 +173,62 @@
 
 		<!--Displaying few menu items in list view with price and info -->
 		<script>
-			function Hide(input) {
-				var message = null;
-				if (input == "dairy") {
-					x = input;
-				}
-				console.log('x:', x);
-				$.ajax({
-					type: 'GET',
-					url: '/HideDairy',
-					data: { 'x': x },
-					dataType: 'json'
-				}).done(function (response) {
-					console.log('this is my response:', response);
-					var data = response.data;
-					for (var i = 0; i < data.length; i++) {
-						var x1 = document.getElementById(data[i]);
-						console.log('x is now changed to:', data[i]);
-						if (x1.length == "0") {
-							location.reload(); // Temp solution until i find out how to reset css style sheets display
-						}
-						console.log('x:', x);
+			function hide(data) {
+				console.log(data);
+				for (var i = 0; i < data.length; i++) {
+					console.log(data[i]);
+					// if (data == "dairy") {
+					// 	x = data[i];
+					// }
+					var x1 = document.getElementById(data[i]);
+					console.log('x is now changed to:', data[i]);
+					if (x1 != null) {
+						// if (x1.length == "0") {
+						// 	location.reload(); // Temp solution until i find out how to reset css style sheets display
+						// }
 						if (x1.style.display === "none") {
 							x1.style.display = "block";
 						} else {
 							x1.style.display = "none";
 						}
 					}
-				});
+				}
 			}
+			// function Hide(input) {
+			// 	var message = null;
+			// 	console.log(input);
+			// 	if (input == "dairy") {
+			// 		x = input;
+			// 	}
+			// 	console.log('x:', x);
+			// 	$.ajax({
+			// 		type: 'POST',
+			// 		url: '/hideDairy',
+			// 		// data: { 'x': x },
+			// 		data: JSON.stringify({
+			// 			"tableNumber": tableNumber,
+			// 			"allergens": allergens
+			// 		}),
+			// 		contentType: "application/json",
+			// 		dataType: 'json'
+			// 	}).done(function (response) {
+			// 		console.log('this is my response:', response);
+			// 		var data = response.data;
+			// 		for (var i = 0; i < data.length; i++) {
+			// 			var x1 = document.getElementById(data[i]);
+			// 			console.log('x is now changed to:', data[i]);
+			// 			if (x1.length == "0") {
+			// 				location.reload(); // Temp solution until i find out how to reset css style sheets display
+			// 			}
+			// 			console.log('x:', x);
+			// 			if (x1.style.display === "none") {
+			// 				x1.style.display = "block";
+			// 			} else {
+			// 				x1.style.display = "none";
+			// 			}
+			// 		}
+			// 	});
+			// }
 		</script>
 		<div class="container">
 			<div class="row justify-content-center mb-5 pb-3 mt-5 pt-5">
@@ -285,6 +312,29 @@
 			</head>
 
 			<script>
+				// function submitPopup() {
+				// 	var selectElement = document.getElementById('table-number-select');
+				// 	var tableNumber = selectElement.options[selectElement.selectedIndex].value;
+
+				// 	var allergenInputs = document.getElementsByName('allergen');
+				// 	var allergens = [];
+				// 	for (var i = 0; i < allergenInputs.length; i++) {
+				// 		if (allergenInputs[i].checked) {
+				// 			allergens.push(allergenInputs[i].value);
+				// 		}
+				// 	}
+
+				// 	console.log('tableNumber:', tableNumber + ' allergens:', allergens);
+				// 	$.ajax({
+				// 		type: "POST",
+				// 		url: "/hideDairy",
+				// 		data: JSON.stringify({
+				// 			"tableNumber": tableNumber,
+				// 			"allergens": allergens
+				// 		}),
+				// 		contentType: "application/json",
+				// 	});
+				// }
 				function submitPopup() {
 					var selectElement = document.getElementById('table-number-select');
 					var tableNumber = selectElement.options[selectElement.selectedIndex].value;
@@ -306,6 +356,11 @@
 							"allergens": allergens
 						}),
 						contentType: "application/json",
+						dataType: 'json'
+					}).done(function (response) {
+						console.log('this is my response:', response);
+						var data = response.data;
+						hide(data);
 					});
 				}
 			</script>
@@ -445,7 +500,7 @@
 							</div>
 						</div>
 					</div>
-					<div id="Mole">
+					<div id="Mole Negro">
 						<div class="pricing-entry d-flex ftco-animate">
 							<div class="img" style="background-image: url(/static/images/dish-4.jpg);"></div>
 							<div class="desc pl-3">
@@ -462,7 +517,7 @@
 				</div>
 
 				<div class="col-md-6">
-					<div id="Tacos">
+					<div id="Tacos al pastor">
 						<div class="pricing-entry d-flex ftco-animate">
 							<div class="img" style="background-image: url(/static/images/dish-5.jpg);"></div>
 							<div class="desc pl-3">
@@ -490,7 +545,7 @@
 							</div>
 						</div>
 					</div>
-					<div id="Arroz">
+					<div id="Arroz verde">
 						<div class="pricing-entry d-flex ftco-animate">
 							<div class="img" style="background-image: url(/static/images/dish-7.jpg);"></div>
 							<div class="desc pl-3">
@@ -504,7 +559,7 @@
 							</div>
 						</div>
 					</div>
-					<div id="Frijoles">
+					<div id="Frijoles negros">
 						<div class="pricing-entry d-flex ftco-animate">
 							<div class="img" style="background-image: url(/static/images/dish-8.jpg);"></div>
 							<div class="desc pl-3">
