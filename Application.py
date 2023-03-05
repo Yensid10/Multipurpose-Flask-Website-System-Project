@@ -39,73 +39,51 @@ def index():
         tableNumber = data['tableNumber']
         allergens = data['allergens']
         print(tableNumber, allergens)
-        for i in range(len(allergens)):
-            if 'Milk' in allergens:
-                print("True")
-                data = SqlQuerys.FetchDairy()
-                return jsonify({'data': data})
+        results = []
+        for allergen in allergens:
+            if allergen == 'Milk':
+                results.extend(SqlQuerys.FetchDairy())
 
-            if 'Gluten' in allergens:
-                print("True")
-                data = SqlQuerys.FetchGluten()
-                return jsonify({'data': data})
+            elif allergen == 'Gluten':
+                results.extend(SqlQuerys.FetchGluten())
 
-            if 'Peanuts' in allergens:
-                print("True")
-                data = SqlQuerys.FetchPeanuts()
-                return jsonify({'data': data})
+            elif allergen == 'Peanuts':
+                results.extend(SqlQuerys.FetchPeanuts())
 
-            if 'Treenuts' in allergens:
-                print("True")
-                data = SqlQuerys.FetchTreenuts()
-                return jsonify({'data': data})
+            elif allergen == 'Treenuts':
+                results.extend(SqlQuerys.FetchTreenuts())
 
-            if 'Celery' in allergens:
-                print("True")
-                data = SqlQuerys.FetchCelery()
-                return jsonify({'data': data})
+            elif allergen == 'Celery':
+                results.extend(SqlQuerys.FetchCelery())
 
-            if 'Mustard' in allergens:
-                print("True")
-                data = SqlQuerys.FetchMustard()
-                return jsonify({'data': data})
+            elif allergen == 'Mustard':
+                results.extend(SqlQuerys.FetchMustard())
 
-            if 'Eggs' in allergens:
-                print("True")
-                data = SqlQuerys.FetchEggs()
-                return jsonify({'data': data})
+            elif allergen == 'Eggs':
+                results.extend(SqlQuerys.FetchEggs())
 
-            if 'Sesame' in allergens:
-                print("True")
-                data = SqlQuerys.FetchSesame()
-                return jsonify({'data': data})
+            elif allergen == 'Sesame':
+                results.extend(SqlQuerys.FetchSesame())
 
-            if 'Fish' in allergens:
-                print("True")
-                data = SqlQuerys.FetchFish()
-                return jsonify({'data': data})
+            elif allergen == 'Fish':
+                results.extend(SqlQuerys.FetchFish())
 
-            if 'Crustaceans' in allergens:
-                print("True")
-                data = SqlQuerys.FetchCrustaceans()
-                return jsonify({'data': data})
+            elif allergen == 'Crustaceans':
+                results.extend(SqlQuerys.FetchCrustaceans())
 
-            if 'Molluscs' in allergens:
-                print("True")
-                data = SqlQuerys.FetchMolluscs()
-                return jsonify({'data': data})
+            elif allergen == 'Molluscs':
+                results.extend(SqlQuerys.FetchMolluscs())
 
-            if 'Sulphates' in allergens:
-                print("True")
-                data = SqlQuerys.FetchSulphites()
-                return jsonify({'data': data})
+            elif allergen == 'Sulphates':
+                results.extend(SqlQuerys.FetchSulphites())
 
-            if 'Lupin' in allergens:
-                print("True")
-                data = SqlQuerys.FetchLupin()
-                return jsonify({'data': data})
-            #             # if x == 'dairy':
-    return jsonify({'success': False})
+            elif allergen == 'Lupin':
+                results.extend(SqlQuerys.FetchLupin())
+
+        if results:
+            return jsonify({'data': results})
+        else:
+            return jsonify({'success': False})
 
 
 @ app.route('/acceptQueuePing', methods=['POST'])
