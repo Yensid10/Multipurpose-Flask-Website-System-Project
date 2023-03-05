@@ -5,7 +5,6 @@ from flask import redirect
 from ObjectQueue import Queue
 import SqlQuerys
 from flask import Response
-import requests
 
 app = Flask(__name__)
 
@@ -33,26 +32,58 @@ def home():
     return render_template('menu.html')
 
 
-@app.route('/HideDairy')
+@app.route('/hideDairy', methods=['POST'])
 def index():
-    x = request.args.get('x')
-    if x == 'dairy':
-        value = SqlQuerys.FetchDairy()
-        return jsonify({'data': value})
-    return jsonify({'success': False})
+    if request.method == 'POST':
+        data = request.get_json()
+        tableNumber = data['tableNumber']
+        allergens = data['allergens']
+        print(tableNumber, allergens)
+        results = []
+        for allergen in allergens:
+            if allergen == 'Milk':
+                results.extend(SqlQuerys.FetchDairy())
 
+            elif allergen == 'Gluten':
+                results.extend(SqlQuerys.FetchGluten())
 
-@app.route('/submit-form', methods=['POST'])
-def submit_form():
-    table_number = request.form.get('table-number')
-    allergens = request.form.getlist('allergen')
-    # do something with table_number and allergens
-    if 'Milk' in allergens:
-        response = requests.get('http://localhost:5000/HideDairy?x=dairy')
-        data = response.json()['data']
-    print(table_number)
-    print(allergens)
-    return ("Form Submmited")
+            elif allergen == 'Peanuts':
+                results.extend(SqlQuerys.FetchPeanuts())
+
+            elif allergen == 'Treenuts':
+                results.extend(SqlQuerys.FetchTreenuts())
+
+            elif allergen == 'Celery':
+                results.extend(SqlQuerys.FetchCelery())
+
+            elif allergen == 'Mustard':
+                results.extend(SqlQuerys.FetchMustard())
+
+            elif allergen == 'Eggs':
+                results.extend(SqlQuerys.FetchEggs())
+
+            elif allergen == 'Sesame':
+                results.extend(SqlQuerys.FetchSesame())
+
+            elif allergen == 'Fish':
+                results.extend(SqlQuerys.FetchFish())
+
+            elif allergen == 'Crustaceans':
+                results.extend(SqlQuerys.FetchCrustaceans())
+
+            elif allergen == 'Molluscs':
+                results.extend(SqlQuerys.FetchMolluscs())
+
+            elif allergen == 'Sulphates':
+                results.extend(SqlQuerys.FetchSulphites())
+
+            elif allergen == 'Lupin':
+                results.extend(SqlQuerys.FetchLupin())
+
+        if results:
+            return jsonify({'data': results})
+        else:
+            return jsonify({'success': False})
 
 
 @ app.route('/acceptQueuePing', methods=['POST'])
