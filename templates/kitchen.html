@@ -51,12 +51,32 @@
     </script>
 
     <script>
-    // Refresh the tables every second
-    setInterval(function() {
-        $('#order-queue-table').load(location.href + ' #order-queue-table');
-        $('#accepted-orders-table').load(location.href + ' #accepted-orders-table');
-    }, 1000);
+    $(document).ready(function() {
+        // Get the initial time from the hidden input field
+        let last_updated = $('#current-time').val();
+
+        // Poll the server every second
+        setInterval(function() {
+            $.ajax({
+                url: '/kitchen/data',
+                method: 'GET',
+                data: {last_updated: last_updated},
+                success: function(data) {
+                    // Update the last_updated timestamp
+                    last_updated = data.current_time;
+
+                    // Check if there are any new orders
+                    const new_orders = data.new_orders;
+                    if (new_orders) {
+                        // Reload the order queue table
+                        $('#order-queue-table').load(location.href + ' #order-queue-table');
+                    }
+                }
+            });
+        }, 1000);
+    });
 </script>
+
 
 
 
@@ -126,5 +146,6 @@
         </div>
     </div>
 </div>
+<input type="hidden" id="current-time" value="{{ current_time }}">
 </body>
 </html>
