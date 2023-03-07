@@ -172,7 +172,37 @@
 		</div>
 
 		<!--Displaying few menu items in list view with price and info -->
-
+		<script>
+			function Hide(input) {
+				var message = null;
+				if (input == "dairy") {
+					x = input;
+				}
+				console.log('x:', x);
+				$.ajax({
+					type: 'GET',
+					url: '/HideDairy',
+					data: { 'x': x },
+					dataType: 'json'
+				}).done(function (response) {
+					console.log('this is my response:', response);
+					var data = response.data;
+					for (var i = 0; i < data.length; i++) {
+						var x1 = document.getElementById(data[i]);
+						console.log('x is now changed to:', data[i]);
+						if (x1.length == "0") {
+							location.reload(); // Temp solution until i find out how to reset css style sheets display
+						}
+						console.log('x:', x);
+						if (x1.style.display === "none") {
+							x1.style.display = "block";
+						} else {
+							x1.style.display = "none";
+						}
+					}
+				});
+			}
+		</script>
 		<div class="container">
 			<div class="row justify-content-center mb-5 pb-3 mt-5 pt-5">
 				<div class="col-md-7 heading-section text-center ftco-animate">
@@ -181,8 +211,12 @@
 					<p class="mt-5">Quality with Uniqueness.</p>
 				</div>
 			</div>
-			<input type="text" , name="text1" , id="Inputed">
-			<button onclick="Hide(document.getElementById('Inputed').value)">Click Me</button>
+			<!-- <button onclick="Hide(document.getElementById('Inputed').value)">Click Me</button> -->
+			<!-- <button onclick="Hide('Guacamole')">Click me</button> -->
+			<button onclick="Hide('dairy')">Click me</button>
+			<!-- <button onclick="Hide({{ url_for('index', x='dairy') }})">Hide dairy</button> -->
+
+			<!-- <button onclick="Hide('{{ dairy }}')">Click me</button> -->
 			<div class="row">
 				<div class="col-md-6">
 					<div id="Guacamole">
@@ -199,7 +233,7 @@
 							</div>
 						</div>
 					</div>
-					<div id="Queso">
+					<div id="Queso fundido">
 						<div class="pricing-entry d-flex ftco-animate">
 							<div class="img" style="background-image: url(/static/images/dish-2.jpg);"></div>
 							<div class="desc pl-3">
@@ -213,7 +247,7 @@
 							</div>
 						</div>
 					</div>
-					<div id="Tostadas">
+					<div id="Tostadas de tinga">
 						<div class="pricing-entry d-flex ftco-animate">
 							<div class="img" style="background-image: url(/static/images/dish-3.jpg);"></div>
 							<div class="desc pl-3">
@@ -258,7 +292,7 @@
 							</div>
 						</div>
 					</div>
-					<div id="Enchiladas">
+					<div id="Enchiladas verdes">
 						<div class="pricing-entry d-flex ftco-animate">
 							<div class="img" style="background-image: url(/static/images/dish-6.jpg);"></div>
 							<div class="desc pl-3">
@@ -304,20 +338,6 @@
 			</div>
 		</div>
 	</section>
-
-	<script>
-		function Hide(x) {
-			if (x.length == "0") {
-				location.reload(); // Temp solution until i find out how to reset css style sheets display
-			}
-			var x = document.getElementById(x);
-			if (x.style.display === "none") {
-				x.style.display = "block";
-			} else {
-				x.style.display = "none";
-			}
-		}
-	</script>
 
 	<!--To display items section wise -->
 	<!--There are 4 different food sections -->
