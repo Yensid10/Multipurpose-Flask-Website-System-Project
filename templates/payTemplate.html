@@ -5,20 +5,16 @@
 
 <script>
     function makePayment() {
-        if (typeof QRCode === 'undefined') {
-            console.log('QR code library not loaded.');
-        } else {
-            console.log('QR code library loaded.');
-        }
         $.ajax({
             url: '/makePayment',
             type: 'POST',
             success: function (link) {
                 console.log(link);
+                $("#qrcode").empty();
                 var qrcode = new QRCode(document.getElementById("qrcode"), {
-                    text: link,
-                    width: 128,
-                    height: 128,
+                    text: link.paymentUrl,
+                    width: 256,
+                    height: 256,
                     colorDark: "#000000",
                     colorLight: "#ffffff",
                     correctLevel: QRCode.CorrectLevel.H
