@@ -4,8 +4,21 @@ from flask import Flask, render_template, jsonify, request, json
 from pymongo import MongoClient
 from ObjectQueue import Queue
 from SqlQuerys import FetchMenu
+import paypalrestsdk
+import logging
+# import os
+
+paypalrestsdk.configure({
+    "mode": "sandbox",  # sandbox or live
+    "client_id": "AfzWV6H8HbQPiOb0a3B-ty24yYWRllM8s34zjYgsgjpnIqlunb3vkmZrJ5KSvLB5XjRXOoAQP6nriEOA",
+    "client_secret": "EA4HmZS-IacWkAx8U0pOwRTlfNawZ_c3wZh87F8oXvxfWK2St54c1CAbdy1_qodhY1OUbz3loVpbwa89"})
+
 
 app = Flask(__name__)
+# app.config['AfzWV6H8HbQPiOb0a3B-ty24yYWRllM8s34zjYgsgjpnIqlunb3vkmZrJ5KSvLB5XjRXOoAQP6nriEOA'] = os.environ.get(
+#     'AfzWV6H8HbQPiOb0a3B-ty24yYWRllM8s34zjYgsgjpnIqlunb3vkmZrJ5KSvLB5XjRXOoAQP6nriEOA')
+# app.config['EA4HmZS-IacWkAx8U0pOwRTlfNawZ_c3wZh87F8oXvxfWK2St54c1CAbdy1_qodhY1OUbz3loVpbwa89'] = os.environ.get(
+#     'EA4HmZS-IacWkAx8U0pOwRTlfNawZ_c3wZh87F8oXvxfWK2St54c1CAbdy1_qodhY1OUbz3loVpbwa89')
 
 client = MongoClient(
     'mongodb+srv://Theamzingu:Socr%40tis123@teamproject14.nnzfaib.mongodb.net/test')
@@ -110,6 +123,45 @@ def getBill():
         if orders.getSpecificOrder(tableNo) == False:
             return render_template('bills.html', data="No order found")
         return render_template('bills.html', data=orders.getSpecificOrder(tableNo))
+
+
+@ app.route('/makePayment', methods=['POST'])
+def makePayment():
+    payment = paypalrestsdk.Payment({
+        "intent": "sale",
+        "payer": {
+            "payment_method": "paypal"
+        },
+        "transactions": [{
+            "amount": {
+                "total": "10.00",
+                "currency": "USD"
+            },
+            "description": "This is the payment transaction description."
+        }],
+        "redirect_urls": {
+            "return_url": "http://localhost:5000/payment/success",
+            "cancel_url": "http://localhost:5000/payment/cancel"
+        }
+    })
+    if payment.create():
+        print("Payment created successfully")
+    else:
+        print(payment.error)
+    # Get the payment URL from the Payment object
+    payment_url = None
+    for link in payment.links:
+        if link.method == "REDIRECT":
+            payment_url = link.href
+            break
+
+    # Return the payment URL as a JSON response
+    return jsonify({'payment_url': payment_url})
+
+
+@ app.route('/testPayment')
+def testPayment():
+    return render_template('payTemplate.html')
 
 
 @ app.route('/Ring')

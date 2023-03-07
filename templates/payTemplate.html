@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+    function makePayment() {
+        if (typeof QRCode === 'undefined') {
+            console.log('QR code library not loaded.');
+        } else {
+            console.log('QR code library loaded.');
+        }
+        $.ajax({
+            url: '/makePayment',
+            type: 'POST',
+            success: function (link) {
+                console.log(link);
+                var qrcode = new QRCode(document.getElementById("qrcode"), {
+                    text: link,
+                    width: 128,
+                    height: 128,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+            }
+        });
+
+    }
+
+
+</script>
+
+
+<head>
+    <title>Bill Page</title>
+</head>
+
+<body>
+    <h1>Bill</h1>
+    <!-- <form action="/submit-form" method="POST">
+        <input type="submit" value="Submit">
+    </form> -->
+    <button onclick="makePayment()">Make Payment</button>
+    <div id="qrcode"></div>
+</body>
+
+</html>
