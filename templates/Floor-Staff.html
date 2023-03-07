@@ -350,6 +350,11 @@
             updateOrder();
         }
 
+        function removeOrderItem(index) {
+            order.removeObject(index);
+            updateOrder();
+        }
+
         function sendToKitchen() {
             var selectElement = document.getElementById("orderSelect");
             if (selectElement.options[selectElement.selectedIndex].value.includes("htmlCheck")) {
