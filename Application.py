@@ -6,6 +6,7 @@ from ObjectQueue import Queue
 from SqlQuerys import FetchMenu
 import paypalrestsdk
 import logging
+
 # import os
 
 paypalrestsdk.configure({
@@ -47,6 +48,11 @@ orders = Queue()
 @app.route('/')
 def home():
     return render_template('menu.html')
+
+
+@app.route('/billTemplate')
+def billTemplate():
+    return render_template('billTemplate.html')
 
 
 @app.route('/acceptQueuePing', methods=['POST'])
@@ -116,13 +122,22 @@ def sendToKitchen():
         return ('', 204)
 
 
+# @ app.route('/getBill', methods=['POST'])
+# def getBill():
+#     if request.method == 'POST':
+#         tableNo = request.form['tableNo']
+#         if orders.getSpecificOrder(tableNo) == False:
+#             return render_template('bills.html', data="No order found")
+#         return render_template('bills.html', data=orders.getSpecificOrder(tableNo))
+
 @ app.route('/getBill', methods=['POST'])
 def getBill():
     if request.method == 'POST':
         tableNo = request.form['tableNo']
-        if orders.getSpecificOrder(tableNo) == False:
-            return render_template('bills.html', data="No order found")
-        return render_template('bills.html', data=orders.getSpecificOrder(tableNo))
+        order = orders.getSpecificOrder(tableNo)
+        if order == False:
+            return render_template('billTemplate.html', data="No order found")
+        return render_template('billTemplate.html', data={'queue': order['queue']})
 
 
 @ app.route('/makePayment', methods=['POST'])
