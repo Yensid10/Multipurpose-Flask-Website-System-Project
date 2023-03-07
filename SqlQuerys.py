@@ -169,11 +169,22 @@ def FetchLupin():
 
 # print(FetchLupin())
 
-# fetch appetisers deserts etc.
+# fetch and print Appetisers
 def FestchAppetisers():
     Item = []
     for item in FetchMenu():
         if (item["appetisers"] == True):
+            print(item["name"])
+            Item.append(item["name"])
+    return item
+
+# fetches and prints entree
+
+
+def FestchEntree():
+    Item = []
+    for item in FetchMenu():
+        if (item["entree"] == True):
             print(item["name"])
             Item.append(item["name"])
     return item
