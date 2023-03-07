@@ -336,7 +336,9 @@
         function updateOrder() {
             var orderHtml = "";
             for (var i = 0; i < order.getLength(); i++) {
-                orderHtml += "<strong>" + order.getObject(i).getNote1() + "</strong><br>" + order.getObject(i).getNote2() + "<br><br>";
+                orderHtml += "<div><strong>" + order.getObject(i).getNote1() + "</strong><br>"
+                    + order.getObject(i).getNote2()
+                    + "<button class=\"remove-button\" onclick=\"removeOrderItem(" + i + ")\">-</button></div><br>";
             }
             $("#order-item").html(orderHtml);
         }
