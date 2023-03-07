@@ -68,3 +68,21 @@ body {
     width: 100%;
     table-layout: fixed;
 }
+
+.table-container th,
+.table-container td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+    width: 25%; /* set the width of the cells to 25% */
+}
+
+.table-container th:first-child,
+.table-container td:first-child {
+    width: 15%; /* set the width of the first cell to 15% */
+}
+
+.table-container th:last-child,
+.table-container td:last-child {
+    width: 20%; /* set the width of the last cell to 20% */
+}

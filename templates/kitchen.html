@@ -51,32 +51,12 @@
     </script>
 
     <script>
-    $(document).ready(function() {
-        // Get the initial time from the hidden input field
-        let last_updated = $('#current-time').val();
-
-        // Poll the server every second
-        setInterval(function() {
-            $.ajax({
-                url: '/kitchen/data',
-                method: 'GET',
-                data: {last_updated: last_updated},
-                success: function(data) {
-                    // Update the last_updated timestamp
-                    last_updated = data.current_time;
-
-                    // Check if there are any new orders
-                    const new_orders = data.new_orders;
-                    if (new_orders) {
-                        // Reload the order queue table
-                        $('#order-queue-table').load(location.href + ' #order-queue-table');
-                    }
-                }
-            });
-        }, 1000);
-    });
+    // Refresh the tables every second
+    setInterval(function() {
+        $('#order-queue-table').load(location.href + ' #order-queue-table');
+        $('#accepted-orders-table').load(location.href + ' #accepted-orders-table');
+    }, 1000);
 </script>
-
 
 
 
@@ -98,6 +78,7 @@
                     <th>Items</th>
                     <th>Note</th>
                     <th>Accept</th>
+                    <th>Cancel</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -110,6 +91,8 @@
                             <button class="btn btn-primary accept-button" data-order-id="{{ order["_id"] }}">Accept
                             </button>
                         </td>
+                        <td><button class="btn btn-danger cancel-button" data-order-id="{{ order["_id"] }}">Cancel</button>
+</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -125,6 +108,7 @@
                         <th>Items</th>
                         <th>Note</th>
                         <th>Complete</th>
+                        <th>Cancel</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -137,7 +121,7 @@
                                 <button class="btn btn-primary complete-button" data-order-id="{{ order._id }}"
                                         onclick="addPingToQueue({{ order["table_number"] }})">Complete
                                 </button>
-
+                            <td><button class="btn btn-danger cancel-button" data-order-id="{{ order["_id"] }}">Cancel</button></td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -146,6 +130,5 @@
         </div>
     </div>
 </div>
-<input type="hidden" id="current-time" value="{{ current_time }}">
 </body>
 </html>

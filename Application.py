@@ -1,5 +1,4 @@
 import datetime
-import time
 
 from bson import ObjectId
 from flask import Flask, render_template, jsonify, request, json, session
@@ -113,10 +112,6 @@ def showFS():
 
 @app.route('/kitchen')
 def kitchen():
-    # Get the current time
-    current_time = int(time.time())
-
-    # Render the kitchen.html template with the current time
     orders = list(order_collection.find())
     for order in orders:
         order['_id'] = str(order['_id'])
@@ -125,7 +120,7 @@ def kitchen():
     for order in accepted_orders:
         order['_id'] = str(order['_id'])
 
-    return render_template('kitchen.html', orders=orders, accepted_orders=accepted_orders, current_time=current_time)
+    return render_template('kitchen.html', orders=orders, accepted_orders=accepted_orders)
 
 
 @app.route('/accept_order', methods=['POST'])
@@ -157,27 +152,6 @@ def complete_order():
     # Return a success response
     return jsonify({'success': True})
 
-@app.route('/kitchen/data')
-def kitchen_data():
-    # Get the last updated timestamp from the request parameters
-    last_updated = int(request.args.get('last_updated'))
-
-    # Get the current time
-    current_time = int(time.time())
-
-    # Query the MongoDB database for new orders since the last updated timestamp
-    new_orders = list(order_collection.find({'time': {'$gt': last_updated}}))
-
-    # Convert the ObjectId to string for JSON serialization
-    for order in new_orders:
-        order['_id'] = str(order['_id'])
-
-    # Return a JSON response with the current time and the new orders
-    response = {
-        'current_time': current_time,
-        'new_orders': bool(new_orders)
-    }
-    return jsonify(response)
 
 
 
