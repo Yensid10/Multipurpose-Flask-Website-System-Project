@@ -199,3 +199,14 @@ def FetchSide():
             print(item["name"])
             Item.append(item["name"])
     return item
+
+# fetches and prints desserts
+
+
+def FetchDessert():
+    Item = []
+    for item in FetchMenu():
+        if (item["dessert"] == True):
+            print(item["name"])
+            Item.append(item["name"])
+    return item
