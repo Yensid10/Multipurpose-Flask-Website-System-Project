@@ -1,0 +1,44 @@
+body {
+	background-color: #fff;
+}
+
+.bill-wrapper {
+	background-color: #f2e4c4;
+	padding: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.bill-tab {
+	background-color: #f2e4c4;
+	padding: 10px;
+}
+
+.oxhca-tab {
+	background-color: #ffbe7d;
+	padding: 10px;
+	color: #fff;
+}
+
+.items-table {
+	margin: 50px auto;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+.items-table th {
+	background-color: #ffbe7d;
+	color: #fff;
+	padding: 10px;
+}
+
+.items-table td, .items-table th {
+	border: 1px solid #000;
+	padding: 10px;
+}
+
+.items-table td:last-child, .total-cell {
+	background-color: #ffbe7d;
+	color: #fff;
+}
