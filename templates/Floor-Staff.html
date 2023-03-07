@@ -148,6 +148,20 @@
             border: 3px solid rgb(0, 0, 0);
         }
 
+        .remove-button {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+        }
+
+        .remove-button img {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+
         .review-header {
             width: 220px;
             height: 50px;
@@ -338,7 +352,7 @@
             for (var i = 0; i < order.getLength(); i++) {
                 orderHtml += "<div><strong>" + order.getObject(i).getNote1() + "</strong><br>"
                     + order.getObject(i).getNote2()
-                    + "<button class=\"remove-button\" onclick=\"removeOrderItem(" + i + ")\">-</button></div><br>";
+                    + "<button class=\"remove-button\" onclick=\"removeOrderItem(" + i + ")\"><img src=\"/static/images/trashcan.png\" alt=\"Remove\"></button></div><br>";
             }
             $("#order-item").html(orderHtml);
         }
