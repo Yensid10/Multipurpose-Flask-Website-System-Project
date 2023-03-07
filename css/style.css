@@ -205,23 +205,25 @@ label {
 button {
   border-radius: 0; }
 
-.ringus {
-  background-color : transparent;
-  border-radius: 5px ;
-  border-color: #ffffff;
-  color: #b3b300;
-  padding: 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  border-radius: 50%; }
-
-.button {
-  position: fixed;
-  bottom: 700px;
-  right: 10px; }
+  .ringus {
+    background-color : transparent;
+    border-radius: 5px ;
+    border-color: #ffffff;
+    color: #b3b300;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 50%;
+  }
+  
+  #mybutton {
+    position: fixed;
+    bottom: 700px;
+    right: 10px;
+  }
 
 button:focus {
   outline: 1px dotted;
