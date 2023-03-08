@@ -5,19 +5,15 @@ from pymongo import MongoClient
 from ObjectQueue import Queue
 from SqlQuerys import FetchMenu
 import paypalrestsdk
-# import os
+import re
 
 paypalrestsdk.configure({
-    "mode": "sandbox",  # sandbox or live
+    "mode": "sandbox",
     "client_id": "AfzWV6H8HbQPiOb0a3B-ty24yYWRllM8s34zjYgsgjpnIqlunb3vkmZrJ5KSvLB5XjRXOoAQP6nriEOA",
     "client_secret": "EA4HmZS-IacWkAx8U0pOwRTlfNawZ_c3wZh87F8oXvxfWK2St54c1CAbdy1_qodhY1OUbz3loVpbwa89"})
 
 
 app = Flask(__name__)
-# app.config['AfzWV6H8HbQPiOb0a3B-ty24yYWRllM8s34zjYgsgjpnIqlunb3vkmZrJ5KSvLB5XjRXOoAQP6nriEOA'] = os.environ.get(
-#     'AfzWV6H8HbQPiOb0a3B-ty24yYWRllM8s34zjYgsgjpnIqlunb3vkmZrJ5KSvLB5XjRXOoAQP6nriEOA')
-# app.config['EA4HmZS-IacWkAx8U0pOwRTlfNawZ_c3wZh87F8oXvxfWK2St54c1CAbdy1_qodhY1OUbz3loVpbwa89'] = os.environ.get(
-#     'EA4HmZS-IacWkAx8U0pOwRTlfNawZ_c3wZh87F8oXvxfWK2St54c1CAbdy1_qodhY1OUbz3loVpbwa89')
 
 client = MongoClient(
     'mongodb+srv://Theamzingu:Socr%40tis123@teamproject14.nnzfaib.mongodb.net/test')
@@ -25,6 +21,7 @@ db = client["Kitchen"]
 order_collection = db["order_queue"]
 accepted_collection = db["accepted_orders"]
 
+orders = Queue()
 queue = Queue()
 # queue.addObject("Food", "#12")
 # queue.addObject("Table", "#3")
@@ -38,9 +35,6 @@ queue.addObject("Door", "<---")
 # queue.addObject("Table", "#3")
 # queue.addObject("Table", "#17")
 # queue.addObject("Door", "<---")
-
-# Testing Orders queue implementation
-orders = Queue()
 
 
 @app.route('/')
@@ -120,14 +114,6 @@ def sendToKitchen():
         return ('', 204)
 
 
-# @ app.route('/getBill', methods=['POST'])
-# def getBill():
-#     if request.method == 'POST':
-#         tableNo = request.form['tableNo']
-#         if orders.getSpecificOrder(tableNo) == False:
-#             return render_template('bills.html', data="No order found")
-#         return render_template('bills.html', data=orders.getSpecificOrder(tableNo))
-
 @ app.route('/getBill', methods=['POST'])
 def getBill():
     if request.method == 'POST':
@@ -136,7 +122,6 @@ def getBill():
         if order == False:
             return render_template('billTemplate.html', data="No order found")
         subtotal = sum(float(item['price']) for item in order['queue'])
-        # total = subtotal * 1.20  # VAT Added ?????
         return render_template('billTemplate.html', data={'queue': order['queue'], 'subtotal': subtotal, 'tableNo': tableNo})
 
 
@@ -145,7 +130,6 @@ def makePayment():
     if request.method == 'POST':
         tableNo = request.json['tableNo']
         bill = orders.getSpecificOrder(tableNo)
-
         payment = paypalrestsdk.Payment({
             "intent": "sale",
             "payer": {
@@ -171,19 +155,9 @@ def makePayment():
                 "cancel_url": "http://localhost:5000/"
             }
         })
-        # if payment.create():
-        #     print("Payment created successfully")
-        # else:
-        #     print(payment.error)
-        # Get the payment URL from the Payment object
         payment.create()
-        paymentUrl = None
-        for link in payment.links:
-            if link.method == "REDIRECT":
-                paymentUrl = link.href
-                break
-
-        # Return the payment URL as a JSON response
+        paymentUrl = next(
+            (link.href for link in payment.links if link.method == "REDIRECT"), None)
         return jsonify({'paymentUrl': paymentUrl})
 
 
@@ -194,6 +168,16 @@ def testPayment():
 
 @ app.route('/success')
 def success():
+    pattern = r"Payment for table (\d+) at"
+    payment_id = request.args.get("paymentId")
+    payer_id = request.args.get("PayerID")
+    payment = paypalrestsdk.Payment.find(payment_id)
+    if payment.execute({"payer_id": payer_id}):
+        match = re.search(pattern, payment.transactions[0].description)
+        tableNo = match.group(1)
+        print("Table number:", tableNo)
+    else:
+        print(payment.error)
     return render_template('menu.html')
 
 
