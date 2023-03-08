@@ -5,8 +5,6 @@ from pymongo import MongoClient
 from ObjectQueue import Queue
 from SqlQuerys import FetchMenu
 import paypalrestsdk
-import logging
-
 # import os
 
 paypalrestsdk.configure({
@@ -166,14 +164,14 @@ def makePayment():
     else:
         print(payment.error)
     # Get the payment URL from the Payment object
-    payment_url = None
+    paymentUrl = None
     for link in payment.links:
         if link.method == "REDIRECT":
-            payment_url = link.href
+            paymentUrl = link.href
             break
 
     # Return the payment URL as a JSON response
-    return jsonify({'payment_url': payment_url})
+    return jsonify({'paymentUrl': paymentUrl})
 
 
 @ app.route('/testPayment')
