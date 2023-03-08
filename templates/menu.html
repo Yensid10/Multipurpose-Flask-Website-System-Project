@@ -275,16 +275,18 @@
 			}
 
 			function hide(data) {
-				console.log(data);
-				for (var i = 0; i < data.length; i++) {
-					console.log(data[i]);
-					var x1 = document.getElementById(data[i]);
-					console.log('x is now changed to:', data[i]);
-					if (x1 != null) {
-						if (x1.style.display === "none") {
-							x1.style.display = "block";
-						} else {
-							x1.style.display = "none";
+				if (data != null) {
+					console.log(data);
+					for (var i = 0; i < data.length; i++) {
+						console.log(data[i]);
+						var x1 = document.getElementById(data[i]);
+						console.log('x is now changed to:', data[i]);
+						if (x1 != null) {
+							if (x1.style.display === "none") {
+								x1.style.display = "block";
+							} else {
+								x1.style.display = "none";
+							}
 						}
 					}
 				}
