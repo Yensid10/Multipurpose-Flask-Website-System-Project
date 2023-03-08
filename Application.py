@@ -1,7 +1,7 @@
 import datetime
 
 from bson import ObjectId
-from flask import Flask, render_template, jsonify, request, json, session
+from flask import Flask, render_template, jsonify, request, json
 from pymongo import MongoClient
 
 from ObjectQueue import Queue
@@ -57,6 +57,19 @@ def addPingToQueue():
         return ('', 204)
 
 
+@app.route('/sendCancel', methods=['POST'])
+def sendCancel():
+    if request.method == 'POST':
+        data = request.get_json()
+        pingType = data.get('pingType')
+        tableNo = data.get('tableNo')
+        indexNumber = data.get("indexNo")
+        print(pingType)
+        print(tableNo)
+        print(indexNumber)
+        return ('', 204)
+
+
 @app.route("/updateQueue")
 def updateQueue():
     jsonQueue = []
@@ -82,7 +95,10 @@ def sendToKitchen():
 
         queue = order.get('queue', [])
 
-        for item in queue:
+        # Add an order ID to each item in the order
+        for i, item in enumerate(queue):
+            item['order_index'] = f"{tableNo}-{i + 1}"
+
             order_items = item.get('Note1')
             note = item.get('Note2')
 
@@ -90,6 +106,7 @@ def sendToKitchen():
             order_collection.insert_one({
                 '_id': ObjectId(),
                 'table_number': tableNo,
+                'order_index': item['order_index'],  # Save the order ID for each item
                 'items': order_items,
                 'note': note,
                 'status': 'Taken',
@@ -141,6 +158,7 @@ def accept_order():
     # Return a success response
     return jsonify({'success': True})
 
+
 @app.route('/complete_order', methods=['POST'])
 def complete_order():
     # Get the order ID from the POST request
@@ -153,6 +171,23 @@ def complete_order():
     return jsonify({'success': True})
 
 
+@app.route('/cancel_order', methods=['POST'])
+def cancel_order():
+    # Get the order index and order ID from the POST request
+    order_index = request.form['order_index']
+    order_id = request.form['order_id']
+
+    # Check if the order is in the order queue collection
+    order = order_collection.find_one({'order_index': order_index})
+    if order:
+        # If the order is in the order queue collection, remove it
+        order_collection.delete_one({'order_index': order_index})
+    else:
+        # If the order is not in the order queue collection, it must be in the accepted orders collection
+        accepted_collection.delete_one({'_id': ObjectId(order_id)})
+
+    # Return a success response
+    return jsonify({'success': True})
 
 
 if __name__ == '__main__':
