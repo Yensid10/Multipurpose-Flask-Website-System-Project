@@ -1,12 +1,46 @@
 <!DOCTYPE html>
 <html>
 
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+	function makePayment(tableNo) {
+		$.ajax({
+			url: '/makePayment',
+			type: 'POST',
+			data: JSON.stringify({ "tableNo": tableNo }),
+			contentType: "application/json",
+			success: function (link) {
+				if (link && link.paymentUrl) {
+					console.log(link);
+					$("#qrcode").empty();
+					var qrcode = new QRCode(document.getElementById("qrcode"), {
+						text: link.paymentUrl,
+						width: 256,
+						height: 256,
+						colorDark: "#000000",
+						colorLight: "#ffffff",
+						correctLevel: QRCode.CorrectLevel.H
+					});
+				} else {
+					console.error("Unexpected response from server:", link);
+				}
+			},
+			error: function (xhr, textStatus, errorThrown) {
+				console.error("AJAX request failed:", errorThrown);
+			}
+		});
+
+	}
+</script>
+
 <head>
 	<title>My Page</title>
 	<link rel="stylesheet" type="text/css" href="static/css/billTemplate.css">
 </head>
 
 <body>
+
 	<div class="bill-wrapper">
 		<div class="bill-tab">
 			<h1>Bill</h1>
@@ -32,11 +66,14 @@
 			<td colspan="2">Subtotal</td>
 			<td>${{ data['subtotal'] }}</td>
 		</tr>
-		<tr>
+		<!-- <tr>
 			<td colspan="2">Grand Total</td>
 			<td class="total-cell">${{ data['total'] }}</td>
-		</tr>
+		</tr> -->
 	</table>
+	{% set tableNo = data['tableNo'] %}
+	<button onclick="makePayment('{{ tableNo }}')">Make Payment</button>
+	<div id="qrcode"></div>
 </body>
 
 </html>

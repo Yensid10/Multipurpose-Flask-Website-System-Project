@@ -136,47 +136,65 @@ def getBill():
         if order == False:
             return render_template('billTemplate.html', data="No order found")
         subtotal = sum(float(item['price']) for item in order['queue'])
-        total = subtotal * 1.20  # VAT Added ?????
-        return render_template('billTemplate.html', data={'queue': order['queue'], 'subtotal': subtotal, 'total': total})
+        # total = subtotal * 1.20  # VAT Added ?????
+        return render_template('billTemplate.html', data={'queue': order['queue'], 'subtotal': subtotal, 'tableNo': tableNo})
 
 
 @ app.route('/makePayment', methods=['POST'])
 def makePayment():
-    payment = paypalrestsdk.Payment({
-        "intent": "sale",
-        "payer": {
-            "payment_method": "paypal"
-        },
-        "transactions": [{
-            "amount": {
-                "total": "10.00",
-                "currency": "USD"
-            },
-            "description": "This is the payment transaction description."
-        }],
-        "redirect_urls": {
-            "return_url": "http://localhost:5000/payment/success",
-            "cancel_url": "http://localhost:5000/payment/cancel"
-        }
-    })
-    if payment.create():
-        print("Payment created successfully")
-    else:
-        print(payment.error)
-    # Get the payment URL from the Payment object
-    paymentUrl = None
-    for link in payment.links:
-        if link.method == "REDIRECT":
-            paymentUrl = link.href
-            break
+    if request.method == 'POST':
+        tableNo = request.json['tableNo']
+        bill = orders.getSpecificOrder(tableNo)
 
-    # Return the payment URL as a JSON response
-    return jsonify({'paymentUrl': paymentUrl})
+        payment = paypalrestsdk.Payment({
+            "intent": "sale",
+            "payer": {
+                "payment_method": "paypal"
+            },
+            "transactions": [{
+                "amount": {
+                    "total": sum(float(item['price']) for item in bill['queue']),
+                    "currency": "GBP"
+                },
+                "description": "Payment for table {}".format(tableNo) + " at " + str(datetime.datetime.now()),
+                "item_list": {
+                    "items": [{
+                        "name": item['Note1'],
+                        "quantity": 1,
+                        "price": item['price'],
+                        "currency": "GBP"
+                    } for item in bill['queue']]
+                }
+            }],
+            "redirect_urls": {
+                "return_url": "http://localhost:5000/success",
+                "cancel_url": "http://localhost:5000/"
+            }
+        })
+        # if payment.create():
+        #     print("Payment created successfully")
+        # else:
+        #     print(payment.error)
+        # Get the payment URL from the Payment object
+        payment.create()
+        paymentUrl = None
+        for link in payment.links:
+            if link.method == "REDIRECT":
+                paymentUrl = link.href
+                break
+
+        # Return the payment URL as a JSON response
+        return jsonify({'paymentUrl': paymentUrl})
 
 
 @ app.route('/testPayment')
 def testPayment():
     return render_template('payTemplate.html')
+
+
+@ app.route('/success')
+def success():
+    return render_template('menu.html')
 
 
 @ app.route('/Ring')
