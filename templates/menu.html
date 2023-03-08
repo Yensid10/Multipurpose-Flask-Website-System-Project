@@ -269,6 +269,8 @@
 					console.log('this is my response:', response);
 					var data = response.data;
 					hide(data);
+					document.querySelector(".popup").style.display = "none";
+					document.querySelector("body").style.overflow = "auto";
 				});
 			}
 
@@ -295,6 +297,10 @@
 				body {
 					overflow: hidden;
 					/* prevent scrolling */
+				}
+
+				body {
+					overflow: auto;
 				}
 
 				.popup {
