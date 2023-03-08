@@ -37,9 +37,14 @@ queue.addObject("Door", "<---")
 # queue.addObject("Door", "<---")
 
 
+@app.route('/Menu')
+def menu():
+    return render_template('menu.html')
+
+
 @app.route('/')
 def home():
-    return render_template('menu.html')
+    return render_template('index.html')
 
 
 @app.route('/billTemplate')
