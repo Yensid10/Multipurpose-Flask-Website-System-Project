@@ -12,7 +12,7 @@
 			<h1>Bill</h1>
 		</div>
 		<div class="oxhca-tab">
-			<h2>Oxhca</h2>
+			<h2>Oaxaca</h2>
 		</div>
 	</div>
 	<table class="items-table">
@@ -30,11 +30,11 @@
 		{% endfor %}
 		<tr>
 			<td colspan="2">Subtotal</td>
-			<td>$0</td>
+			<td>${{ data['subtotal'] }}</td>
 		</tr>
 		<tr>
 			<td colspan="2">Grand Total</td>
-			<td class="total-cell">$0</td>
+			<td class="total-cell">${{ data['total'] }}</td>
 		</tr>
 	</table>
 </body>

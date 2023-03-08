@@ -137,7 +137,9 @@ def getBill():
         order = orders.getSpecificOrder(tableNo)
         if order == False:
             return render_template('billTemplate.html', data="No order found")
-        return render_template('billTemplate.html', data={'queue': order['queue']})
+        subtotal = sum(float(item['price']) for item in order['queue'])
+        total = subtotal * 1.20  # VAT Added ?????
+        return render_template('billTemplate.html', data={'queue': order['queue'], 'subtotal': subtotal, 'total': total})
 
 
 @ app.route('/makePayment', methods=['POST'])
