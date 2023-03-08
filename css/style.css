@@ -204,7 +204,6 @@ label {
 
 button {
   border-radius: 0; }
-
   .ringus {
     background-color : transparent;
     border-radius: 5px ;
@@ -221,7 +220,7 @@ button {
   
   #mybutton {
     position: fixed;
-    bottom: 700px;
+    bottom: 350px;
     right: 10px;
   }
 
