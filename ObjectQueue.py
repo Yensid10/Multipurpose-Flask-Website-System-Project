@@ -35,5 +35,5 @@ class Queue:
     def popSpecificOrder(self, tableNo):
         for i in range(self.getLength()):
             if self.getObject(i).getNote1() == tableNo:
-                return self.queue.pop(i)
+                return self.queue.pop(i).getNote2()
         return False
