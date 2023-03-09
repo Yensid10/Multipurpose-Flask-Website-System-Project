@@ -7,18 +7,23 @@
 </head>
 
 <body>
-  <div class="container">
+    <div class="container">
     <h1>Sign In</h1>
-    <form action="" method="get">
+    <form method="post" onsubmit="signIn(); return false;">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username">
       <label for="password">Password:</label>
       <input type="password" id="password" name="password">
-      <button type="submit" formaction="/kitchen">Kitchen Staff</button>
-      <button type="submit" formaction="/Floor-Staff">Floor Staff</button>
+      <button type="submit">Sign In</button>
     </form>
-
-  </div>
+  </div><script>
+    function signIn() {
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+      if (username === "kitchen" && password === "password") {
+        window.location.href = "kitchen.html";
+      }
+    }
 </body>
 
 </html>
