@@ -51,9 +51,9 @@ def home():
 def index():
     if request.method == 'POST':
         data = request.get_json()
-        tableNumber = data['tableNumber']
+        # tableNumber = data['tableNumber']
         allergens = data['allergens']
-        print(tableNumber, allergens)
+        # print(tableNumber, allergens)
         results = []
         for allergen in allergens:
             if allergen == 'Milk':
@@ -123,7 +123,6 @@ def addPingToQueue():
         pingType = data.get('pingType')
         tableNo = data.get('tableNo')
         queue.addObject(pingType, tableNo)
-        queue.addObject("Table ", tableNo)
         return ('', 204)
 
 
