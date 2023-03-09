@@ -3,22 +3,33 @@
 
 <head>
   <title>Sign In Screen</title>
-  <link rel="stylesheet" href="/static/css/loginpagestyle.css">
+  <link rel="stylesheet" href="../static/css/loginpagestyle.css">
 </head>
 
 <body>
   <div class="container">
     <h1>Sign In</h1>
-    <form action="" method="get">
+    <form method="post" onsubmit="signIn(); return false;">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username">
       <label for="password">Password:</label>
       <input type="password" id="password" name="password">
-      <button type="submit" formaction="/kitchen">Kitchen Staff</button><br>
-      <button type="submit" formaction="/Floor-Staff">Floor Staff</button>
+      <button type="submit">Sign In</button>
     </form>
-
   </div>
+  <script>
+    function signIn() {
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+      if (username === "kitchen" && password === "password") {
+        window.location.href = "kitchen.html";
+      } else if (username === "floor" && password === "password") {
+        window.location.href = "Floor-Staff.html";
+      } else {
+        alert("Invalid username or password");
+      }
+    }
+  </script>
 </body>
 
 </html>
