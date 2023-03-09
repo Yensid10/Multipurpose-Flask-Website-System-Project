@@ -359,6 +359,7 @@
                 orderHtml += "<div><strong>" + order.getObject(i).getNote1() + "</strong><br>"
                     + order.getObject(i).getNote2()
                     + "<button class=\"remove-button\" onclick=\"removeOrderItem(" + i + ")\"><img src=\"/static/images/trashcan.png\" alt=\"Remove\"></button></div><br>";
+                priceTotal += parseFloat(order.getObject(i).getPrice());
             }
             $("#order-item").html(orderHtml + "<strong style='text-decoration: underline; '>Total: £" + priceTotal + "</strong><br><br>");
         }
