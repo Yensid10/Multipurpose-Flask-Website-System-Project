@@ -40,7 +40,7 @@
 			$.ajax({
 				type: "POST",
 				url: "/addPingToQueue",
-				data: JSON.stringify({ "pingType": "Table", "tableNo": "#" + (Math.floor(Math.random() * 100)).toString() }),
+				data: JSON.stringify({ "pingType": "Table", "tableNo": "#" + tableNumber }),
 				contentType: "application/json",
 			});
 		}
@@ -64,7 +64,7 @@
 				</ul>
 			</div>
 			<div id="mybutton">
-				<button class="ringus"><a href=#>Ring us</a></button>
+				<button class="ringus" onclick="addPingToQueue()"><a href=#>Ring us</a></button>
 			</div>
 		</div>
 	</nav>
@@ -174,81 +174,12 @@
 		<title>My </title>
 		<link rel="stylesheet" type="text/css" href="/static/css/popupStyle.css">
 
-		<!-- 		<style>
-			*,
-			*:before,
-			*:after {
-				padding: 0;
-				margin: 0;
-				box-sizing: border-box;
-			}
-
-			body {
-				background-color: white;
-
-
-			}
-
-			.popup {
-				background-color: lightblue;
-				width: 420px;
-				padding: 30px 40px;
-				position: absolute;
-				transform: translate(-50%, -50%);
-				left: 50%;
-				top: 50%;
-				border-radius: 8px;
-				font-family: "Poppins", sans-serif;
-				display: none;
-				text-align: center;
-			}
-
-			.popup button {
-				display: block;
-				margin: 0 0 20px auto;
-				background-color: transparent;
-				font-size: 30px;
-				color: #ffffff;
-				background: #03549a;
-				border-radius: 100%;
-				width: 40px;
-				height: 40px;
-				border: none;
-				outline: none;
-				cursor: pointer;
-			}
-
-			.popup h2 {
-				margin-top: -20px;
-			}
-
-			.popup p {
-				font-size: 14px;
-				text-align: justify;
-				margin: 20px 0;
-				line-height: 25px;
-			}
-
-			a {
-				display: block;
-				width: 150px;
-				position: relative;
-				margin: 10px auto;
-				text-align: center;
-				background-color: #0f72e5;
-				border-radius: 20px;
-				color: #ffffff;
-				text-decoration: none;
-				padding: 8px 0;
-			}
-		</style>
-	 -->
-
-
 		<script>
+			var tableNumber = null;
+
 			function submitPopup() {
 				var selectElement = document.getElementById('table-number-select');
-				var tableNumber = selectElement.options[selectElement.selectedIndex].value;
+				tableNumber = selectElement.options[selectElement.selectedIndex].value;
 
 				var allergenInputs = document.getElementsByName('allergen');
 				var allergens = [];
@@ -257,19 +188,15 @@
 						allergens.push(allergenInputs[i].value);
 					}
 				}
-
-				console.log('tableNumber:', tableNumber + ' allergens:', allergens);
 				$.ajax({
 					type: "POST",
 					url: "/hideDairy",
 					data: JSON.stringify({
-						"tableNumber": tableNumber,
 						"allergens": allergens
 					}),
 					contentType: "application/json",
 					dataType: 'json'
 				}).done(function (response) {
-					console.log('this is my response:', response);
 					var data = response.data;
 					hide(data);
 					document.querySelector(".popup").style.display = "none";
