@@ -257,29 +257,34 @@
 						allergens.push(allergenInputs[i].value);
 					}
 				}
-
+				console.log(tableNumber);
 				console.log('tableNumber:', tableNumber + ' allergens:', allergens);
-				$.ajax({
-					type: "POST",
-					url: "/hideDairy",
-					data: JSON.stringify({
-						"tableNumber": tableNumber,
-						"allergens": allergens
-					}),
-					contentType: "application/json",
-					dataType: 'json'
-				}).done(function (response) {
-					console.log('this is my response:', response);
-					var data = response.data;
-					hide(data);
-					document.querySelector(".popup").style.display = "none";
-					document.querySelector("body").style.overflow = "auto";
-				});
+
+				if (tableNumber !== null && tableNumber !== '') {
+					if (!isNaN(tableNumber) && tableNumber >= 0) {
+						$.ajax({
+							type: "POST",
+							url: "/hideDairy",
+							data: JSON.stringify({
+								"tableNumber": tableNumber,
+								"allergens": allergens
+							}),
+							contentType: "application/json",
+							dataType: 'json'
+						}).done(function (response) {
+							console.log('this is my response:', response);
+							var data = response.data;
+							console.log(tableNumber);
+							hide(data);
+							document.querySelector(".popup").style.display = "none";
+							document.querySelector("body").style.overflow = "auto";
+						});
+					}
+				}
 			}
 
 			function hide(data) {
 				if (data != null) {
-					console.log(data);
 					for (var i = 0; i < data.length; i++) {
 						console.log(data[i]);
 						var x1 = document.getElementById(data[i]);
@@ -293,6 +298,7 @@
 						}
 					}
 				}
+
 			}
 		</script>
 
