@@ -1,6 +1,7 @@
+import SqlQuerys
 import datetime
 from bson import ObjectId
-from flask import Flask, render_template, jsonify, request, json
+from flask import Flask, render_template, jsonify, request, json, Response
 from pymongo import MongoClient
 from ObjectQueue import Queue
 from SqlQuerys import FetchMenu
@@ -11,7 +12,6 @@ paypalrestsdk.configure({
     "mode": "sandbox",
     "client_id": "AfzWV6H8HbQPiOb0a3B-ty24yYWRllM8s34zjYgsgjpnIqlunb3vkmZrJ5KSvLB5XjRXOoAQP6nriEOA",
     "client_secret": "EA4HmZS-IacWkAx8U0pOwRTlfNawZ_c3wZh87F8oXvxfWK2St54c1CAbdy1_qodhY1OUbz3loVpbwa89"})
-
 
 app = Flask(__name__)
 
@@ -47,12 +47,66 @@ def home():
     return render_template('index.html')
 
 
+@app.route('/hideDairy', methods=['POST'])
+def index():
+    if request.method == 'POST':
+        data = request.get_json()
+        tableNumber = data['tableNumber']
+        allergens = data['allergens']
+        print(tableNumber, allergens)
+        results = []
+        for allergen in allergens:
+            if allergen == 'Milk':
+                results.extend(SqlQuerys.FetchDairy())
+
+            elif allergen == 'Gluten':
+                results.extend(SqlQuerys.FetchGluten())
+
+            elif allergen == 'Peanuts':
+                results.extend(SqlQuerys.FetchPeanuts())
+
+            elif allergen == 'Treenuts':
+                results.extend(SqlQuerys.FetchTreenuts())
+
+            elif allergen == 'Celery':
+                results.extend(SqlQuerys.FetchCelery())
+
+            elif allergen == 'Mustard':
+                results.extend(SqlQuerys.FetchMustard())
+
+            elif allergen == 'Eggs':
+                results.extend(SqlQuerys.FetchEggs())
+
+            elif allergen == 'Sesame':
+                results.extend(SqlQuerys.FetchSesame())
+
+            elif allergen == 'Fish':
+                results.extend(SqlQuerys.FetchFish())
+
+            elif allergen == 'Crustaceans':
+                results.extend(SqlQuerys.FetchCrustaceans())
+
+            elif allergen == 'Molluscs':
+                results.extend(SqlQuerys.FetchMolluscs())
+
+            elif allergen == 'Sulphates':
+                results.extend(SqlQuerys.FetchSulphites())
+
+            elif allergen == 'Lupin':
+                results.extend(SqlQuerys.FetchLupin())
+
+        if results:
+            return jsonify({'data': results})
+        else:
+            return jsonify({'success': False})
+
+
 @app.route('/billTemplate')
 def billTemplate():
     return render_template('billTemplate.html')
 
 
-@app.route('/acceptQueuePing', methods=['POST'])
+@ app.route('/acceptQueuePing', methods=['POST'])
 def acceptQueuePing():
     if request.method == 'POST':
         ping = queue.popFrontObject()
@@ -62,17 +116,28 @@ def acceptQueuePing():
         return jsonify(data)
 
 
-@app.route('/addPingToQueue', methods=['POST'])
+@ app.route('/addPingToQueue', methods=['POST'])
 def addPingToQueue():
     if request.method == 'POST':
         data = request.get_json()
         pingType = data.get('pingType')
         tableNo = data.get('tableNo')
         queue.addObject(pingType, tableNo)
+        queue.addObject("Table ", tableNo)
         return ('', 204)
 
 
-@app.route("/updateQueue")
+@ app.route('/addItemToOrder', methods=['POST'])
+def addPingToOrder():
+    if request.method == 'POST':
+        data = request.get_json()
+        orderItem = data.get('orderItem')
+        orderNotes = data.get('orderNotes')
+        orders.addObject(orderItem, orderNotes)
+        return ('', 204)
+
+
+@ app.route("/updateQueue")
 def updateQueue():
     jsonQueue = []
     for i in range(queue.getLength()):
@@ -87,7 +152,7 @@ def updateQueue():
     })
 
 
-@app.route('/sendToKitchen', methods=['POST'])
+@ app.route('/sendToKitchen', methods=['POST'])
 def sendToKitchen():
     if request.method == 'POST':
         data = request.get_json()
@@ -186,7 +251,7 @@ def success():
     return render_template('menu.html')
 
 
-@ app.route('/Ring')
+@  app.route('/Ring')
 def showRing():
     return render_template('Ring.html')
 
@@ -217,8 +282,15 @@ def kitchen():
     for order in accepted_orders:
         order['_id'] = str(order['_id'])
 
-    print(orders)
-    return render_template('kitchen.html', orders=orders, accepted_orders=accepted_orders)
+
+@ app.route('/order_history')
+def order_history():
+    conn = sqlite3.connect("orders.db")
+    c = conn.cursor()
+    c.execute("SELECT * FROM order_history")
+    order_history = c.fetchall()
+    conn.close()
+    return render_template('order_history.html', order_history=order_history)
 
 
 @ app.route('/accept_order', methods=['POST'])

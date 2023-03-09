@@ -70,6 +70,8 @@
 	</nav>
 	<!-- END nav -->
 
+
+
 	<!--The display of the menu starts -->
 	<section class="home-slider owl-carousel img" style="background-image: url(/static/images/bg_1.jpg);">
 
@@ -87,7 +89,6 @@
 			</div>
 		</div>
 	</section>
-
 
 	<!--Displaying few items in a grid view -->
 	<section class="ftco-section">
@@ -168,8 +169,253 @@
 			</div>
 		</div>
 
-		<!--Displaying few menu items in list view with price and info -->
 
+
+		<title>My </title>
+		<link rel="stylesheet" type="text/css" href="/static/css/popupStyle.css">
+
+		<!-- 		<style>
+			*,
+			*:before,
+			*:after {
+				padding: 0;
+				margin: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				background-color: white;
+
+
+			}
+
+			.popup {
+				background-color: lightblue;
+				width: 420px;
+				padding: 30px 40px;
+				position: absolute;
+				transform: translate(-50%, -50%);
+				left: 50%;
+				top: 50%;
+				border-radius: 8px;
+				font-family: "Poppins", sans-serif;
+				display: none;
+				text-align: center;
+			}
+
+			.popup button {
+				display: block;
+				margin: 0 0 20px auto;
+				background-color: transparent;
+				font-size: 30px;
+				color: #ffffff;
+				background: #03549a;
+				border-radius: 100%;
+				width: 40px;
+				height: 40px;
+				border: none;
+				outline: none;
+				cursor: pointer;
+			}
+
+			.popup h2 {
+				margin-top: -20px;
+			}
+
+			.popup p {
+				font-size: 14px;
+				text-align: justify;
+				margin: 20px 0;
+				line-height: 25px;
+			}
+
+			a {
+				display: block;
+				width: 150px;
+				position: relative;
+				margin: 10px auto;
+				text-align: center;
+				background-color: #0f72e5;
+				border-radius: 20px;
+				color: #ffffff;
+				text-decoration: none;
+				padding: 8px 0;
+			}
+		</style>
+	 -->
+
+
+		<script>
+			function submitPopup() {
+				var selectElement = document.getElementById('table-number-select');
+				var tableNumber = selectElement.options[selectElement.selectedIndex].value;
+
+				var allergenInputs = document.getElementsByName('allergen');
+				var allergens = [];
+				for (var i = 0; i < allergenInputs.length; i++) {
+					if (allergenInputs[i].checked) {
+						allergens.push(allergenInputs[i].value);
+					}
+				}
+
+				console.log('tableNumber:', tableNumber + ' allergens:', allergens);
+				$.ajax({
+					type: "POST",
+					url: "/hideDairy",
+					data: JSON.stringify({
+						"tableNumber": tableNumber,
+						"allergens": allergens
+					}),
+					contentType: "application/json",
+					dataType: 'json'
+				}).done(function (response) {
+					console.log('this is my response:', response);
+					var data = response.data;
+					hide(data);
+					document.querySelector(".popup").style.display = "none";
+					document.querySelector("body").style.overflow = "auto";
+				});
+			}
+
+			function hide(data) {
+				if (data != null) {
+					console.log(data);
+					for (var i = 0; i < data.length; i++) {
+						console.log(data[i]);
+						var x1 = document.getElementById(data[i]);
+						console.log('x is now changed to:', data[i]);
+						if (x1 != null) {
+							if (x1.style.display === "none") {
+								x1.style.display = "block";
+							} else {
+								x1.style.display = "none";
+							}
+						}
+					}
+				}
+			}
+		</script>
+
+		<head>
+			<title>Popup Window</title>
+			<link rel="stylesheet" type="text/css" href="/static/css/popupStyle.css">
+			<style>
+				body {
+					overflow: hidden;
+					/* prevent scrolling */
+				}
+
+				body {
+					overflow: auto;
+				}
+
+				.popup {
+					position: fixed;
+					/* fixed position to stay in place */
+					top: 50%;
+					/* position at center of screen */
+					left: 50%;
+					/* position at center of screen */
+					transform: translate(-50%, -50%);
+					/* center the popup */
+					/* background-color: white;
+					border: 2px solid black; */
+					padding: 20px;
+					z-index: 1;
+					/* make sure it appears on top */
+				}
+
+				button#close {
+					position: absolute;
+					/* position the button relative to the popup */
+					top: 0;
+					right: 0;
+					font-size: 24px;
+					background-color: transparent;
+					border: none;
+					cursor: pointer;
+				}
+			</style>
+		</head>
+
+		<body>
+			<!-- <form action="/submit-form" method="POST"> -->
+			<div class="popup">
+				<button id="close">&times;</button>
+				<label for="table-number-select">Table Number:</label>
+				<select id="table-number-select" name="table-number">
+					<option value="">Select a Table</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+
+				</select>
+				<h3>Please Select any Dietary Restrictions:</h3>
+				<h4>Allergens:</h4>
+				<!-- <form> -->
+				<input type="checkbox" id="allergen1" name="allergen" value="Milk">
+				<label for="allergen1">Milk</label><br>
+				<input type="checkbox" id="allergen2" name="allergen" value="Eggs">
+				<label for="allergen2">Eggs</label><br>
+				<input type="checkbox" id="allergen3" name="allergen" value="Peanuts">
+				<label for="allergen3">Peanuts</label><br>
+				<input type="checkbox" id="allergen4" name="allergen" value="Tree Nuts">
+				<label for="allergen4">Tree Nuts</label><br>
+				<input type="checkbox" id="allergen5" name="allergen" value="Wheat">
+				<label for="allergen5">Wheat</label><br>
+				<input type="checkbox" id="allergen6" name="allergen" value="Soy">
+				<label for="allergen6">Soy</label><br>
+				<input type="checkbox" id="allergen7" name="allergen" value="Fish">
+				<label for="allergen7">Fish</label><br>
+				<input type="checkbox" id="allergen8" name="allergen" value="Shellfish">
+				<label for="allergen8">Shellfish</label><br>
+				<h4>Religious Restrictions:</h4>
+				<input type="checkbox" id="Kosher" name="allergen" value="Kosher">
+				<label for="Kosher">Kosher</label><br>
+				<input type="checkbox" id="Halal" name="allergen" value="Halal">
+				<label for="Halal">Halal</label><br>
+				<button onclick="submitPopup()">Submit</button>
+
+			</div>
+
+			<script type="text/javascript">
+				window.addEventListener("load", function () {
+					setTimeout(
+						function open(event) {
+							const popup = document.querySelector(".popup");
+							popup.style.display = "block";
+							document.body.style.overflow = "hidden"; // lock scrolling
+						},
+						2000
+					)
+				});
+
+				document.querySelector("#close").addEventListener("click", function () {
+					const popup = document.querySelector(".popup");
+					popup.style.display = "none";
+					document.body.style.overflow = "auto"; // unlock scrolling
+				});
+			</script>
+		</body>
+
+		<!--Displaying few menu items in list view with price and info -->
 		<div class="container">
 			<div class="row justify-content-center mb-5 pb-3 mt-5 pt-5">
 				<div class="col-md-7 heading-section text-center ftco-animate">
@@ -180,103 +426,118 @@
 			</div>
 			<div class="row">
 				<div class="col-md-6">
-					<div class="pricing-entry d-flex ftco-animate">
-						<div class="img" style="background-image: url(/static/images/dish-1.jpg);"></div>
-						<div class="desc pl-3">
-							<div class="d-flex text align-items-center">
-								<h3><span>Guacamole and chips</span></h3>
-								<span class="price">£7.50</span>
-							</div>
-							<div class="d-block">
-								<p>contains avocado</p>
-							</div>
-						</div>
-					</div>
-					<div class="pricing-entry d-flex ftco-animate">
-						<div class="img" style="background-image: url(/static/images/dish-2.jpg);"></div>
-						<div class="desc pl-3">
-							<div class="d-flex text align-items-center">
-								<h3><span>Queso fundido</span></h3>
-								<span class="price">£9.00</span>
-							</div>
-							<div class="d-block">
-								<p>contains dairy</p>
+					<div id="Guacamole">
+						<div class=" pricing-entry d-flex ftco-animate">
+							<div class="img" style="background-image: url(/static/images/dish-1.jpg);"></div>
+							<div class="desc pl-3">
+								<div class="d-flex text align-items-center">
+									<h3><span>Guacamole and chips</span></h3>
+									<span class="price">£7.50</span>
+								</div>
+								<div class="d-block">
+									<p>contains avocado</p>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="pricing-entry d-flex ftco-animate">
-						<div class="img" style="background-image: url(/static/images/dish-3.jpg);"></div>
-						<div class="desc pl-3">
-							<div class="d-flex text align-items-center">
-								<h3><span>Tostadas de tinga</span></h3>
-								<span class="price">£8.50</span>
-							</div>
-							<div class="d-block">
-								<p>contains chicken, contains dairy</p>
-							</div>
-						</div>
-					</div>
-					<div class="pricing-entry d-flex ftco-animate">
-						<div class="img" style="background-image: url(/static/images/dish-4.jpg);"></div>
-						<div class="desc pl-3">
-							<div class="d-flex text align-items-center">
-								<h3><span>Mole negro</span></h3>
-								<span class="price">£15.00</span>
-							</div>
-							<div class="d-block">
-								<p>contains peanuts, contains tree nuts</p>
+					<div id="Queso fundido">
+						<div class="pricing-entry d-flex ftco-animate">
+							<div class="img" style="background-image: url(/static/images/dish-2.jpg);"></div>
+							<div class="desc pl-3">
+								<div class="d-flex text align-items-center">
+									<h3><span>Queso fundido</span></h3>
+									<span class="price">£9.00</span>
+								</div>
+								<div class="d-block">
+									<p>contains dairy</p>
+								</div>
 							</div>
 						</div>
 					</div>
-
+					<div id="Tostadas de tinga">
+						<div class="pricing-entry d-flex ftco-animate">
+							<div class="img" style="background-image: url(/static/images/dish-3.jpg);"></div>
+							<div class="desc pl-3">
+								<div class="d-flex text align-items-center">
+									<h3><span>Tostadas de tinga</span></h3>
+									<span class="price">£8.50</span>
+								</div>
+								<div class="d-block">
+									<p>contains chicken, contains dairy</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="Mole Negro">
+						<div class="pricing-entry d-flex ftco-animate">
+							<div class="img" style="background-image: url(/static/images/dish-4.jpg);"></div>
+							<div class="desc pl-3">
+								<div class="d-flex text align-items-center">
+									<h3><span>Mole negro</span></h3>
+									<span class="price">£15.00</span>
+								</div>
+								<div class="d-block">
+									<p>contains peanuts, contains tree nuts</p>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 
 				<div class="col-md-6">
-					<div class="pricing-entry d-flex ftco-animate">
-						<div class="img" style="background-image: url(/static/images/dish-5.jpg);"></div>
-						<div class="desc pl-3">
-							<div class="d-flex text align-items-center">
-								<h3><span>Tacos al pastor</span></h3>
-								<span class="price">£12.00</span>
-							</div>
-							<div class="d-block">
-								<p>contains pork</p>
-							</div>
-						</div>
-					</div>
-					<div class="pricing-entry d-flex ftco-animate">
-						<div class="img" style="background-image: url(/static/images/dish-6.jpg);"></div>
-						<div class="desc pl-3">
-							<div class="d-flex text align-items-center">
-								<h3><span>Enchiladas verdes</span></h3>
-								<span class="price">£13.50</span>
-							</div>
-							<div class="d-block">
-								<p>contains dairy, contains chicken</p>
+					<div id="Tacos al pastor">
+						<div class="pricing-entry d-flex ftco-animate">
+							<div class="img" style="background-image: url(/static/images/dish-5.jpg);"></div>
+							<div class="desc pl-3">
+								<div class="d-flex text align-items-center">
+									<h3><span>Tacos al pastor</span></h3>
+									<span class="price">£12.00</span>
+								</div>
+								<div class="d-block">
+									<p>contains pork</p>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="pricing-entry d-flex ftco-animate">
-						<div class="img" style="background-image: url(/static/images/dish-7.jpg);"></div>
-						<div class="desc pl-3">
-							<div class="d-flex text align-items-center">
-								<h3><span>Arroz verde</span></h3>
-								<span class="price">£4.50</span>
-							</div>
-							<div class="d-block">
-								<p>contains dairy</p>
+					<div id="Enchiladas verdes">
+						<div class="pricing-entry d-flex ftco-animate">
+							<div class="img" style="background-image: url(/static/images/dish-6.jpg);"></div>
+							<div class="desc pl-3">
+								<div class="d-flex text align-items-center">
+									<h3><span>Enchiladas verdes</span></h3>
+									<span class="price">£13.50</span>
+								</div>
+								<div class="d-block">
+									<p>contains dairy, contains chicken</p>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="pricing-entry d-flex ftco-animate">
-						<div class="img" style="background-image: url(/static/images/dish-8.jpg);"></div>
-						<div class="desc pl-3">
-							<div class="d-flex text align-items-center">
-								<h3><span>Frijoles negros</span></h3>
-								<span class="price">£4.00</span>
+					<div id="Arroz verde">
+						<div class="pricing-entry d-flex ftco-animate">
+							<div class="img" style="background-image: url(/static/images/dish-7.jpg);"></div>
+							<div class="desc pl-3">
+								<div class="d-flex text align-items-center">
+									<h3><span>Arroz verde</span></h3>
+									<span class="price">£4.50</span>
+								</div>
+								<div class="d-block">
+									<p>contains dairy</p>
+								</div>
 							</div>
-							<div class="d-block">
-								<p>contains soy</p>
+						</div>
+					</div>
+					<div id="Frijoles negros">
+						<div class="pricing-entry d-flex ftco-animate">
+							<div class="img" style="background-image: url(/static/images/dish-8.jpg);"></div>
+							<div class="desc pl-3">
+								<div class="d-flex text align-items-center">
+									<h3><span>Frijoles negros</span></h3>
+									<span class="price">£4.00</span>
+								</div>
+								<div class="d-block">
+									<p>contains soy</p>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -284,7 +545,6 @@
 			</div>
 		</div>
 	</section>
-
 
 	<!--To display items section wise -->
 	<!--There are 4 different food sections -->
