@@ -148,6 +148,20 @@
             border: 3px solid rgb(0, 0, 0);
         }
 
+        .remove-button {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+        }
+
+        .remove-button img {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+
         .review-header {
             width: 220px;
             height: 50px;
@@ -342,9 +356,9 @@
             var orderHtml = "";
             priceTotal = 0;
             for (var i = 0; i < order.getLength(); i++) {
-                // have it so if note2 is too big it wraps onto more lines
-                orderHtml += "<strong>" + order.getObject(i).getNote1() + "</strong><br>" + order.getObject(i).getNote2() + "<br><br>";
-                priceTotal += parseFloat(order.getObject(i).getPrice());
+                orderHtml += "<div><strong>" + order.getObject(i).getNote1() + "</strong><br>"
+                    + order.getObject(i).getNote2()
+                    + "<button class=\"remove-button\" onclick=\"removeOrderItem(" + i + ")\"><img src=\"/static/images/trashcan.png\" alt=\"Remove\"></button></div><br>";
             }
             $("#order-item").html(orderHtml + "<strong style='text-decoration: underline; '>Total: £" + priceTotal + "</strong><br><br>");
         }
@@ -353,6 +367,11 @@
             document.getElementById("review").classList.remove("flash");
             order.addObject(orderItem, document.getElementById(orderItem).value, price);
             document.getElementById(orderItem).value = "";
+            updateOrder();
+        }
+
+        function removeOrderItem(index) {
+            order.removeObject(index);
             updateOrder();
         }
 
