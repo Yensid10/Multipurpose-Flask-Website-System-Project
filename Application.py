@@ -220,9 +220,14 @@ def makePayment():
         return jsonify({'paymentUrl': paymentUrl})
 
 
-@ app.route('/testPayment')
-def testPayment():
-    return render_template('payTemplate.html')
+@ app.route('/checkPayment', methods=['POST'])
+def checkPayment():
+    if request.method == 'POST':
+        tableNo = request.json['tableNo']
+        check = orders.getSpecificOrder(tableNo)
+        if check == False:
+            return jsonify({'check': "False"})
+        return jsonify({'check': "True"})
 
 
 @ app.route('/success')
