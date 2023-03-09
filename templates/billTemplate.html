@@ -40,6 +40,7 @@
 			<h2>Oaxaca</h2>
 		</div>
 	</div>
+	{% if data != "No order found" %}
 	<table class="items-table">
 		<tr>
 			<th>Item Number</th>
@@ -61,6 +62,9 @@
 	{% set tableNo = data['tableNo'] %}
 	<button onclick="makePayment('{{ tableNo }}')">Make Payment</button>
 	<div id="qrcode"></div>
+	{% else %}
+	<h1 style="font-size: 50px; text-align: center;">{{ data }}</h1>
+	{% endif %}
 </body>
 
 </html>

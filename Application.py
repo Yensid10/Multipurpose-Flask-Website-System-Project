@@ -211,7 +211,7 @@ def makePayment():
             }],
             "redirect_urls": {
                 "return_url": "http://localhost:5000/success",
-                "cancel_url": "http://localhost:5000/"
+                "cancel_url": "http://localhost:5000/Menu"
             }
         })
         payment.create()
