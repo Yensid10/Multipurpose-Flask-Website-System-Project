@@ -35,16 +35,6 @@
 
 <body>
 	<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-	<script>
-		function addPingToQueue() {
-			$.ajax({
-				type: "POST",
-				url: "/addPingToQueue",
-				data: JSON.stringify({ "pingType": "Table", "tableNo": "#" + tableNumber }),
-				contentType: "application/json",
-			});
-		}
-	</script>
 	<!--The standard navbar for the website -->
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
@@ -64,7 +54,7 @@
 				</ul>
 			</div>
 			<div id="mybutton">
-				<button class="ringus" onclick="addPingToQueue()"><a href=#>Ring us</a></button>
+				<button class="ringus"><a href=#>Ring us</a></button>
 			</div>
 		</div>
 	</nav>

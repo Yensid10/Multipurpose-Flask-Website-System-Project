@@ -1,7 +1,7 @@
 import SqlQuerys
 import datetime
 from bson import ObjectId
-from flask import Flask, render_template, jsonify, request, json, Response
+from flask import Flask, render_template, jsonify, request, json
 from pymongo import MongoClient
 from ObjectQueue import Queue
 from SqlQuerys import FetchMenu
@@ -21,20 +21,9 @@ db = client["Kitchen"]
 order_collection = db["order_queue"]
 accepted_collection = db["accepted_orders"]
 
+
 orders = Queue()
 queue = Queue()
-# queue.addObject("Food", "#12")
-# queue.addObject("Table", "#3")
-# queue.addObject("Table", "#17")
-queue.addObject("Door", "<---")
-# queue.addObject("Food", "#12")
-# queue.addObject("Table", "#3")
-# queue.addObject("Table", "#17")
-# queue.addObject("Door", "<---")
-# queue.addObject("Food", "#12")
-# queue.addObject("Table", "#3")
-# queue.addObject("Table", "#17")
-# queue.addObject("Door", "<---")
 
 
 @app.route('/Menu')
