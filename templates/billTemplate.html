@@ -50,12 +50,12 @@
 		<tr>
 			<td>{{ loop.index }}</td>
 			<td>{{ item['Note1'] }}</td>
-			<td>${{ item['price'] }}</td>
+			<td>£{{ item['price'] }}</td>
 		</tr>
 		{% endfor %}
 		<tr>
 			<td colspan="2">Subtotal</td>
-			<td>${{ data['subtotal'] }}</td>
+			<td>£{{ data['subtotal'] }}</td>
 		</tr>
 	</table>
 	{% set tableNo = data['tableNo'] %}
