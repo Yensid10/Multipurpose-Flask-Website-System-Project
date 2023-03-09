@@ -19,7 +19,7 @@
             data: {
                 'order_data': JSON.stringify({
                     'old_id': orderID,
-                    'table_number': orderData[0],
+                    'order_index': orderData[0],
                     'items': orderData[1],
                     'note': orderData[2]
                 }),
@@ -33,7 +33,10 @@
     });
     </script>
     <script>
-        function addPingToQueue(tableNumber) {
+        function addPingToQueue(orderIndex) {
+            // Split the orderIndex to get the table number
+            const tableNumber = orderIndex.split('-')[0];
+
             $.ajax({
                 type: "POST",
                 url: "/addPingToQueue",
@@ -41,6 +44,69 @@
                 contentType: "application/json",
             });
         }
+    </script>
+
+    <script>
+        function sendCancel(orderIndex) {
+            // Split the orderIndex to get the table number
+            const orderIndexParts = orderIndex.split('-');
+            const tableNumber = orderIndexParts[0];
+            const indexNumber = orderIndexParts[1];
+
+            $.ajax({
+                type: "POST",
+                url: "/sendCancel",
+                data: JSON.stringify({"pingType": "Food", "tableNo": "#" + tableNumber, "indexNo": indexNumber}),
+                contentType: "application/json",
+            });
+        }
+    </script>
+
+
+    <script>
+        $(document).on('click', '.complete-button', function () {
+            // Get the order ID
+            const orderID = $(this).data('order-id');
+
+            // Send the order ID to the server to be completed
+            $.ajax({
+                url: '/complete_order',
+                type: 'POST',
+                data: {'order_id': orderID},
+                success: function (data) {
+                    // If the order was completed, remove it from the accepted orders table
+                    $(this).closest('tr').remove();
+                }
+            });
+        });
+    </script>
+
+    <script>
+        // Refresh the tables every second
+        setInterval(function () {
+            $('#order-queue-table').load(location.href + ' #order-queue-table');
+            $('#accepted-orders-table').load(location.href + ' #accepted-orders-table');
+        }, 1000);
+    </script>
+
+
+    <script>
+        $(document).on('click', '.cancel-button', function () {
+            // Get the order ID and order index from the table row
+            const orderID = $(this).data('order-id');
+            const orderIndex = $(this).closest('tr').find('td:first-child').text();
+
+            // Send a POST request to cancel the item
+            $.ajax({
+                url: '/cancel_order',
+                type: 'POST',
+                data: {'order_id': orderID, 'order_index': orderIndex},
+                success: function (data) {
+                    // If the item was cancelled, remove it from the bill table
+                    $(this).closest('tr').remove();
+                }
+            });
+        });
     </script>
 
 
@@ -58,20 +124,26 @@
             <table class="table kitchen-table table-container" id="order-queue-table">
                 <thead>
                 <tr>
-                    <th>Table</th>
+                    <th>Index</th>
                     <th>Items</th>
                     <th>Note</th>
                     <th>Accept</th>
+                    <th>Cancel</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for order in orders %}
                     <tr>
-                        <td>{{ order["table_number"] }}</td>
+                        <td>{{ order["order_index"] }}</td>
                         <td>{{ order["items"] }}</td>
                         <td>{{ order["note"] }}</td>
                         <td>
                             <button class="btn btn-primary accept-button" data-order-id="{{ order["_id"] }}">Accept
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger cancel-button" data-order-id="{{ order["_id"] }}"
+                                    onclick="sendCancel('{{ order["order_index"] }}')">Cancel
                             </button>
                         </td>
                     </tr>
@@ -80,28 +152,33 @@
             </table>
         </div>
         <div class="col-md-6">
-            <div class="accepted-table-container table-container">
+            <div class="accepted-table-container table-container" id="accepted-orders-table">
                 <h1 class="text-center mb-5">Accepted Orders</h1>
                 <table class="table accepted-table">
                     <thead>
                     <tr>
-                        <th>Table</th>
+                        <th>Index</th>
                         <th>Items</th>
                         <th>Note</th>
                         <th>Complete</th>
+                        <th>Cancel</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for order in accepted_orders %}
                         <tr>
-                            <td>{{ order["table_number"] }}</td>
+                            <td>{{ order["order_index"] }}</td>
                             <td>{{ order["items"] }}</td>
                             <td>{{ order["note"] }}</td>
                             <td>
                                 <button class="btn btn-primary complete-button" data-order-id="{{ order._id }}"
-                                        onclick="addPingToQueue({{ order["table_number"] }})">Complete
+                                        onclick="addPingToQueue('{{ order["order_index"] }}')">Complete
                                 </button>
-
+                            <td>
+                                <button class="btn btn-danger cancel-button" data-order-id="{{ order._id }}"
+                                        onclick="sendCancel('{{ order["order_index"] }}')">Cancel
+                                </button>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
