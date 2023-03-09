@@ -1,7 +1,7 @@
 import SqlQuerys
 import datetime
 from bson import ObjectId
-from flask import Flask, render_template, jsonify, request, json, Response
+from flask import Flask, render_template, jsonify, request, json
 from pymongo import MongoClient
 from ObjectQueue import Queue
 from SqlQuerys import FetchMenu
@@ -22,20 +22,9 @@ order_collection = db["order_queue"]
 accepted_collection = db["accepted_orders"]
 complete_collection = db["complete_orders"]
 
+
 orders = Queue()
 queue = Queue()
-# queue.addObject("Food", "#12")
-# queue.addObject("Table", "#3")
-# queue.addObject("Table", "#17")
-queue.addObject("Door", "<---")
-# queue.addObject("Food", "#12")
-# queue.addObject("Table", "#3")
-# queue.addObject("Table", "#17")
-# queue.addObject("Door", "<---")
-# queue.addObject("Food", "#12")
-# queue.addObject("Table", "#3")
-# queue.addObject("Table", "#17")
-# queue.addObject("Door", "<---")
 
 
 @app.route('/Menu')
@@ -52,9 +41,9 @@ def home():
 def index():
     if request.method == 'POST':
         data = request.get_json()
-        tableNumber = data['tableNumber']
+        # tableNumber = data['tableNumber']
         allergens = data['allergens']
-        print(tableNumber, allergens)
+        # print(tableNumber, allergens)
         results = []
         for allergen in allergens:
             if allergen == 'Milk':
@@ -124,7 +113,6 @@ def addPingToQueue():
         pingType = data.get('pingType')
         tableNo = data.get('tableNo')
         queue.addObject(pingType, tableNo)
-        queue.addObject("Table ", tableNo)
         return ('', 204)
 
 
