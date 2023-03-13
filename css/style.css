@@ -77,52 +77,74 @@ hr {
   box-sizing: content-box;
   height: 0;
   overflow: visible; }
+/* This code applies styles to different HTML elements in a web page. */
 
+/* Applies style to headings from h1 to h6 */
 h1, h2, h3, h4, h5, h6 {
-  margin-top: 0;
-  margin-bottom: 0.5rem; }
+  margin-top: 0; /* Removes top margin */
+  margin-bottom: 0.5rem; /* Sets 0.5rem bottom margin */
+}
 
+/* Applies style to paragraphs */
 p {
-  margin-top: 0;
-  margin-bottom: 1rem; }
+  margin-top: 0; /* Removes top margin */
+  margin-bottom: 1rem; /* Sets 1rem bottom margin */
+}
 
+/* Applies underline style to abbreviated words */
 abbr[title],
 abbr[data-original-title] {
-  text-decoration: underline;
-  -webkit-text-decoration: underline dotted;
-  text-decoration: underline dotted;
-  cursor: help;
-  border-bottom: 0; }
+  text-decoration: underline; /* Underlines the abbreviated word */
+  -webkit-text-decoration: underline dotted; /* Adds dotted lines for Safari and Chrome */
+  text-decoration: underline dotted; /* Adds dotted lines */
+  cursor: help; /* Changes cursor to tooltip */
+  border-bottom: 0; /* Makes the border of an element underneath to be invisible */
+}
 
+/* Applies style to address HTML element */
 address {
-  margin-bottom: 1rem;
-  font-style: normal;
-  line-height: inherit; }
+  margin-bottom: 1rem; /* Sets 1rem bottom margin */
+  font-style: normal; /* Reverts font back to normal */
+  line-height: inherit; /* Specifies the line height to be inherited from its parent element */
+}
 
+/* Applies style to ordered lists, unordered lists, and definition lists*/
 ol,
 ul,
 dl {
-  margin-top: 0;
-  margin-bottom: 1rem; }
+  margin-top: 0; /* Removes top margin */
+  margin-bottom: 1rem; /* Sets 1rem bottom margin */
+}
 
+/* Applies additional style to nested lists */
 ol ol,
 ul ul,
 ol ul,
 ul ol {
-  margin-bottom: 0; }
+  margin-bottom: 0; /* Sets bottom margin to 0 so it aligns with parent list */
+}
 
+/* Applies bold style to dt (definition term) element */
 dt {
-  font-weight: 700; }
+  font-weight: 700; /* Sets font-weight to bold */
+}
 
+/* Applies margin style to dd (definition description) element */
 dd {
-  margin-bottom: .5rem;
-  margin-left: 0; }
+  margin-bottom: .5rem; /* Sets 0.5rem bottom margin */
+  margin-left: 0; /* Removes left margin */
+}
 
+/* Applies margin style to blockquote element */
 blockquote {
-  margin: 0 0 1rem; }
+  margin: 0 0 1rem; /* Sets 0 top margin, 0 left/right margin, and 1rem bottom margin */
+}
 
+/* Applies italic style to dfn element */
 dfn {
-  font-style: italic; }
+  font-style: italic; /* Sets font-style to italic */
+}
+
 
 b,
 strong {
@@ -295,381 +317,750 @@ legend {
 progress {
   vertical-align: baseline; }
 
-[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
-  height: auto; }
-
-[type="search"] {
-  outline-offset: -2px;
-  -webkit-appearance: none; }
-
-[type="search"]::-webkit-search-cancel-button,
-[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none; }
-
-::-webkit-file-upload-button {
-  font: inherit;
-  -webkit-appearance: button; }
-
-output {
-  display: inline-block; }
-.fixed-button {
-  position: fixed;
-  right: 2000px;
-  bottom: 20px;
+[type="number"]::-webkit-inner-s/* Set font weight to bolder for <b> and <strong> tags */
+b,
+strong {
+  font-weight: bolder;
 }
 
+/* Reduce font size of <small> tag */
+small {
+  font-size: 80%;
+}
 
-summary {
-  display: list-item;
-  cursor: pointer; }
+/* Set position and size of subscripts and superscripts */
+sub,
+sup {
+  position: relative;
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+sub {
+  bottom: -.25em;
+}
+sup {
+  top: -.5em;
+}
 
-template {
-  display: none; }
+/* Set color and style for links */
+a {
+  color: #78d5ef;
+  text-decoration: none;
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+}
+a:hover {
+  color: #34c0e7;
+  text-decoration: underline;
+}
+a:not([href]):not([tabindex]) {
+  color: inherit;
+  text-decoration: none;
+}
+a:not([href]):not([tabindex]):hover, 
+a:not([href]):not([tabindex]):focus {
+  color: inherit;
+  text-decoration: none;
+}
+a:not([href]):not([tabindex]):focus {
+  outline: 0;
+}
 
-[hidden] {
-  display: none !important; }
+/* Set font family and size for preformatted text and program code */
+pre,
+code,
+kbd,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+pre {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  overflow: auto;
+  -ms-overflow-style: scrollbar;
+}
 
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
+/* Set margin and alignment for figures */
+figure {
+  margin: 0 0 1rem;
+}
+
+/* Remove border from image */
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+
+/* Hide overflow in SVG elements */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Collapse borders in tables */
+table {
+  border-collapse: collapse;
+}
+
+/* Style the caption of a table */
+caption {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  color: #6c757d;
+  text-align: left;
+  caption-side: bottom;
+}
+
+/* Inherit text alignment from parent element for table headers */
+th {
+  text-align: inherit;
+}
+
+/* Set display and margin for labels */
+label {
+  display: inline-block;
   margin-bottom: 0.5rem;
+}
+
+/* Set button's border radius */
+button {
+  border-radius: 0;
+}
+/* Style 'ringus' class as a circular button */
+.ringus {
+  background-color : transparent;
+  border-radius: 5px ;
+  border-color: #ffffff;
+  color: #b3b300;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 50%;
+}
+/* Position '#mybutton' relative to viewport */
+#mybutton {
+  position: fixed;
+  bottom: 350px;
+  right: 10px;
+}
+
+/* Add focus outline with dotted border */
+button:focus {
+  outline: 1px dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
+/* Inherit font properties for form elements */
+input,
+button,
+select,
+optgroup,
+textarea {
+  margin: 0;
   font-family: inherit;
-  font-weight: 500;
-  line-height: 1.2;
-  color: inherit; }
+  font-size: inherit;
+  line-height: inherit;
+}
 
+/* Make input and select fields have visible overflow */
+button,
+input {
+  overflow: visible;
+}
+
+/* Disable text transformation for forms */
+button,
+select {
+  text-transform: none;
+}
+
+/* Enable buttons to look like native elements */
+button,
+html [type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+/* Remove inner focus border on Firefox */
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  padding: 0;
+  border-style: none;
+}
+
+/* Set box sizing, padding and border for radio buttons ans checkboxes */
+input[type="radio"],
+input[type="checkbox"] {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+/* Set appearance for special types of input fields */
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="month"] {
+  -webkit-appearance: listbox;
+}
+
+/* Allow reszing of textarea vertically */
+textarea {
+  overflow: auto;
+  resize: vertical;
+}
+
+/* Reset styles for fieldset tag */
+fieldset {
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+/* Style the legend */
+pin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto; }
+/* Styles for search input elements */
+[type="search"] {
+  outline-offset: -2px; /* sets the offset of the selection outline for search inputs */
+  -webkit-appearance: none; /* removes default styling for search inputs on WebKit browsers*/
+}
+[type="search"]::-webkit-search-cancel-button, [type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; /* removes default styling for the cancel button and search decorations on WebKit browsers */
+}
+
+/* Styles for file upload buttons */
+::-webkit-file-upload-button {
+  font: inherit; /* inherit the font properties from the parent element */
+  -webkit-appearance: button; /* turn file upload button into regular button on WebKit browsers */
+}
+
+/* Styles for output elements */
+output {
+  display: inline-block; /* display outputs as inline blocks */
+}
+
+/* Styles for fixed button element */
+.fixed-button {
+  position: fixed; /* set the position to be always fixed at a certain location */
+  right: 2000px; /* set the distance from the right edge of the page */
+  bottom: 20px; /* set the distance from the bottom edge of the page */  
+}
+
+/* Styles for summary elements */
+summary {
+  display: list-item; /* display summaries as list items */
+  cursor: pointer; /* set the cursor style on hover to pointer */
+}
+
+/* Hide the content in template elements */
+template {
+  display: none;
+}
+
+/* Hide elements with the hidden attribute */
+[hidden] {
+  display: none !important; /* make sure the element is hidden even if other styles indicate otherwise */
+}
+
+/* Heading styles */
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  margin-bottom: 0.5rem; /* add some space after each heading */
+  font-family: inherit; /* inherit font properties from parent element */
+  font-weight: 500; /* set font weight to a bold value */
+  line-height: 1.2; /* set the line height to 1.2 times the font size */
+  color: inherit; /* inherit the font color from the parent element */
+}
 h1, .h1 {
-  font-size: 2.5rem; }
-
+  font-size: 2.5rem; /* set font size for level-1 headings */
+}
 h2, .h2 {
-  font-size: 2rem; }
-
+  font-size: 2rem; /* set font size for level-2 headings */
+}
 h3, .h3 {
-  font-size: 1.75rem; }
-
+  font-size: 1.75rem; /* set font size for level-3 headings */
+}
 h4, .h4 {
-  font-size: 1.5rem; }
-
+  font-size: 1.5rem; /* set font size for level-4 headings */
+}
 h5, .h5 {
-  font-size: 1.25rem; }
-
+  font-size: 1.25rem; /* set font size for level-5 headings */
+}
 h6, .h6 {
-  font-size: 1rem; }
+  font-size: 1rem; /* set font size for level-6 headings */
+}
 
+/* Font styles */
 .lead {
-  font-size: 1.25rem;
-  font-weight: 300; }
+  font-size: 1.25rem; /* set font size for leading text */
+  font-weight: 300; /* set font weight to a lighter value */
+}
 
 .display-1 {
-  font-size: 6rem;
-  font-weight: 300;
-  line-height: 1.2; }
+  font-size: 6rem; /* set font size for large heading */
+  font-weight: 300; /* set font weight to a lighter value */
+  line-height: 1.2; /* set the line height to 1.2 times the font size */
+}
 
 .display-2 {
-  font-size: 5.5rem;
-  font-weight: 300;
-  line-height: 1.2; }
+  font-size: 5.5rem; /* set font size for large heading */
+  font-weight: 300; /* set font weight to a lighter value */
+  line-height: 1.2; /* set the line height to 1.2 times the font size */
+}
 
+/* Define style for elements with class "display-3" */
 .display-3 {
-  font-size: 4.5rem;
-  font-weight: 300;
-  line-height: 1.2; }
+  font-size: 4.5rem; /* Set font size to 4.5 times the root font size */
+  font-weight: 300; /* Set font weight to light */
+  line-height: 1.2; /* Set spacing between lines of text */
+}
 
+/* Define style for elements with class "display-4" */
 .display-4 {
-  font-size: 3.5rem;
-  font-weight: 300;
-  line-height: 1.2; }
+  font-size: 3.5rem; /* Set font size to 3.5 times the root font size */
+  font-weight: 300; /* Set font weight to light */
+  line-height: 1.2; /* Set spacing between lines of text */
+}
 
+/* Define style for horizontal rule element */
 hr {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  border: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1); }
+  margin-top: 1rem; /* Set top margin to 1 rem */
+  margin-bottom: 1rem; /* Set bottom margin to 1 rem */
+  border: 0; /* Remove default border styling */
+  border-top: 1px solid rgba(0, 0, 0, 0.1); /* Add a 1-pixel, light gray top border */
+}
 
+/* Define style for small and .small elements */
 small,
 .small {
-  font-size: 80%;
-  font-weight: 400; }
+  font-size: 80%; /* Set font size to 80% of the parent element's font size */
+  font-weight: 400; /* Set font weight to normal */
+}
 
+/* Define style for mark and .mark elements, used for highlighting text */
 mark,
 .mark {
-  padding: 0.2em;
-  background-color: #fcf8e3; }
+  padding: 0.2em; /* Add 0.2em of padding around the element */
+  background-color: #fcf8e3; /* Set background color to a light, pale yellow */
+}
 
+/* Define style for lists that have no markers (bullet points or numbers) */
 .list-unstyled {
-  padding-left: 0;
-  list-style: none; }
+  padding-left: 0; /* Remove default padding on the left side of the list */
+  list-style: none; /* Remove default list-style-type (marker types) */
+}
 
+/* Define style for lists that are displayed in a line */
 .list-inline {
-  padding-left: 0;
-  list-style: none; }
+  padding-left: 0; /* Remove default padding on the left side of the list */
+  list-style: none; /* Remove default list-style-type (marker types) */
+}
 
+/* Define style for items within an inline list */
 .list-inline-item {
-  display: inline-block; }
-  .list-inline-item:not(:last-child) {
-    margin-right: 0.5rem; }
+  display: inline-block; /* Display items as inline-block so they appear next to each other horizontally */
+}
+.list-inline-item:not(:last-child) {
+  margin-right: 0.5rem; /* Add right margin of 0.5 rem to all but the last item in the list */
+}
 
+/* Define style for an abbreviation or acronym */
 .initialism {
-  font-size: 90%;
-  text-transform: uppercase; }
+  font-size: 90%; /* Set font size to 90% of the parent element's font size */
+  text-transform: uppercase; /* Convert text to uppercase */
+}
 
+/* Define style for a blockquote */
 .blockquote {
-  margin-bottom: 1rem;
-  font-size: 1.25rem; }
+  margin-bottom: 1rem; /* Add bottom margin of 1 rem to the blockquote */
+  font-size: 1.25rem; /* Set font size to 1.25 times the root font size */
+}
 
+/* Define styles for the footer of a blockquote */
 .blockquote-footer {
-  display: block;
-  font-size: 80%;
-  color: #6c757d; }
-  .blockquote-footer::before {
-    content: "\2014 \00A0"; }
+  display: block; /* Display content element as a block element */
+  font-size: 80%; /* Set font size to 80% of the parent element's font size */
+  color: #6c757d; /* Set color to medium-gray */
+}
+.blockquote-footer::before {
+  content: "\2014 \00A0"; /* Add an mdash and non-breaking space before the footer text */
+}
 
+/* Define a responsive image size to fill its container */
 .img-fluid {
-  max-width: 100%;
-  height: auto; }
+  max-width: 100%; /* Set maximum width to 100% of its container */
+  height: auto; /* Maintain aspect ratio by setting height to auto */
+}
 
+/* Define a thumbnail-style border for images */
 .img-thumbnail {
-  padding: 0.25rem;
-  background-color: #fff;
-  border: 1px solid #dee2e6;
-  border-radius: 0.25rem;
-  max-width: 100%;
-  height: auto; }
+  padding: 0.25rem; /* Add padding around the image */
+  background-color: #fff; /* Set background color to white */
+  border: 1px solid #dee2e6; /* Add a 1-pixel light-gray border to the image */
+  border-radius: 0.25rem; /* Round the edges of the image border */
+  max-width: 100%; /* Set maximum width to 100% of its container */
+  height: auto; /* Maintain aspect ratio by setting height to auto */
+}
 
+/* Define a figure element as an inline-block*/
 .figure {
-  display: inline-block; }
+  display: inline-block;
+}
 
+/* Define the style for an image in a figure element */
 .figure-img {
-  margin-bottom: 0.5rem;
-  line-height: 1; }
-
-.figure-caption {
-  font-size: 90%;
-  color: #6c757d; }
-
+  margin-bottom: 0.5rem; /* Add bottom margin of 0.5 rem to the figure image */
+  line-height: 1; /* Set line height to 1 so the image sits directly on the baseline */
+}
+/* Set font for code, keyboard input, preformatted text, and sample output */
 code,
 kbd,
 pre,
 samp {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; 
+}
 
+/* Style settings for inline code elements */
 code {
-  font-size: 87.5%;
-  color: #e83e8c;
-  word-break: break-word; }
-  a > code {
-    color: inherit; }
+  font-size: 87.5%; /* Decrease size of font to 87.5% */
+  color: #e83e8c; /* Set text color to a shade of pink */
+  word-break: break-word; /* Break words if they exceed their container's width */
+  }
 
+a > code {
+    color: inherit; /* Make sure color of links defined in a <code> block inherits parent text color */ 
+}
+
+/* Apply styles to keyboard input elements */
 kbd {
-  padding: 0.2rem 0.4rem;
-  font-size: 87.5%;
-  color: #fff;
-  background-color: #212529;
-  border-radius: 0.2rem; }
-  kbd kbd {
-    padding: 0;
-    font-size: 100%;
-    font-weight: 700; }
+  padding: 0.2rem 0.4rem; /* Give some padding to kbd element */
+  font-size: 87.5%; /* Same size as code */
+  color: #fff; /* Set text color to white */
+  background-color: #212529; /* Set background color to a dark shade of gray */
+  border-radius: 0.2rem; /* Round corners slightly */
+}
 
+kbd kbd {
+  padding: 0;
+  font-size: 100%;
+  font-weight: 700; /* Increase font weight inside nested <kbd> tags */
+}
+
+/* Apply styles to <pre> elements */
 pre {
   display: block;
-  font-size: 87.5%;
-  color: #212529; }
-  pre code {
-    font-size: inherit;
-    color: inherit;
-    word-break: normal; }
+  font-size: 87.5%; /* Same size as code */
+  color: #212529; /* Set text color to standard black */
+}
 
+/* Allow for inheritance of font size and color inside <code> blocks located inside <pre> tags*/
+pre code {
+  font-size: inherit;
+  color: inherit;
+  word-break: normal;
+}
+ 
+/* Create a scrollable container element */
 .pre-scrollable {
   max-height: 340px;
-  overflow-y: scroll; }
+  overflow-y: scroll; 
+}
 
+/* Styles for the .container class that sets fixed widths based on media queries*/
 .container {
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
-  margin-left: auto; }
-  @media (min-width: 576px) {
-    .container {
-      max-width: 540px; } }
-  @media (min-width: 768px) {
-    .container {
-      max-width: 720px; } }
-  @media (min-width: 992px) {
-    .container {
-      max-width: 960px; } }
-  @media (min-width: 1200px) {
-    .container {
-      max-width: 1140px; } }
+  margin-left: auto;
+}
 
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+/* Styles for the .container-fluid class that sets full width*/
 .container-fluid {
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
-  margin-left: auto; }
+  margin-left: auto;
+}
+/* This selects elements that use monospace font family */
+code,
+kbd,
+pre,
+samp {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; 
+}
 
+/* This sets the style for inline codes */
+code {
+  font-size: 87.5%;
+  color: #e83e8c;
+  word-break: break-word;
+}
+a > code {
+  color: inherit;
+}
+
+/* This sets the style for keyboard input display */
+kbd {
+  padding: 0.2rem 0.4rem;
+  font-size: 87.5%;
+  color: #fff;
+  background-color: #212529;
+  border-radius: 0.2rem;
+}
+kbd kbd {
+  padding: 0;
+  font-size: 100%;
+  font-weight: 700;
+}
+
+/* This sets the style for preformatted text blocks */
+pre {
+  display: block;
+  font-size: 87.5%;
+  color: #212529;
+}
+pre code {
+  font-size: inherit;
+  color: inherit;
+  word-break: normal;
+}
+
+/* This sets the style for scrollable preformatted text blocks */
+.pre-scrollable {
+  max-height: 340px;
+  overflow-y: scroll;
+}
+
+/* This sets the style for fixed width centered container */
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+/* This sets the style for full width container */
+.container-fluid {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+/* The row class creates a horizontal group of columns */
 .row {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px; }
+  display: -webkit-box; /* Displays as flexbox for safari and earlier webkit browsers */
+  display: -ms-flexbox; /* Displays as older flexbox for Internet Explorer */
+  display: flex; /* Displays as flexbox for modern browsers */
+  -ms-flex-wrap: wrap; /* Do not allow the items overflow the container  */
+  flex-wrap: wrap; /* Do not allow the items overflow the container */
+  margin-right: -15px; /* To make sure that there is no extra margin on the right side of the rows in nested structures */
+  margin-left: -15px; /* To make sure that there is no extra margin on the left side of the rows in nested structures */
+}
 
+/* The no-gutters class removes the gutters or spaces between columns */
 .no-gutters {
   margin-right: 0;
-  margin-left: 0; }
-  .no-gutters > .col,
-  .no-gutters > [class*="col-"] {
-    padding-right: 0;
-    padding-left: 0; }
+  margin-left: 0;
+}
+.no-gutters > .col,
+.no-gutters > [class*="col-"] {
+  padding-right: 0;
+  padding-left: 0;
+}
 
+/* The columns are used within the rows to create your layout */
 .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col,
 .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm,
 .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md,
 .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg,
 .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl,
 .col-xl-auto {
-  position: relative;
-  width: 100%;
-  min-height: 1px;
-  padding-right: 15px;
-  padding-left: 15px; }
+  position: relative; /* Creates a positioned element */
+  width: 100%; /* Create a full-width element */
+  min-height: 1px; /* Minimum height of 1 pixel */
+  padding-right: 15px; /* Right padding of 15 pixels */
+  padding-left: 15px; /* Left padding of 15 pixels */
+}
 
+/* The col class is a basic building block of bootstrap grid system */
 .col {
-  -ms-flex-preferred-size: 0;
-  flex-basis: 0;
-  -webkit-box-flex: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  max-width: 100%; }
+  -ms-flex-preferred-size: 0; /* Older IE/Edge-specific property that takes care of Microsoft Flexibility */
+  flex-basis: 0; /* Basic size of the flex item. */
+  -webkit-box-flex: 1; /* Previous version of Flexbox */
+  -ms-flex-positive: 1; /* Older Flexbox property */
+  flex-grow: 1; /* Allows the element to grow up to available space */
+  max-width: 100%; /* Limitation of maximum width to any flex item */
+}
 
+/* The col-auto class sets the width property to auto for an item. */
 .col-auto {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
-  width: auto;
-  max-width: none; }
+  -webkit-box-flex: 0; /* Previous version of Flexbox */
+  -ms-flex: 0 0 auto; /* Older Flexbox property */
+  flex: 0 0 auto; /* A shorthand property for the flex-grow, flex-shrink, and the flex-basis properties */
+  width: auto; /* Automatically calculate the width of the content */
+  max-width: none; /* No limitaion of maximum width */
+}
 
+/* Responsive column classes based on size of the viewport */
 .col-1 {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 8.33333%;
-  flex: 0 0 8.33333%;
-  max-width: 8.33333%; }
-
-.col-2 {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 16.66667%;
-  flex: 0 0 16.66667%;
-  max-width: 16.66667%; }
-
-.col-3 {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 25%;
-  flex: 0 0 25%;
-  max-width: 25%; }
-
-.col-4 {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 33.33333%;
-  flex: 0 0 33.33333%;
-  max-width: 33.33333%; }
-
-.col-5 {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 41.66667%;
-  flex: 0 0 41.66667%;
-  max-width: 41.66667%; }
-
-.col-6 {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 50%;
-  flex: 0 0 50%;
-  max-width: 50%; }
-
-.col-7 {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 58.33333%;
-  flex: 0 0 58.33333%;
-  max-width: 58.33333%; }
-
+  -webkit-box-flex: 0; /* Previous version of Flexbox */
+  -ms-flex: 0 0 8.33333%; /* Width of the element; 12 columns with (100%/12 = 8.333%) aside from the paddings */
+  flex: 0 
 .col-8 {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 66.66667%;
-  flex: 0 0 66.66667%;
-  max-width: 66.66667%; }
+  -webkit-box-flex: 0; /* Prevents this column from growing or shrinking */
+  -ms-flex: 0 0 66.66667%; /* Sets initial width, cannot grow or shrink past this value */
+  flex: 0 0 66.66667%; /* Same as above but for modern browsers that use "flex" */
+  max-width: 66.66667%; /* Sets maximum width more explicitly */
+}
 
 .col-9 {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 75%;
-  flex: 0 0 75%;
-  max-width: 75%; }
+  -webkit-box-flex: 0; 
+  -ms-flex: 0 0 75%; 
+  flex: 0 0 75%; 
+  max-width: 75%; 
+}
 
 .col-10 {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 83.33333%;
-  flex: 0 0 83.33333%;
-  max-width: 83.33333%; }
+  -webkit-box-flex: 0; 
+  -ms-flex: 0 0 83.33333%; 
+  flex: 0 0 83.33333%; 
+  max-width: 83.33333%; 
+}
 
 .col-11 {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 91.66667%;
+  -webkit-box-flex: 0; 
+  -ms-flex: 0 0 91.66667%; 
   flex: 0 0 91.66667%;
-  max-width: 91.66667%; }
+  max-width: 91.66667%; 
+}
 
 .col-12 {
   -webkit-box-flex: 0;
-  -ms-flex: 0 0 100%;
-  flex: 0 0 100%;
-  max-width: 100%; }
+  -ms-flex: 0 0 100%; 
+  flex: 0 0 100%; 
+  max-width: 100%; 
+}
 
+/* Sets the first element in the order */
 .order-first {
-  -webkit-box-ordinal-group: 0;
-  -ms-flex-order: -1;
-  order: -1; }
+  -webkit-box-ordinal-group: 0; /* WebKit/Blink-based browsers */
+  -ms-flex-order: -1; /* IE 10, Edge */
+  order: -1; /* The actual CSS standard */
+}
 
+/* Sets the last element in the order */
 .order-last {
-  -webkit-box-ordinal-group: 14;
-  -ms-flex-order: 13;
-  order: 13; }
+    -webkit-box-ordinal-group: 14; /* WebKit/Blink-based browsers */
+    -ms-flex-order: 13; /* IE 10, Edge */
+    order: 13; /* The actual CSS standard */
+}
 
+/* Sets an element to be at index 0 in the order */
 .order-0 {
-  -webkit-box-ordinal-group: 1;
-  -ms-flex-order: 0;
-  order: 0; }
+    -webkit-box-ordinal-group: 1; /* WebKit/Blink-based browsers */
+    -ms-flex-order: 0; /* IE 10, Edge */
+    order: 0; /* The actual CSS standard */
+}
 
+/* Sets an element to be at index 1 in the order */
 .order-1 {
-  -webkit-box-ordinal-group: 2;
-  -ms-flex-order: 1;
-  order: 1; }
+    -webkit-box-ordinal-group: 2; /* WebKit/Blink-based browsers */
+    -ms-flex-order: 1; /* IE 10, Edge */
+    order: 1; /* The actual CSS standard */
+}
 
+/* Sets an element to be at index 2 in the order */
 .order-2 {
-  -webkit-box-ordinal-group: 3;
-  -ms-flex-order: 2;
-  order: 2; }
+    -webkit-box-ordinal-group: 3; /* WebKit/Blink-based browsers */
+    -ms-flex-order: 2; /* IE 10, Edge */
+    order: 2; /* The actual CSS standard */
+}
 
+/* Sets an element to be at index 3 in the order */
 .order-3 {
-  -webkit-box-ordinal-group: 4;
-  -ms-flex-order: 3;
-  order: 3; }
+    -webkit-box-ordinal-group: 4; /* WebKit/Blink-based browsers */
+    -ms-flex-order: 3; /* IE 10, Edge */
+    order: 3; /* The actual CSS standard */
+}
 
+/* Sets an element to be at index 4 in the order */
 .order-4 {
-  -webkit-box-ordinal-group: 5;
-  -ms-flex-order: 4;
-  order: 4; }
+    -webkit-box-ordinal-group: 5; /* WebKit/Blink-based browsers */
+    -ms-flex-order: 4; /* IE 10, Edge */
+    order: 4; /* The actual CSS standard */
+}
 
+/* Sets an element to be at index 5 in the order */
 .order-5 {
-  -webkit-box-ordinal-group: 6;
-  -ms-flex-order: 5;
-  order: 5; }
+    -webkit-box-ordinal-group: 6; /* WebKit/Blink-based browsers */
+    -ms-flex-order: 5; /* IE 10, Edge */
+    order: 5; /* The actual CSS standard */
+}
 
+/* Sets an element to be at index 6 in the order */
 .order-6 {
-  -webkit-box-ordinal-group: 7;
-  -ms-flex-order: 6;
-  order: 6; }
+    -webkit-box-ordinal-group: 7; /* WebKit/Blink-based browsers */
+    -ms-flex-order: 6; /* IE 10, Edge */
+    order: 6; /* The actual CSS standard */
+}
+
 
 .order-7 {
   -webkit-box-ordinal-group: 8;
@@ -700,48 +1091,62 @@ pre {
   -webkit-box-ordinal-group: 13;
   -ms-flex-order: 12;
   order: 12; }
-
+/*Adds 8.33333% left margin to element*/ 
 .offset-1 {
   margin-left: 8.33333%; }
 
+/*Adds 16.66667% left margin to element*/
 .offset-2 {
   margin-left: 16.66667%; }
 
+/*Adds 25% left margin to element*/
 .offset-3 {
   margin-left: 25%; }
 
+/*Adds 33.33333% left margin to element*/
 .offset-4 {
   margin-left: 33.33333%; }
 
+/*Adds 41.66667% left margin to element*/
 .offset-5 {
   margin-left: 41.66667%; }
 
+/*Adds 50% left margin to element*/
 .offset-6 {
   margin-left: 50%; }
 
+/*Adds 58.33333% left margin to element*/
 .offset-7 {
   margin-left: 58.33333%; }
 
+/*Adds 66.66667% left margin to element*/
 .offset-8 {
   margin-left: 66.66667%; }
 
+/*Adds 75% left margin to element*/
 .offset-9 {
   margin-left: 75%; }
 
+/*Adds 83.33333% left margin to element*/
 .offset-10 {
   margin-left: 83.33333%; }
 
+/*Adds 91.66667% left margin to element*/
 .offset-11 {
   margin-left: 91.66667%; }
 
 @media (min-width: 576px) {
+  /* Targets elements with class 'col-sm' that have a parent with a minimum width of 576 pixels */
   .col-sm {
-    -ms-flex-preferred-size: 0;
-    flex-basis: 0;
-    -webkit-box-flex: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    max-width: 100%; }
+    -ms-flex-preferred-size: 0; /* Specifies the preferred initial size for a flex item in Internet Explorer 10 */
+    flex-basis: 0; /* Specifies the initial main size (width if row, height if column) of a flex item */
+    -webkit-box-flex: 1; /* Specifies the flexibility of a flex item */
+    -ms-flex-positive: 1; /* Specifies the ability of a flex item to grow if necessary */
+    flex-grow: 1; /* Specifies the ability of a flex item to grow if necessary */
+    max-width: 100%; /* Specifies the maximum width of a flex item */
+  }
+}
+
   .col-sm-auto {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 auto;
@@ -892,15 +1297,22 @@ pre {
     margin-left: 83.33333%; }
   .offset-sm-11 {
     margin-left: 91.66667%; } }
-
+/* This is a media query that targets devices with a minimum width of 768px */
 @media (min-width: 768px) {
+  /* The following style rules will apply to elements with class "col-md" when the screen matches the above media query */
   .col-md {
+    /* The element will not have an initial size based on its content */
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
+    /* The element will grow as needed until it fills all available space */
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
-    max-width: 100%; }
+    /* The element will have a maximum width of 100% */
+    max-width: 100%; 
+  }
+}
+
   .col-md-auto {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 auto;
@@ -1051,15 +1463,21 @@ pre {
     margin-left: 83.33333%; }
   .offset-md-11 {
     margin-left: 91.66667%; } }
-
+/* Media query with minimum screen width of 992px */
 @media (min-width: 992px) {
+  
+  /* CSS class for all columns with large width*/
   .col-lg {
+    /* Disable automatic sizing based on content */
     -ms-flex-preferred-size: 0;
-    flex-basis: 0;
+    flex-basis: 0; /* another way to achieve the above property */ 
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
-    max-width: 100%; }
+    max-width: 100%; /* setting maximum width of column as full row width */
+  }
+}
+
   .col-lg-auto {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 auto;
@@ -1210,15 +1628,18 @@ pre {
     margin-left: 83.33333%; }
   .offset-lg-11 {
     margin-left: 91.66667%; } }
-
 @media (min-width: 1200px) {
+   /* This style applies when the screen width is greater than or equal to 1200px */
   .col-xl {
-    -ms-flex-preferred-size: 0;
-    flex-basis: 0;
-    -webkit-box-flex: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    max-width: 100%; }
+    -ms-flex-preferred-size: 0; /* make sure IE supports flexbox correctly */
+    flex-basis: 0; /* set initial size of the item to 0 */
+    -webkit-box-flex: 1; /* set flexible items to have same size in WebKit. Still needed in Safari 8 */
+    -ms-flex-positive: 1; /* make sure Edge browser handles flexbox layout properly */
+    flex-grow: 1; /* specify how much flex item can grow when there's empty space available*/
+    max-width: 100%; /* specify maximum width of the flex item */
+  }
+}
+
   .col-xl-auto {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 auto;
@@ -1545,45 +1966,55 @@ pre {
     -ms-overflow-style: -ms-autohiding-scrollbar; }
     .table-responsive-sm > .table-bordered {
       border: 0; } }
+@media (max-width: 767.98px) { /* media query for devices up to max-width of 767.98px */
+  .table-responsive-md { /* class to be applied for tables on medium size screens*/
+    display: block;
+    width: 100%;
+    overflow-x: auto; /* enable horizontal scrolling if needed */
+    -webkit-overflow-scrolling: touch; /* for smoother scrolling in iOS devices*/
+    -ms-overflow-style: -ms-autohiding-scrollbar; /* specifies the behavior of scrollbar when table overflows*/
+  }
+  .table-responsive-md > .table-bordered { /* applies styles only to the table with the table-bordered class */
+    border: 0; /* removes border on the table*/
+  }
+}
 
-@media (max-width: 767.98px) {
-  .table-responsive-md {
+@media (max-width: 991.98px) { /* media query for devices up to max-width of 991.98px */
+  .table-responsive-lg {  /* class to be applied for tables on large size screens*/
     display: block;
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar; }
-    .table-responsive-md > .table-bordered {
-      border: 0; } }
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+  .table-responsive-lg > .table-bordered {
+    border: 0;
+  }
+}
 
-@media (max-width: 991.98px) {
-  .table-responsive-lg {
+@media (max-width: 1199.98px) { /* media query for devices up to max-width of 1199.98px */
+  .table-responsive-xl { /* class to be applied for tables on extra-large size screens*/
     display: block;
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar; }
-    .table-responsive-lg > .table-bordered {
-      border: 0; } }
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+  .table-responsive-xl > .table-bordered {
+    border: 0;
+  }
+}
 
-@media (max-width: 1199.98px) {
-  .table-responsive-xl {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar; }
-    .table-responsive-xl > .table-bordered {
-      border: 0; } }
-
-.table-responsive {
+.table-responsive { /*default style for tables*/
   display: block;
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar; }
-  .table-responsive > .table-bordered {
-    border: 0; }
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+.table-responsive > .table-bordered {
+  border: 0;
+}
 
 .form-control {
   display: block;
@@ -2047,31 +2478,40 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
 a.btn.disabled,
 fieldset:disabled a.btn {
   pointer-events: none; }
-
+/* This code block sets styles for the primary button type */
 .btn-primary {
+  color: #212529; /* Sets text color for the button */
+  background-color: #78d5ef; /* Sets background color for the button */
+  border-color: #78d5ef; /* Sets border color for the button */ 
+}
+.btn-primary:hover { /* Styles for when the cursor is hovering over the button */
+  color: #212529;
+  background-color: #56caeb;
+  border-color: #4ac7ea; }
+}
+.btn-primary:focus, .btn-primary.focus { /* Styles for when the button is focused (clicked) */
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(120, 213, 239, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(120, 213, 239, 0.5); 
+}
+.btn-primary.disabled, .btn-primary:disabled { /* Styles for when the button is disabled */
   color: #212529;
   background-color: #78d5ef;
-  border-color: #78d5ef; }
-  .btn-primary:hover {
-    color: #212529;
-    background-color: #56caeb;
-    border-color: #4ac7ea; }
-  .btn-primary:focus, .btn-primary.focus {
-    -webkit-box-shadow: 0 0 0 0.2rem rgba(120, 213, 239, 0.5);
-    box-shadow: 0 0 0 0.2rem rgba(120, 213, 239, 0.5); }
-  .btn-primary.disabled, .btn-primary:disabled {
-    color: #212529;
-    background-color: #78d5ef;
-    border-color: #78d5ef; }
-  .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
-  .show > .btn-primary.dropdown-toggle {
-    color: #212529;
-    background-color: #4ac7ea;
-    border-color: #3fc3e8; }
-    .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
-    .show > .btn-primary.dropdown-toggle:focus {
-      -webkit-box-shadow: 0 0 0 0.2rem rgba(120, 213, 239, 0.5);
-      box-shadow: 0 0 0 0.2rem rgba(120, 213, 239, 0.5); }
+  border-color: #78d5ef; 
+}
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle { /* Styles for when the button is being interacted with or is a dropdown button */
+  color: #212529;
+  background-color: #4ac7ea;
+  border-color: #3fc3e8; 
+}
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus { /* Styles for when the button that's being interacted with has focus */
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(120, 213, 239, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(120, 213, 239, 0.5);
+}
+
 
 .btn-secondary {
   color: #fff;
@@ -8993,13 +9433,25 @@ textarea.form-control {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
 
-@keyframes loader-dash {
+/* This is a keyframe animation for a loader stroke which will draw a dashed line. */
+@keyframes loader-dash { 
+
+/* Start the animation at 0% and set the initial state with stroke dash properties. */
   0% {
-    stroke-dasharray: 1, 200;
-    stroke-dashoffset: 0; }
+    stroke-dasharray: 1, 200; /* The length of each dash and space in the dash pattern (total length = 201) */
+    stroke-dashoffset: 0; /* Move the start point of the dash pattern to the beginning of the path */
+  }
+  
+  /* At the 50% mark, adjust the stroke dash properties to draw half of the path. */
   50% {
-    stroke-dasharray: 89, 200;
-    stroke-dashoffset: -35px; }
+    stroke-dasharray: 89, 200; /* Draw dashes that total to 89 units (out of total 201 units) */
+    stroke-dashoffset: -35px; /* Move the starting point by -35 pixels to the left */
+  }
+  
+  /* End the animation at 100% where stroke dash properties are tweaked again to complete the drawing process. */
   100% {
-    stroke-dasharray: 89, 200;
-    stroke-dashoffset: -136px; } }
+    stroke-dasharray: 89, 200; /* Use another dash array to finish the drawing process */
+    stroke-dashoffset: -136px; /* Move the starting point further left to complete the drawing pattern*/
+  } 
+}
+
