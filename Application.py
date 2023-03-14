@@ -172,7 +172,7 @@ def complete_order():
     if order:
         # Insert the order data into the complete_orders collection
         complete_collection.insert_one(order)
-
+        complete_collection.update_one({'_id': ObjectId(order_id)}, {'$set': {'status': 'Completed', 'completed_time': datetime.datetime.now()}})
         # Remove the order from the accepted_orders collection
         accepted_collection.delete_one({'_id': ObjectId(order_id)})
 
