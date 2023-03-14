@@ -198,6 +198,13 @@ def cancel_order():
     # Return a success response
     return jsonify({'success': True})
 
+@app.route('/completed')
+def completed():
+    completed_orders = list(complete_collection.find())
+    for order in completed_orders:
+        order['_id'] = str(order['_id'])
+
+    return render_template('completed.html', completed_orders=completed_orders)
 
 
 

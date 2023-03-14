@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Completed Orders</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center my-5">Completed Orders</h1>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Index</th>
+            <th>Items</th>
+            <th>Note</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in completed_orders %}
+            <tr>
+                <td>{{ order["order_index"] }}</td>
+                <td>{{ order["items"] }}</td>
+                <td>{{ order["note"] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
