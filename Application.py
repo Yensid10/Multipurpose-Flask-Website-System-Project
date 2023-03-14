@@ -13,6 +13,8 @@ client = MongoClient('mongodb+srv://Theamzingu:Socr%40tis123@teamproject14.nnzfa
 db = client["Kitchen"]
 order_collection = db["order_queue"]
 accepted_collection = db["accepted_orders"]
+complete_collection = db["complete_orders"]
+
 
 queue = Queue()
 queue.addObject("Food", "#12")
@@ -164,8 +166,15 @@ def complete_order():
     # Get the order ID from the POST request
     order_id = request.form['order_id']
 
-    # Remove the order from the accepted_orders collection
-    accepted_collection.delete_one({'_id': ObjectId(order_id)})
+    # Get the order from the accepted_orders collection
+    order = accepted_collection.find_one({'_id': ObjectId(order_id)})
+
+    if order:
+        # Insert the order data into the complete_orders collection
+        complete_collection.insert_one(order)
+
+        # Remove the order from the accepted_orders collection
+        accepted_collection.delete_one({'_id': ObjectId(order_id)})
 
     # Return a success response
     return jsonify({'success': True})
@@ -188,6 +197,8 @@ def cancel_order():
 
     # Return a success response
     return jsonify({'success': True})
+
+
 
 
 if __name__ == '__main__':
