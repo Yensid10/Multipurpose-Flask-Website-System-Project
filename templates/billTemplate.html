@@ -47,7 +47,6 @@
 </head>
 
 <body>
-	<!-- <div id="hiddenTableNo" style="display: none;">{{ data['tableNo'] }}</div> -->
 	<div class="bill-wrapper">
 		<div class="bill-tab">
 			<h1>Bill</h1>
@@ -76,8 +75,10 @@
 		</tr>
 	</table>
 	{% set tableNo = data['tableNo'] %}
-	<button onclick="makePayment('{{ tableNo }}')">Make Payment</button>
-	<div id="qrcode"></div>
+	<button class="button" onclick="makePayment('{{ tableNo }}')">Make Payment</button>
+	<div class="qrCodeWrapper">
+		<div id="qrcode"></div>
+	</div>
 	{% else %}
 	<h1 style="font-size: 50px; text-align: center;">{{ data }}</h1>
 	{% endif %}

@@ -32,6 +32,9 @@ body {
 	border-collapse: collapse;
 	text-align: center;
 	border-radius: 10px;
+	position: absolute;
+	top: 20%;
+	left: 17%;
 }
 
 .items-table th {
@@ -42,14 +45,35 @@ body {
 	border-top-right-radius: 10px;
 }
 
-.items-table td, .items-table th {
+.items-table td,
+.items-table th {
 	border: 1px solid #000;
 	padding: 10px;
 }
 
-.items-table td:last-child, .total-cell {
+.items-table td:last-child,
+.total-cell {
 	background-color: #ffbe7d;
 	color: #fff;
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
+}
+
+.button {
+	background-color: #b629aa;
+	color: #fff;
+	padding: 10px;
+	border-radius: 10px;
+	position: absolute;
+	top: 30%;
+	left: 65%;
+}
+
+.qrCodeWrapper {
+	position: absolute;
+	top: 37%;
+	left: 64%;
+	border: #000 2px solid;
+	height: 128px;
+	width: 128px;
 }
