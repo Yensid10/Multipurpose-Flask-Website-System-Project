@@ -1,0 +1,117 @@
+<style>
+    *,
+    *:before,
+    *:after {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    select#table-number-select {
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 8px;
+        font-size: 16px;
+        color: #333;
+        width: 200px;
+        outline: none;
+        cursor: pointer;
+      }
+      
+      
+    body {
+        background-color: white;
+
+
+    }
+
+    input[type="checkbox"] {
+        appearance: none;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        position: relative;
+        top: 4px;
+        margin-right: 10px;
+        outline: none;
+        transition: all 0.2s ease-in-out;
+      }
+      
+      input[type="checkbox"]:checked {
+        background-color: #66bb6a;
+        border-color: #66bb6a;
+      }
+      
+      input[type="checkbox"]:checked::after {
+        content: "\f00c";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        font-size: 16px;
+        position: absolute;
+        top: -1px;
+        left: 3px;
+        color: white;
+      }
+      
+    
+
+    .popup {
+        background-color: #8E8E8E;
+        width: 350px;
+        padding: 30px 40px;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 50%;
+        border-radius: 8px;
+        font-family: "Work Sans", sans-serif;
+        display: none;
+        text-align: center;
+    }
+    .popup button {
+        display: block;
+        margin-bottom: 30px;
+        margin: 0 auto 20px;
+        background-color: transparent;
+        font-size: 20px;
+        color: #ffffff;
+        background: black;
+        border-radius: 0;
+        width: 80px;
+        height: 30px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+    
+    
+
+    .popup h2 {
+        margin-top: -20px;
+    }
+
+    .popup p {
+        font-size: 14px;
+        text-align: justify;
+        margin: 20px 0;
+        line-height: 25px;
+    }
+
+ /*    .popup a {
+        display: block;
+        width: 150px;
+        position: relative;
+        margin: 10px auto;
+        text-align: center;
+        background-color: #0f72e5;
+        border-radius: 20px;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 8px 0;
+    } */
+
+    
+</style>
