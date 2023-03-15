@@ -39,13 +39,13 @@
       </button>
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active"><a href="{{ url_for('home') }}" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="{{ url_for('menu') }}" class="nav-link">Menu</a></li>
-          <li class="nav-item active"><a href="about.html" class="nav-link">About us</a></li>
-          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-          <li class="nav-item"><a href="{{ url_for('loginPage') }}" class="nav-link">Staff login</a></li>
+					<li class="nav-item"><a href="{{ url_for('home') }}" class="nav-link">Home</a></li>
+					<li class="nav-item active"><a href="{{ url_for('menu') }}" class="nav-link">Menu</a></li>
+					<li class="nav-item active"><a href="{{ url_for('about_us') }}" class="nav-link">About us</a></li>
+					<li class="nav-item"><a href="{{ url_for('contact_us') }}" class="nav-link">Contact</a></li>
+					<li class="nav-item"><a href="{{ url_for('loginPage') }}" class="nav-link">Staff login</a></li>
 
-        </ul>
+				</ul>
       </div>
     </div>
   </nav>

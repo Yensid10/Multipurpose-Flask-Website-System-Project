@@ -38,6 +38,16 @@ def home():
     return render_template('index.html')
 
 
+@app.route('/about')
+def about_us():
+    return render_template('about.html')
+
+
+@app.route('/contact')
+def contact_us():
+    return render_template('contact.html')
+
+
 @app.route('/hideDairy', methods=['POST'])
 def index():
     if request.method == 'POST':
@@ -156,7 +166,7 @@ def sendToKitchen():
             orders.addObject(tableNo, order)
         else:
             tempOrder = orders.popSpecificOrder(tableNo)[
-                            'queue'] + order['queue']
+                'queue'] + order['queue']
             orders.addObject(tableNo, tempOrder)
 
         queue = order.get('queue', [])
@@ -172,7 +182,8 @@ def sendToKitchen():
             order_collection.insert_one({
                 '_id': ObjectId(),
                 'table_number': tableNo,
-                'order_index': item['order_index'],  # Save the order ID for each item
+                # Save the order ID for each item
+                'order_index': item['order_index'],
                 'items': order_items,
                 'note': note,
                 'status': 'Taken',
