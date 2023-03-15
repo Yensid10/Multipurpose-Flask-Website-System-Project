@@ -1,7 +1,7 @@
 import datetime
 
 from bson import ObjectId
-from flask import Flask, render_template, jsonify, request, json
+from flask import Flask, render_template, jsonify, request, json, redirect, url_for
 from pymongo import MongoClient
 
 from ObjectQueue import Queue
@@ -206,7 +206,10 @@ def completed():
 
     return render_template('completed.html', completed_orders=completed_orders)
 
-
+@app.route('/clear_completed_orders', methods=['POST'])
+def clear_completed_orders():
+    complete_collection.delete_many({})
+    return redirect(url_for('completed'))
 
 if __name__ == '__main__':
     app.run(debug=True)

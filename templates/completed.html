@@ -10,6 +10,11 @@
     <div class="row">
         <div class="col-md-12">
             <h1 class="text-center mb-5">Completed Orders</h1>
+            <div class="text-center mb-3">
+                <form action="{{ url_for('clear_completed_orders') }}" method="POST">
+                    <button type="submit" class="btn btn-danger">Clear All</button>
+                </form>
+            </div>
             <table class="table completed-table table-container">
                 <thead>
                 <tr>
