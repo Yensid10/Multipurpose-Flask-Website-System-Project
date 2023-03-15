@@ -4,9 +4,12 @@ const ringUsBtn = document.querySelector('.ringus');
 // Set a variable to keep track of the timer
 let timer;
 
+// Set a variable to keep track of the time left
+let timeLeft = 0;
+
 // Add a click event listener to the button
 ringUsBtn.addEventListener('click', () => {
-  if (tableNumber != null) {
+  if (tableNumber != null && timeLeft === 0) {
     // Disable the button
     ringUsBtn.disabled = true;
     // Create a transparent background
@@ -24,13 +27,7 @@ ringUsBtn.addEventListener('click', () => {
     document.body.appendChild(background);
     // Start the timer
     const clickTime = Date.now();
-    const storedTime = localStorage.getItem('ringUsTime');
-    const storedDuration = localStorage.getItem('ringUsDuration');
-    let timeLeft;
-    if (storedTime && storedDuration) {
-      const elapsedTime = clickTime - storedTime;
-      timeLeft = Math.max(0, storedDuration - elapsedTime);
-    } else {
+    if (timeLeft === 0) {
       timeLeft = 120000; // 2 minutes in milliseconds
       $.ajax({
         type: "POST",
@@ -48,8 +45,6 @@ ringUsBtn.addEventListener('click', () => {
         const minutes = Math.floor(timeLeft / 60000);
         seconds = Math.floor((timeLeft % 60000) / 1000);
         background.innerText = `Please wait ${minutes}:${seconds < 10 ? '0' : ''}${seconds} minutes. The waiter will be with you shortly.`;
-        localStorage.setItem('ringUsTime', clickTime);
-        localStorage.setItem('ringUsDuration', timeLeft);
       } else {
         // Enable the button
         ringUsBtn.disabled = false;
@@ -57,20 +52,17 @@ ringUsBtn.addEventListener('click', () => {
         document.body.removeChild(background);
         // Stop the timer
         clearInterval(timer);
-        localStorage.removeItem('ringUsTime');
-        localStorage.removeItem('ringUsDuration');
+        timeLeft = 0;
       }
     }, 1000); // 1 second interval
-    localStorage.setItem('ringUsTime', clickTime);
-    localStorage.setItem('ringUsDuration', timeLeft);
   }
 });
 
-if (tableNumber != null) {
+if (tableNumber != null && timeLeft === 0) {
   const storedTime = localStorage.getItem('ringUsTime');
   const storedDuration = localStorage.getItem('ringUsDuration');
-  let timeLeft;
   if (storedTime && storedDuration) {
+    const clickTime = Date.now();
     const elapsedTime = clickTime - storedTime;
     timeLeft = Math.max(0, storedDuration - elapsedTime);
   } else {
