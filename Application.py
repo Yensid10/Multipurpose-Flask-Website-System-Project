@@ -283,6 +283,11 @@ def faqPage():
     return render_template('faq.html')
 
 
+@app.route('/doorPage')
+def DoorPage():
+    return render_template('DoorPage.html')
+
+
 @app.route('/loginPage')
 def loginPage():
     return render_template('loginpage.html')
