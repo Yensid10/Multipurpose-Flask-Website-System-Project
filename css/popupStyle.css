@@ -17,13 +17,10 @@
         width: 200px;
         outline: none;
         cursor: pointer;
-      }
-      
-      
+    }
+
     body {
         background-color: white;
-
-
     }
 
     input[type="checkbox"] {
@@ -38,6 +35,7 @@
         margin-right: 10px;
         outline: none;
         transition: all 0.2s ease-in-out;
+        background-color: #fff;
       }
       
       input[type="checkbox"]:checked {
@@ -55,11 +53,10 @@
         left: 3px;
         color: white;
       }
-      
-    
 
     .popup {
         background-color: #8E8E8E;
+        color: white;
         width: 350px;
         padding: 30px 40px;
         position: absolute;
@@ -71,6 +68,7 @@
         display: none;
         text-align: center;
     }
+
     .popup button {
         display: block;
         margin-bottom: 30px;
@@ -86,8 +84,6 @@
         outline: none;
         cursor: pointer;
     }
-    
-    
 
     .popup h2 {
         margin-top: -20px;
