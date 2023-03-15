@@ -8318,7 +8318,8 @@ h1, h2, h3, h4, h5,
     display: block; }
   .services-wrap .text {
     background: rgba(0, 0, 0, 0.2);
-    position: relative; }
+    position: relative;
+    color: #fff; }
     .services-wrap .text h3 {
       font-size: 20px; }
     .services-wrap .text .price {
