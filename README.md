@@ -1,3 +1,12 @@
-This repository has been created to store your Team Project.
+Oaxaca Website
 
-You may edit it as you like, but please do not remove the default topics or the project members list. These need to stay as currently defined in order for your lecturer to be able to find and mark your work.
+Oaxaca is a website that allows customers to order food at a restaurant and customize their orders based on allergens and dietary restrictions. The website also includes a ring function to call a waiter, as well as contract, about us, and home pages.
+
+Getting Started
+To run this project, clone the GitLab repository and open it in any IDE. All dependencies, including HTML, CSS, JavaScript, and Bootstrap, are included in the project.
+
+About the Project
+This website was created by a team of 9 students from Royal Holloway University as a team project module. If you encounter any bugs, please feel free to contact us using the contact information below.
+
+Contact Information
+For inquiries or bug reports, please contact Shokrola Amiri via email at zkac434@live.rhul.ac.uk.
