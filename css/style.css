@@ -8779,11 +8779,13 @@ textarea.form-control {
   display: block;
   margin-bottom: 10px; }
 
-.heading-section h2 {
-  font-size: 30px;
-  font-weight: 400;
-  position: relative;
-  text-transform: uppercase; }
+  .heading-section h2 {
+    font-size: 30px;
+    font-weight: 400;
+    position: relative;
+    text-transform: uppercase;
+    color: #fff;
+  }
   @media (max-width: 767.98px) {
     .heading-section h2 {
       font-size: 28px; } }
