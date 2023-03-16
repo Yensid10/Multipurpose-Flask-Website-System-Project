@@ -238,6 +238,7 @@
                 this.price = price;
             }
 
+            // Getters
             getNote1() {
                 return this.Note1;
             }
@@ -257,36 +258,29 @@
             }
 
             addObject(Note1, Note2, price) {
+                // Add a new orderNotes object to the queue array
                 this.queue.push(new orderNotes(Note1, Note2, price));
             }
 
             removeObject(index) {
+                // Remove an object from the queue array at the specified index
                 this.queue.splice(index, 1);
             }
 
             getObject(index) {
+                // Get the object at the specified index of the queue array
                 return this.queue[index];
             }
 
             getLength() {
+                // Get the length of the queue array
                 return this.queue.length;
             }
         }
 
-
-        // TEST BUTTON FUNCTION \\
-        function addPingToQueue() {
-            $.ajax({
-                type: "POST",
-                url: "/addPingToQueue",
-                data: JSON.stringify({ "pingType": "Table", "tableNo": "#" + (Math.floor(Math.random() * 100)).toString() }),
-                contentType: "application/json",
-            });
-        }
-
-
         // QUEUE FUNCTIONS \\
         function acceptQueuePing() {
+            // If the info-container div contains "Complete!" or "htmlCheck", change info-container to be the top popped ping from the python ping queue
             if (($("#info-container").html().includes("Complete!")) || ($("#info-container").html().includes("htmlCheck"))) {
                 $.ajax({
                     type: "POST",
@@ -300,6 +294,7 @@
         }
 
         function completeCurrentJob() {
+            // If the info-container div doesn't contain "htmlCheck" or "Complete!", add "Complete!" and a flash animation to the div
             if ((!$("#info-container").html().includes("htmlCheck"))
                 && (!$("#info-container").html().includes("Complete!"))) {
                 $("#info-container").html("<span id='fade-out-text' class='fade-out-text'>Complete!</span>");
@@ -308,6 +303,7 @@
         }
 
         function updateQueue() {
+            // Send a GET request to the server to get the ping queue data and update the page accordingly
             var xhr = new XMLHttpRequest();
             xhr.open("GET", "/updateQueue", true);
             xhr.onreadystatechange = function () {
@@ -342,7 +338,7 @@
 
         // ORDER FUNCTIONS \\        
         function flashElement(element) {
-            //Animation Function
+            // Creates an animation effect called "flash" on an element which will flash red and then fade away
             if (element.classList.contains("flash")) {
                 element.classList.remove("flash");
                 void element.offsetWidth;
@@ -353,6 +349,7 @@
         }
 
         function updateOrder() {
+            // Updates the order review list on the webpage and displays the total price of the order
             var orderHtml = "";
             priceTotal = 0;
             for (var i = 0; i < order.getLength(); i++) {
@@ -365,6 +362,7 @@
         }
 
         function addItemToOrder(orderItem, price) {
+            // Adds an item to the order list and updates the display
             document.getElementById("review").classList.remove("flash");
             order.addObject(orderItem, document.getElementById(orderItem).value, price);
             document.getElementById(orderItem).value = "";
@@ -372,11 +370,13 @@
         }
 
         function removeOrderItem(index) {
+            // Removes an item from the order list and updates the display
             order.removeObject(index);
             updateOrder();
         }
 
         function sendToKitchen() {
+            // Sends the order to the kitchen via an AJAX call and updates the display accordingly
             var selectElement = document.getElementById("orderSelect");
             if (selectElement.options[selectElement.selectedIndex].value.includes("htmlCheck")) {
                 flashElement(selectElement)
@@ -400,9 +400,9 @@
             }
         }
 
-
-        // BILLS FUNCTIONS \\
+        // BILLS FUNCTIONS \        
         function getBill() {
+            // Retrieves the bill for a particular table and redirects the user to that specific tables bill page
             var selectElement = document.getElementById("billSelect");
             if (!selectElement.options[selectElement.selectedIndex].value.includes("htmlCheck")) {
                 var form = document.createElement('form');
@@ -425,13 +425,6 @@
         updateQueue();
         setInterval(updateQueue, 1000); 
     </script>
-
-
-    <!-- //TEST BUTTON\\ -->
-    <!-- <button style="position: absolute; top: 0%; left: 90.2%;" type="button" class="button"
-        onclick="addPingToQueue()">Add
-    </button> -->
-
 
     <!-- //TITLE\\  -->
     <h1>Floor Staff</h1>
@@ -513,8 +506,6 @@
         onclick="getBill()">Get</button>
 
 
-
-
     <!-- //HELP SECTION\\ -->
     <h2 style="top: 51.5%; left: 82.5%;"> HELP</h2>
     <div class="help">
@@ -522,8 +513,8 @@
             <h2 style="font-size: 40px; top: 15%; left: 25%; text-align: center; text-decoration: underline;"> FAQ <br>
                 PAGE </h2>
         </a>
-
     </div>
+
 </body>
 
 </html>
