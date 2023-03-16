@@ -1,21 +1,23 @@
+### Imports ###
+
 import datetime
 import re
-
 import paypalrestsdk
 from bson import ObjectId
 from flask import Flask, render_template, jsonify, request, json
 from pymongo import MongoClient
-
 import SqlQuerys
 from ObjectQueue import Queue
 from SqlQuerys import FetchMenu
 
+
+### Configurations ###
+
+# Sets up the paypal api in sandbox mode (to allow for testing)
 paypalrestsdk.configure({
     "mode": "sandbox",
     "client_id": "AfzWV6H8HbQPiOb0a3B-ty24yYWRllM8s34zjYgsgjpnIqlunb3vkmZrJ5KSvLB5XjRXOoAQP6nriEOA",
     "client_secret": "EA4HmZS-IacWkAx8U0pOwRTlfNawZ_c3wZh87F8oXvxfWK2St54c1CAbdy1_qodhY1OUbz3loVpbwa89"})
-
-app = Flask(__name__)
 
 client = MongoClient(
     'mongodb+srv://Theamzingu:Socr%40tis123@teamproject14.nnzfaib.mongodb.net/test')
@@ -24,27 +26,38 @@ order_collection = db["order_queue"]
 accepted_collection = db["accepted_orders"]
 complete_collection = db["complete_orders"]
 
-orders = Queue()
-queue = Queue()
+app = Flask(__name__)
+
+
+### Variables ###
+
+queue = Queue()  # Used for pings
+orders = Queue()  # Used for orders
+
+
+### Routes ###
+
+@app.route('/')
+def home():
+    # Displays Home page
+    return render_template('index.html')
 
 
 @app.route('/Menu')
 def menu():
+    # Displays Menu page
     return render_template('menu.html')
-
-
-@app.route('/')
-def home():
-    return render_template('index.html')
 
 
 @app.route('/about')
 def about_us():
+    # Displays About-us page
     return render_template('about.html')
 
 
 @app.route('/contact')
 def contact_us():
+    # Displays Contact-us page
     return render_template('contact.html')
 
 
@@ -104,11 +117,13 @@ def index():
 
 @app.route('/billTemplate')
 def billTemplate():
+    # Displays Bills page
     return render_template('billTemplate.html')
 
 
 @app.route('/acceptQueuePing', methods=['POST'])
 def acceptQueuePing():
+    # Pop top ping in queue and return it
     if request.method == 'POST':
         ping = queue.popFrontObject()
         data = {
@@ -119,6 +134,7 @@ def acceptQueuePing():
 
 @app.route('/addPingToQueue', methods=['POST'])
 def addPingToQueue():
+    # Add ping to bottom of queue
     if request.method == 'POST':
         data = request.get_json()
         pingType = data.get('pingType')
@@ -129,6 +145,7 @@ def addPingToQueue():
 
 @app.route('/sendCancel', methods=['POST'])
 def sendCancel():
+    # Needs to be completed
     if request.method == 'POST':
         data = request.get_json()
         pingType = data.get('pingType')
@@ -142,6 +159,7 @@ def sendCancel():
 
 @app.route("/updateQueue")
 def updateQueue():
+    # Returns the queue as a json object
     jsonQueue = []
     for i in range(queue.getLength()):
         ping = queue.getObject(i)
@@ -157,6 +175,7 @@ def updateQueue():
 
 @app.route('/sendToKitchen', methods=['POST'])
 def sendToKitchen():
+    # Send an order to the kitchen database and store it in the order queue
     if request.method == 'POST':
         data = request.get_json()
         time = datetime.datetime.now()
@@ -165,6 +184,7 @@ def sendToKitchen():
         if orders.getSpecificOrder(tableNo) == False:
             orders.addObject(tableNo, order)
         else:
+            # If the table already has an order, add the new order to the old one
             tempOrder = {
                 'queue': orders.popSpecificOrder(tableNo)['queue']
                 + order['queue']}
@@ -196,6 +216,7 @@ def sendToKitchen():
 
 @app.route('/getBill', methods=['POST'])
 def getBill():
+    # Get the bill for a specific table
     if request.method == 'POST':
         tableNo = request.form['tableNo']
         order = orders.getSpecificOrder(tableNo)
@@ -208,6 +229,7 @@ def getBill():
 
 @app.route('/makePayment', methods=['POST'])
 def makePayment():
+    # Make a payment using paypal api
     if request.method == 'POST':
         tableNo = request.json['tableNo']
         bill = orders.getSpecificOrder(tableNo)
@@ -244,6 +266,7 @@ def makePayment():
 
 @app.route('/checkPayment', methods=['POST'])
 def checkPayment():
+    # Check if a payment has been made/if an order exists
     if request.method == 'POST':
         tableNo = request.json['tableNo']
         check = orders.getSpecificOrder(tableNo)
@@ -254,6 +277,7 @@ def checkPayment():
 
 @app.route('/success')
 def success():
+    # After a successful order, add it to the completed orders database
     pattern = r"Payment for table (\d+) at"
     payment_id = request.args.get("paymentId")
     payer_id = request.args.get("PayerID")
@@ -275,28 +299,27 @@ def success():
     return render_template('menu.html')
 
 
-@app.route('/Ring')
-def showRing():
-    return render_template('Ring.html')
-
-
 @app.route('/faqPage')
 def faqPage():
+    # Render the FAQ page
     return render_template('faq.html')
 
 
 @app.route('/doorPage')
 def DoorPage():
+    # Render the Door page
     return render_template('DoorPage.html')
 
 
 @app.route('/loginPage')
 def loginPage():
+    # Render the Login page
     return render_template('loginpage.html')
 
 
 @app.route('/Floor-Staff')
 def showFS():
+    # Render the Floor Staff page, passing in the relevent information
     names, prices = FetchMenu()
     return render_template('Floor-Staff.html', queue=queue, names=names, prices=prices)
 
@@ -364,5 +387,8 @@ def cancel_order():
     return jsonify({'success': True})
 
 
+### MAIN ###
+
 if __name__ == '__main__':
+    # Run the app
     app.run(debug=True)
