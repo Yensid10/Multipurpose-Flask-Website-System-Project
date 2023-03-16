@@ -352,14 +352,19 @@
             // Updates the order review list on the webpage and displays the total price of the order
             var orderHtml = "";
             priceTotal = 0;
-            for (var i = 0; i < order.getLength(); i++) {
-                orderHtml += "<div><strong>" + order.getObject(i).getNote1() + "</strong><br>"
-                    + order.getObject(i).getNote2()
-                    + "<button class=\"remove-button\" onclick=\"removeOrderItem(" + i + ")\"><img src=\"/static/images/trashcan.png\" alt=\"Remove\"></button></div><br>";
-                priceTotal += parseFloat(order.getObject(i).getPrice());
+            if (order.getLength() > 0) {
+                for (var i = 0; i < order.getLength(); i++) {
+                    orderHtml += "<div><strong>" + order.getObject(i).getNote1() + "</strong><br>"
+                        + order.getObject(i).getNote2()
+                        + "<button class=\"remove-button\" onclick=\"removeOrderItem(" + i + ")\"><img src=\"/static/images/trashcan.png\" alt=\"Remove\"></button></div><br>";
+                    priceTotal += parseFloat(order.getObject(i).getPrice());
+                }
+                $("#order-item").html(orderHtml + "<strong style='text-decoration: underline; '>Total: £" + priceTotal + "</strong><br><br>");
+            } else {
+                $("#order-item").html("");
             }
-            $("#order-item").html(orderHtml + "<strong style='text-decoration: underline; '>Total: £" + priceTotal + "</strong><br><br>");
         }
+
 
         function addItemToOrder(orderItem, price) {
             // Adds an item to the order list and updates the display
