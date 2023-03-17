@@ -224,6 +224,8 @@ def makePayment():
 def testPayment():
     return render_template('payTemplate.html')
 
+# stores order with all items in database and clears the order of the table number
+
 
 @ app.route('/success')
 def success():
