@@ -64,15 +64,17 @@ def contact_us():
 @app.route('/hideDairy', methods=['POST'])
 def index():
     if request.method == 'POST':
+        # Get the JSON data from the request
         data = request.get_json()
-        # tableNumber = data['tableNumber']
+        # Get the list of allergens from the JSON data
         allergens = data['allergens']
-        # print(tableNumber, allergens)
+        # Initialize an empty list to store the query results
         results = []
+        # Loop through the list of allergens and fetch the corresponding data from the database
         for allergen in allergens:
             if allergen == 'Milk':
                 results.extend(SqlQuerys.FetchDairy())
-
+                print (results)
             elif allergen == 'Gluten':
                 results.extend(SqlQuerys.FetchGluten())
 
@@ -108,7 +110,7 @@ def index():
 
             elif allergen == 'Lupin':
                 results.extend(SqlQuerys.FetchLupin())
-
+        # Check if there are any query results
         if results:
             return jsonify({'data': results})
         else:

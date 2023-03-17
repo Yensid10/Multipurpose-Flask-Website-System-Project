@@ -171,66 +171,6 @@
 
 		<title>My </title>
 		<link rel="stylesheet" type="text/css" href="/static/css/popupStyle.css">
-
-		<script>
-			var tableNumber = null;
-
-			function submitPopup() {
-				var selectElement = document.getElementById('table-number-select');
-				tableNumber = selectElement.options[selectElement.selectedIndex].value;
-
-				var allergenInputs = document.getElementsByName('allergen');
-				var allergens = [];
-				for (var i = 0; i < allergenInputs.length; i++) {
-					if (allergenInputs[i].checked) {
-						allergens.push(allergenInputs[i].value);
-					}
-				}
-				console.log(tableNumber);
-				console.log('tableNumber:', tableNumber + ' allergens:', allergens);
-
-				if (tableNumber !== null && tableNumber !== '') {
-					if (!isNaN(tableNumber) && tableNumber >= 0) {
-						$.ajax({
-							type: "POST",
-							url: "/hideDairy",
-							data: JSON.stringify({
-								"tableNumber": tableNumber,
-								"allergens": allergens
-							}),
-							contentType: "application/json",
-							dataType: 'json'
-						}).done(function (response) {
-							console.log('this is my response:', response);
-							var data = response.data;
-							console.log(tableNumber);
-							hide(data);
-							document.querySelector(".popup").style.display = "none";
-							document.querySelector("body").style.overflow = "auto";
-						});
-					}
-				}
-			}
-
-			function hide(data) {
-				if (data != null) {
-					for (var i = 0; i < data.length; i++) {
-						console.log(data[i]);
-						var x1 = document.getElementById(data[i]);
-						console.log('x is now changed to:', data[i]);
-						if (x1 != null) {
-							if (x1.style.display === "none") {
-								x1.style.display = "block";
-							} else {
-								x1.style.display = "none";
-							}
-						}
-					}
-				}
-
-			}
-		</script>
-
 		<head>
 			<title>Popup Window</title>
 			<link rel="stylesheet" type="text/css" href="/css/popupStyle.css">
@@ -321,11 +261,6 @@
 				<label for="allergen7">Fish</label><br>
 				<input type="checkbox" id="allergen8" name="allergen" value="Shellfish">
 				<label for="allergen8">Shellfish</label><br>
-				<h4>Religious Restrictions:</h4>
-				<input type="checkbox" id="Kosher" name="allergen" value="Kosher">
-				<label for="Kosher">Kosher</label><br>
-				<input type="checkbox" id="Halal" name="allergen" value="Halal">
-				<label for="Halal">Halal</label><br>
 				<button onclick="submitPopup()">Submit</button>
 
 			</div>
@@ -514,7 +449,7 @@
 								<div class="tab-pane fade show active" id="v-pills-1" role="tabpanel"
 									aria-labelledby="v-pills-1-tab">
 									<div class="row">
-										<div class="col-md-4 text-center">
+										<div class="col-md-4 text-center", id="Guacamole">
 											<div class="menu-wrap">
 												<a href="#" class="menu-img img mb-4"
 													style="background-image: url(/static/images/dish-1.jpg);"></a>
@@ -525,7 +460,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-md-4 text-center">
+										<div class="col-md-4 text-center", id="Queso fundido">
 											<div class="menu-wrap">
 												<a href="#" class="menu-img img mb-4"
 													style="background-image: url(/static/images/dish-2.jpg);"></a>
@@ -536,7 +471,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-md-4 text-center">
+										<div class="col-md-4 text-center", id="Tostadas de tinga">
 											<div class="menu-wrap">
 												<a href="#" class="menu-img img mb-4"
 													style="background-image: url(/static/images/dish-3.jpg);"></a>
@@ -553,36 +488,42 @@
 								<div class="tab-pane fade" id="v-pills-2" role="tabpanel"
 									aria-labelledby="v-pills-2-tab">
 									<div class="row">
-										<div class="col-md-4 text-center">
-											<div class="menu-wrap">
-												<a href="#" class="menu-img img mb-4"
-													style="background-image: url(/static/images/dish-4.jpg);"></a>
-												<div class="text">
-													<h3><a href="#">Mole negro</a></h3>
-													<p>contains peanuts & nuts.</p>
-													<p class="price"><span>£15.00</span></p>
+										<div id="Mole negro">
+											<div class="col-md-4 text-center">
+												<div class="menu-wrap">
+													<a href="#" class="menu-img img mb-4"
+														style="background-image: url(/static/images/dish-4.jpg);"></a>
+													<div class="text">
+														<h3><a href="#">Mole negro</a></h3>
+														<p>contains peanuts & nuts.</p>
+														<p class="price"><span>£15.00</span></p>
+													</div>
 												</div>
 											</div>
 										</div>
-										<div class="col-md-4 text-center">
-											<div class="menu-wrap">
-												<a href="#" class="menu-img img mb-4"
-													style="background-image: url(/static/images/dish-5.jpg);"></a>
-												<div class="text">
-													<h3><a href="#">Tacos al pastor</a></h3>
-													<p>contains pork.</p>
-													<p class="price"><span>£12.00</span></p>
+										<div id="Tacos al pastor">
+											<div class="col-md-4 text-center">
+												<div class="menu-wrap">
+													<a href="#" class="menu-img img mb-4"
+														style="background-image: url(/static/images/dish-5.jpg);"></a>
+													<div class="text">
+														<h3><a href="#">Tacos al pastor</a></h3>
+														<p>contains pork.</p>
+														<p class="price"><span>£12.00</span></p>
+													</div>
 												</div>
 											</div>
 										</div>
-										<div class="col-md-4 text-center">
-											<div class="menu-wrap">
-												<a href="#" class="menu-img img mb-4"
-													style="background-image: url(/static/images/dish-6.jpg);"></a>
-												<div class="text">
-													<h3><a href="#">Enchiladas verdes</a></h3>
-													<p>contains dairy & chicken.</p>
-													<p class="price"><span>£13.50</span></p>
+										<div id="Enchiladas verdes">
+											<div class="col-md-4 text-center">
+												<div class="menu-wrap">
+													<a href="#" class="menu-img img mb-4"
+														style="background-image: url(/static/images/dish-6.jpg);"></a>
+													<div class="text">
+														<h3><a href="#">Enchiladas verdes</a></h3>
+														<p>contains dairy & chicken.</p>
+														<p class="price"><span>£13.50</span></p>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -592,36 +533,42 @@
 								<div class="tab-pane fade" id="v-pills-3" role="tabpanel"
 									aria-labelledby="v-pills-3-tab">
 									<div class="row">
-										<div class="col-md-4 text-center">
-											<div class="menu-wrap">
-												<a href="#" class="menu-img img mb-4"
-													style="background-image: url(/static/images/dish-7.jpg);"></a>
-												<div class="text">
-													<h3><a href="#">Arroz verde</a></h3>
-													<p>contains dairy.</p>
-													<p class="price"><span>£4.50</span></p>
+										<div id="Arroz verde">
+											<div class="col-md-4 text-center">
+												<div class="menu-wrap">
+													<a href="#" class="menu-img img mb-4"
+														style="background-image: url(/static/images/dish-7.jpg);"></a>
+													<div class="text">
+														<h3><a href="#">Arroz verde</a></h3>
+														<p>contains dairy.</p>
+														<p class="price"><span>£4.50</span></p>
+													</div>
 												</div>
 											</div>
 										</div>
-										<div class="col-md-4 text-center">
-											<div class="menu-wrap">
-												<a href="#" class="menu-img img mb-4"
-													style="background-image: url(/static/images/dish-8.jpg);"></a>
-												<div class="text">
-													<h3><a href="#">Frijoles negros</a></h3>
-													<p>contains soy.</p>
-													<p class="price"><span>£4.00</span></p>
+										<div id="Frijoles negros">
+											<div class="col-md-4 text-center">
+												<div class="menu-wrap">
+													<a href="#" class="menu-img img mb-4"
+														style="background-image: url(/static/images/dish-8.jpg);"></a>
+													<div class="text">
+														<h3><a href="#">Frijoles negros</a></h3>
+														<p>contains soy.</p>
+														<p class="price"><span>£4.00</span></p>
+													</div>
 												</div>
 											</div>
 										</div>
-										<div class="col-md-4 text-center">
-											<div class="menu-wrap">
-												<a href="#" class="menu-img img mb-4"
-													style="background-image: url(/static/images/dish-9.jpg);"></a>
-												<div class="text">
-													<h3><a href="#">Elote</a></h3>
-													<p>contains dairy.</p>
-													<p class="price"><span>£5.50</span></p>
+										<div id="Elote">
+											<div class="col-md-4 text-center">
+												<div class="menu-wrap">
+													<a href="#" class="menu-img img mb-4"
+														style="background-image: url(/static/images/dish-9.jpg);"></a>
+													<div class="text">
+														<h3><a href="#">Elote</a></h3>
+														<p>contains dairy.</p>
+														<p class="price"><span>£5.50</span></p>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -631,36 +578,42 @@
 								<div class="tab-pane fade" id="v-pills-4" role="tabpanel"
 									aria-labelledby="v-pills-4-tab">
 									<div class="row">
-										<div class="col-md-4 text-center">
-											<div class="menu-wrap">
-												<a href="#" class="menu-img img mb-4"
-													style="background-image: url(/static/images/dish-10.jpg);"></a>
-												<div class="text">
-													<h3><a href="#">Flan</a></h3>
-													<p>contains dairy & eggs.</p>
-													<p class="price"><span>£6.00</span></p>
+										<div id="Flan">
+											<div class="col-md-4 text-center">
+												<div class="menu-wrap">
+													<a href="#" class="menu-img img mb-4"
+														style="background-image: url(/static/images/dish-10.jpg);"></a>
+													<div class="text">
+														<h3><a href="#">Flan</a></h3>
+														<p>contains dairy & eggs.</p>
+														<p class="price"><span>£6.00</span></p>
+													</div>
 												</div>
 											</div>
 										</div>
-										<div class="col-md-4 text-center">
-											<div class="menu-wrap">
-												<a href="#" class="menu-img img mb-4"
-													style="background-image: url(/static/images/dish-11.jpg);"></a>
-												<div class="text">
-													<h3><a href="#">Tres leches</a></h3>
-													<p>contains dairy.</p>
-													<p class="price"><span>£7.00</span></p>
+										<div id="Tres leches">
+											<div class="col-md-4 text-center">
+												<div class="menu-wrap">
+													<a href="#" class="menu-img img mb-4"
+														style="background-image: url(/static/images/dish-11.jpg);"></a>
+													<div class="text">
+														<h3><a href="#">Tres leches</a></h3>
+														<p>contains dairy.</p>
+														<p class="price"><span>£7.00</span></p>
+													</div>
 												</div>
 											</div>
 										</div>
-										<div class="col-md-4 text-center">
-											<div class="menu-wrap">
-												<a href="#" class="menu-img img mb-4"
-													style="background-image: url(/static/images/dish-12.jpg);"></a>
-												<div class="text">
-													<h3><a href="#">Sorbete de tamarindo</a></h3>
-													<p>contains tree nuts.</p>
-													<p class="price"><span>£5.50</span></p>
+										<div id="Sorbete de tamarindo">
+											<div class="col-md-4 text-center">
+												<div class="menu-wrap">
+													<a href="#" class="menu-img img mb-4"
+														style="background-image: url(/static/images/dish-12.jpg);"></a>
+													<div class="text">
+														<h3><a href="#">Sorbete de tamarindo</a></h3>
+														<p>contains tree nuts.</p>
+														<p class="price"><span>£5.50</span></p>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -732,6 +685,7 @@
 	<script src="/static/js/google-map.js"></script>
 	<script src="/static/js/buttonring.js"></script>
 	<script src="/static/js/main.js"></script>
+	<script src="/static/js/popUp.js"></script>
 </body>
 
 </html>
