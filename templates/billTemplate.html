@@ -23,6 +23,22 @@
 			},
 		});
 	}
+
+	function checkPayment(tableNo) {
+		$.ajax({
+			url: '/checkPayment',
+			type: 'POST',
+			data: JSON.stringify({ "tableNo": tableNo }),
+			contentType: "application/json",
+			success: function (response) {
+				if (response['check'] == "False") {
+					window.location.href = "/Floor-Staff";
+				}
+			}
+		});
+	}
+	setInterval(function () { checkPayment("{{ data['tableNo'] }}"); }, 5000);
+
 </script>
 
 <head>
@@ -31,7 +47,7 @@
 </head>
 
 <body>
-
+	<!-- <div id="hiddenTableNo" style="display: none;">{{ data['tableNo'] }}</div> -->
 	<div class="bill-wrapper">
 		<div class="bill-tab">
 			<h1>Bill</h1>
@@ -40,6 +56,7 @@
 			<h2>Oaxaca</h2>
 		</div>
 	</div>
+	{% if data != "No order found" %}
 	<table class="items-table">
 		<tr>
 			<th>Item Number</th>
@@ -61,6 +78,9 @@
 	{% set tableNo = data['tableNo'] %}
 	<button onclick="makePayment('{{ tableNo }}')">Make Payment</button>
 	<div id="qrcode"></div>
+	{% else %}
+	<h1 style="font-size: 50px; text-align: center;">{{ data }}</h1>
+	{% endif %}
 </body>
 
 </html>

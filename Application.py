@@ -211,7 +211,7 @@ def makePayment():
             }],
             "redirect_urls": {
                 "return_url": "http://localhost:5000/success",
-                "cancel_url": "http://localhost:5000/"
+                "cancel_url": "http://localhost:5000/Menu"
             }
         })
         payment.create()
@@ -220,9 +220,14 @@ def makePayment():
         return jsonify({'paymentUrl': paymentUrl})
 
 
-@ app.route('/testPayment')
-def testPayment():
-    return render_template('payTemplate.html')
+@ app.route('/checkPayment', methods=['POST'])
+def checkPayment():
+    if request.method == 'POST':
+        tableNo = request.json['tableNo']
+        check = orders.getSpecificOrder(tableNo)
+        if check == False:
+            return jsonify({'check': "False"})
+        return jsonify({'check': "True"})
 
 # stores order with all items in database and clears the order of the table number
 
