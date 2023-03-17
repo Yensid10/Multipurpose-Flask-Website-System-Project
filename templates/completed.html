@@ -9,7 +9,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="text-center mb-5">Completed Orders</h1>
+    <h1 class="text-center mb-5">Completed Orders</h1>
+    <div class="text-center mb-3">
+        <a href="{{ url_for('kitchen') }}" class="btn btn-primary">View Kitchen Orders</a>
+    </div>
             <div class="text-center mb-3">
                 <form action="{{ url_for('clear_completed_orders') }}" method="POST">
                     <button type="submit" class="btn btn-danger">Clear All</button>
