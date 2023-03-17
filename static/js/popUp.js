@@ -57,20 +57,21 @@ function submitPopup() {
 * @param {Array} data - An array of item IDs to be hidden.
 */
 
+
+
 function hide(data) {
 	if (data != null) {
-		for (var i = 0; i < data.length; i++) {
-			console.log(data[i]);
-			var x1 = document.getElementById(data[i]);
-			console.log('x is now changed to:', data[i]);
-			if (x1 != null) {
-				if (x1.style.display === "none") {
-					x1.style.display = "block";
-				} else {
-					x1.style.display = "none";
-				}
-			}
+	  for (var i = 0; i < data.length; i++) {
+		console.log(data[i]);
+		var elements = document.getElementsByClassName(data[i]);
+		console.log('elements are now changed to:', data[i]);
+		for (var x = 0; x < elements.length; x++) {
+		  if (elements[x].style.display === "none") {
+			elements[x].style.display = "block";
+		  } else {
+			elements[x].style.display = "none";
+		  }
 		}
+	  }
 	}
-
-}
+  }
