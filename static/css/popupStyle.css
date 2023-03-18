@@ -1,4 +1,5 @@
 <style>
+    /* make border-box sizing for all the elements  */
     *,
     *:before,
     *:after {
@@ -7,6 +8,7 @@
         box-sizing: border-box;
     }
 
+    /* styling for the dropdown element */
     select#table-number-select {
         background: white;
         border: 1px solid #ccc;
@@ -19,10 +21,12 @@
         cursor: pointer;
     }
 
+    /* styling for the main body element */
     body {
         background-color: white;
     }
 
+    /* styling for the checkboxes */
     input[type="checkbox"] {
         appearance: none;
         width: 18px;
@@ -33,10 +37,11 @@
         transition: all 0.2s ease-in-out;
         position: relative;
         cursor: pointer;
-      }
-      
-      input[type="checkbox"]::before,
-      input[type="checkbox"]::after {
+    }
+    
+    /* styling for the checkbox cross when user inputs */
+    input[type="checkbox"]::before,
+    input[type="checkbox"]::after {
         content: "";
         position: absolute;
         top: 50%;
@@ -47,23 +52,26 @@
         transform: translate(-50%, -50%) rotate(45deg);
         opacity: 0;
         transition: all 0.2s ease-in-out;
-      }
-      
-      input[type="checkbox"]::after {
+    }
+    
+    /* rotate checkbox checkmark */
+    input[type="checkbox"]::after {
         transform: translate(-50%, -50%) rotate(-45deg);
-      }
-      
-      input[type="checkbox"]:checked::before,
-      input[type="checkbox"]:checked::after {
+    }
+    
+    /* style for checked checkbox */
+    input[type="checkbox"]:checked::before,
+    input[type="checkbox"]:checked::after {
         opacity: 1;
-      }
-      
-      input[type="checkbox"]:checked {
+    }
+    
+    /* style for checked checkbox border and background */
+    input[type="checkbox"]:checked {
         border-color: #1abc9c;
         background-color: red;
-      }
-      
-
+    }
+    
+    /* style for popup container */
     .popup {
         background-color: #6c757d;
         color: white;
@@ -79,6 +87,7 @@
         text-align: center;
     }
 
+    /* style for popup button */
     .popup button {
         display: block;
         margin-bottom: 30px;
@@ -95,17 +104,18 @@
         cursor: pointer;
     }
 
+    /* style for popup heading */
     .popup h2 {
         margin-top: -20px;
     }
 
+    /* style for popup paragraph text */
     .popup p {
         font-size: 14px;
         text-align: justify;
         margin: 20px 0;
         line-height: 25px;
     }
-
  /*    .popup a {
         display: block;
         width: 150px;
