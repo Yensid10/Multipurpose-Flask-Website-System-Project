@@ -51,7 +51,7 @@ body {
 }
 
 .common-table-container tbody {
-    height: calc(100vh - 150px);
+    height: calc(100vh - 130px);
     display: block;
     overflow-y: scroll;
 }
