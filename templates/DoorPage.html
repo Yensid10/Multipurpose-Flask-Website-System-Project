@@ -38,8 +38,22 @@
 		}
 
 		.button-disabled {
-			background-color: #808080 !important;
+			background-color: #808080;
 			cursor: not-allowed;
+			opacity: 0.6;
+		}
+
+		.button-disabled:hover {
+			background-color: #808080;
+		}
+
+		.timer {
+			position: absolute;
+			bottom: 5px;
+			left: 50%;
+			transform: translateX(-50%);
+			font-size: 24px;
+			color: white;
 		}
 	</style>
 </head>
@@ -47,34 +61,38 @@
 <body>
 	<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 	<script>
-		var isButtonEnabled = true;
-
-		function disableButton() {
-			isButtonEnabled = false;
-			$("button").addClass("button-disabled");
-			setTimeout(function () {
-				enableButton();
-			}, 30000); // Wait for 30 seconds before enabling button again
-		}
-
-		function enableButton() {
-			isButtonEnabled = true;
-			$("button").removeClass("button-disabled");
-		}
-
 		function addPingToQueue() {
-			if (isButtonEnabled) {
-				disableButton();
-				$.ajax({
-					type: "POST",
-					url: "/addPingToQueue",
-					data: JSON.stringify({ "pingType": "Door", "tableNo": "<---" }),
-					contentType: "application/json",
-				});
-			}
+			// disable the button and add the "button-disabled" class
+			var button = document.getElementById("pingButton");
+			button.disabled = true;
+			button.classList.add("button-disabled");
+
+			// start the countdown timer
+			var countDownDate = new Date().getTime() + 32000;
+			var x = setInterval(function () {
+				var now = new Date().getTime();
+				var distance = countDownDate - now;
+				var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+				document.getElementById("pingTimer").textContent = seconds + "s";
+				if (distance < 0) {
+					clearInterval(x);
+					button.disabled = false;
+					button.classList.remove("button-disabled");
+					document.getElementById("pingTimer").textContent = "";
+				}
+			}, 1000);
+
+			// send the ping to the server
+			$.ajax({
+				type: "POST",
+				url: "/addPingToQueue",
+				data: JSON.stringify({ "pingType": "Door", "tableNo": "<---" }),
+				contentType: "application/json",
+			});
 		}
 	</script>
-	<button onclick="addPingToQueue()">Press here to call for a waiter</button>
+	<button id="pingButton" onclick="addPingToQueue()">Press here to call for a waiter</button>
+	<div class="timer" id="pingTimer"></div>
 </body>
 
 </html>
