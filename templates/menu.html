@@ -265,6 +265,7 @@
 
 			</div>
 
+			<!--waits for the page to load then loads pop up after 2 seconds-->
 			<script type="text/javascript">
 				window.addEventListener("load", function () {
 					setTimeout(
@@ -277,6 +278,7 @@
 					)
 				});
 
+				//waits for close button to be clicked then closes pop up form and allows scrolling
 				document.querySelector("#close").addEventListener("click", function () {
 					const popup = document.querySelector(".popup");
 					popup.style.display = "none";
