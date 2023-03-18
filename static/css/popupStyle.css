@@ -8,9 +8,37 @@
         box-sizing: border-box;
     }
 
-    /* styling for the dropdown element */
+
+    /* changed the font family and font size of the dropdown */
     select#table-number-select {
-        background: white;
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+        text-align: center;
+        color: white;
+        background-color: #778899;
+    }
+    /* changed the background colour and border colour when clicked */
+    select#table-number-select:focus {
+        background-color: grey;
+        border-color: red;
+    }
+    /* added a hover effect */
+    select#table-number-select:hover {
+        background-color: #778899;
+    }
+
+    /* styling the table numbers in the drop down */
+    select#table-number-select option {
+    font-size: 16px;
+    padding: 8px;
+    background-color: paleturquoise;
+    color: #333;
+}
+
+
+    /* styling for the dropdown element 
+    select#table-number-select {
+        background: green;
         border: 1px solid #ccc;
         border-radius: 4px;
         padding: 8px;
@@ -19,7 +47,7 @@
         width: 200px;
         outline: none;
         cursor: pointer;
-    }
+    }*/
 
     /* styling for the main body element */
     body {
