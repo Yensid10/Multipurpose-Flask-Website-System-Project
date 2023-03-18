@@ -74,7 +74,7 @@ def index():
         for allergen in allergens:
             if allergen == 'Milk':
                 results.extend(SqlQuerys.FetchDairy())
-                print (results)
+                print(results)
             elif allergen == 'Gluten':
                 results.extend(SqlQuerys.FetchGluten())
 
