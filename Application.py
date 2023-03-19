@@ -4,7 +4,7 @@ import datetime
 import re
 import paypalrestsdk
 from bson import ObjectId
-from flask import Flask, render_template, jsonify, request, json
+from flask import Flask, render_template, jsonify, request, json, redirect, url_for
 from pymongo import MongoClient
 import SqlQuerys
 from ObjectQueue import Queue
@@ -24,6 +24,8 @@ client = MongoClient(
 db = client["Kitchen"]
 order_collection = db["order_queue"]
 accepted_collection = db["accepted_orders"]
+complete_collection = db["complete_orders"]
+
 complete_collection = db["complete_orders"]
 
 app = Flask(__name__)
@@ -383,8 +385,15 @@ def complete_order():
     # Get the order ID from the POST request
     order_id = request.form['order_id']
 
-    # Remove the order from the accepted_orders collection
-    accepted_collection.delete_one({'_id': ObjectId(order_id)})
+    # Get the order from the accepted_orders collection
+    order = accepted_collection.find_one({'_id': ObjectId(order_id)})
+
+    if order:
+        # Insert the order data into the complete_orders collection
+        complete_collection.insert_one(order)
+        complete_collection.update_one({'_id': ObjectId(order_id)}, {'$set': {'status': 'Completed', 'completed_time': datetime.datetime.now()}})
+        # Remove the order from the accepted_orders collection
+        accepted_collection.delete_one({'_id': ObjectId(order_id)})
 
     # Return a success response
     return jsonify({'success': True})
@@ -408,6 +417,18 @@ def cancel_order():
     # Return a success response
     return jsonify({'success': True})
 
+@app.route('/completed')
+def completed():
+    completed_orders = list(complete_collection.find())
+    for order in completed_orders:
+        order['_id'] = str(order['_id'])
+
+    return render_template('completed.html', completed_orders=completed_orders)
+
+@app.route('/clear_completed_orders', methods=['POST'])
+def clear_completed_orders():
+    complete_collection.delete_many({})
+    return redirect(url_for('completed'))
 
 ### MAIN ###
 

@@ -3,86 +3,62 @@ body {
     overflow: hidden;
 }
 
-
 .page-container {
     height: 100%;
     overflow: hidden;
 }
 
-.table-container {
+.common-table-container {
     height: 100%;
     max-height: 100%;
     margin-top: 50px;
+    min-height: calc(100vh - 150px);
 }
 
-
-.table-container table {
+.common-table-container table {
     width: 100%;
-}
-
-.table-container th,
-.table-container td {
-    border: 1px solid black;
-    padding: 8px;
-    text-align: center;
-}
-
-.table-container th {
-    font-weight: bold;
-    text-transform: uppercase;
-    background-color: #ddd;
-    padding: 10px;
-}
-
-.table-container table {
+    table-layout: fixed;
     margin: 50px auto;
 }
 
-.table-container h1 {
+.common-table-container th,
+.common-table-container td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+    width: 25%;
+}
+
+.common-table-container th:first-child,
+.common-table-container td:first-child {
+    width: 15%;
+}
+
+.common-table-container th:last-child,
+.common-table-container td:last-child {
+    width: 20%;
+}
+
+.common-table-container th {
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #ddd;
+}
+
+.common-table-container h1 {
     margin-bottom: 20px;
     margin-top: 50px;
 }
 
-
-.table-container table {
-    width: 100%;
-    table-layout: fixed;
-}
-
-.table-container td {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    border: 1px solid black;
-    padding: 12px;
-    text-align: center;
-}
-
-.table-container tbody {
-    height: calc(100vh - 150px);
+.common-table-container tbody {
+    height: calc(100vh - 130px);
     display: block;
     overflow-y: scroll;
 }
 
-.table-container thead, .table-container tbody tr {
+.common-table-container thead,
+.common-table-container tbody tr {
     display: table;
     width: 100%;
     table-layout: fixed;
-}
-
-.table-container th,
-.table-container td {
-    border: 1px solid black;
-    padding: 10px;
-    text-align: center;
-    width: 25%; /* set the width of the cells to 25% */
-}
-
-.table-container th:first-child,
-.table-container td:first-child {
-    width: 15%; /* set the width of the first cell to 15% */
-}
-
-.table-container th:last-child,
-.table-container td:last-child {
-    width: 20%; /* set the width of the last cell to 20% */
 }
