@@ -2,7 +2,7 @@
 
 import datetime
 import re
-import paypalrestsdk    
+import paypalrestsdk
 from bson import ObjectId
 from flask import Flask, render_template, jsonify, request, json
 from pymongo import MongoClient
@@ -39,25 +39,45 @@ orders = Queue()  # Used for orders
 
 @app.route('/')
 def home():
+    """Displays the home page.
+
+    Returns:
+        str: HTML for the home page.
+    """
     # Displays Home page
     return render_template('index.html')
 
 
 @app.route('/Menu')
 def menu():
-    # Displays Menu page
+    """
+    Displays the menu page.
+
+    Returns:
+        str: HTML for the menu page.
+    """
     return render_template('menu.html')
 
 
 @app.route('/about')
 def about_us():
-    # Displays About-us page
+    """
+    Displays the about-us page.
+
+    Returns:
+        str: HTML for the about-us page.
+    """
     return render_template('about.html')
 
 
 @app.route('/contact')
 def contact_us():
-    # Displays Contact-us page
+    """
+    Displays the contact-us page.
+
+    Returns:
+        str: HTML for the contact-us page.
+    """
     return render_template('contact.html')
 
 
