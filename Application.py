@@ -391,7 +391,8 @@ def complete_order():
     if order:
         # Insert the order data into the complete_orders collection
         complete_collection.insert_one(order)
-        complete_collection.update_one({'_id': ObjectId(order_id)}, {'$set': {'status': 'Completed', 'completed_time': datetime.datetime.now()}})
+        complete_collection.update_one({'_id': ObjectId(order_id)}, {
+                                       '$set': {'status': 'Completed', 'completed_time': datetime.datetime.now()}})
         # Remove the order from the accepted_orders collection
         accepted_collection.delete_one({'_id': ObjectId(order_id)})
 
@@ -417,6 +418,7 @@ def cancel_order():
     # Return a success response
     return jsonify({'success': True})
 
+
 @app.route('/completed')
 def completed():
     completed_orders = list(complete_collection.find())
@@ -425,12 +427,14 @@ def completed():
 
     return render_template('completed.html', completed_orders=completed_orders)
 
+
 @app.route('/clear_completed_orders', methods=['POST'])
 def clear_completed_orders():
     complete_collection.delete_many({})
     return redirect(url_for('completed'))
 
 ### MAIN ###
+
 
 if __name__ == '__main__':
     # Run the app
