@@ -56,13 +56,15 @@
             const orderIndexParts = orderIndex.split('-');
             const tableNumber = orderIndexParts[0];
             const indexNumber = orderIndexParts[1];
-            console.log("Table number: " + tableNumber + " Index number: " + indexNumber)
-            // $.ajax({
-            //     type: "POST",
-            //     url: "/sendCancel",
-            //     data: JSON.stringify({"pingType": "Food", "tableNo": "#" + tableNumber, "indexNo": indexNumber}),
-            //     contentType: "application/json",
-            // });
+            console.log(tableNumber);
+            console.log(indexNumber)
+
+            $.ajax({
+                type: "POST",
+                url: "/sendCancel",
+                data: JSON.stringify({ "pingType": "Food", "tableNo": "#" + tableNumber, "indexNo": indexNumber }),
+                contentType: "application/json",
+            });
         }
     </script>
 
