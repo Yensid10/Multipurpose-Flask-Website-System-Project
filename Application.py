@@ -86,10 +86,10 @@ def contact_us():
 @app.route('/hideDairy', methods=['POST'])
 def index():
     """Endpoint that returns a list of food items that do not contain specified allergens.
-    
+
     This endpoint takes in a JSON object in the request body that contains a list of allergens to exclude from the query.
     It then fetches the corresponding data from a database and returns a list of food items that do not contain any of the specified allergens.
-    
+
     Returns:
         A JSON object with a 'data' key that contains a list of food items that do not contain any of the specified allergens, or a 'success' key with a value of False if there are no query results.
     """
@@ -146,6 +146,7 @@ def index():
         else:
             return jsonify({'success': False})
 
+
 @app.route('/acceptQueuePing', methods=['POST'])
 def acceptQueuePing():
     # Pop top ping in queue and return it
@@ -170,15 +171,16 @@ def addPingToQueue():
 
 @app.route('/sendCancel', methods=['POST'])
 def sendCancel():
-    # Needs to be completed
+    # When an order item is cancelled in the kitchen, it also needs to be deleted in the order queue
     if request.method == 'POST':
         data = request.get_json()
-        pingType = data.get('pingType')
-        tableNo = data.get('tableNo')
+        tableNo = data.get('tableNo')[1:]
         indexNumber = data.get("indexNo")
-        print(pingType)
-        print(tableNo)
-        print(indexNumber)
+        tempOrder = orders.popSpecificOrder(tableNo)['queue']
+        del tempOrder[int(indexNumber)]
+        tempOrder = {
+            'queue': tempOrder}
+        orders.addObject(tableNo, tempOrder)
         return ('', 204)
 
 
@@ -213,7 +215,6 @@ def sendToKitchen():
             tempOrder = {
                 'queue': orders.popSpecificOrder(tableNo)['queue']
                 + order['queue']}
-            print(tempOrder)
             orders.addObject(tableNo, tempOrder)
 
         queue = order.get('queue', [])
