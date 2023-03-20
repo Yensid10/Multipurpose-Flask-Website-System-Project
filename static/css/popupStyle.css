@@ -8,46 +8,31 @@
         box-sizing: border-box;
     }
 
-
     /* changed the font family and font size of the dropdown */
     select#table-number-select {
-        font-family: Arial, sans-serif;
+        font-family: "Work Sans", sans-serif;
         font-size: 18px;
         text-align: center;
-        color: white;
-        background-color: #778899;
+        color: black;
+        background-color: lightsalmon;
     }
     /* changed the background colour and border colour when clicked */
     select#table-number-select:focus {
-        background-color: grey;
+        background-color: lightsalmon;
         border-color: red;
     }
     /* added a hover effect */
     select#table-number-select:hover {
-        background-color: #778899;
+        background-color: lightsalmon;
     }
 
     /* styling the table numbers in the drop down */
     select#table-number-select option {
     font-size: 16px;
     padding: 8px;
-    background-color: paleturquoise;
-    color: #333;
+    background-color: lightgreen ;
+    color: black;
 }
-
-
-    /* styling for the dropdown element 
-    select#table-number-select {
-        background: green;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        padding: 8px;
-        font-size: 16px;
-        color: #333;
-        width: 200px;
-        outline: none;
-        cursor: pointer;
-    }*/
 
     /* styling for the main body element */
     body {
@@ -59,7 +44,7 @@
         appearance: none;
         width: 18px;
         height: 18px;
-        border: 2px solid #ccc;
+        border: 2px solid lightsalmon;
         border-radius: 4px;
         outline: none;
         transition: all 0.2s ease-in-out;
@@ -101,8 +86,8 @@
     
     /* style for popup container */
     .popup {
-        background-color: #6c757d;
-        color: white;
+        background-color: lightgoldenrodyellow;
+        color: black;
         width: 350px;
         padding: 30px 40px;
         position: absolute;
@@ -137,6 +122,13 @@
         margin-top: -20px;
     }
 
+    /* make the h3 and h4 colour black */
+    h3, h4 {
+        color: black;
+        font-family: "Work Sans", sans-serif;
+    }
+    
+
     /* style for popup paragraph text */
     .popup p {
         font-size: 14px;
@@ -144,18 +136,12 @@
         margin: 20px 0;
         line-height: 25px;
     }
- /*    .popup a {
-        display: block;
-        width: 150px;
-        position: relative;
-        margin: 10px auto;
-        text-align: center;
-        background-color: #0f72e5;
-        border-radius: 20px;
-        color: #ffffff;
-        text-decoration: none;
-        padding: 8px 0;
-    } */
+
+    /* make the close button colour */
+    #close {
+        color: black;
+      }
+
 
     
 </style>
