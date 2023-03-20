@@ -3,7 +3,8 @@
     <head>
         <link rel="stylesheet" href="style.css">
       </head>
-    <body>
+    <body> <!-- This is code for the faq page of the site. Accordions are used to hide information until clicked, and contains information on areas where staff
+    may need help-->
         <h1>FaQs</h1>
         <p>Select a topic from below to find out more:</p>
         <button class="accordion">Getting to know the menu</button>
@@ -92,13 +93,12 @@
         </div>
 
         <script>
-            const accordions = document.getElementsByClassName("accordion");
-
+            const accordions = document.getElementsByClassName("accordion"); //This selects all items under the id of accordion
             for (let i = 0; i < accordions.length; i++) {
-            accordions[i].addEventListener("click", function() {
+            accordions[i].addEventListener("click", function() { //Each item is looped through and waits for a click
                 this.classList.toggle("active");
                 const panel = this.nextElementSibling;
-                panel.style.display = panel.style.display === "block" ? "none" : "block";
+                panel.style.display = panel.style.display === "block" ? "none" : "block"; //The item is unhidden and is now able to drop down and display information
             });
             }
 
