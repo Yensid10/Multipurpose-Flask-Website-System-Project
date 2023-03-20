@@ -7,6 +7,13 @@ db = client.Menu
 
 
 def FetchMenu():
+    """
+    Retrieve the names and prices of all items in the 'Menu' collection of the connected MongoDB database.
+
+    Returns:
+    names: list of strings representing the names of each item in the 'Menu' collection.
+    prices: list of floats representing the prices of each item in the 'Menu' collection.
+    """
     names = []
     prices = []
     for item in db.Menu.find({}):
@@ -15,158 +22,183 @@ def FetchMenu():
     return names, prices
 
 
-# for item in FetchMenu():
-#     print(item["name"])
-#     print(item["price"])
-#     print(item["description"])
-
-
 def FetchAllergies():
+    """
+    Retrieve all items in the 'Allergies' collection of the connected MongoDB database.
+
+    Returns:
+    menuItem: list of dictionaries representing each item in the 'Allergies' collection.
+    """
     menuItem = []
     for item in db.Allergies.find({}):
         menuItem.append(item)
     return menuItem
 
-
-# print(FetchAllergies())
-
 def FetchGluten():
+    """
+    Retrieve a list of all items in the 'Allergies' collection that contain gluten.
+
+    Returns:
+    Item: list of strings representing the names of all items in the 'Allergies' collection that contain gluten.
+    """
     Item = []
     for item in FetchAllergies():
         if (item["gluten"] == True):
-            print(item["name"])
             Item.append(item["name"])
     return Item
 
-# print(FetchGluten())
-
-
 def FetchPeanuts():
+    """
+    Retrieve a list of all items in the 'Allergies' collection that contain peanuts.
+
+    Returns:
+    Item: list of strings representing the names of all items in the 'Allergies' collection that contain peanuts.
+    """
     Item = []
     for item in FetchAllergies():
         if (item["peanuts"] == True):
-            print(item["name"])
             Item.append(item["name"])
     return Item
 
-# print(FetchPeanuts())
-
-
 def FetchTreenuts():
+    """
+    Retrieve a list of all items in the 'Allergies' collection that contain tree nuts.
+
+    Returns:
+    Item: list of strings representing the names of all items in the 'Allergies' collection that contain tree nuts.
+    """
     Item = []
     for item in FetchAllergies():
         if (item["treenuts"] == True):
-            print(item["name"])
             Item.append(item["name"])
     return Item
 
-# print(FetchTreenuts())
-
-
 def FetchCelery():
+    """
+    Retrieve a list of all items in the 'Allergies' collection that contain celery.
+
+    Returns:
+    Item: list of strings representing the names of all items in the 'Allergies' collection that contain celery.
+    """
     Item = []
     for item in FetchAllergies():
         if (item["celery"] == True):
-            print(item["name"])
             Item.append(item["name"])
     return Item
-# print(FetchCelery())
-
 
 def FetchMustard():
+    """
+    Retrieve a list of all items in the 'Allergies' collection that contain mustard.
+
+    Returns:
+    Item: list of strings representing the names of all items in the 'Allergies' collection that contain mustard.
+    """
     Item = []
     for item in FetchAllergies():
         if (item["mustard"] == True):
-            print(item["name"])
             Item.append(item["name"])
     return Item
 
-# print(FetchMustard())
-
-
 def FetchEggs():
+    """
+    Retrieve a list of all items in the 'Allergies' collection that contain eggs.
+
+    Returns:
+    Item: list of strings representing the names of all items in the 'Allergies' collection that contain eggs.
+    """
     Item = []
     for item in FetchAllergies():
         if (item["eggs"] == True):
-            print(item["name"])
             Item.append(item["name"])
     return Item
 
-# print(FetchEggs())
-
-
 def FetchDairy():
+    """
+    Retrieve a list of all items in the 'Allergies' collection that contain milk.
+
+    Returns:
+    Item: list of strings representing the names of all items in the 'Allergies' collection that contain milk.
+    """
     Item = []
     for item in FetchAllergies():
         if (item["milk"] == True):
-            # print(item["name"])
             Item.append(item["name"])
     return Item
 
-# print(FetchDairy())
-
-
 def FetchSesame():
+    """
+    Retrieve a list of all items in the 'Allergies' collection that contain sesame.
+
+    Returns:
+    Item: list of strings representing the names of all items in the 'Allergies' collection that contain sesame.
+    """
     Item = []
     for item in FetchAllergies():
         if (item["sesame"] == True):
-            print(item["name"])
             Item.append(item["name"])
     return Item
 
-# print(FetchSesame())
-
-
 def FetchFish():
+    """
+    Retrieve a list of all items in the 'Allergies' collection that contain fish.
+
+    Returns:
+    Item: list of strings representing the names of all items in the 'Allergies' collection that contain fish.
+    """
     Item = []
     for item in FetchAllergies():
         if (item["fish"] == True):
-            print(item["name"])
             Item.append(item["name"])
     return Item
 
-# print(FetchFish())
-
-
 def FetchCrustaceans():
+    """
+    Retrieve a list of all items in the 'Allergies' collection that contain crustaceans.
+
+    Returns:
+    Item: list of strings representing the names of all items in the 'Allergies' collection that contain crustaceans.
+    """
     Item = []
     for item in FetchAllergies():
         if (item["crustaceans"] == True):
-            print(item["name"])
             Item.append(item["name"])
     return Item
-# print(FetchCrustaceans())
-
 
 def FetchMolluscs():
+    """
+    Retrieve a list of all items in the 'Allergies' collection that contain molluscs.
+
+    Returns:
+    Item: list of strings representing the names of all items in the 'Allergies' collection that contain molluscs.
+    """
     Item = []
     for item in FetchAllergies():
         if (item["molluscs"] == True):
-            print(item["name"])
             Item.append(item["name"])
     return Item
 
-# print(FetchMolluscs())
-
-
 def FetchSulphites():
+    """
+    Retrieve a list of all items in the 'Allergies' collection that contain sulphites.
+
+    Returns:
+    Item: list of strings representing the names of all items in the 'Allergies' collection that contain sulphites.
+    """
     Item = []
     for item in FetchAllergies():
         if (item["sulphites"] == True):
-            print(item["name"])
             Item.append(item["name"])
     return Item
 
-# print(FetchSulphites())
-
-
 def FetchLupin():
+    """
+    Retrieve a list of all items in the 'Allergies' collection that contain lupin.
+
+    Returns:
+    Item: list of strings representing the names of all items in the 'Allergies' collection that contain lupin.
+    """
     Item = []
     for item in FetchAllergies():
         if (item["lupin"] == True):
-            print(item["name"])
             Item.append(item["name"])
     return Item
-
-
-# print(FetchLupin())
