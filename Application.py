@@ -85,6 +85,14 @@ def contact_us():
 
 @app.route('/hideDairy', methods=['POST'])
 def index():
+    """Endpoint that returns a list of food items that do not contain specified allergens.
+    
+    This endpoint takes in a JSON object in the request body that contains a list of allergens to exclude from the query.
+    It then fetches the corresponding data from a database and returns a list of food items that do not contain any of the specified allergens.
+    
+    Returns:
+        A JSON object with a 'data' key that contains a list of food items that do not contain any of the specified allergens, or a 'success' key with a value of False if there are no query results.
+    """
     if request.method == 'POST':
         # Get the JSON data from the request
         data = request.get_json()
@@ -137,13 +145,6 @@ def index():
             return jsonify({'data': results})
         else:
             return jsonify({'success': False})
-
-
-@app.route('/billTemplate')
-def billTemplate():
-    # Displays Bills page
-    return render_template('billTemplate.html')
-
 
 @app.route('/acceptQueuePing', methods=['POST'])
 def acceptQueuePing():
@@ -240,6 +241,11 @@ def sendToKitchen():
 
 @app.route('/getBill', methods=['POST'])
 def getBill():
+    """
+    Retrieve the bill for a specific table.
+
+    :return: The rendered HTML template for displaying the bill information.
+    """
     # Get the bill for a specific table
     if request.method == 'POST':
         tableNo = request.form['tableNo']
