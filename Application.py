@@ -150,6 +150,12 @@ def index():
 @app.route('/acceptQueuePing', methods=['POST'])
 def acceptQueuePing():
     # Pop top ping in queue and return it
+    """
+    The acceptQueuePing function is called by the client when a user clicks on the Accept button.
+        The function pops off the top ping in queue and returns it to be displayed on screen.
+
+    :return: The ping that was accepted
+    """
     if request.method == 'POST':
         ping = queue.popFrontObject()
         data = {
@@ -161,6 +167,14 @@ def acceptQueuePing():
 @app.route('/addPingToQueue', methods=['POST'])
 def addPingToQueue():
     # Add ping to bottom of queue
+    """
+        The addPingToQueue function is used to add a ping to the queue.
+            It takes in a POST request with JSON data containing two fields:
+                - pingType (string) : The type of ping that needs to be added.
+                - tableNo (int) : The number of the table that needs service.
+
+        :return: A 204 status code which means that the request has been successfully processed and the response is intentionally blank
+        """
     if request.method == 'POST':
         data = request.get_json()
         pingType = data.get('pingType')
@@ -172,6 +186,15 @@ def addPingToQueue():
 @app.route('/sendCancel', methods=['POST'])
 def sendCancel():
     # When an order item is cancelled in the kitchen, it also needs to be deleted in the order queue
+    """
+    The sendCancel function is called when an order item is cancelled in the kitchen.
+        It deletes the corresponding order item from the queue of orders for that table.
+
+        Args:
+            data (dict): A dictionary containing a table number and index number, which are used to identify which order item to delete from the queue of orders for that table.
+
+    :return: A 204 status code, which means that the request has been successfully processed and the response is intentionally blank
+    """
     if request.method == 'POST':
         data = request.get_json()
         tableNo = data.get('tableNo')[1:]
@@ -187,6 +210,16 @@ def sendCancel():
 @app.route("/updateQueue")
 def updateQueue():
     # Returns the queue as a json object
+
+    """
+    The updateQueue function returns the queue as a json object.
+        The function is called by the client to update its view of the queue.
+
+        Returns:
+            A json object containing two fields: &quot;queueLength&quot; and &quot;queueItems&quot;.
+
+    :return: The queue as a json object
+    """
     jsonQueue = []
     for i in range(queue.getLength()):
         ping = queue.getObject(i)
@@ -203,6 +236,14 @@ def updateQueue():
 @app.route('/sendToKitchen', methods=['POST'])
 def sendToKitchen():
     # Send an order to the kitchen database and store it in the order queue
+    """
+    The sendToKitchen function is used to send an order from the front-end to the kitchen.
+    It takes in a JSON object with two keys: 'order' and 'tableNo'. The value of 'order' is a list of items, each item being
+    a dictionary containing information about that item (e.g. name, price). The value of tableNo is an integer representing
+    the table number for which this order was placed.
+
+    :return: A 204 status code, which means that the request has been successfully processed and the response is intentionally blank
+    """
     if request.method == 'POST':
         data = request.get_json()
         time = datetime.datetime.now()
@@ -261,6 +302,15 @@ def getBill():
 @app.route('/makePayment', methods=['POST'])
 def makePayment():
     # Make a payment using paypal api
+    """
+    The makePayment function is used to create a payment object using the paypal api.
+    The function takes in a table number and uses this to get the bill for that table from
+    the bill database. The total price of all items on the bill is then calculated and passed into
+    the payment object along with other information such as currency, description, item list etc.
+    A redirect url is also created which will be used by paypal when it redirects back to our website.
+
+    :return: A paymenturl which is a link to the paypal website
+    """
     if request.method == 'POST':
         tableNo = request.json['tableNo']
         bill = orders.getSpecificOrder(tableNo)
@@ -298,6 +348,13 @@ def makePayment():
 @app.route('/checkPayment', methods=['POST'])
 def checkPayment():
     # Check if a payment has been made/if an order exists
+    """
+    The checkPayment function is used to check if a payment has been made for an order.
+        This function takes in the table number of the order and checks if there is an existing
+        order with that table number. If there isn't, it returns False, else it returns True.
+
+    :return: A boolean value that determines whether or not a payment has been made
+    """
     if request.method == 'POST':
         tableNo = request.json['tableNo']
         check = orders.getSpecificOrder(tableNo)
@@ -311,6 +368,14 @@ def checkPayment():
 @app.route('/success')
 def success():
     # After a successful order, add it to the completed orders database
+    """
+    The success function is called when the user has successfully paid for their order.
+    It takes the payment ID and payer ID from PayPal, then uses them to execute a payment.
+    If this is successful, it will add an entry to the completed orders database with
+    the table number, items ordered and time of completion.
+
+    :return: To the menu page
+    """
     pattern = r"Payment for table (\d+) at"
     payment_id = request.args.get("paymentId")
     payer_id = request.args.get("PayerID")
@@ -335,30 +400,60 @@ def success():
 @app.route('/faqPage')
 def faqPage():
     # Render the FAQ page
+    """
+    The faqPage function renders the FAQ page.
+
+    :return: The rendered faq page
+    """
     return render_template('faq.html')
 
 
 @app.route('/doorPage')
 def DoorPage():
     # Render the Door page
+    """
+    The DoorPage function renders the DoorPage.html template, which is a page that allows users to open and close the door.
+
+    :return: The doorpage
+    """
     return render_template('DoorPage.html')
 
 
 @app.route('/loginPage')
 def loginPage():
     # Render the Login page
+    """
+    The loginPage function renders the login page for the user to enter their credentials.
+        Args: None
+        Returns: The rendered template of the login page.
+
+    :return: The loginpage
+    """
     return render_template('loginpage.html')
 
 
 @app.route('/Floor-Staff')
 def showFS():
-    # Render the Floor Staff page, passing in the relevent information
+    # Render the Floor Staff page, passing in the relevant information
+    """
+    The showFS function is used to render the Floor Staff page, passing in the relevant information.
+        It takes no arguments and returns a rendered template of the Floor Staff page.
+
+    :return: The floor staff page
+    """
     names, prices = FetchMenu()
     return render_template('Floor-Staff.html', queue=queue, names=names, prices=prices)
 
 
 @app.route('/kitchen')
 def kitchen():
+    """
+    The kitchen function is the route for the kitchen page.
+    It queries all orders from the order collection and accepted orders from
+    the accepted_orders collection, then renders them to a template.
+
+    :return: A list of all orders in the order collection and a list of accepted orders from the accepted_collection
+    """
     orders = list(order_collection.find())
     for order in orders:
         order['_id'] = str(order['_id'])
@@ -373,6 +468,14 @@ def kitchen():
 @app.route('/accept_order', methods=['POST'])
 def accept_order():
     # Get the order data from the POST request
+    """
+    The accept_order function is called when the user clicks on the accept button for a given order.
+    It takes in an order_data object, which contains all of the information about that particular order.
+    The function then inserts this data into the accepted_orders collection and removes it from
+    the orders_queue collection.
+
+    :return: A success response, but the client doesn't do anything with it
+    """
     order_data = json.loads(request.form['order_data'])
 
     order_data['time'] = int(request.form['time'])
@@ -391,7 +494,14 @@ def accept_order():
 
 @app.route('/complete_order', methods=['POST'])
 def complete_order():
-    # Get the order ID from the POST request
+    """
+    The complete_order function is called when the user clicks on the Complete Order button.
+    It takes in an order ID from a POST request and uses it to find the corresponding order in
+    the accepted_orders collection. If it finds one, then it inserts that data into the complete_orders
+    collection and removes that data from accepted_orders.
+
+    :return: A success response
+    """
     order_id = request.form['order_id']
 
     # Get the order from the accepted_orders collection
@@ -411,7 +521,12 @@ def complete_order():
 
 @app.route('/cancel_order', methods=['POST'])
 def cancel_order():
-    # Get the order index and order ID from the POST request
+    """
+    The cancel_order function is called when a user clicks the cancel button on an order.
+    It removes the order from either the accepted orders collection or the order queue collection, depending on whether it has been accepted yet.
+
+    :return: A success response
+    """
     order_index = request.form['order_index']
     order_id = request.form['order_id']
 
@@ -430,6 +545,14 @@ def cancel_order():
 
 @app.route('/completed')
 def completed():
+    """
+    The completed function is a route that renders the completed.html template, which displays all orders in the
+    completed_orders collection of MongoDB. The function first finds all documents in the collection and stores them as a list
+    in completed_orders. Then, it iterates through each order and converts its ObjectId to a string so that it can be displayed
+    on the page.
+
+    :return: The completed orders page
+    """
     completed_orders = list(complete_collection.find())
     for order in completed_orders:
         order['_id'] = str(order['_id'])
@@ -439,6 +562,12 @@ def completed():
 
 @app.route('/clear_completed_orders', methods=['POST'])
 def clear_completed_orders():
+    """
+    The clear_completed_orders function clears the completed orders collection in MongoDB.
+        It is called when the user clicks on the 'Clear Completed Orders' button on the /completed page.
+
+    :return: The completed page
+    """
     complete_collection.delete_many({})
     return redirect(url_for('completed'))
 
