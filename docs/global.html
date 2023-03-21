@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>JSDoc: Global</title>
@@ -15,842 +16,689 @@
 
 <body>
 
-<div id="main">
+    <div id="main">
 
-    <h1 class="page-title">Global</h1>
-
-    
+        <h1 class="page-title">Global</h1>
 
 
 
 
-<section>
-
-<header>
-    
-        <h2></h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-        
 
 
-<dl class="details">
+        <section>
 
-    
+            <header>
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
+                <h2></h2>
 
 
-        
-    
+            </header>
+
+            <article>
+                <div class="container-overview">
+
+
+
+
+
+
+                    <dl class="details">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </dl>
+
+
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <h3 class="subsection-title">Members</h3>
+
+
+
+                <h4 class="name" id="acceptOrderButton"><span class="type-signature"></span>acceptOrderButton<span
+                        class="type-signature"></span></h4>
+
+
+
+
+                <div class="description">
+                    This function is called when the accept button is clicked.
+                    It reads the order data including the order ID, order index, items, and note from the table row.
+                    It then sends a POST request to the server to accept the order.
+                    It then removes the order from the order queue table.
+                </div>
+
+
+
+
+
+
+
+                <dl class="details">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <dt class="tag-source">Source:</dt>
+                    <dd class="tag-source">
+                        <ul class="dummy">
+                            <li>
+                                <a href="kitchen.js.html">kitchen.js</a>, <a href="kitchen.js.html#line7">line 7</a>
+                            </li>
+                        </ul>
+                    </dd>
+
+
+
+
+
+
+
+                </dl>
+
+
+
+
+
+
+
+
+                <h4 class="name" id="cancelOrderButton"><span class="type-signature"></span>cancelOrderButton<span
+                        class="type-signature"></span></h4>
+
+
+
+
+                <div class="description">
+                    This function is called when the cancel button is clicked.
+                    It reads the order ID and order index from the table row.
+                    It then sends a POST request to the server to cancel the order.
+                    It then removes the order from the accepted orders table.
+                </div>
+
+
+
+
+
+
+
+                <dl class="details">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <dt class="tag-source">Source:</dt>
+                    <dd class="tag-source">
+                        <ul class="dummy">
+                            <li>
+                                <a href="kitchen.js.html">kitchen.js</a>, <a href="kitchen.js.html#line47">line 47</a>
+                            </li>
+                        </ul>
+                    </dd>
+
+
+
+
+
+
+
+                </dl>
+
+
+
+
+
+
+
+
+                <h4 class="name" id="completeOrderButton"><span class="type-signature"></span>completeOrderButton<span
+                        class="type-signature"></span></h4>
+
+
+
+
+                <div class="description">
+                    This function is called when the complete button is clicked.
+                    It reads the order ID from the table row.
+                    It then sends a POST request to the server to complete the order.
+                    It then removes the order from the accepted orders table.
+                </div>
+
+
+
+
+
+
+
+                <dl class="details">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <dt class="tag-source">Source:</dt>
+                    <dd class="tag-source">
+                        <ul class="dummy">
+                            <li>
+                                <a href="kitchen.js.html">kitchen.js</a>, <a href="kitchen.js.html#line89">line 89</a>
+                            </li>
+                        </ul>
+                    </dd>
+
+
+
+
+
+
+
+                </dl>
+
+
+
+
+
+
+
+
+                <h4 class="name" id="refreshTables"><span class="type-signature"></span>refreshTables<span
+                        class="type-signature"></span></h4>
+
+
+
+
+                <div class="description">
+                    This function refreshes the order queue and accepted orders tables every 5 seconds.
+                    This is done to ensure that the tables are up to date with the server.
+                    This is done by reloading the tables from the server.
+                </div>
+
+
+
+
+
+
+
+                <dl class="details">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <dt class="tag-source">Source:</dt>
+                    <dd class="tag-source">
+                        <ul class="dummy">
+                            <li>
+                                <a href="kitchen.js.html">kitchen.js</a>, <a href="kitchen.js.html#line77">line 77</a>
+                            </li>
+                        </ul>
+                    </dd>
+
+
+
+
+
+
+
+                </dl>
+
+
+
+
+
+
+
+
+
+
+                <h3 class="subsection-title">Methods</h3>
+
+
+
+
+
+
+
+                <h4 class="name" id="addPingToQueue"><span class="type-signature"></span>addPingToQueue<span
+                        class="signature">(orderIndex)</span><span class="type-signature"></span></h4>
+
+
+
+
+
+
+                <div class="description">
+                    This function is called when the complete button is clicked.
+                    It splits the order index to get the table number.
+                    It then sends a POST request to the server to complete the order.
+                </div>
+
+
+
+
+
+
+
+
+
+                <h5>Parameters:</h5>
+
+
+                <table class="params">
+                    <thead>
+                        <tr>
+
+                            <th>Name</th>
+
+
+                            <th>Type</th>
+
+
+
+
+
+                            <th class="last">Description</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+
+                        <tr>
+
+                            <td class="name"><code>orderIndex</code></td>
+
+
+                            <td class="type">
+
+                            </td>
+
+
+
+
+
+                            <td class="description last">The order index of the order to send a ping for</td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+
+
+
+
+
+
+                <dl class="details">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <dt class="tag-source">Source:</dt>
+                    <dd class="tag-source">
+                        <ul class="dummy">
+                            <li>
+                                <a href="kitchen.js.html">kitchen.js</a>, <a href="kitchen.js.html#line149">line 149</a>
+                            </li>
+                        </ul>
+                    </dd>
+
+
+
+
+
+
+
+                </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <h4 class="name" id="sendCancel"><span class="type-signature"></span>sendCancel<span
+                        class="signature">(orderIndex)</span><span class="type-signature"></span></h4>
+
+
+
+
+
+
+                <div class="description">
+                    This function is called when the cancel button is clicked.
+                    It reads the order index from the table row.
+                    It then splits the order index to get the table number and index number.
+                    It then sends a POST request to the server to send a ping to the queue.
+                    It then removes the order from the order queue table.
+                </div>
+
+
+
+
+
+
+
+
+
+                <h5>Parameters:</h5>
+
+
+                <table class="params">
+                    <thead>
+                        <tr>
+
+                            <th>Name</th>
+
+
+                            <th>Type</th>
+
+
+
+
+
+                            <th class="last">Description</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+
+                        <tr>
+
+                            <td class="name"><code>orderIndex</code></td>
+
+
+                            <td class="type">
+
+                            </td>
+
+
+
+
+
+                            <td class="description last">The order index of the order to send a ping for</td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+
+
+
+
+
+
+                <dl class="details">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <dt class="tag-source">Source:</dt>
+                    <dd class="tag-source">
+                        <ul class="dummy">
+                            <li>
+                                <a href="kitchen.js.html">kitchen.js</a>, <a href="kitchen.js.html#line127">line 127</a>
+                            </li>
+                        </ul>
+                    </dd>
+
+
+
+
+
+
+
+                </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </article>
+
+        </section>
+
+
+
+
     </div>
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="addItemToOrder"><span class="type-signature"></span>addItemToOrder<span class="signature">(orderItem, price)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Adds an item to the order list and updates the display
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>orderItem</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The name of the item to add to the order</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>price</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The price of the item to add to the order</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="floorStaff.js.html">floorStaff.js</a>, <a href="floorStaff.js.html#line182">line 182</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="flashElement"><span class="type-signature"></span>flashElement<span class="signature">(element)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Creates a flashing animation effect on an HTML element by adding/removing "flash" classThe "flash" animation causes the element to briefly flash red and then fade away
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>element</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">HTMLElement</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The HTML element on which to apply the "flash" effect</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="floorStaff.js.html">floorStaff.js</a>, <a href="floorStaff.js.html#line145">line 145</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="getBill"><span class="type-signature"></span>getBill<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Retrieves the bill for a particular table and redirects the user to that specific table's bill pageIf the selected table has a "htmlCheck" value, flashes the element
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="floorStaff.js.html">floorStaff.js</a>, <a href="floorStaff.js.html#line237">line 237</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="removeOrderItem"><span class="type-signature"></span>removeOrderItem<span class="signature">(index)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Removes an item from the order list and updates the display
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>index</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The index of the item to remove from the order</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="floorStaff.js.html">floorStaff.js</a>, <a href="floorStaff.js.html#line193">line 193</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="sendToKitchen"><span class="type-signature"></span>sendToKitchen<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Sends the order to the kitchen via an AJAX call and updates the display accordinglyChecks if the selected table has a "htmlCheck" value and flashes the element if it doesChecks if the order is empty and flashes the review element if it isIf the order is not empty and does not have a "htmlCheck" value, sends the order to the kitchen via AJAXClears the order queue and updates the display after sending the orderDisplays a confirmation message to the user and fades it out after a delay
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="floorStaff.js.html">floorStaff.js</a>, <a href="floorStaff.js.html#line207">line 207</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Throws:</h5>
-
-        
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        If there is an issue sending the order to the kitchen
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">Error</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-
-    
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="updateOrder"><span class="type-signature"></span>updateOrder<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    If the order is not empty, this function generates HTML markup for each order item with a remove buttonCalculates and displays the total price of the order. Otherwise, the order list is cleared
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="floorStaff.js.html">floorStaff.js</a>, <a href="floorStaff.js.html#line160">line 160</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
-
-    
-
-    
-</article>
-
-</section>
-
-
-
-
-</div>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="%2520Creates%2520a%2520new%2520order%2520queue.html">- Creates a new order queue</a></li><li><a href="orderNotes.html">orderNotes</a></li><li><a href="orderQueue.html">orderQueue</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addItemToOrder">addItemToOrder</a></li><li><a href="global.html#flashElement">flashElement</a></li><li><a href="global.html#getBill">getBill</a></li><li><a href="global.html#removeOrderItem">removeOrderItem</a></li><li><a href="global.html#sendToKitchen">sendToKitchen</a></li><li><a href="global.html#updateOrder">updateOrder</a></li></ul>
-</nav>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Mar 21 2023 10:41:13 GMT+0000 (Greenwich Mean Time)
-</footer>
-
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+    <nav>
+        <h2><a href="index.html">Home</a></h2>
+        <h3>Global</h3>
+        <ul>
+            <li><a href="global.html#acceptOrderButton">acceptOrderButton</a></li>
+            <li><a href="global.html#addPingToQueue">addPingToQueue</a></li>
+            <li><a href="global.html#cancelOrderButton">cancelOrderButton</a></li>
+            <li><a href="global.html#completeOrderButton">completeOrderButton</a></li>
+            <li><a href="global.html#refreshTables">refreshTables</a></li>
+            <li><a href="global.html#sendCancel">sendCancel</a></li>
+        </ul>
+    </nav>
+
+    <br class="clear">
+
+    <footer>
+        Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Mar 21 2023 13:58:04
+        GMT+0000 (Greenwich Mean Time)
+    </footer>
+
+    <script> prettyPrint(); </script>
+    <script src="scripts/linenumber.js"> </script>
 </body>
+
 </html>
