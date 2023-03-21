@@ -305,6 +305,8 @@ def checkPayment():
             return jsonify({'check': "False"})
         return jsonify({'check': "True"})
 
+# stores order with all items in database and clears the order of the table number
+
 
 @app.route('/success')
 def success():
