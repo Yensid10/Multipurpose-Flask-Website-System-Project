@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Sign In Screen</title>
+  <title>Sign In Screen</title> <!-- The webpage for having staff log in to reach the appropriate page-->
   <link rel="stylesheet" href="../static/css/loginpagestyle.css">
 </head>
 
@@ -14,19 +14,20 @@
       <input type="text" id="username" name="username">
       <label for="password">Password:</label>
       <input type="password" id="password" name="password">
-      <button type="submit">Sign In</button>
+      <button type="submit">Sign In</button> <!-- Once the user inputs a username and password, the details are passed to the 
+      function -->
     </form>
   </div>
   <script>
-    function signIn() {
+    function signIn() { //Function for using premade userpass combinations to redirect staff to the appropriate page
       var username = document.getElementById("username").value;
-      var password = document.getElementById("password").value;
+      var password = document.getElementById("password").value; //Inputs from the username and password text field are gathered and assigned to variables
       if (username === "kitchen" && password === "password") {
         window.location.href = "kitchen";
       } else if (username === "floor" && password === "password") {
-        window.location.href = "Floor-Staff";
+        window.location.href = "Floor-Staff"; //Depending on the userpass combination used, the webpage for either the floorstaff page or kitchenstaff page is loaded
       } else if (username === "door" && password === "password") {
-        window.location.href = "doorPage";
+        window.location.href = "doorPage"; //It can also be used to redirect to the door page
       } else {
         alert("Invalid username or password");
       }

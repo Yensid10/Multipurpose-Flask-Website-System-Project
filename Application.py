@@ -2,9 +2,9 @@
 
 import datetime
 import re
-import paypalrestsdk    
+import paypalrestsdk
 from bson import ObjectId
-from flask import Flask, render_template, jsonify, request, json
+from flask import Flask, render_template, jsonify, request, json, redirect, url_for
 from pymongo import MongoClient
 import SqlQuerys
 from ObjectQueue import Queue
@@ -26,6 +26,8 @@ order_collection = db["order_queue"]
 accepted_collection = db["accepted_orders"]
 complete_collection = db["complete_orders"]
 
+complete_collection = db["complete_orders"]
+
 app = Flask(__name__)
 
 
@@ -39,30 +41,58 @@ orders = Queue()  # Used for orders
 
 @app.route('/')
 def home():
+    """Displays the home page.
+
+    Returns:
+        str: HTML for the home page.
+    """
     # Displays Home page
     return render_template('index.html')
 
 
 @app.route('/Menu')
 def menu():
-    # Displays Menu page
+    """
+    Displays the menu page.
+
+    Returns:
+        str: HTML for the menu page.
+    """
     return render_template('menu.html')
 
 
 @app.route('/about')
 def about_us():
-    # Displays About-us page
+    """
+    Displays the about-us page.
+
+    Returns:
+        str: HTML for the about-us page.
+    """
     return render_template('about.html')
 
 
 @app.route('/contact')
 def contact_us():
-    # Displays Contact-us page
+    """
+    Displays the contact-us page.
+
+    Returns:
+        str: HTML for the contact-us page.
+    """
     return render_template('contact.html')
 
 
 @app.route('/hideDairy', methods=['POST'])
 def index():
+    """Endpoint that returns a list of food items that do not contain specified allergens.
+
+    This endpoint takes in a JSON object in the request body that contains a list of allergens to exclude from the query.
+    It then fetches the corresponding data from a database and returns a list of food items that do not contain any of the specified allergens.
+
+    Returns:
+        A JSON object with a 'data' key that contains a list of food items that do not contain any of the specified allergens, or a 'success' key with a value of False if there are no query results.
+    """
     if request.method == 'POST':
         # Get the JSON data from the request
         data = request.get_json()
@@ -117,12 +147,6 @@ def index():
             return jsonify({'success': False})
 
 
-@app.route('/billTemplate')
-def billTemplate():
-    # Displays Bills page
-    return render_template('billTemplate.html')
-
-
 @app.route('/acceptQueuePing', methods=['POST'])
 def acceptQueuePing():
     # Pop top ping in queue and return it
@@ -147,15 +171,16 @@ def addPingToQueue():
 
 @app.route('/sendCancel', methods=['POST'])
 def sendCancel():
-    # Needs to be completed
+    # When an order item is cancelled in the kitchen, it also needs to be deleted in the order queue
     if request.method == 'POST':
         data = request.get_json()
-        pingType = data.get('pingType')
-        tableNo = data.get('tableNo')
+        tableNo = data.get('tableNo')[1:]
         indexNumber = data.get("indexNo")
-        print(pingType)
-        print(tableNo)
-        print(indexNumber)
+        tempOrder = orders.popSpecificOrder(tableNo)['queue']
+        del tempOrder[int(indexNumber)]
+        tempOrder = {
+            'queue': tempOrder}
+        orders.addObject(tableNo, tempOrder)
         return ('', 204)
 
 
@@ -190,7 +215,6 @@ def sendToKitchen():
             tempOrder = {
                 'queue': orders.popSpecificOrder(tableNo)['queue']
                 + order['queue']}
-            print(tempOrder)
             orders.addObject(tableNo, tempOrder)
 
         queue = order.get('queue', [])
@@ -218,6 +242,11 @@ def sendToKitchen():
 
 @app.route('/getBill', methods=['POST'])
 def getBill():
+    """
+    Retrieve the bill for a specific table.
+
+    :return: The rendered HTML template for displaying the bill information.
+    """
     # Get the bill for a specific table
     if request.method == 'POST':
         tableNo = request.form['tableNo']
@@ -275,6 +304,8 @@ def checkPayment():
         if check == False:
             return jsonify({'check': "False"})
         return jsonify({'check': "True"})
+
+# stores order with all items in database and clears the order of the table number
 
 
 @app.route('/success')
@@ -363,8 +394,16 @@ def complete_order():
     # Get the order ID from the POST request
     order_id = request.form['order_id']
 
-    # Remove the order from the accepted_orders collection
-    accepted_collection.delete_one({'_id': ObjectId(order_id)})
+    # Get the order from the accepted_orders collection
+    order = accepted_collection.find_one({'_id': ObjectId(order_id)})
+
+    if order:
+        # Insert the order data into the complete_orders collection
+        complete_collection.insert_one(order)
+        complete_collection.update_one({'_id': ObjectId(order_id)}, {
+                                       '$set': {'status': 'Completed', 'completed_time': datetime.datetime.now()}})
+        # Remove the order from the accepted_orders collection
+        accepted_collection.delete_one({'_id': ObjectId(order_id)})
 
     # Return a success response
     return jsonify({'success': True})
@@ -389,7 +428,22 @@ def cancel_order():
     return jsonify({'success': True})
 
 
+@app.route('/completed')
+def completed():
+    completed_orders = list(complete_collection.find())
+    for order in completed_orders:
+        order['_id'] = str(order['_id'])
+
+    return render_template('completed.html', completed_orders=completed_orders)
+
+
+@app.route('/clear_completed_orders', methods=['POST'])
+def clear_completed_orders():
+    complete_collection.delete_many({})
+    return redirect(url_for('completed'))
+
 ### MAIN ###
+
 
 if __name__ == '__main__':
     # Run the app

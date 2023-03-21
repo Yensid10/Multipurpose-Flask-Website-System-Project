@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module Application</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>Application</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cinvate%5Cdesktop%5Cproject%5Capplication.py">c:\users\invate\desktop\project\application.py</a></font></td></tr></table>
+    <p><tt>###&nbsp;Imports&nbsp;###</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="SqlQuerys.html">SqlQuerys</a><br>
+<a href="datetime.html">datetime</a><br>
+</td><td width="25%" valign=top><a href="flask.json.html">flask.json</a><br>
+<a href="paypalrestsdk.html">paypalrestsdk</a><br>
+</td><td width="25%" valign=top><a href="re.html">re</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-DoorPage"><strong>DoorPage</strong></a>()</dt></dl>
+ <dl><dt><a name="-about_us"><strong>about_us</strong></a>()</dt><dd><tt>Displays&nbsp;the&nbsp;about-us&nbsp;page.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;HTML&nbsp;for&nbsp;the&nbsp;about-us&nbsp;page.</tt></dd></dl>
+ <dl><dt><a name="-acceptQueuePing"><strong>acceptQueuePing</strong></a>()</dt></dl>
+ <dl><dt><a name="-accept_order"><strong>accept_order</strong></a>()</dt></dl>
+ <dl><dt><a name="-addPingToQueue"><strong>addPingToQueue</strong></a>()</dt></dl>
+ <dl><dt><a name="-cancel_order"><strong>cancel_order</strong></a>()</dt></dl>
+ <dl><dt><a name="-checkPayment"><strong>checkPayment</strong></a>()</dt></dl>
+ <dl><dt><a name="-clear_completed_orders"><strong>clear_completed_orders</strong></a>()</dt></dl>
+ <dl><dt><a name="-complete_order"><strong>complete_order</strong></a>()</dt></dl>
+ <dl><dt><a name="-completed"><strong>completed</strong></a>()</dt></dl>
+ <dl><dt><a name="-contact_us"><strong>contact_us</strong></a>()</dt><dd><tt>Displays&nbsp;the&nbsp;contact-us&nbsp;page.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;HTML&nbsp;for&nbsp;the&nbsp;contact-us&nbsp;page.</tt></dd></dl>
+ <dl><dt><a name="-faqPage"><strong>faqPage</strong></a>()</dt></dl>
+ <dl><dt><a name="-getBill"><strong>getBill</strong></a>()</dt><dd><tt>Retrieve&nbsp;the&nbsp;bill&nbsp;for&nbsp;a&nbsp;specific&nbsp;table.<br>
+&nbsp;<br>
+:return:&nbsp;The&nbsp;rendered&nbsp;HTML&nbsp;template&nbsp;for&nbsp;displaying&nbsp;the&nbsp;bill&nbsp;information.</tt></dd></dl>
+ <dl><dt><a name="-home"><strong>home</strong></a>()</dt><dd><tt>Displays&nbsp;the&nbsp;home&nbsp;page.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;HTML&nbsp;for&nbsp;the&nbsp;home&nbsp;page.</tt></dd></dl>
+ <dl><dt><a name="-index"><strong>index</strong></a>()</dt><dd><tt>Endpoint&nbsp;that&nbsp;returns&nbsp;a&nbsp;list&nbsp;of&nbsp;food&nbsp;items&nbsp;that&nbsp;do&nbsp;not&nbsp;contain&nbsp;specified&nbsp;allergens.<br>
+&nbsp;<br>
+This&nbsp;endpoint&nbsp;takes&nbsp;in&nbsp;a&nbsp;JSON&nbsp;object&nbsp;in&nbsp;the&nbsp;request&nbsp;body&nbsp;that&nbsp;contains&nbsp;a&nbsp;list&nbsp;of&nbsp;allergens&nbsp;to&nbsp;exclude&nbsp;from&nbsp;the&nbsp;query.<br>
+It&nbsp;then&nbsp;fetches&nbsp;the&nbsp;corresponding&nbsp;data&nbsp;from&nbsp;a&nbsp;database&nbsp;and&nbsp;returns&nbsp;a&nbsp;list&nbsp;of&nbsp;food&nbsp;items&nbsp;that&nbsp;do&nbsp;not&nbsp;contain&nbsp;any&nbsp;of&nbsp;the&nbsp;specified&nbsp;allergens.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;JSON&nbsp;object&nbsp;with&nbsp;a&nbsp;'data'&nbsp;key&nbsp;that&nbsp;contains&nbsp;a&nbsp;list&nbsp;of&nbsp;food&nbsp;items&nbsp;that&nbsp;do&nbsp;not&nbsp;contain&nbsp;any&nbsp;of&nbsp;the&nbsp;specified&nbsp;allergens,&nbsp;or&nbsp;a&nbsp;'success'&nbsp;key&nbsp;with&nbsp;a&nbsp;value&nbsp;of&nbsp;False&nbsp;if&nbsp;there&nbsp;are&nbsp;no&nbsp;query&nbsp;results.</tt></dd></dl>
+ <dl><dt><a name="-kitchen"><strong>kitchen</strong></a>()</dt></dl>
+ <dl><dt><a name="-loginPage"><strong>loginPage</strong></a>()</dt></dl>
+ <dl><dt><a name="-makePayment"><strong>makePayment</strong></a>()</dt></dl>
+ <dl><dt><a name="-menu"><strong>menu</strong></a>()</dt><dd><tt>Displays&nbsp;the&nbsp;menu&nbsp;page.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;HTML&nbsp;for&nbsp;the&nbsp;menu&nbsp;page.</tt></dd></dl>
+ <dl><dt><a name="-sendCancel"><strong>sendCancel</strong></a>()</dt></dl>
+ <dl><dt><a name="-sendToKitchen"><strong>sendToKitchen</strong></a>()</dt></dl>
+ <dl><dt><a name="-showFS"><strong>showFS</strong></a>()</dt></dl>
+ <dl><dt><a name="-success"><strong>success</strong></a>()</dt></dl>
+ <dl><dt><a name="-updateQueue"><strong>updateQueue</strong></a>()</dt></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>accepted_collection</strong> = Collection(Database(MongoClient(host=['ac-6g1grx...ard-0', tls=True), 'Kitchen'), 'accepted_orders')<br>
+<strong>app</strong> = &lt;Flask 'Application'&gt;<br>
+<strong>client</strong> = MongoClient(host=['ac-6g1grx5-shard-00-02.nnzfai...in', replicaset='atlas-lqstvf-shard-0', tls=True)<br>
+<strong>complete_collection</strong> = Collection(Database(MongoClient(host=['ac-6g1grx...ard-0', tls=True), 'Kitchen'), 'complete_orders')<br>
+<strong>db</strong> = Database(MongoClient(host=['ac-6g1grx5-shard-00-...set='atlas-lqstvf-shard-0', tls=True), 'Kitchen')<br>
+<strong>order_collection</strong> = Collection(Database(MongoClient(host=['ac-6g1grx...f-shard-0', tls=True), 'Kitchen'), 'order_queue')<br>
+<strong>orders</strong> = &lt;ObjectQueue.Queue object&gt;<br>
+<strong>queue</strong> = &lt;ObjectQueue.Queue object&gt;<br>
+<strong>request</strong> = &lt;LocalProxy unbound&gt;</td></tr></table>
+</body></html>

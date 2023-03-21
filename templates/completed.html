@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Completed Orders</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="{{ url_for('static', filename='css/completedstyle.css') }}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+    <h1 class="text-center mb-5">Completed Orders</h1>
+    <div class="text-center mb-3">
+        <a href="{{ url_for('kitchen') }}" class="btn btn-primary">View Kitchen Orders</a>
+    </div>
+            <div class="text-center mb-3">
+                <form action="{{ url_for('clear_completed_orders') }}" method="POST">
+                    <button type="submit" class="btn btn-danger">Clear All</button>
+                </form>
+            </div>
+            <table class="table completed-table table-container">
+                <thead>
+                <tr>
+                    <th>Index</th>
+                    <th>Items</th>
+                    <th>Note</th>
+                    <th>Completed Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for order in completed_orders %}
+                    <tr>
+                        <td>{{ order["order_index"] }}</td>
+                        <td>{{ order["items"] }}</td>
+                        <td>{{ order["note"] }}</td>
+                        <td>{{ order["completed_time"] }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

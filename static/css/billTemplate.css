@@ -1,100 +1,108 @@
 /* setting the background color and height of the body */
 body {
-background-color: lightcyan;
-height: 100vh;
+    background-color: lightcyan;
+    height: 100vh;
 }
 
 /* styling the wrapper of the bill section */
 .bill-wrapper {
-background-color: lightgoldenrodyellow;
-padding: 20px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-border-radius: 20px;
-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: lightgoldenrodyellow;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* styling the bill tab */
 .bill-tab {
-background-color: #ffbe7d;
-padding: 10px;
-border-radius: 10px;
-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #ffbe7d;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* styling the Oxhca tab */
 .oxhca-tab {
-background-color: #ffbe7d;
-padding: 10px;
-color: #fff;
-border-radius: 10px;
-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #ffbe7d;
+    padding: 10px;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* styling the items table */
 .items-table {
-margin: 50px auto;
-border-collapse: collapse;
-text-align: center;
-border-radius: 10px;
-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 50px auto;
+    border-collapse: collapse;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 20%;
+    left: 17%;
+
 }
 
 /* styling the table header cells */
 .items-table th {
-background-color: #ffbe7d;
-color: #fff;
-padding: 10px;
-border-top-left-radius: 10px;
-border-top-right-radius: 10px;
+    background-color: #ffbe7d;
+    color: #fff;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.items-table td {
+    background-color: #ffffff;
 }
 
 /* styling the table cells */
 .items-table td,
 .items-table th {
-border: 1px solid #ddd;
-padding: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
 }
 
 /* styling the last cell in each row and the total cell */
 .items-table td:last-child,
 .total-cell {
-background-color: #ffbe7d;
-color: #fff;
-border-bottom-left-radius: 10px;
-border-bottom-right-radius: 10px;
+    background-color: #ffbe7d;
+    color: #fff;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 /* styling the "make payment" button */
 .button {
-background-color: #b629aa;
-color: #fff;
-padding: 10px;
-border-radius: 10px;
-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-position: absolute;
-top: 30%;
-left: 65%;
-text-transform: uppercase;
-font-weight: bold;
-letter-spacing: 1px;
-cursor: pointer;
-transition: all 0.2s ease-in-out;
+    background-color: #b629aa;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 30%;
+    left: 63.5%;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
 
 .button:hover {
-background-color: #8a1b80;
+    background-color: #8a1b80;
 }
 
 /* styling the QR code wrapper */
 .qrCodeWrapper {
-position: absolute;
-top: 37%;
-left: 64%;
-border: #ddd 2px solid;
-height: 128px;
-width: 128px;
-border-radius: 10px;
-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 37%;
+    left: 64%;
+    border: #ddd 2px solid;
+    height: 128px;
+    width: 128px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
