@@ -54,6 +54,10 @@ body {
     border-top-right-radius: 10px;
 }
 
+.items-table td {
+    background-color: #ffffff;
+}
+
 /* styling the table cells */
 .items-table td,
 .items-table th {
