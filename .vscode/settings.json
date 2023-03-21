@@ -3,5 +3,7 @@
     "cSpell.words": [
         "mybutton",
         "ringus"
-    ]
+    ],
+    "appService.defaultWebAppToDeploy": "undefined/subscriptions/610666fa-cc43-41c3-ab0b-1a35ebedcb2a/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/Group14ProjectOaxaca-159",
+    "appService.deploySubpath": "."
 }
