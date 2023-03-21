@@ -224,6 +224,11 @@ label {
   display: inline-block;
   margin-bottom: 0.5rem; }
 
+.home-slider img {
+  touch-action: pan-y;
+}
+  
+
 button {
   border-radius: 0; }
   .ringus {
