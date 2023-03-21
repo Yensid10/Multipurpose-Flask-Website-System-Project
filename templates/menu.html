@@ -67,9 +67,113 @@
 			</div>
 		</div>
 	</nav>
+
+
 	<!-- END nav -->
 
 
+	
+
+
+	<title>My </title>
+	<link rel="stylesheet" type="text/css" href="/static/css/popupStyle.css">
+	<head>
+		<title>Popup Window</title>
+		<link rel="stylesheet" type="text/css" href="/css/popupStyle.css">
+		<style>
+			body {
+				overflow: hidden;
+				/* prevent scrolling */
+			}
+
+			body {
+				overflow: auto;
+			}
+
+			.popup {
+				position: fixed;
+				/* fixed position to stay in place */
+				top: 50%;
+				/* position at center of screen */
+				left: 50%;
+				/* position at center of screen */
+				transform: translate(-50%, -50%);
+				/* center the popup */
+				/* background-color: white;
+				border: 2px solid black; */
+				padding: 20px;
+				z-index: 1;
+				/* make sure it appears on top */
+			}
+
+			button#close {
+				position: absolute;
+				/* position the button relative to the popup */
+				top: 0;
+				right: 0;
+				font-size: 24px;
+				background-color: transparent;
+				border: none;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- <form action="/submit-form" method="POST"> -->
+		<div class="popup">
+			<button id="close">&times;</button>
+			<label for="table-number-select">Table Number:</label>
+			<select id="table-number-select" name="table-number">
+				<option value="">Select a Table</option>
+				{% for i in range(1,31) %}
+					<option value="{{i}}">{{i}}</option>
+				{% endfor %}
+			</select>
+			<h3>Please Select any Dietary Restrictions:</h3>
+			<h4>Allergens:</h4>
+			<!-- <form> -->
+			<input type="checkbox" id="allergen1" name="allergen" value="Milk">
+			<label for="allergen1">Milk</label><br>
+			<input type="checkbox" id="allergen2" name="allergen" value="Eggs">
+			<label for="allergen2">Eggs</label><br>
+			<input type="checkbox" id="allergen3" name="allergen" value="Peanuts">
+			<label for="allergen3">Peanuts</label><br>
+			<input type="checkbox" id="allergen4" name="allergen" value="Tree Nuts">
+			<label for="allergen4">Tree Nuts</label><br>
+			<input type="checkbox" id="allergen5" name="allergen" value="Wheat">
+			<label for="allergen5">Wheat</label><br>
+			<input type="checkbox" id="allergen6" name="allergen" value="Soy">
+			<label for="allergen6">Soy</label><br>
+			<input type="checkbox" id="allergen7" name="allergen" value="Fish">
+			<label for="allergen7">Fish</label><br>
+			<input type="checkbox" id="allergen8" name="allergen" value="Shellfish">
+			<label for="allergen8">Shellfish</label><br>
+			<button onclick="submitPopup()">Submit</button>
+
+		</div>
+
+		<!--waits for the page to load then loads pop up after 1 second-->
+		<script type="text/javascript">
+			window.addEventListener("load", function () {
+				setTimeout(
+					function open(event) {
+						const popup = document.querySelector(".popup");
+						popup.style.display = "block";
+						document.body.style.overflow = "hidden"; // lock scrolling
+					},
+					1000
+				)
+			});
+
+			//waits for close button to be clicked then closes pop up form and allows scrolling
+			document.querySelector("#close").addEventListener("click", function () {
+				const popup = document.querySelector(".popup");
+				popup.style.display = "none";
+				document.body.style.overflow = "auto"; // unlock scrolling
+			});
+		</script>
+	</body>
 
 	<!--The display of the menu starts -->
 	<section class="home-slider owl-carousel img" style="background-image: url(/static/images/bg_1.jpg);">
@@ -103,7 +207,7 @@
 			<div class="row no-gutters d-flex">
 				<div class="col-lg-4 d-flex ftco-animate">
 					<div class="services-wrap d-flex">
-						<a href="#" class="img" style="background-image: url(/static/images/dish-1.jpg);"></a>
+						<a onclick="preventReload(event)" class="img" style="background-image: url(/static/images/dish-1.jpg); cursor: pointer;"></a>
 						<div class="text p-4">
 							<h3>Guacamole and chips</h3>
 							<p>contains avocado.</p>
@@ -113,7 +217,7 @@
 				</div>
 				<div class="col-lg-4 d-flex ftco-animate">
 					<div class="services-wrap d-flex">
-						<a href="#" class="img" style="background-image: url(/static/images/dish-2.jpg);"></a>
+						<a onclick="preventReload(event)" class="img" style="background-image: url(/static/images/dish-2.jpg); cursor: pointer;"></a>
 						<div class="text p-4">
 							<h3>Queso fundido</h3>
 							<p>contains dairy.</p>
@@ -123,7 +227,7 @@
 				</div>
 				<div class="col-lg-4 d-flex ftco-animate">
 					<div class="services-wrap d-flex">
-						<a href="#" class="img" style="background-image: url(/static/images/dish-3.jpg);"></a>
+						<a onclick="preventReload(event)" class="img" style="background-image: url(/static/images/dish-3.jpg); cursor: pointer;"></a>
 						<div class="text p-4">
 							<h3>Tostadas de tinga</h3>
 							<p>contains chicken, contains dairy.</p>
@@ -134,8 +238,7 @@
 
 				<div class="col-lg-4 d-flex ftco-animate">
 					<div class="services-wrap d-flex">
-						<a href="#" class="img order-lg-last"
-							style="background-image: url(/static/images/dish-4.jpg);"></a>
+						<a onclick="preventReload(event)" class="img" style="background-image: url(/static/images/dish-4.jpg); cursor: pointer;"></a>
 						<div class="text p-4">
 							<h3>Mole negro</h3>
 							<p>contains peanuts, contains tree nuts.</p>
@@ -145,8 +248,7 @@
 				</div>
 				<div class="col-lg-4 d-flex ftco-animate">
 					<div class="services-wrap d-flex">
-						<a href="#" class="img order-lg-last"
-							style="background-image: url(/static/images/dish-5.jpg);"></a>
+						<a onclick="preventReload(event)" class="img" style="background-image: url(/static/images/dish-5.jpg); cursor: pointer;"></a>
 						<div class="text p-4">
 							<h3>Tacos al pastor</h3>
 							<p>contains pork.</p>
@@ -156,8 +258,7 @@
 				</div>
 				<div class="col-lg-4 d-flex ftco-animate">
 					<div class="services-wrap d-flex">
-						<a href="#" class="img order-lg-last"
-							style="background-image: url(/static/images/dish-6.jpg);"></a>
+						<a onclick="preventReload(event)" class="img" style="background-image: url(/static/images/dish-6.jpg); cursor: pointer;"></a>
 						<div class="text p-4">
 							<h3>Enchiladas verdes</h3>
 							<p>contains dairy, contains chicken.</p>
@@ -167,108 +268,6 @@
 				</div>
 			</div>
 		</div>
-
-
-
-		<title>My </title>
-		<link rel="stylesheet" type="text/css" href="/static/css/popupStyle.css">
-		<head>
-			<title>Popup Window</title>
-			<link rel="stylesheet" type="text/css" href="/css/popupStyle.css">
-			<style>
-				body {
-					overflow: hidden;
-					/* prevent scrolling */
-				}
-
-				body {
-					overflow: auto;
-				}
-
-				.popup {
-					position: fixed;
-					/* fixed position to stay in place */
-					top: 50%;
-					/* position at center of screen */
-					left: 50%;
-					/* position at center of screen */
-					transform: translate(-50%, -50%);
-					/* center the popup */
-					/* background-color: white;
-					border: 2px solid black; */
-					padding: 20px;
-					z-index: 1;
-					/* make sure it appears on top */
-				}
-
-				button#close {
-					position: absolute;
-					/* position the button relative to the popup */
-					top: 0;
-					right: 0;
-					font-size: 24px;
-					background-color: transparent;
-					border: none;
-					cursor: pointer;
-				}
-			</style>
-		</head>
-
-		<body>
-			<!-- <form action="/submit-form" method="POST"> -->
-			<div class="popup">
-				<button id="close">&times;</button>
-				<label for="table-number-select">Table Number:</label>
-				<select id="table-number-select" name="table-number">
-					<option value="">Select a Table</option>
-					{% for i in range(1,31) %}
-						<option value="{{i}}">{{i}}</option>
-					{% endfor %}
-				</select>
-				<h3>Please Select any Dietary Restrictions:</h3>
-				<h4>Allergens:</h4>
-				<!-- <form> -->
-				<input type="checkbox" id="allergen1" name="allergen" value="Milk">
-				<label for="allergen1">Milk</label><br>
-				<input type="checkbox" id="allergen2" name="allergen" value="Eggs">
-				<label for="allergen2">Eggs</label><br>
-				<input type="checkbox" id="allergen3" name="allergen" value="Peanuts">
-				<label for="allergen3">Peanuts</label><br>
-				<input type="checkbox" id="allergen4" name="allergen" value="Tree Nuts">
-				<label for="allergen4">Tree Nuts</label><br>
-				<input type="checkbox" id="allergen5" name="allergen" value="Wheat">
-				<label for="allergen5">Wheat</label><br>
-				<input type="checkbox" id="allergen6" name="allergen" value="Soy">
-				<label for="allergen6">Soy</label><br>
-				<input type="checkbox" id="allergen7" name="allergen" value="Fish">
-				<label for="allergen7">Fish</label><br>
-				<input type="checkbox" id="allergen8" name="allergen" value="Shellfish">
-				<label for="allergen8">Shellfish</label><br>
-				<button onclick="submitPopup()">Submit</button>
-
-			</div>
-
-			<!--waits for the page to load then loads pop up after 1 second-->
-			<script type="text/javascript">
-				window.addEventListener("load", function () {
-					setTimeout(
-						function open(event) {
-							const popup = document.querySelector(".popup");
-							popup.style.display = "block";
-							document.body.style.overflow = "hidden"; // lock scrolling
-						},
-						1000
-					)
-				});
-
-				//waits for close button to be clicked then closes pop up form and allows scrolling
-				document.querySelector("#close").addEventListener("click", function () {
-					const popup = document.querySelector(".popup");
-					popup.style.display = "none";
-					document.body.style.overflow = "auto"; // unlock scrolling
-				});
-			</script>
-		</body>
 
 		<!--Displaying few menu items in list view with price and info -->
 		<div class="container">
@@ -437,8 +436,7 @@
 										<div class="Guacamole">
 											<div class="col-md-4 text-center">
 												<div class="menu-wrap">
-													<a href="#" class="menu-img img mb-4"
-														style="background-image: url(/static/images/dish-1.jpg);"></a>
+													<a onclick="preventReload(event)" class="menu-img img mb-4" style="background-image: url(/static/images/dish-1.jpg); cursor: pointer;"></a>
 													<div class="text">
 														<h3><a href="#">Guacamole & chips</a></h3>
 														<p>contains avocado.</p>
@@ -450,8 +448,7 @@
 										<div class="Queso fundido">
 											<div class="col-md-4 text-center">
 												<div class="menu-wrap">
-													<a href="#" class="menu-img img mb-4"
-														style="background-image: url(/static/images/dish-2.jpg);"></a>
+													<a onclick="preventReload(event)" class="menu-img img mb-4" style="background-image: url(/static/images/dish-2.jpg); cursor: pointer;"></a>
 													<div class="text">
 														<h3><a href="#">Queso fundido</a></h3>
 														<p>contains dairy.</p>
@@ -463,8 +460,7 @@
 										<div class="Tostadas de tinga">
 											<div class="col-md-4 text-center">
 												<div class="menu-wrap">
-													<a href="#" class="menu-img img mb-4"
-														style="background-image: url(/static/images/dish-3.jpg);"></a>
+													<a onclick="preventReload(event)" class="menu-img img mb-4" style="background-image: url(/static/images/dish-3.jpg); cursor: pointer;"></a>
 													<div class="text">
 														<h3><a href="#">Tostadas de tinga</a></h3>
 														<p>contains chicken & dairy.</p>
@@ -482,8 +478,7 @@
 										<div class="Mole negro">
 											<div class="col-md-4 text-center">
 												<div class="menu-wrap">
-													<a href="#" class="menu-img img mb-4"
-														style="background-image: url(/static/images/dish-4.jpg);"></a>
+													<a onclick="preventReload(event)" class="menu-img img mb-4" style="background-image: url(/static/images/dish-4.jpg); cursor: pointer;"></a>
 													<div class="text">
 														<h3><a href="#">Mole negro</a></h3>
 														<p>contains peanuts & nuts.</p>
@@ -495,8 +490,7 @@
 										<div class="Tacos al pastor">
 											<div class="col-md-4 text-center">
 												<div class="menu-wrap">
-													<a href="#" class="menu-img img mb-4"
-														style="background-image: url(/static/images/dish-5.jpg);"></a>
+													<a onclick="preventReload(event)" class="menu-img img mb-4" style="background-image: url(/static/images/dish-5.jpg); cursor: pointer;"></a>
 													<div class="text">
 														<h3><a href="#">Tacos al pastor</a></h3>
 														<p>contains pork.</p>
@@ -508,8 +502,7 @@
 										<div class="Enchiladas verdes">
 											<div class="col-md-4 text-center">
 												<div class="menu-wrap">
-													<a href="#" class="menu-img img mb-4"
-														style="background-image: url(/static/images/dish-6.jpg);"></a>
+													<a onclick="preventReload(event)" class="menu-img img mb-4" style="background-image: url(/static/images/dish-6.jpg); cursor: pointer;"></a>
 													<div class="text">
 														<h3><a href="#">Enchiladas verdes</a></h3>
 														<p>contains dairy & chicken.</p>
@@ -527,8 +520,7 @@
 										<div class="Arroz verde">
 											<div class="col-md-4 text-center">
 												<div class="menu-wrap">
-													<a href="#" class="menu-img img mb-4"
-														style="background-image: url(/static/images/dish-7.jpg);"></a>
+													<a onclick="preventReload(event)" class="menu-img img mb-4" style="background-image: url(/static/images/dish-7.jpg); cursor: pointer;"></a>
 													<div class="text">
 														<h3><a href="#">Arroz verde</a></h3>
 														<p>contains dairy.</p>
@@ -540,8 +532,7 @@
 										<div class="Frijoles negros">
 											<div class="col-md-4 text-center">
 												<div class="menu-wrap">
-													<a href="#" class="menu-img img mb-4"
-														style="background-image: url(/static/images/dish-8.jpg);"></a>
+													<a onclick="preventReload(event)" class="menu-img img mb-4" style="background-image: url(/static/images/dish-8.jpg); cursor: pointer;"></a>
 													<div class="text">
 														<h3><a href="#">Frijoles negros</a></h3>
 														<p>contains soy.</p>
@@ -553,8 +544,7 @@
 										<div class="Elote">
 											<div class="col-md-4 text-center">
 												<div class="menu-wrap">
-													<a href="#" class="menu-img img mb-4"
-														style="background-image: url(/static/images/dish-9.jpg);"></a>
+													<a onclick="preventReload(event)" class="menu-img img mb-4" style="background-image: url(/static/images/dish-9.jpg); cursor: pointer;"></a>
 													<div class="text">
 														<h3><a href="#">Elote</a></h3>
 														<p>contains dairy.</p>
@@ -572,8 +562,7 @@
 										<div class="Flan">
 											<div class="col-md-4 text-center">
 												<div class="menu-wrap">
-													<a href="#" class="menu-img img mb-4"
-														style="background-image: url(/static/images/dish-10.jpg);"></a>
+													<a onclick="preventReload(event)" class="menu-img img mb-4" style="background-image: url(/static/images/dish-10.jpg); cursor: pointer;"></a>
 													<div class="text">
 														<h3><a href="#">Flan</a></h3>
 														<p>contains dairy & eggs.</p>
@@ -585,8 +574,7 @@
 										<div class="Tres leches">
 											<div class="col-md-4 text-center">
 												<div class="menu-wrap">
-													<a href="#" class="menu-img img mb-4"
-														style="background-image: url(/static/images/dish-11.jpg);"></a>
+													<a onclick="preventReload(event)" class="menu-img img mb-4" style="background-image: url(/static/images/dish-11.jpg); cursor: pointer;"></a>
 													<div class="text">
 														<h3><a href="#">Tres leches</a></h3>
 														<p>contains dairy.</p>
@@ -598,8 +586,7 @@
 										<div class="Sorbete de tamarindo">
 											<div class="col-md-4 text-center">
 												<div class="menu-wrap">
-													<a href="#" class="menu-img img mb-4"
-														style="background-image: url(/static/images/dish-12.jpg);"></a>
+													<a onclick="preventReload(event)" class="menu-img img mb-4" style="background-image: url(/static/images/dish-12.jpg); cursor: pointer;"></a>
 													<div class="text">
 														<h3><a href="#">Sorbete de tamarindo</a></h3>
 														<p>contains tree nuts.</p>

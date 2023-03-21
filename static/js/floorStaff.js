@@ -2,7 +2,7 @@
 // CLIENT CLASSES \\
 /**
  * @class orderNotes
- * @classdesc This class is used to store the order notes and price of an order
+ * @classdesc This class is used to store the order notes and price of an order.
  * @param {string} Note1 - The first note of the order
  * @param {string} Note2 - The second note of the order
  * @param {number} price - The price of the order
@@ -32,17 +32,17 @@ class orderNotes {
 }
 /**
  * @class orderQueue
- * @classdesc This is a class used to manage order notes and price in the order queue
+ * @classdesc This is a class used to manage order notes and price in the order queue.
  */
 class orderQueue {
     /**
-     * @constructor - Creates a new order queue
+     * @constructor - Creates a new order queue.
      */
     constructor() {
         this.queue = [];
     }
     /**
-       * Adds a new orderNotes object to the queue array
+       * Adds a new orderNotes object to the queue array.
        * @param {string} Note1 - The first note for the order
        * @param {string} Note2 - The second note for the order
        * @param {number} price - The price for the order
@@ -52,7 +52,7 @@ class orderQueue {
         this.queue.push(new orderNotes(Note1, Note2, price));
     }
     /**
-       * Removes an object from the queue array at the specified index
+       * Removes an object from the queue array at the specified index.
        * @param {number} index - The index of the object to remove
        */
     removeObject(index) {
@@ -60,7 +60,7 @@ class orderQueue {
         this.queue.splice(index, 1);
     }
     /**
-       * Gets the object at the specified index of the queue array
+       * Gets the object at the specified index of the queue array.
        * @param {number} index - The index of the object to get
        * @returns {orderNotes} - The orderNotes object at the specified index
        */
@@ -69,7 +69,7 @@ class orderQueue {
         return this.queue[index];
     }
     /**
-       * Gets the length of the queue array
+       * Gets the length of the queue array.
        * @returns {number} - The length of the queue array
        */
     getLength() {
@@ -138,8 +138,8 @@ function updateQueue() {
 
 // ORDER FUNCTIONS \\
 /**
- * Creates a flashing animation effect on an HTML element by adding/removing "flash" class
- * The "flash" animation causes the element to briefly flash red and then fade away
+ * Creates a flashing animation effect on an HTML element by adding/removing "flash" class.
+ * The "flash" animation causes the element to briefly flash red and then fade away.
  * @param {HTMLElement} element - The HTML element on which to apply the "flash" effect
 */
 function flashElement(element) {
@@ -153,9 +153,9 @@ function flashElement(element) {
     }
 }
 /**
- * Updates the order review list on the webpage and displays the total price of the order
- * @description If the order is not empty, this function generates HTML markup for each order item with a remove button
- * Calculates and displays the total price of the order. Otherwise, the order list is cleared
+ * Updates the order review list on the webpage and displays the total price of the order.
+ * @description If the order is not empty, this function generates HTML markup for each order item with a remove button.
+ * Calculates and displays the total price of the order. Otherwise, the order list is cleared.
 */
 function updateOrder() {
     // Updates the order review list on the webpage and displays the total price of the order
@@ -175,7 +175,7 @@ function updateOrder() {
 }
 
 /**
- * Adds an item to the order list and updates the display
+ * Adds an item to the order list and updates the display.
  * @param {string} orderItem - The name of the item to add to the order
  * @param {number} price - The price of the item to add to the order
 */
@@ -187,7 +187,7 @@ function addItemToOrder(orderItem, price) {
     updateOrder();
 }
 /**
- * Removes an item from the order list and updates the display
+ * Removes an item from the order list and updates the display..
  * @param {number} index - The index of the item to remove from the order
 */
 function removeOrderItem(index) {
@@ -197,11 +197,11 @@ function removeOrderItem(index) {
 }
 /**
  * Sends the order to the kitchen via an AJAX call and updates the display accordingly
- * Checks if the selected table has a "htmlCheck" value and flashes the element if it does
- * Checks if the order is empty and flashes the review element if it is
- * If the order is not empty and does not have a "htmlCheck" value, sends the order to the kitchen via AJAX
- * Clears the order queue and updates the display after sending the order
- * Displays a confirmation message to the user and fades it out after a delay
+ * Checks if the selected table has a "htmlCheck" value and flashes the element if it does.
+ * Checks if the order is empty and flashes the review element if it is.
+ * If the order is not empty and does not have a "htmlCheck" value, sends the order to the kitchen via AJAX.
+ * Clears the order queue and updates the display after sending the order.
+ * Displays a confirmation message to the user and fades it out after a delay.
  * @throws {Error} If there is an issue sending the order to the kitchen
 */
 function sendToKitchen() {
@@ -231,8 +231,8 @@ function sendToKitchen() {
 
 // BILLS FUNCTIONS \  
 /**
- * Retrieves the bill for a particular table and redirects the user to that specific table's bill page
- * If the selected table has a "htmlCheck" value, flashes the element
+ * Retrieves the bill for a particular table and redirects the user to that specific table's bill page.
+ * If the selected table has a "htmlCheck" value, flashes the element.
 */
 function getBill() {
     // Retrieves the bill for a particular table and redirects the user to that specific tables bill page

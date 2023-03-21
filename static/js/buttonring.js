@@ -1,3 +1,10 @@
+/**
+ * This file is used to handle the ring us button.
+ * When the button is clicked, it will be disabled for 2 minutes.
+ * The button will be enabled again after 2 minutes.
+ * The button will also be disabled if the user refreshes the page.
+ * The button will be enabled again if the user refreshes the page after 2 minutes.
+ */
 // Get the button element
 const ringUsBtn = document.querySelector('.ringus');
 
@@ -57,7 +64,19 @@ ringUsBtn.addEventListener('click', () => {
     }, 1000); // 1 second interval
   }
 });
+/**
+ * This function is used to disable the button when the user refreshes the page.
+ * @param {number} timeLeft - The time left in milliseconds.
+ * @param {number} clickTime - The time when the button was clicked.
+ * @param {number} storedDuration - The duration of the timer in milliseconds.
+ * @param {number} storedTime - The time when the timer was started.
+ * @param {number} elapsedTime - The time elapsed since the timer was started.
+ * @param {number} minutes - The minutes left.
+ * @param {number} seconds - The seconds left.
+ * @param {number} duration - The duration of the timer in milliseconds.
+ * @param {number} time - The time when the timer was started. 
 
+ */
 if (tableNumber != null && timeLeft === 0) {
   const storedTime = localStorage.getItem('ringUsTime');
   const storedDuration = localStorage.getItem('ringUsDuration');
