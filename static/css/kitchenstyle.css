@@ -62,3 +62,13 @@ body {
     width: 100%;
     table-layout: fixed;
 }
+
+#order-queue-table td:nth-child(3) {
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+#accepted-orders-table td:nth-child(3) {
+  white-space: nowrap;
+  overflow-x: auto;
+}
