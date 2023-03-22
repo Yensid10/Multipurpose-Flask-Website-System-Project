@@ -10,7 +10,7 @@ var tableNumber = null;
 
 /**
 *
-* This function submits the form with the selected table number and allergens via an AJAX request to the server to hide items containing dairy.
+* This function submits the form with the selected table number and allergens via an AJAX request to the server to hide items containing a certain allergy.
 *
 * It then hides the selected items on the page and hides the popup.
 */
