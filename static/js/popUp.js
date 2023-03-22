@@ -25,8 +25,6 @@ function submitPopup() {
 			allergens.push(allergenInputs[i].value);
 		}
 	}
-	console.log(tableNumber);
-	console.log('tableNumber:', tableNumber + ' allergens:', allergens);
 
 	if (tableNumber !== null && tableNumber !== '') {
 		if (!isNaN(tableNumber) && tableNumber >= 0) {
@@ -40,9 +38,7 @@ function submitPopup() {
 				contentType: "application/json",
 				dataType: 'json'
 			}).done(function (response) {
-				console.log('this is my response:', response);
 				var data = response.data;
-				console.log(tableNumber);
 				hide(data);
 				document.querySelector(".popup").style.display = "none";
 				document.querySelector("body").style.overflow = "auto";
@@ -62,9 +58,7 @@ function submitPopup() {
 function hide(data) {
 	if (data != null) {
 	  for (var i = 0; i < data.length; i++) {
-		console.log(data[i]);
 		var elements = document.getElementsByClassName(data[i]);
-		console.log('elements are now changed to:', data[i]);
 		for (var x = 0; x < elements.length; x++) {
 		  if (elements[x].style.display === "none") {
 			elements[x].style.display = "block";
