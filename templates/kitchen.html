@@ -9,90 +9,91 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- <link href="{{ url_for('static', filename='images/kitchenicon.png') }}" rel="icon" type="image/png"> -->
-    <link rel="icon" type="image/png" href="/static/images/icon.png" />
+    <link rel="icon" type="image/png" href="/static/images/icon.png"/>
     <script src="{{ url_for('static', filename='js/kitchen.js') }}"></script>
 
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="common-table-container">
-                    <h1 class="text-center mb-5">Order Queue</h1>
-                    <div id="order-queue-table-content">
-                        <table class="table kitchen-table" id="order-queue-table">
-                            <thead>
-                                <tr>
-                                    <th>Index</th>
-                                    <th>Items</th>
-                                    <th>Note</th>
-                                    <th>Accept</th>
-                                    <th>Cancel</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for order in orders %}
-                                <tr>
-                                    <td>{{ order["order_index"] }}</td>
-                                    <td>{{ order["items"] }}</td>
-                                    <td>{{ order["note"] }}</td>
-                                    <td>
-                                        <button class="btn btn-primary accept-button" data-order-id="{{ order[" _id"]
-                                            }}">
-                                            Accept
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-danger cancel-button" data-order-id="{{ order[" _id"] }}"
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="common-table-container">
+                <h1 class="text-center mb-5">Order Queue</h1>
+                <div id="order-queue-table-content">
+                    <table class="table kitchen-table" id="order-queue-table">
+                        <!-- This is the table that will display the orders that are in the queue -->
+                        <thead>
+                        <tr>
+                            <th>Index</th>
+                            <th>Items</th>
+                            <th>Note</th>
+                            <th>Accept</th>
+                            <th>Cancel</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- This iterates through the orders in the queue and displays them in the table -->
+                        {% for order in orders %}
+                            <tr>
+                                <td>{{ order["order_index"] }}</td>
+                                <td>{{ order["items"] }}</td>
+                                <td>{{ order["note"] }}</td>
+                                <td>
+                                    <button class="btn btn-primary accept-button" data-order-id="{{ order['_id'] }}">
+                                        Accept
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger cancel-button" data-order-id="{{ order[" _id"] }}"
                                             onclick="sendCancel('{{ order[" order_index"] }}')">Cancel
-                                        </button>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="common-table-container">
-                    <h1 class="text-center mb-5">Accepted Orders</h1>
-                    <div id="accepted-orders-table-content">
-                        <table class="table accepted-table" id="accepted-orders-table">
-                            <thead>
-                                <tr>
-                                    <th>Index</th>
-                                    <th>Items</th>
-                                    <th>Note</th>
-                                    <th>Complete</th>
-                                    <th>Cancel</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for order in accepted_orders %}
-                                <tr>
-                                    <td>{{ order["order_index"] }}</td>
-                                    <td>{{ order["items"] }}</td>
-                                    <td>{{ order["note"] }}</td>
-                                    <td>
-                                        <button class="btn btn-primary complete-button" data-order-id="{{ order._id }}"
+        </div>
+        <div class="col-md-6">
+            <div class="common-table-container">
+                <h1 class="text-center mb-5">Accepted Orders</h1>
+                <div id="accepted-orders-table-content">
+                    <table class="table accepted-table" id="accepted-orders-table">
+                        <thead>
+                        <tr>
+                            <th>Index</th>
+                            <th>Items</th>
+                            <th>Note</th>
+                            <th>Complete</th>
+                            <th>Cancel</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for order in accepted_orders %}
+                            <tr>
+                                <td>{{ order["order_index"] }}</td>
+                                <td>{{ order["items"] }}</td>
+                                <td>{{ order["note"] }}</td>
+                                <td>
+                                    <button class="btn btn-primary complete-button" data-order-id="{{ order._id }}"
                                             onclick="addPingToQueue('{{ order[" order_index"] }}')">Complete
-                                        </button>
-                                    <td>
-                                        <button class="btn btn-danger cancel-button" data-order-id="{{ order._id }}"
+                                    </button>
+                                <td>
+                                    <button class="btn btn-danger cancel-button" data-order-id="{{ order._id }}"
                                             onclick="sendCancel('{{ order[" order_index"] }}')">Cancel
-                                        </button>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </body>
 
 </html>

@@ -477,18 +477,13 @@ def accept_order():
     :return: A success response, but the client doesn't do anything with it
     """
     order_data = json.loads(request.form['order_data'])
-
-    order_data['time'] = int(request.form['time'])
-
-    print(order_data)
-
-    # Insert the order data into the accepted_orders collection
-    accepted_collection.insert_one(order_data)
-
-    # Remove the order data from the order_queue collection
+    print(f"order_data: {order_data}")
+    # Find the order in the order collection and update its status to accepted
+    order_collection.update_one({'_id': ObjectId(order_data['old_id'])}, {'$set': {'status': 'Accepted'}})
+    print(f"Order with ID {order_data['old_id']} updated to Accepted.")
+    # Remove the order from the order queue table
     order_collection.delete_one({'_id': ObjectId(order_data['old_id'])})
-
-    # Return a success response
+    print(f"Order with ID {order_data['old_id']} deleted.")
     return jsonify({'success': True})
 
 

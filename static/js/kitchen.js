@@ -23,6 +23,9 @@ $(document).on('click', '.accept-button', function () {
         const orderData = $(this).closest('tr').find('td').map(function () {
             return $(this).text();
         }).get();
+        console.log('orderID:', orderID);
+        console.log('orderData:', orderData);
+
 
         $('#order-queue-table-content').load(location.href + ' #order-queue-table');
         $('#accepted-orders-table-content').load(location.href + ' #accepted-orders-table');
