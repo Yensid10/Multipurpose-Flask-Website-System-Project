@@ -45,8 +45,7 @@
                                     </button>
                                 </td>
                                 <td>
-                                    <button class="btn btn-danger cancel-button" data-order-id="{{ order[" _id"] }}"
-                                            onclick="sendCancel('{{ order[" order_index"] }}')">Cancel
+                                    <button class="btn btn-danger cancel-button" data-order-id="{{ order[" _id"] }}">Cancel
                                     </button>
                                 </td>
                             </tr>
@@ -77,12 +76,10 @@
                                 <td>{{ order["items"] }}</td>
                                 <td>{{ order["note"] }}</td>
                                 <td>
-                                    <button class="btn btn-primary complete-button" data-order-id="{{ order._id }}"
-                                            onclick="addPingToQueue('{{ order[" order_index"] }}')">Complete
+                                    <button class="btn btn-primary complete-button" data-order-id="{{ order._id }}">Complete
                                     </button>
                                 <td>
-                                    <button class="btn btn-danger cancel-button" data-order-id="{{ order._id }}"
-                                            onclick="sendCancel('{{ order[" order_index"] }}')">Cancel
+                                    <button class="btn btn-danger cancel-button" data-order-id="{{ order._id }}">Cancel
                                     </button>
                                 </td>
                             </tr>
