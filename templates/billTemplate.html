@@ -65,13 +65,14 @@
 			<th>Item Name</th>
 			<th>Price</th>
 		</tr>
-		{% for item in data['queue'] %}
+		{% for item in data['queue'] if item != "CANCELLED" %}
 		<tr>
 			<td>{{ loop.index }}</td>
 			<td>{{ item['Note1'] }}</td>
 			<td>£{{ item['price'] }}</td>
 		</tr>
 		{% endfor %}
+
 		<tr>
 			<td colspan="2">Subtotal</td>
 			<td>£{{ data['subtotal'] }}</td>

@@ -198,19 +198,21 @@ def sendCancel():
     if request.method == 'POST':
         data = request.get_json()
         tableNo = data.get('tableNo')[1:]
-        indexNumber = data.get("indexNo")
+        indexNumber = int(data.get("indexNo"))
         tempOrder = orders.popSpecificOrder(tableNo)['queue']
-        del tempOrder[int(indexNumber)]
-        tempOrder = {
-            'queue': tempOrder}
-        orders.addObject(tableNo, tempOrder)
+        tempOrder[indexNumber] = "CANCELLED"
+        if all(item == "CANCELLED" for item in tempOrder):
+            # Skip adding the order back into orders if all items are cancelled
+            pass
+        else:
+            tempOrder = {'queue': tempOrder}
+            orders.addObject(tableNo, tempOrder)
         return ('', 204)
 
 
 @app.route("/updateQueue")
 def updateQueue():
     # Returns the queue as a json object
-
     """
     The updateQueue function returns the queue as a json object.
         The function is called by the client to update its view of the queue.
@@ -254,7 +256,7 @@ def sendToKitchen():
         for existing_order in existing_orders:
             order_index = int(existing_order['order_index'].split('-')[-1])
             if order_index > max_order_index:
-                max_order_index = order_index
+                max_order_index = order_index + 1
 
         if orders.getSpecificOrder(tableNo) == False:
             orders.addObject(tableNo, order)
@@ -269,7 +271,7 @@ def sendToKitchen():
 
         # Add an order ID to each item in the order
         for i, item in enumerate(queue):
-            next_order_index = max_order_index + i + 1
+            next_order_index = max_order_index + i
             item['order_index'] = f"{tableNo}-{next_order_index}"
 
             order_items = item.get('Note1')
@@ -289,7 +291,6 @@ def sendToKitchen():
         return ('', 204)
 
 
-
 @app.route('/getBill', methods=['POST'])
 def getBill():
     """
@@ -303,7 +304,8 @@ def getBill():
         order = orders.getSpecificOrder(tableNo)
         if order == False:
             return render_template('billTemplate.html', data="No order found")
-        subtotal = sum(float(item['price']) for item in order['queue'])
+        subtotal = sum(float(item['price'])
+                       for item in order['queue'] if item != "CANCELLED")
         return render_template('billTemplate.html',
                                data={'queue': order['queue'], 'subtotal': subtotal, 'tableNo': tableNo})
 
@@ -330,7 +332,7 @@ def makePayment():
             },
             "transactions": [{
                 "amount": {
-                    "total": sum(float(item['price']) for item in bill['queue']),
+                    "total": sum(float(item['price']) for item in bill['queue'] if item != "CANCELLED"),
                     "currency": "GBP"
                 },
                 "description": "Payment for table {}".format(tableNo) + " at " + str(datetime.datetime.now()),
@@ -340,12 +342,13 @@ def makePayment():
                         "quantity": 1,
                         "price": item['price'],
                         "currency": "GBP"
-                    } for item in bill['queue']]
+                    } for item in bill['queue'] if item != "CANCELLED"]
                 }
+
             }],
             "redirect_urls": {
-                "return_url": "http://localhost:5000/success",
-                "cancel_url": "http://localhost:5000/Menu"
+                "return_url": "https://group14projectoaxaca-357.azurewebsites.net/success",
+                "cancel_url": "https://group14projectoaxaca-357.azurewebsites.net/Menu"
             }
         })
         payment.create()
