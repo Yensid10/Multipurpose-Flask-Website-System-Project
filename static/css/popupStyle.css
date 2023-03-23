@@ -1,4 +1,3 @@
-<style>
     /* make border-box sizing for all the elements  */
     *,
     *:before,
@@ -13,26 +12,36 @@
         font-family: "Work Sans", sans-serif;
         font-size: 18px;
         text-align: center;
-        color: black;
-        background-color: lightsalmon;
+        color: rgb(255, 255, 255);
+        background-color: rgb(0, 0, 0);
+        border-color: rgb(255, 0, 221);
+        animation: border-color-animation 0.5s infinite;
     }
-    /* changed the background colour and border colour when clicked */
-    select#table-number-select:focus {
-        background-color: lightsalmon;
-        border-color: red;
+
+    @keyframes border-color-animation {
+        0% {
+            border-color: rgb(255, 0, 221);
+        }
+
+        50% {
+            border-color: yellow;
+        }
+
+        100% {
+            border-color: rgb(255, 0, 221);
+        }
     }
-    /* added a hover effect */
-    select#table-number-select:hover {
-        background-color: lightsalmon;
-    }
+
+
+
 
     /* styling the table numbers in the drop down */
     select#table-number-select option {
-    font-size: 16px;
-    padding: 8px;
-    background-color: lightgreen ;
-    color: black;
-}
+        font-size: 16px;
+        padding: 8px;
+        background-color: rgb(255, 255, 255);
+        color: black;
+    }
 
     /* styling for the main body element */
     body {
@@ -51,7 +60,7 @@
         position: relative;
         cursor: pointer;
     }
-    
+
     /* styling for the checkbox cross when user inputs */
     input[type="checkbox"]::before,
     input[type="checkbox"]::after {
@@ -66,27 +75,27 @@
         opacity: 0;
         transition: all 0.2s ease-in-out;
     }
-    
+
     /* rotate checkbox checkmark */
     input[type="checkbox"]::after {
         transform: translate(-50%, -50%) rotate(-45deg);
     }
-    
+
     /* style for checked checkbox */
     input[type="checkbox"]:checked::before,
     input[type="checkbox"]:checked::after {
         opacity: 1;
     }
-    
+
     /* style for checked checkbox border and background */
     input[type="checkbox"]:checked {
         border-color: #1abc9c;
         background-color: red;
     }
-    
+
     /* style for popup container */
     .popup {
-        background-color: lightgoldenrodyellow;
+        background-color: #f0f0f0;
         color: black;
         width: 350px;
         padding: 30px 40px;
@@ -98,6 +107,8 @@
         font-family: "Work Sans", sans-serif;
         display: none;
         text-align: center;
+        /* black border */
+        border: 2px solid black;
     }
 
     /* style for popup button */
@@ -123,11 +134,12 @@
     }
 
     /* make the h3 and h4 colour black */
-    h3, h4 {
+    h3,
+    h4 {
         color: black;
         font-family: "Work Sans", sans-serif;
     }
-    
+
 
     /* style for popup paragraph text */
     .popup p {
@@ -140,8 +152,4 @@
     /* make the close button colour */
     #close {
         color: black;
-      }
-
-
-    
-</style>
+    }
