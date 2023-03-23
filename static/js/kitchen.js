@@ -10,6 +10,12 @@
  * It then sends a POST request to the server to accept the order.
  * It then removes the order from the order queue table.
  * @name acceptOrderButton
+ * @param {String} orderID - The ID of the order to be accepted.
+ * @param {String} orderData - The data of the order to be accepted.
+ * @param {String} orderData[0] - The index of the order to be accepted.
+ * @param {String} orderData[1] - The items of the order to be accepted.
+ * @param {String} orderData[2] - The note of the order to be accepted.
+ *
  */
 $(document).on('click', '.accept-button', function () {
         // Get the order ID and data
@@ -50,6 +56,8 @@ $(document).on('click', '.accept-button', function () {
  * It then sends a POST request to the server to cancel the order.
  * It then removes the order from the accepted orders table.
  * @name cancelOrderButton
+ * @param {String} orderID - The ID of the order to be cancelled.
+ * @param {String} orderIndex - The index of the order to be cancelled.
  */
 $(document).on('click', '.cancel-button', function () {
             // Get the order ID and order index from the table row
@@ -92,6 +100,7 @@ setInterval(function () {
  * It then sends a POST request to the server to complete the order.
  * It then removes the order from the accepted orders table.
  * @name completeOrderButton
+ * @param {String} orderID - The ID of the order to be completed.
  */
 $(document).on('click', '.complete-button', function () {
             // Get the order ID
@@ -123,6 +132,9 @@ $(document).on('click', '.complete-button', function () {
  * It then sends a POST request to the server to send a ping to the queue.
  * It then removes the order from the order queue table.
  * @param orderIndex The order index of the order to send a ping for
+ * @param tableNumber The table number of the order to send a ping for
+ * @param indexNumber The index number of the order to send a ping for
+ * @param pingType The type of ping to send
  */
 function sendCancel(orderIndex) {
             // Split the orderIndex to get the table number
@@ -145,6 +157,7 @@ function sendCancel(orderIndex) {
  * It splits the order index to get the table number.
  * It then sends a POST request to the server to complete the order.
  * @param orderIndex The order index of the order to send a ping for
+ * @param tableNumber The table number of the order to send a ping for
  */
 function addPingToQueue(orderIndex) {
 
