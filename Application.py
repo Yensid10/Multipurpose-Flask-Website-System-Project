@@ -235,20 +235,27 @@ def updateQueue():
 
 @app.route('/sendToKitchen', methods=['POST'])
 def sendToKitchen():
-    # Send an order to the kitchen database and store it in the order queue
     """
-    The sendToKitchen function is used to send an order from the front-end to the kitchen.
-    It takes in a JSON object with two keys: 'order' and 'tableNo'. The value of 'order' is a list of items, each item being
-    a dictionary containing information about that item (e.g. name, price). The value of tableNo is an integer representing
-    the table number for which this order was placed.
+    The sendToKitchen function is used to send the order from the table to the kitchen.
+    It takes in a JSON object with two keys: 'order' and 'tableNo'. The value of 'order' is an array of objects, each containing information about one item on the order.
+    The value of 'tableNo' is a string representing which table this order belongs to.
 
-    :return: A 204 status code, which means that the request has been successfully processed and the response is intentionally blank
+    :return: A 204 status code, which means that the request was received and understood but no response is needed
     """
     if request.method == 'POST':
         data = request.get_json()
         time = datetime.datetime.now()
         order = data.get('order')
         tableNo = data.get('tableNo')
+
+        # Get the highest order index for the table
+        max_order_index = 0
+        existing_orders = order_collection.find({'table_number': tableNo})
+        for existing_order in existing_orders:
+            order_index = int(existing_order['order_index'].split('-')[-1])
+            if order_index > max_order_index:
+                max_order_index = order_index
+
         if orders.getSpecificOrder(tableNo) == False:
             orders.addObject(tableNo, order)
         else:
@@ -262,7 +269,8 @@ def sendToKitchen():
 
         # Add an order ID to each item in the order
         for i, item in enumerate(queue):
-            item['order_index'] = f"{tableNo}-{i + 1}"
+            next_order_index = max_order_index + i + 1
+            item['order_index'] = f"{tableNo}-{next_order_index}"
 
             order_items = item.get('Note1')
             note = item.get('Note2')
@@ -279,6 +287,7 @@ def sendToKitchen():
                 'time': time
             })
         return ('', 204)
+
 
 
 @app.route('/getBill', methods=['POST'])
