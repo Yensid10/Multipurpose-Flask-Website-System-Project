@@ -146,12 +146,10 @@ $(document).on('click', '.complete-button', function () {
 function sendCancel(orderIndex) {
             // Split the orderIndex to get the table number
             const orderIndexParts = orderIndex.split('-');
-            console.log(orderIndexParts)
             const tableNumber = orderIndexParts[0];
             const indexNumber = orderIndexParts[1];
             $('#order-queue-table-content').load(location.href + ' #order-queue-table');
             $('#accepted-orders-table-content').load(location.href + ' #accepted-orders-table');
-            console.log("amogus" + tableNumber)
             $.ajax({
                 type: "POST",
                 url: "/sendCancel",
