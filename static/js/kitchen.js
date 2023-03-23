@@ -24,6 +24,7 @@ $(document).on('click', '.accept-button', function () {
             return $(this).text();
         }).get();
 
+
         $('#order-queue-table-content').load(location.href + ' #order-queue-table');
         $('#accepted-orders-table-content').load(location.href + ' #accepted-orders-table');
 
@@ -63,7 +64,6 @@ $(document).on('click', '.cancel-button', function () {
             // Get the order ID and order index from the table row
             const orderID = $(this).data('order-id');
             const orderIndex = $(this).closest('tr').find('td:first-child').text();
-
             $('#order-queue-table-content').load(location.href + ' #order-queue-table');
             $('#accepted-orders-table-content').load(location.href + ' #accepted-orders-table');
 
@@ -77,10 +77,14 @@ $(document).on('click', '.cancel-button', function () {
                 }
             });
 
+            sendCancel(orderIndex);
+
             $('#order-queue-table-content').load(location.href + ' #order-queue-table');
             $('#accepted-orders-table-content').load(location.href + ' #accepted-orders-table');
 
         });
+
+
 
 /**
  * This function refreshes the order queue and accepted orders tables every 5 seconds.
@@ -105,6 +109,7 @@ setInterval(function () {
 $(document).on('click', '.complete-button', function () {
             // Get the order ID
             const orderID = $(this).data('order-id');
+            const orderIndex = $(this).closest('tr').find('td:first-child').text();
 
             $('#order-queue-table-content').load(location.href + ' #order-queue-table');
             $('#accepted-orders-table-content').load(location.href + ' #accepted-orders-table');
@@ -119,6 +124,8 @@ $(document).on('click', '.complete-button', function () {
                     $(this).closest('tr').remove();
                 }
             });
+
+            addPingToQueue(orderIndex)
 
             $('#order-queue-table-content').load(location.href + ' #order-queue-table');
             $('#accepted-orders-table-content').load(location.href + ' #accepted-orders-table');
@@ -139,11 +146,12 @@ $(document).on('click', '.complete-button', function () {
 function sendCancel(orderIndex) {
             // Split the orderIndex to get the table number
             const orderIndexParts = orderIndex.split('-');
+            console.log(orderIndexParts)
             const tableNumber = orderIndexParts[0];
             const indexNumber = orderIndexParts[1];
             $('#order-queue-table-content').load(location.href + ' #order-queue-table');
             $('#accepted-orders-table-content').load(location.href + ' #accepted-orders-table');
-
+            console.log("amogus" + tableNumber)
             $.ajax({
                 type: "POST",
                 url: "/sendCancel",
