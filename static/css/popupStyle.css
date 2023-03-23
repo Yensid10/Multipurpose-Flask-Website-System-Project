@@ -95,8 +95,8 @@
 
     /* style for popup container */
     .popup {
-        background-color: #f0f0f0;
-        color: black;
+        background-color: rgb(32, 35, 37);
+        color: rgb(232, 230, 227);
         width: 350px;
         padding: 30px 40px;
         position: absolute;
@@ -108,7 +108,7 @@
         display: none;
         text-align: center;
         /* black border */
-        border: 2px solid black;
+        border: 2px solid rgb(140, 130, 115);
     }
 
     /* style for popup button */
@@ -136,7 +136,7 @@
     /* make the h3 and h4 colour black */
     h3,
     h4 {
-        color: black;
+        color: rgb(255, 255, 255);
         font-family: "Work Sans", sans-serif;
     }
 
