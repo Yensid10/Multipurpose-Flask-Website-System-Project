@@ -406,7 +406,7 @@ def success():
         })
     else:
         print(payment.error)
-    return render_template('menu.html')
+    return render_template('index.html')
 
 
 @app.route('/faqPage')
