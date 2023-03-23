@@ -237,13 +237,6 @@ def updateQueue():
 
 @app.route('/sendToKitchen', methods=['POST'])
 def sendToKitchen():
-    """
-    The sendToKitchen function is used to send the order from the table to the kitchen.
-    It takes in a JSON object with two keys: 'order' and 'tableNo'. The value of 'order' is an array of objects, each containing information about one item on the order.
-    The value of 'tableNo' is a string representing which table this order belongs to.
-
-    :return: A 204 status code, which means that the request was received and understood but no response is needed
-    """
     if request.method == 'POST':
         data = request.get_json()
         time = datetime.datetime.now()
@@ -255,13 +248,12 @@ def sendToKitchen():
         existing_orders = order_collection.find({'table_number': tableNo})
         for existing_order in existing_orders:
             order_index = int(existing_order['order_index'].split('-')[-1])
-            if order_index > max_order_index:
+            if order_index >= max_order_index:
                 max_order_index = order_index + 1
 
         if orders.getSpecificOrder(tableNo) == False:
             orders.addObject(tableNo, order)
         else:
-            # If the table already has an order, add the new order to the old one
             tempOrder = {
                 'queue': orders.popSpecificOrder(tableNo)['queue']
                 + order['queue']}
@@ -269,7 +261,6 @@ def sendToKitchen():
 
         queue = order.get('queue', [])
 
-        # Add an order ID to each item in the order
         for i, item in enumerate(queue):
             next_order_index = max_order_index + i
             item['order_index'] = f"{tableNo}-{next_order_index}"
@@ -277,11 +268,9 @@ def sendToKitchen():
             order_items = item.get('Note1')
             note = item.get('Note2')
 
-            # Insert the order into the order queue in MongoDB
             order_collection.insert_one({
                 '_id': ObjectId(),
                 'table_number': tableNo,
-                # Save the order ID for each item
                 'order_index': item['order_index'],
                 'items': order_items,
                 'note': note,
@@ -289,6 +278,9 @@ def sendToKitchen():
                 'time': time
             })
         return ('', 204)
+
+
+
 
 
 @app.route('/getBill', methods=['POST'])
