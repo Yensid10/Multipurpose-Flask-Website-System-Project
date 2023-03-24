@@ -26,7 +26,8 @@ order_collection = db["order_queue"]
 accepted_collection = db["accepted_orders"]
 complete_collection = db["complete_orders"]
 
-complete_collection = db["complete_orders"]
+db2 = client["Complete_Bills"]
+bill_collection = db2["bill"]
 
 app = Flask(__name__)
 
@@ -280,9 +281,6 @@ def sendToKitchen():
         return ('', 204)
 
 
-
-
-
 @app.route('/getBill', methods=['POST'])
 def getBill():
     """
@@ -390,7 +388,7 @@ def success():
         order = orders.popSpecificOrder(tableNo)['queue']
         time = datetime.datetime.now()
 
-        complete_collection.insert_one({
+        bill_collection.insert_one({
             '_id': ObjectId(),
             'table_number': tableNo,
             'items': order,
