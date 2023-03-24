@@ -10,3 +10,14 @@ This website was created by a team of 9 students from Royal Holloway University 
 
 ##### Contact Information
 For inquiries or bug reports, please contact Shokrola Amiri via email at zkac434@live.rhul.ac.uk.
+
+####  Description 
+This is a group project for our second year teams project (CS2810/2815) at RHUL, The website was created with the team specficied below 
+Benjamin Shearlock
+Ethan Chandler
+Sokratis Lioupis
+Maan Meher
+Musfik Hossain Ferdoushi
+Shokrola Amiri
+Muhammed Atlas
+Arunavo Das
