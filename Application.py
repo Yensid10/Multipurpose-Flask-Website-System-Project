@@ -31,7 +31,6 @@ bill_collection = db2["bill"]
 
 app = Flask(__name__)
 
-
 ### Variables ###
 
 queue = Queue()  # Used for pings
@@ -387,7 +386,6 @@ def success():
         tableNo = match.group(1)
         order = orders.popSpecificOrder(tableNo)['queue']
         time = datetime.datetime.now()
-
         bill_collection.insert_one({
             '_id': ObjectId(),
             'table_number': tableNo,
