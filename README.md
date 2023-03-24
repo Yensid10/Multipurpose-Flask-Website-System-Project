@@ -11,6 +11,12 @@ This website was created by a team of 9 students from Royal Holloway University 
 ##### Contact Information
 For inquiries or bug reports, please contact Shokrola Amiri via email at zkac434@live.rhul.ac.uk.
 
+#### Testing 
+Project was tested on various web browers, microsoft edge, google chrome, opera and safari.
+The website was also tested on Linux,Windows and MacOS.
+Worked and intended and all functionality was in place.
+
+
 ####  Description 
 This is a group project for our second year teams project (CS2810/2815) at RHUL, The website was created with the team specficied below 
 Benjamin Shearlock
